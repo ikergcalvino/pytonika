@@ -3,10 +3,17 @@
 import requests
 from typing import Dict, Any, Tuple, Optional, List, Union
 
+from .endpoints.unauthorized import Unauthorized
+from .endpoints.authentication import Authentication
+
 
 class Router:
     """
-    API client for Teltonika routers.
+    Central client class for interacting with Teltonika router APIs.
+
+    This class serves as the main entry point for all API operations, managing
+    the connection, authentication, and request handling. It provides access to
+    all API functionality through organized endpoint groups.
     """
 
     def __init__(self, url: str):
@@ -14,12 +21,29 @@ class Router:
         Initialize a Teltonika router client.
 
         Args:
-            url (str): The base URL of the router (e.g., "https://192.168.1.1").
-                       The "/api" path will be automatically appended.
+            url: Base URL of the router (e.g., "https://192.168.1.1").
+                The "/api" path will be automatically appended.
         """
         self.api_url = url.rstrip("/") + "/api"
         self._token = None
         self._session = requests.Session()
+
+        self.auth = Authentication(self)
+        self.unauthorized = Unauthorized(self)
+
+        self._setup_direct_methods()
+
+    def _setup_direct_methods(self):
+        """
+        Setup direct access to commonly used methods from endpoints.
+
+        Creates shortcuts to frequently used endpoint methods at the Router level.
+        """
+        self.get_device_info = self.unauthorized.get_status
+
+        self.login = self.auth.login
+        self.logout = self.auth.logout
+        self.get_session_status = self.auth.get_session_status
 
     # --------------------------------------------------------------------------
     # Private HTTP request methods
@@ -27,14 +51,18 @@ class Router:
 
     def _get_auth_headers(self) -> Dict[str, str]:
         """
-        Returns the authorization headers for authenticated requests.
+        Construct the authorization headers for authenticated requests.
 
         Returns:
-            Dict[str, str]: Dictionary containing headers with authorization token if available.
+            Dictionary with headers including:
+            - Content-Type: application/json
+            - Authorization: Bearer token (if authenticated)
         """
         headers = {"Content-Type": "application/json"}
+
         if self._token:
             headers["Authorization"] = f"Bearer {self._token}"
+
         return headers
 
     def _make_request(self,
@@ -46,16 +74,20 @@ class Router:
         Execute an HTTP request to the router's API.
 
         Args:
-            method (str): HTTP method (GET, POST, PUT, DELETE).
-            endpoint (str): API endpoint path (with leading slash, e.g., "/login").
-            data (Optional[Dict[str, Any]]): JSON data for request body.
-            params (Optional[Dict[str, Any]]): URL query parameters.
+            method: HTTP method (GET, POST, PUT, DELETE).
+            endpoint: API endpoint path (with leading slash).
+            data: JSON data for request body.
+            params: URL query parameters.
 
         Returns:
-            Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]: 
-                A tuple containing (success, data / errors) where:
-                - success (bool): True if the request was successful, False otherwise.
-                - data / errors: Either the response data on success, or error details on failure.
+            For successful requests:
+                (True, response_data): Where response_data contains the API response.
+
+            For failed requests:
+                (False, error_list): Where error_list contains error details with:
+                - source: Origin of the error (API, client, etc.)
+                - error: Error message
+                - code: Error code
         """
         url = f"{self.api_url}{endpoint}"
 

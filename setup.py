@@ -1,4 +1,6 @@
-from setuptools import setup, find_packages
+#!/usr/bin/env python3
+
+from setuptools import setup
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
@@ -32,8 +34,9 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     keywords="teltonika, router, api, networking",
-    package_dir={"": "src"},
-    packages=find_packages(where="src"),
+    packages=[
+        "teltonika_api",
+    ],
     python_requires=">=3.7",
     install_requires=[
         "requests>=2.25.0",
