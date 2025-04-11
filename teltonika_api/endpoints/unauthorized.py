@@ -25,7 +25,7 @@ class Unauthorized:
         """
         self._router = router
 
-    def get_status(self) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
+    def get_unauthorized_status(self) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
         """
         Get basic device info.
 

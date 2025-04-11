@@ -6,7 +6,8 @@ based on their purpose and authentication requirements. Each endpoint group
 encapsulates related API operations, providing a clean and intuitive interface.
 """
 
-from .unauthorized import Unauthorized
 from .authentication import Authentication
+from .unauthorized import Unauthorized
+from .users import Users
 
-__all__ = ["Unauthorized", "Authentication"]
+__all__ = ["Authentication", "Unauthorized", "Users"]

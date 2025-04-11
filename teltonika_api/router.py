@@ -3,8 +3,9 @@
 import requests
 from typing import Dict, Any, Tuple, Optional, List, Union
 
-from .endpoints.unauthorized import Unauthorized
 from .endpoints.authentication import Authentication
+from .endpoints.unauthorized import Unauthorized
+from .endpoints.users import Users
 
 
 class Router:
@@ -28,8 +29,9 @@ class Router:
         self._token = None
         self._session = requests.Session()
 
-        self.auth = Authentication(self)
+        self.authentication = Authentication(self)
         self.unauthorized = Unauthorized(self)
+        self.users = Users(self)
 
         self._setup_direct_methods()
 
@@ -39,11 +41,19 @@ class Router:
 
         Creates shortcuts to frequently used endpoint methods at the Router level.
         """
-        self.get_device_info = self.unauthorized.get_status
+        self.login = self.authentication.login
+        self.logout = self.authentication.logout
+        self.get_session_status = self.authentication.get_session_status
 
-        self.login = self.auth.login
-        self.logout = self.auth.logout
-        self.get_session_status = self.auth.get_session_status
+        self.get_unauthorized_status = self.unauthorized.get_unauthorized_status
+
+        self.get_users_config = self.users.get_users_config
+        self.create_users_config = self.users.create_users_config
+        self.update_users_config = self.users.update_users_config
+        self.delete_users_config = self.users.delete_users_config
+        self.get_users_config_by_id = self.users.get_users_config_by_id
+        self.update_users_config_by_id = self.users.update_users_config_by_id
+        self.delete_users_config_by_id = self.users.delete_users_config_by_id
 
     # --------------------------------------------------------------------------
     # Private HTTP request methods
