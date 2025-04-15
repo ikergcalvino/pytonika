@@ -1,6 +1,57 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "teltonika-api"
+version = "0.1.0"
+description = "Simplified Python wrapper for interacting with Teltonika router APIs"
+readme = "README.md"
+requires-python = ">=3.7,<3.13"
+license = { text = "MIT" }
+authors = [
+    { name = "Iker García Calviño", email = "iker.gcalvino@udc.es" }
+]
+keywords = ["teltonika", "router", "api", "networking", "lte", "lte-modem"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: System :: Networking",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+dependencies = [
+    "requests>=2.25.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/ikergcalvino/teltonika-api"
+Documentation = "https://github.com/ikergcalvino/teltonika-api#readme"
+Source = "https://github.com/ikergcalvino/teltonika-api"
+"Bug Tracker" = "https://github.com/ikergcalvino/teltonika-api/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0.0",
+    "pytest-cov>=2.12.0",
+    "black>=21.5b2",
+    "isort>=5.9.1",
+    "mypy>=0.812",
+    "flake8>=3.9.2"
+]
+docs = [
+    "sphinx>=4.0.2",
+    "sphinx-rtd-theme>=0.5.2"
+]
 
 [tool.black]
 line-length = 88
@@ -35,6 +86,4 @@ disallow_incomplete_defs = true
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = "--cov=teltonika_api"
-testpaths = [
-    "tests",
-]
+testpaths = ["tests"]
