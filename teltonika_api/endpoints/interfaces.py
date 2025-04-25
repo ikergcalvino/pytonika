@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
 
 class Interfaces:
@@ -10,18 +10,24 @@ class Interfaces:
 
         return self._api_client.get(endpoint)
 
-    def create_interfaces_config(self, data: Dict[str, Any]) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
+    def create_interfaces_config(self, config: Dict[str, Any]) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
         endpoint = "/interfaces/config"
+
+        data = {"data": config}
 
         return self._api_client.post(endpoint, data=data)
 
-    def update_interfaces_config(self, data: Dict[str, Any]) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
+    def update_interfaces_config(self, config: Dict[str, Any]) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
         endpoint = "/interfaces/config"
+
+        data = {"data": config}
 
         return self._api_client.put(endpoint, data=data)
 
-    def delete_interfaces_config(self, data: Dict[str, Any]) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
+    def delete_interfaces_config(self, config: Dict[str, Any]) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
         endpoint = "/interfaces/config"
+
+        data = {"data": config}
 
         return self._api_client.delete(endpoint, data=data)
 
@@ -30,8 +36,10 @@ class Interfaces:
 
         return self._api_client.get(endpoint)
 
-    def update_interfaces_config_by_id(self, interface_id: str, data: Dict[str, Any]) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
+    def update_interfaces_config_by_id(self, interface_id: str, config: Dict[str, Any]) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
         endpoint = f"/interfaces/config/{interface_id}"
+
+        data = {"data": config}
 
         return self._api_client.put(endpoint, data=data)
 

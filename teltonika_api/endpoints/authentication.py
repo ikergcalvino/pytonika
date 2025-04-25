@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
 
 class Authentication:
@@ -13,7 +13,7 @@ class Authentication:
             "password": password
         }
 
-        success, response = self._api_client.post(endpoint, data)
+        success, response = self._api_client.post(endpoint, data=data)
 
         if success and "token" in response:
             self._api_client._auth_token = response.get("token")

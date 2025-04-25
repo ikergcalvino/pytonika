@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Tuple, Union
 
 
 class Firmware:
@@ -25,7 +25,9 @@ class Firmware:
 
         return self._api_client.post(endpoint)
 
-    def firmware_actions_upgrade(self, data: Dict[str, Any]) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
+    def firmware_actions_upgrade(self, config: Dict[str, Any]) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
         endpoint = "/firmware/actions/upgrade"
+
+        data = {"data": config}
 
         return self._api_client.post(endpoint, data=data)
