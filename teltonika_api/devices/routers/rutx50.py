@@ -1,10 +1,10 @@
-from ..api_client import ApiClient
-from ..endpoints import Authentication, Users, Firmware, Interfaces
+from .router import Router
+from ...endpoints import Authentication, Users, Firmware, Interfaces
 
 
-class RUTX08:
+class RUTX50(Router):
     def __init__(self, base_url: str):
-        self._api_client = ApiClient(base_url)
+        super().__init__(base_url)
 
         self.auth = Authentication(self._api_client)
         self.users = Users(self._api_client)
@@ -16,6 +16,4 @@ class RUTX08:
             if hasattr(endpoint, attr):
                 return getattr(endpoint, attr)
 
-        raise AttributeError(
-            f"'{self.__class__.__name__}' object has no attribute '{attr}'"
-        )
+        return super().__getattr__(attr)
