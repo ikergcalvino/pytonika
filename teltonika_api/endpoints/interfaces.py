@@ -17,14 +17,14 @@ class Interfaces:
 
         return self._api_client.post(endpoint, data=data)
 
-    def update_interfaces_config(self, config: Dict[str, Any]) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
+    def update_interfaces_config(self, config: List[Dict[str, Any]]) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
         endpoint = "/interfaces/config"
 
         data = {"data": config}
 
         return self._api_client.put(endpoint, data=data)
 
-    def delete_interfaces_config(self, config: Dict[str, Any]) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
+    def delete_interfaces_config(self, config: List[str]) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
         endpoint = "/interfaces/config"
 
         data = {"data": config}
