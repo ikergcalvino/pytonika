@@ -1,8 +1,9 @@
+from abc import ABC
 from ...api_client import ApiClient
 from ...endpoints import Unauthorized, Authentication
 
 
-class Router:
+class Router(ABC):
     def __init__(self, base_url: str):
         self._api_client = ApiClient(base_url)
 
