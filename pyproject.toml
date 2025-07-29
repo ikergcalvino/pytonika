@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools >= 61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pytonika"
+dynamic = ["version"]
+description = ""
+readme = "README.md"
+license = { type = "MIT", file = "LICENSE" }
+authors = [
+    { name = "Iker García Calviño", email = "iker.gcalvino@udc.es" },
+]
+requires-python = ">=3.8"
+dependencies = [
+    "requests >= 2.25.0",
+]
