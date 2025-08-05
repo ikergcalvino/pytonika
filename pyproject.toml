@@ -1,17 +1,27 @@
 [build-system]
-requires = ["setuptools >= 61.0", "wheel"]
+requires = ["setuptools >= 75.8"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "pytonika"
 dynamic = ["version"]
-description = ""
+description = "A Python library for interacting with Teltonika Networks HTTP API."
 readme = "README.md"
 license = { type = "MIT", file = "LICENSE" }
 authors = [
     { name = "Iker García Calviño", email = "iker.gcalvino@udc.es" },
 ]
 requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
 dependencies = [
     "requests >= 2.25.0",
 ]
