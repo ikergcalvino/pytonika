@@ -1,6 +1,6 @@
-from .access_points import *
+from .routers import *
 from .gateways import *
-from .routers import Router, RUT200, RUT240, RUT241, RUT956, RUTX08, RUTX50
+from .access_points import *
 from .switches import *
 
 __all__ = [
@@ -11,4 +11,7 @@ __all__ = [
     "RUT956",
     "RUTX08",
     "RUTX50",
+    "Gateway",
+    "AccessPoint",
+    "Switch",
 ]
