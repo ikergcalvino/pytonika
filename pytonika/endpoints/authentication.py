@@ -1,11 +1,11 @@
-from typing import Any, Dict, List, Tuple, Union
+from .._client import APIClient
 
 
 class Authentication:
-    def __init__(self, api_client):
+    def __init__(self, api_client: APIClient) -> None:
         self._api_client = api_client
 
-    def login(self, username: str, password: str) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
+    def login(self, username: str, password: str) -> dict[str, object]:
         endpoint = "/login"
 
         data = {
@@ -13,25 +13,25 @@ class Authentication:
             "password": password
         }
 
-        success, response = self._api_client.post(endpoint, data=data)
+        response = self._api_client.post(endpoint, data=data)
 
-        if success and "token" in response:
-            self._api_client._auth_token = response.get("token")
+        token = response.get("token")
 
-        return success, response
+        if token:
+            self._api_client.set_token(token)
 
-    def logout(self) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
+        return response
+
+    def logout(self) -> dict[str, object]:
         endpoint = "/logout"
 
-        success, response = self._api_client.post(endpoint)
+        response = self._api_client.post(endpoint)
 
-        if success:
-            self._api_client._auth_token = None
-            self._api_client._session.cookies.clear()
+        self._api_client.clear_token()
 
-        return success, response
+        return response
 
-    def get_session_status(self) -> Tuple[bool, Union[Dict[str, Any], List[Dict[str, Any]]]]:
+    def get_session_status(self) -> dict[str, object]:
         endpoint = "/session/status"
 
         return self._api_client.get(endpoint)

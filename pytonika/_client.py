@@ -12,6 +12,9 @@ class APIClient:
     def set_token(self, token: str) -> None:
         self._client.headers["Authorization"] = f"Bearer {token}"
 
+    def clear_token(self) -> None:
+        self._client.headers.pop("Authorization", None)
+
     def get(self, endpoint: str, params: dict[str, object] | None = None) -> dict[str, object]:
         return self._client.get(endpoint, params=params).json()
 
