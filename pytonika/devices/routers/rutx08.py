@@ -2,12 +2,13 @@ from .router import Router
 
 
 class RUTX08(Router):
-    def __init__(self, base_url: str):
+    def __init__(self, base_url: str) -> None:
         super().__init__(base_url)
 
-    def __getattr__(self, attr):
-        for endpoint in []:
+        self._endpoints.extend([])
 
+    def __getattr__(self, attr: str):
+        for endpoint in self._endpoints:
             if hasattr(endpoint, attr):
                 return getattr(endpoint, attr)
 

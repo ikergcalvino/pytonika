@@ -1,7 +1,17 @@
-from abc import ABC
-from ...api_client import ApiClient
+from ..._client import APIClient
 
 
-class Gateway(ABC):
-    def __init__(self, base_url: str):
-        self._api_client = ApiClient(base_url)
+class Gateway():
+    def __init__(self, base_url: str) -> None:
+        self._client = APIClient(base_url)
+
+        self._endpoints = []
+
+    def __getattr__(self, attr: str):
+        for endpoint in self._endpoints:
+            if hasattr(endpoint, attr):
+                return getattr(endpoint, attr)
+
+        raise AttributeError(
+            f"'{self.__class__.__name__}' object has no attribute '{attr}'"
+        )
