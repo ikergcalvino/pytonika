@@ -15,7 +15,7 @@ class Authentication:
 
         response = self._api_client.post(endpoint, data=data)
 
-        token = response.get("token")
+        token = response["data"].get("token")
 
         if token:
             self._api_client.set_token(token)
