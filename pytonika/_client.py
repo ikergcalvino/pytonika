@@ -1,4 +1,5 @@
 import httpx
+from . import __version__
 
 
 class APIClient:
@@ -6,7 +7,7 @@ class APIClient:
         self._client = httpx.Client(
             base_url=base_url.rstrip("/") + "/api",
             timeout=timeout,
-            headers={"User-Agent": "pytonika/0.1"}
+            headers={"User-Agent": f"pytonika/{__version__}"},
         )
 
     def set_token(self, token: str) -> None:

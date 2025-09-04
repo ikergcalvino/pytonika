@@ -1,4 +1,4 @@
-# Pytonika – The Teltonika API, pythonized.
+# Pytonika
 
 **Pytonika** is a lightweight Python wrapper for the [Teltonika Networks HTTP API](https://developers.teltonika-networks.com).
 It provides simple, direct Python function calls to interact with the API endpoints, making it easier to send requests and handle responses without dealing with raw HTTP.
