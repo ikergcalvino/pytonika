@@ -4,9 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pytonika"
-description = ""
-version = "0.1.0"
-readme = ""
+version = "0.1.1"
+description = "The Teltonika API, pythonized."
+readme = "README.md"
 license = { type = "MIT", file = "LICENSE" }
 authors = [
     { name = "Iker García Calviño", email = "iker.gcalvino@udc.es" },
