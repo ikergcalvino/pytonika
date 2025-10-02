@@ -1,9 +1,5 @@
 # Pytonika
 
-> [!NOTE]
-> This project is currently in **early development (alpha)**.
-> The API surface and behaviors may change between releases.
-
 Pytonika is a lightweight Python client library to interact with **Teltonika Networks device** via their Web API.
 It provides simple device abstractions and grouped endpoint interfaces to make automation and scripting straightforward.
 
