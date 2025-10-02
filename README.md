@@ -12,11 +12,12 @@ It provides simple device abstractions and grouped endpoint interfaces to make a
 
 ## Installation
 
-Requirements:
+### Requirements
+
 - Python **3.10+**
 - [httpx](https://pypi.org/project/httpx/) >= **0.28.1**
 
-Install from PyPI:
+### Install from PyPI
 
 ```bash
 pip install pytonika
