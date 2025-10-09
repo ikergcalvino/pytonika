@@ -1,6 +1,6 @@
 name: New device request
-description: Request to add a new Teltonika device model to the library
-title: "[Device]: "
+description: Request support for a new Teltonika device model.
+title: "[Device]: <model>"
 labels: ["new device"]
 assignees: []
 
@@ -9,7 +9,7 @@ body:
     id: device_type
     attributes:
       label: Device type
-      description: Select the type of device you are requesting
+      description: Select the type of Teltonika device.
       options:
         - Router
         - Gateway
@@ -22,16 +22,16 @@ body:
     id: device_model
     attributes:
       label: Device model
-      description: Enter the exact model name (e.g., RUT240, RUT955, RUTX11)
-      placeholder: "e.g. RUTX11"
+      description: Provide the exact model (e.g., RUT240, RUT955, RUTX11).
+      placeholder: "RUTX11"
     validations:
       required: true
 
   - type: textarea
     id: additional_info
     attributes:
-      label: Additional information (optional)
-      description: Add any extra details, links or notes you think are relevant.
-      placeholder: "Optional notes or links..."
+      label: Additional details (optional)
+      description: Add context if relevant (e.g., firmware version, special features, use case).
+      placeholder: "Optional notes..."
     validations:
       required: false

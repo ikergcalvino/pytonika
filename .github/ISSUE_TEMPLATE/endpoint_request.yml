@@ -1,0 +1,33 @@
+name: New endpoint request
+description: Request support for a new API endpoint for a Teltonika device.
+title: "[Endpoint]: <path>"
+labels: ["new endpoint"]
+assignees: []
+
+body:
+  - type: input
+    id: device_model
+    attributes:
+      label: Device model
+      description: Provide the device model (e.g., RUT240, RUT955, RUTX11).
+      placeholder: "RUTX11"
+    validations:
+      required: true
+
+  - type: input
+    id: endpoint_name
+    attributes:
+      label: Endpoint path
+      description: Enter the exact API path (e.g., /unauthorized/status).
+      placeholder: "/unauthorized/status"
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: Additional details (optional)
+      description: Add extra context (e.g., parameters, expected output, why it's needed).
+      placeholder: "Optional notes..."
+    validations:
+      required: false
