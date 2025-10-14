@@ -1,5 +1,5 @@
 from ..._client import APIClient
-from ...endpoints import Authentication, Firewall, Firmware, Interfaces, Unauthorized, Users, WireGuard
+from ...endpoints import *
 
 
 class Router():
