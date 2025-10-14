@@ -3,8 +3,8 @@ from ...endpoints import Authentication, Firewall, Firmware, Interfaces, Unautho
 
 
 class Router():
-    def __init__(self, base_url: str) -> None:
-        self._client = APIClient(base_url)
+    def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool = True) -> None:
+        self._client = APIClient(base_url, timeout=timeout, verify=verify)
 
         self.authentication = Authentication(self._client)
         self.firewall = Firewall(self._client)
