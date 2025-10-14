@@ -3,11 +3,12 @@ from . import __version__
 
 
 class APIClient:
-    def __init__(self, base_url: str, timeout: float = 10.0) -> None:
+    def __init__(self, base_url: str, *, timeout: float, verify: bool) -> None:
         self._client = httpx.Client(
             base_url=base_url.rstrip("/") + "/api",
-            timeout=timeout,
             headers={"User-Agent": f"pytonika/{__version__}"},
+            timeout=timeout,
+            verify=verify,
         )
 
     def set_token(self, token: str) -> None:
