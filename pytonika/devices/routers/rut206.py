@@ -24,10 +24,8 @@ class RUT206(Router):
         self.backup = None
         self.date_time = None
         self.sshfs = None
-        self.input_output = None
         self.modbus = None
         self.access_control = None
-        self.itxpt = None
         self.failover = None
         self.console = None
         self.wireless = None
@@ -76,7 +74,6 @@ class RUT206(Router):
         self.recipients = None
         self.pptp = None
         self.dnp3 = None
-        self.sd_usb_tools = None
         self.wireguard = None
         self.qos = None
         self.ports_settings = None
@@ -108,8 +105,6 @@ class RUT206(Router):
         self.dfota = None
         self.data_usage = None
         self.sim_switch = None
-        self.sim_switch_log = None
-        self.sim_switch_status = None
         self.traffic_logging = None
         self.overip = None
         self.l2tp = None
@@ -121,7 +116,6 @@ class RUT206(Router):
         self.vrrp = None
         self.relayd = None
         self.wake_on_lan = None
-        self.starlink = None
         self.aws = None
         self.udp_broadcast_relay = None
         self.auto_reboot = None

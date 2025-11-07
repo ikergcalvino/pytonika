@@ -25,7 +25,6 @@ class RUT142(Router):
         self.sshfs = None
         self.modbus = None
         self.access_control = None
-        self.itxpt = None
         self.failover = None
         self.console = None
         self.wireless = None

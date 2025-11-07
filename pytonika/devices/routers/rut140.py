@@ -24,7 +24,6 @@ class RUT140(Router):
         self.sshfs = None
         self.modbus = None
         self.access_control = None
-        self.itxpt = None
         self.failover = None
         self.wireless = None
         self.ip_rules = None

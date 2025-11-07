@@ -26,7 +26,6 @@ class RUT241(Router):
         self.input_output = None
         self.modbus = None
         self.access_control = None
-        self.itxpt = None
         self.failover = None
         self.wireless = None
         self.ip_rules = None
