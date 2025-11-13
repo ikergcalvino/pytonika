@@ -1,10 +1,11 @@
 from .router import Router
-from .rut200 import RUT200
-from .rut240 import RUT240
-from .rut241 import RUT241
-from .rut956 import RUT956
-from .rutx08 import RUTX08
-from .rutx50 import RUTX50
+from .rut1 import *
+from .rut2 import *
+from .rut3 import *
+from .rut9 import *
+from .rutc import *
+from .rutm import *
+from .rutx import *
 
 __all__ = [
     "Router",
