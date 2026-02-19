@@ -37,6 +37,7 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://github.com/ikergcalvino/pytonika"
+Documentation = "https://github.com/ikergcalvino/pytonika#readme"
 Repository = "https://github.com/ikergcalvino/pytonika.git"
 Issues = "https://github.com/ikergcalvino/pytonika/issues"
 
