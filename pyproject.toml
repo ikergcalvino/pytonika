@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pytonika"
-version = "0.2.0"
+dynamic = ["version"]
 description = "Python wrapper for the Teltonika API."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -40,6 +40,10 @@ Homepage = "https://github.com/ikergcalvino/pytonika"
 Documentation = "https://github.com/ikergcalvino/pytonika#readme"
 Repository = "https://github.com/ikergcalvino/pytonika.git"
 Issues = "https://github.com/ikergcalvino/pytonika/issues"
+Changelog = "https://github.com/ikergcalvino/pytonika/releases"
+
+[tool.setuptools.dynamic]
+version = {attr = "pytonika.__version__.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["."]
