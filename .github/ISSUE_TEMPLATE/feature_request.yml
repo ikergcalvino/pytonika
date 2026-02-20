@@ -1,0 +1,39 @@
+name: Feature request
+description: Suggest an idea or improvement for pytonika.
+title: "[Feature]: "
+labels: ["enhancement"]
+assignees: []
+
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or motivation
+      description: Is this related to a problem? Describe the context.
+      placeholder: "I'm always frustrated when..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe what you'd like to happen. Include code examples if possible.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any alternative solutions or workarounds you've thought of.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Any other relevant information.
+    validations:
+      required: false

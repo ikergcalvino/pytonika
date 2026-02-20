@@ -27,11 +27,28 @@ body:
     validations:
       required: true
 
+  - type: input
+    id: firmware_version
+    attributes:
+      label: Firmware version
+      description: Firmware version of the device, if known.
+      placeholder: "RUTX_R_00.07.08"
+    validations:
+      required: false
+
+  - type: input
+    id: documentation_link
+    attributes:
+      label: API documentation link
+      description: Link to the Teltonika API documentation for this device.
+      placeholder: "https://developers.teltonika-networks.com/..."
+    validations:
+      required: false
+
   - type: textarea
     id: additional_info
     attributes:
-      label: Additional details (optional)
-      description: Add context if relevant (e.g., firmware version, special features, use case).
-      placeholder: "Optional notes..."
+      label: Additional context
+      description: Any other relevant information (special features, use case, etc.).
     validations:
       required: false

@@ -1,0 +1,88 @@
+name: Bug report
+description: Report a bug or unexpected behavior.
+title: "[Bug]: "
+labels: ["bug"]
+assignees: []
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: To reproduce
+      description: Minimal code example to reproduce the behavior.
+      render: python
+      placeholder: |
+        from pytonika import RUT240
+
+        router = RUT240("https://192.168.1.1")
+        router.authentication.login("admin", "password")
+        # ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: traceback
+    attributes:
+      label: Error traceback
+      description: Paste the full traceback if applicable.
+      render: python
+    validations:
+      required: false
+
+  - type: input
+    id: pytonika_version
+    attributes:
+      label: Pytonika version
+      placeholder: "0.3.0"
+    validations:
+      required: true
+
+  - type: input
+    id: python_version
+    attributes:
+      label: Python version
+      placeholder: "3.12"
+    validations:
+      required: true
+
+  - type: input
+    id: device_model
+    attributes:
+      label: Device model
+      description: Teltonika device model, if relevant.
+      placeholder: "RUTX50"
+    validations:
+      required: false
+
+  - type: input
+    id: firmware_version
+    attributes:
+      label: Firmware version
+      description: Device firmware version, if relevant.
+      placeholder: "RUTX_R_00.07.08"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Any other relevant information (OS, logs, screenshots, etc.).
+    validations:
+      required: false
