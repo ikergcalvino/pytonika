@@ -1,9 +1,7 @@
-from .._client import APIClient
+from ._base import Endpoint
 
 
-class Firmware:
-    def __init__(self, api_client: APIClient) -> None:
-        self._api_client = api_client
+class Firmware(Endpoint):
 
     def get_firmware_device_status(self) -> dict[str, object]:
         endpoint = "/firmware/device/status"

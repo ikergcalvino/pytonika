@@ -1,9 +1,7 @@
-from .._client import APIClient
+from ._base import Endpoint
 
 
-class Users:
-    def __init__(self, api_client: APIClient) -> None:
-        self._api_client = api_client
+class Users(Endpoint):
 
     def get_users_config(self) -> dict[str, object]:
         endpoint = "/users/config"

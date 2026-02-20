@@ -1,9 +1,7 @@
-from .._client import APIClient
+from ._base import Endpoint
 
 
-class Interfaces:
-    def __init__(self, api_client: APIClient) -> None:
-        self._api_client = api_client
+class Interfaces(Endpoint):
 
     def get_interfaces_config(self) -> dict[str, object]:
         endpoint = "/interfaces/config"

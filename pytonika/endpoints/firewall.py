@@ -1,9 +1,7 @@
-from .._client import APIClient
+from ._base import Endpoint
 
 
-class Firewall:
-    def __init__(self, api_client: APIClient) -> None:
-        self._api_client = api_client
+class Firewall(Endpoint):
 
     def get_firewall_connections_status(self) -> dict[str, object]:
         endpoint = "/firewall/connections/status"

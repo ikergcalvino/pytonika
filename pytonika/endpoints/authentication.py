@@ -1,9 +1,7 @@
-from .._client import APIClient
+from ._base import Endpoint
 
 
-class Authentication:
-    def __init__(self, api_client: APIClient) -> None:
-        self._api_client = api_client
+class Authentication(Endpoint):
 
     def login(self, username: str, password: str) -> dict[str, object]:
         endpoint = "/login"

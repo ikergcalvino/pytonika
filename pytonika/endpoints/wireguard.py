@@ -1,9 +1,7 @@
-from .._client import APIClient
+from ._base import Endpoint
 
 
-class WireGuard:
-    def __init__(self, api_client: APIClient) -> None:
-        self._api_client = api_client
+class WireGuard(Endpoint):
 
     def get_wireguard_config(self) -> dict[str, object]:
         endpoint = "/wireguard/config"
