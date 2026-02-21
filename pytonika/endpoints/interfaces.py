@@ -4,7 +4,6 @@ from ._base import Endpoint
 
 
 class Interfaces(Endpoint):
-
     def get_interfaces_config(self) -> dict[str, Any]:
         endpoint = "/interfaces/config"
 

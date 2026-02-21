@@ -4,7 +4,6 @@ from ._base import Endpoint
 
 
 class Users(Endpoint):
-
     def get_users_config(self) -> dict[str, Any]:
         endpoint = "/users/config"
 

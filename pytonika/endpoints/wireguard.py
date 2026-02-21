@@ -4,7 +4,6 @@ from ._base import Endpoint
 
 
 class WireGuard(Endpoint):
-
     def get_wireguard_config(self) -> dict[str, Any]:
         endpoint = "/wireguard/config"
 

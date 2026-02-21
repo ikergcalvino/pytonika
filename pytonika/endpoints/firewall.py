@@ -4,7 +4,6 @@ from ._base import Endpoint
 
 
 class Firewall(Endpoint):
-
     def get_firewall_connections_status(self) -> dict[str, Any]:
         endpoint = "/firewall/connections/status"
 

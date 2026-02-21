@@ -4,7 +4,6 @@ from ._base import Endpoint
 
 
 class System(Endpoint):
-
     def system_actions_change_password_firstlogin(self, config: dict[str, Any]) -> dict[str, Any]:
         endpoint = "/system/actions/change_password_firstlogin"
 

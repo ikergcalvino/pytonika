@@ -4,14 +4,10 @@ from ._base import Endpoint
 
 
 class Authentication(Endpoint):
-
     def login(self, username: str, password: str) -> dict[str, Any]:
         endpoint = "/login"
 
-        data = {
-            "username": username,
-            "password": password
-        }
+        data = {"username": username, "password": password}
 
         response = self._api_client.post(endpoint, data=data)
 

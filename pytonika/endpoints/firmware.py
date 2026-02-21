@@ -4,7 +4,6 @@ from ._base import Endpoint
 
 
 class Firmware(Endpoint):
-
     def get_firmware_device_status(self) -> dict[str, Any]:
         endpoint = "/firmware/device/status"
 
