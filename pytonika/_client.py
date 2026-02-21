@@ -1,15 +1,14 @@
+from importlib.metadata import version
 from typing import Any
 
 import httpx
-
-from . import __version__
 
 
 class APIClient:
     def __init__(self, base_url: str, *, timeout: float, verify: bool) -> None:
         self._client = httpx.Client(
             base_url=base_url.rstrip("/") + "/api",
-            headers={"User-Agent": f"pytonika/{__version__}"},
+            headers={"User-Agent": f"pytonika/{version('pytonika')}"},
             timeout=timeout,
             verify=verify,
         )

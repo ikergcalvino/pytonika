@@ -1,9 +1,10 @@
-from .__version__ import __title__, __description__, __version__
+from importlib.metadata import version
+
 from .devices import *
 
+__version__ = version("pytonika")
+
 __all__ = [
-    "__title__",
-    "__description__",
     "__version__",
     "Router",
     "ATRM50",
