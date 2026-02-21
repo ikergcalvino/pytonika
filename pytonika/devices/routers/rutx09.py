@@ -1,0 +1,43 @@
+from ...endpoints import *
+from .router import Router
+
+
+class RUTX09(Router):
+    def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool = True) -> None:
+        super().__init__(base_url, timeout=timeout, verify=verify)
+
+        self.serial = Serial(self._client)
+        self.sms_gateway = SMSGateway(self._client)
+        self.input_output = InputOutput(self._client)
+        self.dlna = DLNA(self._client)
+        self.console = Console(self._client)
+        self.ntrip = NTRIP(self._client)
+        self.bacnet = Bacnet(self._client)
+        self.port_based_vlan = PortBasedVlan(self._client)
+        self.sd_usb_tools = SDUSBTools(self._client)
+        self.samba = Samba(self._client)
+        self.tailscale = Tailscale(self._client)
+        self.data_limit = DataLimit(self._client)
+        self.ports_settings = PortsSettings(self._client)
+        self.gps = GPS(self._client)
+        self.smpp = SMPP(self._client)
+        self.sms_utilities = SMSUtilities(self._client)
+        self.messages = Messages(self._client)
+        self.sim_idle_protection = SIMIdleProtection(self._client)
+        self.modem_control = ModemControl(self._client)
+        self.port_mirroring = PortMirroring(self._client)
+        self.dot1x = Dot1X(self._client)
+        self.openconnect = OpenConnect(self._client)
+        self.apn_database = APNDatabase(self._client)
+        self.esim = eSIM(self._client)
+        self.operator_lists = OperatorLists(self._client)
+        self.sim_cards = SIMCards(self._client)
+        self.modems = Modems(self._client)
+        self.dfota = DFOTA(self._client)
+        self.data_usage = DataUsage(self._client)
+        self.sim_switch = SIMSwitch(self._client)
+        self.overip = OverIP(self._client)
+        self.universal_gateway = UniversalGateway(self._client)
+        self.impulse_counter = ImpulseCounter(self._client)
+        self.call_utilities = CallUtilities(self._client)
+        self.network_usage = NetworkUsage(self._client)

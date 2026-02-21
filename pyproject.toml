@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pytonika"
-version = "0.2.0"
-description = "Python wrapper for the Teltonika API."
+dynamic = ["version"]
+description = "Python client library for the Teltonika API."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
@@ -29,21 +29,52 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
 
 dependencies = [
   "httpx>=0.28.1"
 ]
 
+[project.optional-dependencies]
+dev = [
+  "build>=1.2.0",
+  "mypy>=1.14.0",
+  "pytest>=8.0",
+  "pytest-cov>=6.0",
+  "respx>=0.22.0",
+  "ruff>=0.9.0",
+  "twine>=6.0.0",
+]
+
 [project.urls]
 Homepage = "https://github.com/ikergcalvino/pytonika"
+Documentation = "https://github.com/ikergcalvino/pytonika#readme"
 Repository = "https://github.com/ikergcalvino/pytonika.git"
 Issues = "https://github.com/ikergcalvino/pytonika/issues"
+Changelog = "https://github.com/ikergcalvino/pytonika/releases"
+
+[tool.setuptools.dynamic]
+version = {attr = "pytonika.__version__.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["pytonika*"]
 exclude = ["tests*", "venv*", "dist*", "build*"]
 
-[tool.setuptools]
-zip-safe = false
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "B", "SIM", "RUF"]
+ignore = ["F403", "F405"]
+per-file-ignores = { "__init__.py" = ["I001", "RUF022"] }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=pytonika --cov-fail-under=0"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true

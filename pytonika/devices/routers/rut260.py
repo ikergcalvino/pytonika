@@ -1,0 +1,32 @@
+from ...endpoints import *
+from .router import Router
+
+
+class RUT260(Router):
+    def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool = True) -> None:
+        super().__init__(base_url, timeout=timeout, verify=verify)
+
+        self.sms_gateway = SMSGateway(self._client)
+        self.input_output = InputOutput(self._client)
+        self.wireless = Wireless(self._client)
+        self.bacnet = Bacnet(self._client)
+        self.port_based_vlan = PortBasedVlan(self._client)
+        self.hotspot_2 = Hotspot2(self._client)
+        self.data_limit = DataLimit(self._client)
+        self.ports_settings = PortsSettings(self._client)
+        self.smpp = SMPP(self._client)
+        self.sms_utilities = SMSUtilities(self._client)
+        self.messages = Messages(self._client)
+        self.wifi_scanner = WiFiScanner(self._client)
+        self.dot1x = Dot1X(self._client)
+        self.apn_database = APNDatabase(self._client)
+        self.esim = eSIM(self._client)
+        self.operator_lists = OperatorLists(self._client)
+        self.sim_cards = SIMCards(self._client)
+        self.modems = Modems(self._client)
+        self.dfota = DFOTA(self._client)
+        self.data_usage = DataUsage(self._client)
+        self.universal_gateway = UniversalGateway(self._client)
+        self.impulse_counter = ImpulseCounter(self._client)
+        self.relayd = Relayd(self._client)
+        self.call_utilities = CallUtilities(self._client)

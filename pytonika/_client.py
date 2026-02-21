@@ -1,4 +1,7 @@
+from typing import Any
+
 import httpx
+
 from . import __version__
 
 
@@ -17,14 +20,18 @@ class APIClient:
     def clear_token(self) -> None:
         self._client.headers.pop("Authorization", None)
 
-    def get(self, endpoint: str, params: dict[str, object] | None = None) -> dict[str, object]:
-        return self._client.get(endpoint, params=params).json()
+    def get(self, endpoint: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
+        response: dict[str, Any] = self._client.get(endpoint, params=params).json()
+        return response
 
-    def post(self, endpoint: str, data: dict[str, object] | None = None) -> dict[str, object]:
-        return self._client.post(endpoint, json=data).json()
+    def post(self, endpoint: str, data: dict[str, Any] | None = None) -> dict[str, Any]:
+        response: dict[str, Any] = self._client.post(endpoint, json=data).json()
+        return response
 
-    def put(self, endpoint: str, data: dict[str, object] | None = None) -> dict[str, object]:
-        return self._client.put(endpoint, json=data).json()
+    def put(self, endpoint: str, data: dict[str, Any] | None = None) -> dict[str, Any]:
+        response: dict[str, Any] = self._client.put(endpoint, json=data).json()
+        return response
 
-    def delete(self, endpoint: str, data: dict[str, object] | None = None) -> dict[str, object]:
-        return self._client.delete(endpoint, json=data).json()
+    def delete(self, endpoint: str) -> dict[str, Any]:
+        response: dict[str, Any] = self._client.delete(endpoint).json()
+        return response

@@ -1,17 +1,13 @@
-from .._client import APIClient
+from typing import Any
+
+from ._base import Endpoint
 
 
-class Authentication:
-    def __init__(self, api_client: APIClient) -> None:
-        self._api_client = api_client
-
-    def login(self, username: str, password: str) -> dict[str, object]:
+class Authentication(Endpoint):
+    def login(self, username: str, password: str) -> dict[str, Any]:
         endpoint = "/login"
 
-        data = {
-            "username": username,
-            "password": password
-        }
+        data = {"username": username, "password": password}
 
         response = self._api_client.post(endpoint, data=data)
 
@@ -22,7 +18,7 @@ class Authentication:
 
         return response
 
-    def logout(self) -> dict[str, object]:
+    def logout(self) -> dict[str, Any]:
         endpoint = "/logout"
 
         response = self._api_client.post(endpoint)
@@ -31,7 +27,7 @@ class Authentication:
 
         return response
 
-    def get_session_status(self) -> dict[str, object]:
+    def get_session_status(self) -> dict[str, Any]:
         endpoint = "/session/status"
 
         return self._api_client.get(endpoint)

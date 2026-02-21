@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - run: ruff check .
+      - run: ruff format --check .
+
+  type-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - run: mypy pytonika
+
+  # test:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-python@v5
+  #       with:
+  #         python-version: ${{ matrix.python-version }}
+  #         cache: pip
+  #     - run: pip install -e ".[dev]"
+  #     - run: pytest --cov=pytonika --cov-report=term-missing
+
+  build-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - run: python -m build
+      - run: twine check dist/*

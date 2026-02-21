@@ -1,11 +1,10 @@
-from .._client import APIClient
+from typing import Any
+
+from ._base import Endpoint
 
 
-class Unauthorized:
-    def __init__(self, api_client: APIClient) -> None:
-        self._api_client = api_client
-
-    def get_unauthorized_status(self) -> dict[str, object]:
+class Unauthorized(Endpoint):
+    def get_unauthorized_status(self) -> dict[str, Any]:
         endpoint = "/unauthorized/status"
 
         return self._api_client.get(endpoint)
