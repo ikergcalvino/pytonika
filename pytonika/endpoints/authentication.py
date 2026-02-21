@@ -1,9 +1,11 @@
+from typing import Any
+
 from ._base import Endpoint
 
 
 class Authentication(Endpoint):
 
-    def login(self, username: str, password: str) -> dict[str, object]:
+    def login(self, username: str, password: str) -> dict[str, Any]:
         endpoint = "/login"
 
         data = {
@@ -20,7 +22,7 @@ class Authentication(Endpoint):
 
         return response
 
-    def logout(self) -> dict[str, object]:
+    def logout(self) -> dict[str, Any]:
         endpoint = "/logout"
 
         response = self._api_client.post(endpoint)
@@ -29,7 +31,7 @@ class Authentication(Endpoint):
 
         return response
 
-    def get_session_status(self) -> dict[str, object]:
+    def get_session_status(self) -> dict[str, Any]:
         endpoint = "/session/status"
 
         return self._api_client.get(endpoint)

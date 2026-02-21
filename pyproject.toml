@@ -68,7 +68,8 @@ line-length = 120
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "W", "UP", "B", "SIM", "RUF"]
-ignore = ["F403", "F405", "RUF022"]
+ignore = ["F403", "F405"]
+per-file-ignores = { "__init__.py" = ["I001", "RUF022"] }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
