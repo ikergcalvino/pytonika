@@ -23,12 +23,11 @@ class WireGuard(Endpoint):
 
         return self._api_client.put(endpoint, data=data)
 
-    def delete_wireguard_config(self, config: list[str]) -> dict[str, Any]:
-        endpoint = "/wireguard/config"
-
-        data = {"data": config}
-
-        return self._api_client.delete(endpoint, data=data)
+    def delete_wireguard_config(self, config: list[str]) -> list[dict[str, Any]]:
+        return [
+            self.delete_wireguard_config_by_id(wireguard_id)
+            for wireguard_id in config
+        ]
 
     def get_wireguard_config_by_id(self, wireguard_id: str) -> dict[str, Any]:
         endpoint = f"/wireguard/config/{wireguard_id}"
@@ -71,12 +70,11 @@ class WireGuard(Endpoint):
 
         return self._api_client.put(endpoint, data=data)
 
-    def delete_wireguard_peers_config(self, wireguard_id: str, config: list[str]) -> dict[str, Any]:
-        endpoint = f"/wireguard/{wireguard_id}/peers/config"
-
-        data = {"data": config}
-
-        return self._api_client.delete(endpoint, data=data)
+    def delete_wireguard_peers_config(self, wireguard_id: str, config: list[str]) -> list[dict[str, Any]]:
+        return [
+            self.delete_wireguard_peer_config_by_id(wireguard_id, peer_id)
+            for peer_id in config
+        ]
 
     def get_wireguard_peer_config_by_id(self, wireguard_id: str, peer_id: str) -> dict[str, Any]:
         endpoint = f"/wireguard/{wireguard_id}/peers/config/{peer_id}"
