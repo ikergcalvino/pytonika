@@ -24,10 +24,7 @@ class Users(Endpoint):
         return self._api_client.put(endpoint, data=data)
 
     def delete_users_config(self, config: list[str]) -> list[dict[str, Any]]:
-        return [
-            self.delete_users_config_by_id(user_id)
-            for user_id in config
-        ]
+        return [self.delete_users_config_by_id(user_id) for user_id in config]
 
     def get_users_config_by_id(self, user_id: str) -> dict[str, Any]:
         endpoint = f"/users/config/{user_id}"
