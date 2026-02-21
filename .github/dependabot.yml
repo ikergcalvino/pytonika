@@ -1,34 +1,34 @@
 version: 2
 updates:
-  - package-ecosystem: "pip"
-    directory: "/"
-    target-branch: "develop"
+  - package-ecosystem: pip
+    directory: /
+    target-branch: develop
     schedule:
-      interval: "weekly"
-    labels: ["dependencies"]
+      interval: weekly
+    labels: [dependencies]
     commit-message:
-      prefix: "deps"
+      prefix: deps
     groups:
       runtime:
         patterns:
           - "httpx"
       dev:
         patterns:
+          - "build"
+          - "mypy"
           - "pytest*"
           - "respx"
           - "ruff"
-          - "mypy"
-          - "build"
           - "twine"
 
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    target-branch: "develop"
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: develop
     schedule:
-      interval: "weekly"
-    labels: ["dependencies"]
+      interval: weekly
+    labels: [dependencies]
     commit-message:
-      prefix: "ci"
+      prefix: ci
     groups:
       actions:
         patterns:
