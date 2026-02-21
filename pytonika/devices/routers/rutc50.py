@@ -1,5 +1,5 @@
-from .router import Router
 from ...endpoints import *
+from .router import Router
 
 
 class RUTC50(Router):

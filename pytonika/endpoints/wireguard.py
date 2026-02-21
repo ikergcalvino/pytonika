@@ -82,7 +82,9 @@ class WireGuard(Endpoint):
 
         return self._api_client.get(endpoint)
 
-    def update_wireguard_peer_config_by_id(self, wireguard_id: str, peer_id: str, config: dict[str, object]) -> dict[str, object]:
+    def update_wireguard_peer_config_by_id(
+        self, wireguard_id: str, peer_id: str, config: dict[str, object]
+    ) -> dict[str, object]:
         endpoint = f"/wireguard/{wireguard_id}/peers/config/{peer_id}"
 
         data = {"data": config}

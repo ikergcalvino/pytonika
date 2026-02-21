@@ -39,7 +39,9 @@ class Firewall(Endpoint):
 
         return self._api_client.get(endpoint)
 
-    def update_firewall_port_forwards_config_by_id(self, port_forward_id: str, config: dict[str, object]) -> dict[str, object]:
+    def update_firewall_port_forwards_config_by_id(
+        self, port_forward_id: str, config: dict[str, object]
+    ) -> dict[str, object]:
         endpoint = f"/firewall/port_forwards/config/{port_forward_id}"
 
         data = {"data": config}
