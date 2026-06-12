@@ -5,6 +5,7 @@ from .trb142 import TRB142
 from .trb143 import TRB143
 from .trb145 import TRB145
 from .trb160 import TRB160
+from .trb236 import TRB236
 from .trb245 import TRB245
 from .trb246 import TRB246
 from .trb247 import TRB247
@@ -21,6 +22,7 @@ __all__ = [
     "TRB143",
     "TRB145",
     "TRB160",
+    "TRB236",
     "TRB245",
     "TRB246",
     "TRB247",

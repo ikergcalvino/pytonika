@@ -36,7 +36,7 @@ jobs:
           python-version: "3.13"
           cache: pip
       - run: pip install -e ".[type]"
-      - run: mypy pytonika
+      - run: ty check pytonika
 
   # test:
   #   runs-on: ubuntu-latest

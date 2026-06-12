@@ -5,6 +5,7 @@ from ._base import Endpoint
 
 class Authentication(Endpoint):
     def login(self, username: str, password: str) -> dict[str, Any]:
+        """Authenticates user for API access."""
         endpoint = "/login"
 
         data = {"username": username, "password": password}
@@ -19,6 +20,7 @@ class Authentication(Endpoint):
         return response
 
     def logout(self) -> dict[str, Any]:
+        """Logs out user from API."""
         endpoint = "/logout"
 
         response = self._api_client.post(endpoint)
@@ -28,6 +30,7 @@ class Authentication(Endpoint):
         return response
 
     def get_session_status(self) -> dict[str, Any]:
+        """Returns if API session is alive and resets session's timer."""
         endpoint = "/session/status"
 
         return self._api_client.get(endpoint)
