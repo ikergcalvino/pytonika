@@ -15,11 +15,11 @@ updates:
       dev:
         patterns:
           - "build"
-          - "mypy"
           - "pytest*"
           - "respx"
           - "ruff"
           - "twine"
+          - "ty"
 
   - package-ecosystem: github-actions
     directory: /

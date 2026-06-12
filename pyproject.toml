@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=61", "wheel"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "pytonika"
-version = "0.3.0"
+version = "0.4.0"
 description = "Python client library for the Teltonika API."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -17,7 +17,7 @@ authors = [
 keywords = ["teltonika", "api", "python", "networking", "routers", "gateways", "access-points", "switches"]
 
 classifiers = [
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
   "Intended Audience :: System Administrators",
   "Topic :: Software Development :: Libraries :: Python Modules",
@@ -29,6 +29,7 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
+  "Typing :: Typed",
 ]
 
 dependencies = [
@@ -36,10 +37,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-lint = ["ruff>=0.15.9"]
-test = ["pytest>=9.0.2", "pytest-cov>=7.1.0", "respx>=0.22.0"]
-type = ["ty>=0.0.28"]
-build = ["build>=1.4.2", "twine>=6.2.0"]
+lint = ["ruff>=0.15.17"]
+test = ["pytest>=9.0.3", "pytest-cov>=7.1.0", "respx>=0.23.1"]
+type = ["ty>=0.0.49"]
+build = ["build>=1.5.0", "twine>=6.2.0"]
 dev = ["pytonika[lint,test,type,build]"]
 
 [project.urls]
