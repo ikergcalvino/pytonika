@@ -3,7 +3,7 @@ from ...endpoints import *
 
 
 class Router:
-    def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool = True) -> None:
+    def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool | str = True) -> None:
         self._client = APIClient(base_url, timeout=timeout, verify=verify)
 
         self.unauthorized = Unauthorized(self._client)

@@ -5,7 +5,7 @@ import httpx
 
 
 class APIClient:
-    def __init__(self, base_url: str, *, timeout: float, verify: bool) -> None:
+    def __init__(self, base_url: str, *, timeout: float, verify: bool | str) -> None:
         self._client = httpx.Client(
             base_url=base_url.rstrip("/") + "/api",
             headers={"User-Agent": f"pytonika/{version('pytonika')}"},
