@@ -5,10 +5,11 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pytonika"
 version = "0.4.0"
-description = "Python client library for the Teltonika API."
+description = "Python client library for the Teltonika Networks Web API."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
+license-files = ["LICENSE"]
 
 authors = [
   { name = "Iker García Calviño", email = "iker.gcalvino@udc.es" }

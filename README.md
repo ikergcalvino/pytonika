@@ -3,7 +3,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/pytonika)](https://pypi.org/project/pytonika/)
 [![Python versions](https://img.shields.io/pypi/pyversions/pytonika)](https://pypi.org/project/pytonika/)
 [![CI](https://github.com/ikergcalvino/pytonika/actions/workflows/ci.yml/badge.svg)](https://github.com/ikergcalvino/pytonika/actions/workflows/ci.yml)
-[![License](https://img.shields.io/github/license/ikergcalvino/pytonika)](LICENSE)
+[![License](https://img.shields.io/github/license/ikergcalvino/pytonika)](https://github.com/ikergcalvino/pytonika/blob/main/LICENSE)
 
 Pytonika is a lightweight Python client library for the **Teltonika Networks Web API**.
 It provides device-aware wrappers and grouped endpoint interfaces to make automation and scripting straightforward.
@@ -94,7 +94,7 @@ named after the group — a few examples:
 
 Method names follow the API structure: `get_*` / `create_*` / `update_*` / `delete_*`
 for configuration resources (with `_by_id` variants), and `<group>_actions_<action>`
-for actions. See [`pytonika/endpoints/`](pytonika/endpoints/) for the full list of
+for actions. See [`pytonika/endpoints/`](https://github.com/ikergcalvino/pytonika/tree/main/pytonika/endpoints) for the full list of
 160+ groups, or browse the [Teltonika API reference](https://developers.teltonika-networks.com/)
 for request and response details.
 
@@ -127,8 +127,8 @@ python -m build && twine check dist/*
 ## Contributing
 
 Contributions, bug reports and feature requests are welcome!
-Check out the [Contributing guidelines](CONTRIBUTING.md) to get started.
+Check out the [Contributing guidelines](https://github.com/ikergcalvino/pytonika/blob/main/CONTRIBUTING.md) to get started.
 
 ## License
 
-[MIT License](LICENSE)
+[MIT License](https://github.com/ikergcalvino/pytonika/blob/main/LICENSE)
