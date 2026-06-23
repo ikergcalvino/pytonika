@@ -4,6 +4,7 @@ Thanks for your interest in improving Pytonika! Contributions, bug reports and
 feature requests are all welcome. This guide covers how to set up your
 environment and the conventions the project follows.
 
+> [!NOTE]
 > Pytonika is **not an official Teltonika library** and is not affiliated with
 > Teltonika Networks. Endpoint and device definitions are derived from the
 > public [Teltonika Web API reference](https://developers.teltonika-networks.com/).
@@ -17,8 +18,9 @@ environment and the conventions the project follows.
 
 ## Development setup
 
-An **editable install is required** — the package reads its own version via
-`importlib.metadata`, so it must be installed to import correctly.
+> [!IMPORTANT]
+> An **editable install is required** — the package reads its own version via
+> `importlib.metadata`, so it must be installed to import correctly.
 
 ```bash
 # Clone and enter the repository

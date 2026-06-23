@@ -13,7 +13,8 @@ only. Please make sure you are on the latest version before reporting an issue.
 
 ## Reporting a vulnerability
 
-**Please do not report security vulnerabilities through public GitHub issues.**
+> [!IMPORTANT]
+> Please **do not** report security vulnerabilities through public GitHub issues.
 
 Instead, report them privately through GitHub's
 [private vulnerability reporting](https://github.com/ikergcalvino/pytonika/security/advisories/new).

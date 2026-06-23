@@ -51,6 +51,9 @@ device.interfaces.get_interfaces_status()
 device.authentication.logout()
 ```
 
+> [!WARNING]
+> Teltonika devices usually ship with a self-signed certificate, so the example passes `verify=False`, which **disables TLS verification**. On an untrusted network, provide a trusted CA bundle instead — see [SECURITY.md](https://github.com/ikergcalvino/pytonika/blob/main/SECURITY.md).
+
 Every method returns the raw API response as a `dict`, typically shaped as
 `{"success": True, "data": ...}` or `{"success": False, "errors": [...]}`.
 
@@ -65,14 +68,14 @@ router = Router("http://192.168.1.1/", timeout=10.0)
 
 ## Supported devices
 
-Use the generic class per device type or a model-specific subclass:
+Pytonika supports **84 models** across four families. Use the generic class for a device type, or a model-specific subclass:
 
-| Generic class | Models |
-|---|---|
-| `Router` | ATRM50, CAP700, DAP140, DAP142, DAP145, OTD140, OTD144, OTD500, RUT140, RUT142, RUT145, RUT200, RUT202, RUT204, RUT206, RUT240, RUT241, RUT260, RUT271, RUT276, RUT281, RUT300, RUT301, RUT360, RUT361, RUT901, RUT906, RUT950, RUT951, RUT955, RUT956, RUT976, RUT981, RUT986, RUTC40, RUTC41, RUTC42, RUTC50, RUTM08, RUTM09, RUTM10, RUTM11, RUTM16, RUTM20, RUTM30, RUTM31, RUTM50, RUTM51, RUTM52, RUTM54, RUTM55, RUTM56, RUTM59, RUTX08, RUTX09, RUTX10, RUTX11, RUTX12, RUTX14, RUTX50, RUTXR1, TCR100 |
-| `Gateway` | TRB140, TRB141, TRB142, TRB143, TRB145, TRB160, TRB236, TRB245, TRB246, TRB247, TRB255, TRB256, TRB500, TRB501 |
-| `AccessPoint` | TAP100, TAP200, TAP400 |
-| `Switch` | SWM280, SWM281, SWM282, TSW202, TSW212 |
+| Generic class | Count | Models |
+|---|---|---|
+| `Router` | 62 | ATRM50, CAP700, DAP140, DAP142, DAP145, OTD140, OTD144, OTD500, RUT140, RUT142, RUT145, RUT200, RUT202, RUT204, RUT206, RUT240, RUT241, RUT260, RUT271, RUT276, RUT281, RUT300, RUT301, RUT360, RUT361, RUT901, RUT906, RUT950, RUT951, RUT955, RUT956, RUT976, RUT981, RUT986, RUTC40, RUTC41, RUTC42, RUTC50, RUTM08, RUTM09, RUTM10, RUTM11, RUTM16, RUTM20, RUTM30, RUTM31, RUTM50, RUTM51, RUTM52, RUTM54, RUTM55, RUTM56, RUTM59, RUTX08, RUTX09, RUTX10, RUTX11, RUTX12, RUTX14, RUTX50, RUTXR1, TCR100 |
+| `Gateway` | 14 | TRB140, TRB141, TRB142, TRB143, TRB145, TRB160, TRB236, TRB245, TRB246, TRB247, TRB255, TRB256, TRB500, TRB501 |
+| `AccessPoint` | 3 | TAP100, TAP200, TAP400 |
+| `Switch` | 5 | SWM280, SWM281, SWM282, TSW202, TSW212 |
 
 Each model class exposes exactly the endpoints documented for its latest firmware,
 so your editor can autocomplete what a given device actually supports.
@@ -97,32 +100,6 @@ for configuration resources (with `_by_id` variants), and `<group>_actions_<acti
 for actions. See [`pytonika/endpoints/`](https://github.com/ikergcalvino/pytonika/tree/main/pytonika/endpoints) for the full list of
 160+ groups, or browse the [Teltonika API reference](https://developers.teltonika-networks.com/)
 for request and response details.
-
-## Development
-
-```bash
-# Clone and set up a virtual environment
-git clone https://github.com/ikergcalvino/pytonika.git
-cd pytonika
-python -m venv .venv
-source .venv/bin/activate
-
-# Install in editable mode with all dev dependencies
-pip install -e ".[dev]"
-
-# Lint and format
-ruff check .
-ruff format --check .
-
-# Type check
-ty check pytonika
-
-# Run tests
-pytest
-
-# Build and verify the package
-python -m build && twine check dist/*
-```
 
 ## Contributing
 
