@@ -13,6 +13,9 @@ class APIClient:
             verify=verify,
         )
 
+    def close(self) -> None:
+        self._client.close()
+
     def set_token(self, token: str) -> None:
         self._client.headers["Authorization"] = f"Bearer {token}"
 

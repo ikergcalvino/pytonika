@@ -7,7 +7,7 @@ name = "pytonika"
 version = "0.4.0"
 description = "Python client library for the Teltonika Networks Web API."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = "MIT"
 license-files = ["LICENSE"]
 
@@ -25,7 +25,6 @@ classifiers = [
   "Topic :: System :: Networking",
   "Topic :: Communications",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
@@ -60,7 +59,7 @@ exclude = ["tests*", "venv*", "dist*", "build*", "*.egg-info*"]
 pytonika = ["py.typed"]
 
 [tool.ruff]
-target-version = "py310"
+target-version = "py311"
 line-length = 120
 
 [tool.ruff.lint]
@@ -77,4 +76,4 @@ testpaths = ["tests"]
 addopts = "--cov=pytonika --cov-report=term-missing --cov-fail-under=80"
 
 [tool.ty.environment]
-python-version = "3.10"
+python-version = "3.11"

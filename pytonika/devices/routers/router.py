@@ -1,3 +1,5 @@
+from typing import Self
+
 from ..._client import APIClient
 from ...endpoints import *
 
@@ -93,3 +95,12 @@ class Router:
         self.auto_reboot = AutoReboot(self._client)
         self.vrf = VRF(self._client)
         self.ipsec = IPSec(self._client)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> Self:
+        return self
+
+    def __exit__(self, *exc: object) -> None:
+        self.close()

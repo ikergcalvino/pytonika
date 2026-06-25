@@ -23,7 +23,7 @@ Instead of crafting raw HTTP requests against the Teltonika Web API, Pytonika gi
 
 ## Installation
 
-Requires Python **3.10+**:
+Requires Python **3.11+**:
 
 ```bash
 pip install pytonika
