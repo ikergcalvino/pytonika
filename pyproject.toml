@@ -38,10 +38,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-lint = ["ruff>=0.15.20"]
+lint = ["ruff>=0.16.0"]
 test = ["pytest>=9.1.1", "pytest-cov>=7.1.0", "respx>=0.23.1"]
 type = ["ty>=0.0.55"]
-build = ["build>=1.5.0", "twine>=6.2.0"]
+build = ["build>=1.5.0", "twine>=7.0.0"]
 dev = ["pytonika[lint,test,type,build]"]
 
 [project.urls]
