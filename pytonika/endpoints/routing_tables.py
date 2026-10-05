@@ -8,7 +8,7 @@ class RoutingTables(Endpoint):
         """Returns routing table configurations."""
         endpoint = "/routing_tables/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_routing_tables_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates routing table configuration."""
@@ -16,7 +16,7 @@ class RoutingTables(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_routing_tables_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates routing table configurations."""
@@ -24,7 +24,7 @@ class RoutingTables(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_routing_tables_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes routing table configurations."""
@@ -34,7 +34,7 @@ class RoutingTables(Endpoint):
         """Returns routing table configuration."""
         endpoint = f"/routing_tables/config/{table_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_routing_tables_config_by_id(self, table_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates routing table configuration."""
@@ -42,10 +42,10 @@ class RoutingTables(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_routing_tables_config_by_id(self, table_id: str) -> dict[str, Any]:
         """Deletes routing table configuration."""
         endpoint = f"/routing_tables/config/{table_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

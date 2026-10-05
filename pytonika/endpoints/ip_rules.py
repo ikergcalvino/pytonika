@@ -8,7 +8,7 @@ class IPRules(Endpoint):
         """Returns routing rule configurations."""
         endpoint = "/ip_rules/ipv4/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_ip_rules_ipv4_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates routing rule configuration."""
@@ -16,7 +16,7 @@ class IPRules(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_ip_rules_ipv4_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates routing rule configurations."""
@@ -24,7 +24,7 @@ class IPRules(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_ip_rules_ipv4_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified routing rule configurations."""
@@ -34,7 +34,7 @@ class IPRules(Endpoint):
         """Returns routing rule configuration."""
         endpoint = f"/ip_rules/ipv4/config/{rule_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_ip_rules_ipv4_config_by_id(self, rule_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates routing rule configuration."""
@@ -42,10 +42,10 @@ class IPRules(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_ip_rules_ipv4_config_by_id(self, rule_id: str) -> dict[str, Any]:
         """Deletes specified routing rule configuration."""
         endpoint = f"/ip_rules/ipv4/config/{rule_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

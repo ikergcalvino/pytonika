@@ -8,7 +8,7 @@ class QoS(Endpoint):
         """Returns QoS interface configurations."""
         endpoint = "/qos/interfaces/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_qos_interfaces_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates QOS interface configuration."""
@@ -16,7 +16,7 @@ class QoS(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_qos_interfaces_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates QoS interface configurations."""
@@ -24,7 +24,7 @@ class QoS(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_qos_interfaces_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes QoS interface configurations."""
@@ -34,7 +34,7 @@ class QoS(Endpoint):
         """Returns QoS interface configuration."""
         endpoint = f"/qos/interfaces/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_qos_interfaces_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates QoS interface configuration."""
@@ -42,19 +42,19 @@ class QoS(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_qos_interfaces_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes QoS interface configuration."""
         endpoint = f"/qos/interfaces/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_qos_rules_config(self) -> dict[str, Any]:
         """Returns QoS classification rules."""
         endpoint = "/qos/rules/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_qos_rules_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates QoS classification rule."""
@@ -62,7 +62,7 @@ class QoS(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_qos_rules_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates QoS classification rules."""
@@ -70,7 +70,7 @@ class QoS(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_qos_rules_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes QoS classification rules."""
@@ -80,7 +80,7 @@ class QoS(Endpoint):
         """Returns QoS classification rule configuration."""
         endpoint = f"/qos/rules/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_qos_rules_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates QoS classification rule configuration."""
@@ -88,16 +88,16 @@ class QoS(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_qos_rules_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes QoS classification rule configuration."""
         endpoint = f"/qos/rules/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_qos_rules_options(self) -> dict[str, Any]:
         """Returns rules service options."""
         endpoint = "/qos/rules/options"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

@@ -8,7 +8,7 @@ class Tailscale(Endpoint):
         """Returns Tailscale configurations."""
         endpoint = "/tailscale/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_tailscale_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates Tailscale configurations."""
@@ -16,13 +16,13 @@ class Tailscale(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_tailscale_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Returns Tailscale configuration."""
         endpoint = f"/tailscale/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_tailscale_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates Tailscale configuration."""
@@ -30,10 +30,10 @@ class Tailscale(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_tailscale_status(self) -> dict[str, Any]:
         """Returns Tailscale status."""
         endpoint = "/tailscale/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

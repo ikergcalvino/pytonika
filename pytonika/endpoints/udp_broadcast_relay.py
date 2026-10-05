@@ -8,7 +8,7 @@ class UDPBroadcastRelay(Endpoint):
         """Returns UDP Broadcast Relay configurations."""
         endpoint = "/udprelay/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_udprelay_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates UDP Broadcast Relay configuration."""
@@ -16,7 +16,7 @@ class UDPBroadcastRelay(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_udprelay_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates UDP Broadcast Relay configurations.
@@ -27,7 +27,7 @@ class UDPBroadcastRelay(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_udprelay_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes UDP Broadcast Relay configurations."""
@@ -37,7 +37,7 @@ class UDPBroadcastRelay(Endpoint):
         """Returns UDP Broadcast Relay configuration."""
         endpoint = f"/udprelay/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_udprelay_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates UDP Broadcast Relay configuration."""
@@ -45,10 +45,10 @@ class UDPBroadcastRelay(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_udprelay_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes UDP Broadcast Relay configuration."""
         endpoint = f"/udprelay/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

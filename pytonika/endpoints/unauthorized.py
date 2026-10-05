@@ -8,4 +8,4 @@ class Unauthorized(Endpoint):
         """Get basic device info."""
         endpoint = "/unauthorized/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

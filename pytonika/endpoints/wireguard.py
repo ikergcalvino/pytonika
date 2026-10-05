@@ -8,7 +8,7 @@ class WireGuard(Endpoint):
         """Returns all Wireguard configurations."""
         endpoint = "/wireguard/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_wireguard_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates a Wireguard configuration."""
@@ -16,7 +16,7 @@ class WireGuard(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_wireguard_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified wireguard configurations."""
@@ -24,7 +24,7 @@ class WireGuard(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_wireguard_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified wireguard configurations."""
@@ -34,7 +34,7 @@ class WireGuard(Endpoint):
         """Returns the specified Wireguard configuration."""
         endpoint = f"/wireguard/config/{wireguard_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_wireguard_config_by_id(self, wireguard_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified Wireguard configuration."""
@@ -42,25 +42,25 @@ class WireGuard(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_wireguard_config_by_id(self, wireguard_id: str) -> dict[str, Any]:
         """Deletes the specified Wireguard configuration."""
         endpoint = f"/wireguard/config/{wireguard_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def wireguard_actions_generate_keys(self) -> dict[str, Any]:
         """Generates Private and Public keys."""
         endpoint = "/wireguard/actions/generate_keys"
 
-        return self._api_client.post(endpoint)
+        return self._client.request("POST", endpoint)
 
     def get_wireguard_peers_config(self, wireguard_id: str) -> dict[str, Any]:
         """Returns all wireguard peer configuration sections."""
         endpoint = f"/wireguard/{wireguard_id}/peers/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_wireguard_peers_config(self, wireguard_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Creates wireguard peer section."""
@@ -68,7 +68,7 @@ class WireGuard(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_wireguard_peers_config(self, wireguard_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified wireguard peer configurations."""
@@ -76,7 +76,7 @@ class WireGuard(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_wireguard_peers_config(self, wireguard_id: str, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified wireguard peer configurations."""
@@ -86,7 +86,7 @@ class WireGuard(Endpoint):
         """Returns specified wireguard peer section."""
         endpoint = f"/wireguard/{wireguard_id}/peers/config/{peer_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_wireguard_peer_config_by_id(
         self, wireguard_id: str, peer_id: str, config: dict[str, Any]
@@ -96,10 +96,10 @@ class WireGuard(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_wireguard_peer_config_by_id(self, wireguard_id: str, peer_id: str) -> dict[str, Any]:
         """Deletes specified wireguard peer configuration."""
         endpoint = f"/wireguard/{wireguard_id}/peers/config/{peer_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

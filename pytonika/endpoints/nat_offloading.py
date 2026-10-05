@@ -8,7 +8,7 @@ class NATOffloading(Endpoint):
         """Returns Firewall NAT Offloading settings."""
         endpoint = "/nat_offloading/global"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_nat_offloading_global(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates Firewall NAT Offloading settings."""
@@ -16,4 +16,4 @@ class NATOffloading(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)

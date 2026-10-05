@@ -8,7 +8,7 @@ class DMVPN(Endpoint):
         """Returns all DMVPN instances."""
         endpoint = "/dmvpn/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_dmvpn_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates DMVPN configuration."""
@@ -16,7 +16,7 @@ class DMVPN(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_dmvpn_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified DMVPN configurations."""
@@ -24,7 +24,7 @@ class DMVPN(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_dmvpn_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified DMVPN configurations."""
@@ -34,7 +34,7 @@ class DMVPN(Endpoint):
         """Returns the specified DMVPN configuration."""
         endpoint = f"/dmvpn/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_dmvpn_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified DMVPN configuration."""
@@ -42,10 +42,10 @@ class DMVPN(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_dmvpn_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes the specified DMVPN configuration."""
         endpoint = f"/dmvpn/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

@@ -8,7 +8,7 @@ class InternetConnection(Endpoint):
         """Returns internet global configuration."""
         endpoint = "/internet_connection/global"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_internet_connection_global(self, config: dict[str, Any]) -> dict[str, Any]:
         """Updates internet global configuration."""
@@ -16,10 +16,10 @@ class InternetConnection(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_internet_connection_status(self) -> dict[str, Any]:
         """Returns internet status."""
         endpoint = "/internet_connection/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

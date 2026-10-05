@@ -8,4 +8,4 @@ class Ports(Endpoint):
         """Returns port status."""
         endpoint = "/ports/traffic/errors/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

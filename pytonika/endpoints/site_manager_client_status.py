@@ -8,4 +8,4 @@ class SiteManagerClientStatus(Endpoint):
         """Get Site Manager Client status."""
         endpoint = "/site_manager/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

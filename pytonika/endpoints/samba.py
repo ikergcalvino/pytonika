@@ -8,7 +8,7 @@ class Samba(Endpoint):
         """Get SAMBA general configuration."""
         endpoint = "/samba/global"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_samba_global(self, config: dict[str, Any]) -> dict[str, Any]:
         """Update SAMBA general configuration."""
@@ -16,19 +16,19 @@ class Samba(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_samba_status(self) -> dict[str, Any]:
         """Get SAMBA instance status and all active sessions."""
         endpoint = "/samba/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_samba_shares_config(self) -> dict[str, Any]:
         """Get SAMBA share configurations."""
         endpoint = "/samba/shares/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_samba_shares_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create SAMBA share configuration."""
@@ -36,7 +36,7 @@ class Samba(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_samba_shares_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update SAMBA share configurations."""
@@ -44,7 +44,7 @@ class Samba(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_samba_shares_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Delete SAMBA share configurations."""
@@ -54,7 +54,7 @@ class Samba(Endpoint):
         """Get SAMBA share configuration."""
         endpoint = f"/samba/shares/config/{share_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_samba_shares_config_by_id(self, share_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update SAMBA share configuration."""
@@ -62,19 +62,19 @@ class Samba(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_samba_shares_config_by_id(self, share_id: str) -> dict[str, Any]:
         """Delete SAMBA share configuration."""
         endpoint = f"/samba/shares/config/{share_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_samba_users_config(self) -> dict[str, Any]:
         """Get SAMBA user configurations."""
         endpoint = "/samba/users/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_samba_users_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create SAMBA user configuration."""
@@ -82,7 +82,7 @@ class Samba(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_samba_users_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update SAMBA user configurations."""
@@ -90,7 +90,7 @@ class Samba(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_samba_users_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Delete SAMBA user configurations."""
@@ -100,7 +100,7 @@ class Samba(Endpoint):
         """Get SAMBA user configuration."""
         endpoint = f"/samba/users/config/{user_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_samba_users_config_by_id(self, user_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update SAMBA user configuration."""
@@ -108,10 +108,10 @@ class Samba(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_samba_users_config_by_id(self, user_id: str) -> dict[str, Any]:
         """Delete SAMBA user configuration."""
         endpoint = f"/samba/users/config/{user_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

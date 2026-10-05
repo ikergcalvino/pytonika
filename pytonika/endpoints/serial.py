@@ -8,10 +8,10 @@ class Serial(Endpoint):
         """Returns Serial usage status."""
         endpoint = "/serial/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_serial_options(self) -> dict[str, Any]:
         """Returns available serial options."""
         endpoint = "/serial/options"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

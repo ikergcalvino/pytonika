@@ -8,7 +8,7 @@ class PortBasedVlan(Endpoint):
         """Returns Port Based VLANs."""
         endpoint = "/port_based_vlan/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_port_based_vlan_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates Port Based VLAN."""
@@ -16,7 +16,7 @@ class PortBasedVlan(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_port_based_vlan_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates Port Based VLANs."""
@@ -24,7 +24,7 @@ class PortBasedVlan(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_port_based_vlan_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes Port Based VLANs."""
@@ -34,7 +34,7 @@ class PortBasedVlan(Endpoint):
         """Returns Port Based VLAN."""
         endpoint = f"/port_based_vlan/config/{vlan_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_port_based_vlan_config_by_id(self, vlan_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates Port Based VLAN."""
@@ -42,10 +42,10 @@ class PortBasedVlan(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_port_based_vlan_config_by_id(self, vlan_id: str) -> dict[str, Any]:
         """Deletes Port Based VLAN."""
         endpoint = f"/port_based_vlan/config/{vlan_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

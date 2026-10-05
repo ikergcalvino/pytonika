@@ -8,7 +8,7 @@ class SMCRoute(Endpoint):
         """Returns SMCRoute route configurations."""
         endpoint = "/smcroutes/routes/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_smcroutes_routes_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates SMCRoute route configuration."""
@@ -16,7 +16,7 @@ class SMCRoute(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_smcroutes_routes_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates SMCRoute route configurations."""
@@ -24,7 +24,7 @@ class SMCRoute(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_smcroutes_routes_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes SMCRoute route configurations."""
@@ -34,25 +34,25 @@ class SMCRoute(Endpoint):
         """Returns SMCRoute route configuration."""
         endpoint = f"/smcroutes/routes/config/{route_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_smcroutes_routes_config_by_id(self, route_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates SMCRoute route configuration."""
         endpoint = f"/smcroutes/routes/config/{route_id}"
 
-        return self._api_client.put(endpoint, data=config)
+        return self._client.request("PUT", endpoint, json=config)
 
     def delete_smcroutes_routes_config_by_id(self, route_id: str) -> dict[str, Any]:
         """Deletes SMCRoute route configuration."""
         endpoint = f"/smcroutes/routes/config/{route_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_smcroutes_interfaces_config(self) -> dict[str, Any]:
         """Returns SMCRoute interface configurations."""
         endpoint = "/smcroutes/interfaces/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_smcroutes_interfaces_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates SMCRoute interface configuration."""
@@ -60,7 +60,7 @@ class SMCRoute(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_smcroutes_interfaces_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates SMCRoute interface configurations."""
@@ -68,7 +68,7 @@ class SMCRoute(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_smcroutes_interfaces_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes SMCRoute interface configurations."""
@@ -78,16 +78,16 @@ class SMCRoute(Endpoint):
         """Returns SMCRoute interface configuration."""
         endpoint = f"/smcroutes/interfaces/config/{interface_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_smcroutes_interfaces_config_by_id(self, interface_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates SMCRoute interface configuration."""
         endpoint = f"/smcroutes/interfaces/config/{interface_id}"
 
-        return self._api_client.put(endpoint, data=config)
+        return self._client.request("PUT", endpoint, json=config)
 
     def delete_smcroutes_interfaces_config_by_id(self, interface_id: str) -> dict[str, Any]:
         """Deletes SMCRoute interface configuration."""
         endpoint = f"/smcroutes/interfaces/config/{interface_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

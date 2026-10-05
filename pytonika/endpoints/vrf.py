@@ -8,7 +8,7 @@ class VRF(Endpoint):
         """Returns VRF configurations."""
         endpoint = "/vrf/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_vrf_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates VRF configuration."""
@@ -16,7 +16,7 @@ class VRF(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_vrf_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates VRF configurations."""
@@ -24,7 +24,7 @@ class VRF(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_vrf_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes VRF configurations."""
@@ -34,7 +34,7 @@ class VRF(Endpoint):
         """Returns VRF configuration."""
         endpoint = f"/vrf/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_vrf_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates VRF configuration."""
@@ -42,10 +42,10 @@ class VRF(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_vrf_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes VRF configuration."""
         endpoint = f"/vrf/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

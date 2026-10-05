@@ -8,7 +8,7 @@ class NHRP(Endpoint):
         """Returns NHRP global configuration."""
         endpoint = "/nhrp/global"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_nhrp_global(self, config: dict[str, Any]) -> dict[str, Any]:
         """Updates specified NHRP global configuration."""
@@ -16,19 +16,19 @@ class NHRP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_nhrp_status(self) -> dict[str, Any]:
         """Fetches data about NHRP neighbors."""
         endpoint = "/nhrp/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_nhrp_nhs_config(self, interface_id: str) -> dict[str, Any]:
         """Returns all NHRP NHS configurations."""
         endpoint = f"/nhrp/interface/{interface_id}/nhs/config/"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_nhrp_nhs_config(self, interface_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Creates NHRP NHS configuration."""
@@ -36,7 +36,7 @@ class NHRP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_nhrp_nhs_config(self, interface_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified NHRP NHS configurations."""
@@ -44,7 +44,7 @@ class NHRP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_nhrp_nhs_config(self, interface_id: str, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified NHRP NHS configurations."""
@@ -54,7 +54,7 @@ class NHRP(Endpoint):
         """Returns specified NHRP NHS configuration."""
         endpoint = f"/nhrp/interface/{interface_id}/nhs/config/{nhs_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_nhrp_nhs_config_by_id(self, interface_id: str, nhs_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates specified NHRP NHS configuration."""
@@ -62,19 +62,19 @@ class NHRP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_nhrp_nhs_config_by_id(self, interface_id: str, nhs_id: str) -> dict[str, Any]:
         """Deletes specified NHRP NHS configuration."""
         endpoint = f"/nhrp/interface/{interface_id}/nhs/config/{nhs_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_nhrp_mapping_config(self, interface_id: str) -> dict[str, Any]:
         """Returns all NHRP mapping configurations."""
         endpoint = f"/nhrp/interface/{interface_id}/mapping/config/"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_nhrp_mapping_config(self, interface_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Creates NHRP mapping configuration."""
@@ -82,7 +82,7 @@ class NHRP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_nhrp_mapping_config(self, interface_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified NHRP mapping configurations."""
@@ -90,7 +90,7 @@ class NHRP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_nhrp_mapping_config(self, interface_id: str, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified NHRP mapping configurations."""
@@ -100,7 +100,7 @@ class NHRP(Endpoint):
         """Returns specified NHRP mapping configuration."""
         endpoint = f"/nhrp/interface/{interface_id}/mapping/config/{mapping_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_nhrp_mapping_config_by_id(
         self, interface_id: str, mapping_id: str, config: dict[str, Any]
@@ -110,19 +110,19 @@ class NHRP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_nhrp_mapping_config_by_id(self, interface_id: str, mapping_id: str) -> dict[str, Any]:
         """Deletes specified NHRP mapping configuration."""
         endpoint = f"/nhrp/interface/{interface_id}/mapping/config/{mapping_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_nhrp_interface_config(self) -> dict[str, Any]:
         """Returns all NHRP interface configurations."""
         endpoint = "/nhrp/interface/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_nhrp_interface_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates NHRP interface configuration."""
@@ -130,7 +130,7 @@ class NHRP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_nhrp_interface_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified nhrp interface configurations."""
@@ -138,7 +138,7 @@ class NHRP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_nhrp_interface_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified nhrp interface configurations."""
@@ -148,7 +148,7 @@ class NHRP(Endpoint):
         """Returns specified NHRP interface configuration."""
         endpoint = f"/nhrp/interface/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_nhrp_interface_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates specified NHRP interface configuration."""
@@ -156,10 +156,10 @@ class NHRP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_nhrp_interface_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes specified NHRP interface configuration."""
         endpoint = f"/nhrp/interface/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

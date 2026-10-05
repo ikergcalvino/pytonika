@@ -1,9 +1,11 @@
+import ssl
+
 from ...endpoints import *
 from .gateway import Gateway
 
 
 class TRB160(Gateway):
-    def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool | str = True) -> None:
+    def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool | ssl.SSLContext = True) -> None:
         super().__init__(base_url, timeout=timeout, verify=verify)
 
         self.ldp = LDP(self._client)

@@ -8,7 +8,7 @@ class SIMSwitch(Endpoint):
         """Returns multiple SIM switch configurations."""
         endpoint = "/sim_switch/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_sim_switch_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates multiple SIM switch configurations."""
@@ -16,13 +16,13 @@ class SIMSwitch(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_sim_switch_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Returns specified SIM switch configuration."""
         endpoint = f"/sim_switch/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_sim_switch_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates specified SIM switch configuration."""
@@ -30,4 +30,4 @@ class SIMSwitch(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)

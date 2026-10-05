@@ -8,7 +8,7 @@ class DLNA(Endpoint):
         """Returns the minidlna configuration."""
         endpoint = "/minidlna/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_minidlna_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates the minidlna configuration."""
@@ -16,13 +16,13 @@ class DLNA(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_minidlna_config_by_id(self, dlna_id: str) -> dict[str, Any]:
         """Returns the minidlna configuration."""
         endpoint = f"/minidlna/config/{dlna_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_minidlna_config_by_id(self, dlna_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the minidlna configuration."""
@@ -30,16 +30,16 @@ class DLNA(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_minidlna_status(self) -> dict[str, Any]:
         """Get minidlna status."""
         endpoint = "/minidlna/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_minidlna_options(self) -> dict[str, Any]:
         """Get available dlna interfaces."""
         endpoint = "/minidlna/options"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

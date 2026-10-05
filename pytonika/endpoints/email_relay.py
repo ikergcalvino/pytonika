@@ -8,7 +8,7 @@ class EmailRelay(Endpoint):
         """Returns all Email Relay configurations."""
         endpoint = "/email_relay/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_email_relay_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates Email Relay configuration."""
@@ -16,7 +16,7 @@ class EmailRelay(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_email_relay_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified Email Relay configurations."""
@@ -24,7 +24,7 @@ class EmailRelay(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_email_relay_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified Email Relay configurations."""
@@ -34,13 +34,13 @@ class EmailRelay(Endpoint):
         """Returns the specified Email Relay configuration."""
         endpoint = f"/email_relay/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def upload_email_relay_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads TLS certificate."""
         endpoint = f"/email_relay/config/{config_id}"
 
-        return self._api_client.post(endpoint, data={"data": data})
+        return self._client.request("POST", endpoint, json={"data": data})
 
     def update_email_relay_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified Email Relay configuration."""
@@ -48,10 +48,10 @@ class EmailRelay(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_email_relay_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes the specified Email Relay configuration."""
         endpoint = f"/email_relay/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

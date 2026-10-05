@@ -12,7 +12,7 @@ class UniversalGateway(Endpoint):
         """
         endpoint = "/universal_gateway/options"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_universal_gateway_status(self) -> dict[str, Any]:
         """Returns tag ids from all configured data sources.
@@ -22,4 +22,4 @@ class UniversalGateway(Endpoint):
         """
         endpoint = "/universal_gateway/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

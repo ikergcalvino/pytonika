@@ -8,7 +8,7 @@ class PhoneSettings(Endpoint):
         """Returns Phone Settings configuration in an array."""
         endpoint = "/phone_settings/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_phone_settings_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates Phone Settings configuration in an array."""
@@ -16,13 +16,13 @@ class PhoneSettings(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_phone_settings_config_by_id(self, phone_setting_id: str) -> dict[str, Any]:
         """Returns Phone Settings configuration."""
         endpoint = f"/phone_settings/config/{phone_setting_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_phone_settings_config_by_id(self, phone_setting_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates Phone Settings configuration."""
@@ -30,4 +30,4 @@ class PhoneSettings(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)

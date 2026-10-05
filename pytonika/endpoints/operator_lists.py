@@ -8,7 +8,7 @@ class OperatorLists(Endpoint):
         """Returns multiple configurations of operator lists."""
         endpoint = "/operator_lists/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_operator_lists_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates configuration for operator lists."""
@@ -16,7 +16,7 @@ class OperatorLists(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_operator_lists_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates multiple configurations of operator lists."""
@@ -24,7 +24,7 @@ class OperatorLists(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_operator_lists_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes multiple configurations of operator lists."""
@@ -34,7 +34,7 @@ class OperatorLists(Endpoint):
         """Returns specified configuration of operator lists."""
         endpoint = f"/operator_lists/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_operator_lists_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates specified configuration of operator lists."""
@@ -42,10 +42,10 @@ class OperatorLists(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_operator_lists_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes specified configuration of operator lists."""
         endpoint = f"/operator_lists/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

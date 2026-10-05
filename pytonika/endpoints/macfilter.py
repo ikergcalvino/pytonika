@@ -8,7 +8,7 @@ class MACFilter(Endpoint):
         """Returns all Macfilter configurations."""
         endpoint = "/macfilter/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_macfilter_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified Macfilter configurations."""
@@ -16,13 +16,13 @@ class MACFilter(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_macfilter_config_by_id(self, macfilter_id: str) -> dict[str, Any]:
         """Returns the specified Macfilter configuration."""
         endpoint = f"/macfilter/config/{macfilter_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_macfilter_config_by_id(self, macfilter_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified Macfilter configuration."""
@@ -30,4 +30,4 @@ class MACFilter(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)

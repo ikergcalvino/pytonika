@@ -8,7 +8,7 @@ class Stunnel(Endpoint):
         """Returns specified stunnel global section."""
         endpoint = "/stunnel/global"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_stunnel_global(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified stunnel global configuration."""
@@ -16,13 +16,13 @@ class Stunnel(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_stunnel_config(self) -> dict[str, Any]:
         """Returns all stunnel configuration sections."""
         endpoint = "/stunnel/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_stunnel_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates stunnel section."""
@@ -30,7 +30,7 @@ class Stunnel(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_stunnel_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update all section options."""
@@ -38,7 +38,7 @@ class Stunnel(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_stunnel_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified stunnel configurations."""
@@ -48,13 +48,13 @@ class Stunnel(Endpoint):
         """Returns specified stunnel section."""
         endpoint = f"/stunnel/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def upload_stunnel_certificates(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads certificates."""
         endpoint = f"/stunnel/config/{config_id}"
 
-        return self._api_client.post(endpoint, data={"data": data})
+        return self._client.request("POST", endpoint, json={"data": data})
 
     def update_stunnel_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates specified stunnel configuration."""
@@ -62,10 +62,10 @@ class Stunnel(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_stunnel_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes specified stunnel configuration."""
         endpoint = f"/stunnel/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

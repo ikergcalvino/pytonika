@@ -10,12 +10,12 @@ class Authentication(Endpoint):
 
         data = {"username": username, "password": password}
 
-        response = self._api_client.post(endpoint, data=data)
+        response = self._client.request("POST", endpoint, json=data)
 
-        token = response["data"].get("token")
+        token = (response.get("data") or {}).get("token")
 
-        if token:
-            self._api_client.set_token(token)
+        if isinstance(token, str):
+            self._client.set_token(token)
 
         return response
 
@@ -23,9 +23,9 @@ class Authentication(Endpoint):
         """Logs out user from API."""
         endpoint = "/logout"
 
-        response = self._api_client.post(endpoint)
+        response = self._client.request("POST", endpoint)
 
-        self._api_client.clear_token()
+        self._client.clear_token()
 
         return response
 
@@ -33,4 +33,4 @@ class Authentication(Endpoint):
         """Returns if API session is alive and resets session's timer."""
         endpoint = "/session/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

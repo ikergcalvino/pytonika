@@ -1,9 +1,11 @@
+import ssl
+
 from ...endpoints import *
 from .router import Router
 
 
 class RUTM10(Router):
-    def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool | str = True) -> None:
+    def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool | ssl.SSLContext = True) -> None:
         super().__init__(base_url, timeout=timeout, verify=verify)
 
         self.internet_connection = InternetConnection(self._client)

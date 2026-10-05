@@ -8,7 +8,7 @@ class FOTA(Endpoint):
         """Returns Fota configuration."""
         endpoint = "/fota/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_fota_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates Fota configuration."""
@@ -16,13 +16,13 @@ class FOTA(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_fota_config_by_id(self, fota_id: str) -> dict[str, Any]:
         """Returns Fota configuration."""
         endpoint = f"/fota/config/{fota_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_fota_config_by_id(self, fota_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates Fota configuration."""
@@ -30,4 +30,4 @@ class FOTA(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)

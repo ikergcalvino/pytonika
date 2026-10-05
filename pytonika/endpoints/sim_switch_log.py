@@ -8,10 +8,10 @@ class SIMSwitchLog(Endpoint):
         """Returns SIM switch operation log for all modems."""
         endpoint = "/sim_switch/log"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_sim_switch_log_by_modem_id(self, modem_id: str) -> dict[str, Any]:
         """Returns SIM switch operation log for specified modem."""
         endpoint = f"/sim_switch/log/{modem_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

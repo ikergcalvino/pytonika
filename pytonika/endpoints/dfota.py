@@ -8,7 +8,7 @@ class DFOTA(Endpoint):
         """Returns multiple DFOTA configurations."""
         endpoint = "/dfota/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_dfota_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates multiple DFOTA configurations."""
@@ -16,13 +16,13 @@ class DFOTA(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_dfota_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Returns DFOTA configuration."""
         endpoint = f"/dfota/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_dfota_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates DFOTA configuration."""
@@ -30,4 +30,4 @@ class DFOTA(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)

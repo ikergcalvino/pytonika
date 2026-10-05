@@ -8,4 +8,4 @@ class ForwardingTable(Endpoint):
         """Returns forwarding table data."""
         endpoint = "/forwarding_table/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

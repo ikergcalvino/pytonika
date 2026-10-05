@@ -8,7 +8,7 @@ class Users(Endpoint):
         """Returns all users configurations."""
         endpoint = "/users/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_users_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates users configuration."""
@@ -16,7 +16,7 @@ class Users(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_users_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified users configurations."""
@@ -24,7 +24,7 @@ class Users(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_users_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified users configurations."""
@@ -34,7 +34,7 @@ class Users(Endpoint):
         """Returns the specified users configuration."""
         endpoint = f"/users/config/{user_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_users_config_by_id(self, user_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified users configuration."""
@@ -42,25 +42,25 @@ class Users(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_users_config_by_id(self, user_id: str) -> dict[str, Any]:
         """Deletes the specified users configuration."""
         endpoint = f"/users/config/{user_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_users_acls_options(self) -> dict[str, Any]:
         """Returns current user's permissions (ACL's)."""
         endpoint = "/users/acls/options"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_users_groups_config(self) -> dict[str, Any]:
         """Returns all groups configurations."""
         endpoint = "/users/groups/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_users_groups_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates a new group configuration."""
@@ -68,7 +68,7 @@ class Users(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_users_groups_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified groups configurations."""
@@ -76,7 +76,7 @@ class Users(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_users_groups_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes the specified group configurations."""
@@ -86,7 +86,7 @@ class Users(Endpoint):
         """Returns specified groups configuration."""
         endpoint = f"/users/groups/config/{group_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_users_groups_config_by_id(self, group_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates specified groups configuration."""
@@ -94,10 +94,10 @@ class Users(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_users_groups_config_by_id(self, group_id: str) -> dict[str, Any]:
         """Deletes the specified group configuration."""
         endpoint = f"/users/groups/config/{group_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

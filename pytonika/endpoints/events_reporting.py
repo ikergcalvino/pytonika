@@ -11,7 +11,7 @@ class EventsReporting(Endpoint):
         """
         endpoint = "/events_reporting/options"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_events_reporting_config(self) -> dict[str, Any]:
         """Returns all Events Reporting configurations.
@@ -20,7 +20,7 @@ class EventsReporting(Endpoint):
         """
         endpoint = "/events_reporting/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_events_reporting_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates a new Events Reporting configuration.
@@ -31,7 +31,7 @@ class EventsReporting(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_events_reporting_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates the selected Events Reporting configurations.
@@ -42,7 +42,7 @@ class EventsReporting(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_events_reporting_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes the selected Events Reporting configurations.
@@ -58,7 +58,7 @@ class EventsReporting(Endpoint):
         """
         endpoint = f"/events_reporting/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_events_reporting_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the selected Events Reporting configuration.
@@ -69,7 +69,7 @@ class EventsReporting(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_events_reporting_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes the selected Events Reporting configuration.
@@ -78,7 +78,7 @@ class EventsReporting(Endpoint):
         """
         endpoint = f"/events_reporting/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def send_test_email(self, data: dict[str, Any]) -> dict[str, Any]:
         """Sends test email.
@@ -87,4 +87,4 @@ class EventsReporting(Endpoint):
         """
         endpoint = "/events_reporting/actions/send_test_email"
 
-        return self._api_client.post(endpoint, data={"data": data})
+        return self._client.request("POST", endpoint, json={"data": data})

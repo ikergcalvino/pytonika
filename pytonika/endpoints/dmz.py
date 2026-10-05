@@ -8,7 +8,7 @@ class DMZ(Endpoint):
         """Returns DMZ configuration settings."""
         endpoint = "/dmz/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_dmz_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates DMZ configration settings."""
@@ -16,13 +16,13 @@ class DMZ(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_dmz_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Returns DMZ configuration settings."""
         endpoint = f"/dmz/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_dmz_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates DMZ configration settings."""
@@ -30,4 +30,4 @@ class DMZ(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)

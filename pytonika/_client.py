@@ -1,39 +1,58 @@
+import ssl
+from collections.abc import Mapping
 from importlib.metadata import version
-from typing import Any
+from typing import Any, Literal
 
 import httpx
 
+USER_AGENT = f"pytonika/{version('pytonika')}"
+
 
 class APIClient:
-    def __init__(self, base_url: str, *, timeout: float, verify: bool | str) -> None:
-        self._client = httpx.Client(
-            base_url=base_url.rstrip("/") + "/api",
-            headers={"User-Agent": f"pytonika/{version('pytonika')}"},
+    """HTTP client for the Teltonika Web API.
+
+    Responses are returned as the device sends them, including the ``{"success": False, "errors": [...]}``
+    envelope of failed requests. Transport errors such as timeouts are raised by ``httpx``.
+    """
+
+    def __init__(self, base_url: str, *, timeout: float, verify: bool | ssl.SSLContext) -> None:
+        self._session = httpx.Client(
+            base_url=f"{base_url.rstrip('/')}/api",
+            headers={"User-Agent": USER_AGENT},
             timeout=timeout,
             verify=verify,
         )
 
     def close(self) -> None:
-        self._client.close()
+        self._session.close()
 
     def set_token(self, token: str) -> None:
-        self._client.headers["Authorization"] = f"Bearer {token}"
+        self._session.headers["Authorization"] = f"Bearer {token}"
 
     def clear_token(self) -> None:
-        self._client.headers.pop("Authorization", None)
+        self._session.headers.pop("Authorization", None)
 
-    def get(self, endpoint: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
-        response: dict[str, Any] = self._client.get(endpoint, params=params).json()
-        return response
+    def request(
+        self,
+        method: Literal["GET", "POST", "PUT", "DELETE"],
+        path: str,
+        *,
+        params: Mapping[str, Any] | None = None,
+        json: Mapping[str, Any] | None = None,
+        files: Mapping[str, Any] | None = None,
+        form: Mapping[str, Any] | None = None,
+        download: bool = False,
+    ) -> Any:  # noqa: ANN401 - each endpoint method declares its precise return type
+        """Sends a request and returns the decoded JSON response.
 
-    def post(self, endpoint: str, data: dict[str, Any] | None = None) -> dict[str, Any]:
-        response: dict[str, Any] = self._client.post(endpoint, json=data).json()
-        return response
+        With ``download=True``, a file response is returned as ``bytes`` (a JSON error is still decoded).
+        """
+        if params:
+            params = {name: value for name, value in params.items() if value is not None}
 
-    def put(self, endpoint: str, data: dict[str, Any] | None = None) -> dict[str, Any]:
-        response: dict[str, Any] = self._client.put(endpoint, json=data).json()
-        return response
+        response = self._session.request(method, path, params=params, json=json, files=files, data=form)
 
-    def delete(self, endpoint: str) -> dict[str, Any]:
-        response: dict[str, Any] = self._client.delete(endpoint).json()
-        return response
+        if download and not response.headers.get("Content-Type", "").startswith("application/json"):
+            return response.content
+
+        return response.json()

@@ -8,7 +8,7 @@ class DHCPServers(Endpoint):
         """Returns static IPv4 leases."""
         endpoint = "/dhcp/static_leases/ipv4/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_dhcp_static_leases_ipv4_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates static IPv4 lease."""
@@ -16,7 +16,7 @@ class DHCPServers(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_dhcp_static_leases_ipv4_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates static IPv4 leases."""
@@ -24,7 +24,7 @@ class DHCPServers(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_dhcp_static_leases_ipv4_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes static IPv4 leases."""
@@ -34,7 +34,7 @@ class DHCPServers(Endpoint):
         """Returns static IPv4 lease."""
         endpoint = f"/dhcp/static_leases/ipv4/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_dhcp_static_leases_ipv4_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates static IPv4 lease."""
@@ -42,19 +42,19 @@ class DHCPServers(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_dhcp_static_leases_ipv4_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes static IPv4 lease."""
         endpoint = f"/dhcp/static_leases/ipv4/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_dhcp_static_leases_ipv6_config(self) -> dict[str, Any]:
         """Returns static IPv6 leases."""
         endpoint = "/dhcp/static_leases/ipv6/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_dhcp_static_leases_ipv6_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates static IPv6 lease."""
@@ -62,7 +62,7 @@ class DHCPServers(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_dhcp_static_leases_ipv6_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates static IPv6 leases."""
@@ -70,7 +70,7 @@ class DHCPServers(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_dhcp_static_leases_ipv6_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes static IPv6 leases."""
@@ -80,7 +80,7 @@ class DHCPServers(Endpoint):
         """Returns static lease."""
         endpoint = f"/dhcp/static_leases/ipv6/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_dhcp_static_leases_ipv6_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates static lease."""
@@ -88,19 +88,19 @@ class DHCPServers(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_dhcp_static_leases_ipv6_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes static lease."""
         endpoint = f"/dhcp/static_leases/ipv6/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_dhcp_servers_ipv4_config(self) -> dict[str, Any]:
         """Returns DHCP IPv4 servers."""
         endpoint = "/dhcp/servers/ipv4/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_dhcp_servers_ipv4_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates DHCP IPv4 server."""
@@ -108,7 +108,7 @@ class DHCPServers(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_dhcp_servers_ipv4_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates DHCP IPv4 servers."""
@@ -116,7 +116,7 @@ class DHCPServers(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_dhcp_servers_ipv4_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes DHCP IPv4 servers."""
@@ -126,7 +126,7 @@ class DHCPServers(Endpoint):
         """Returns DHCP IPv4 server."""
         endpoint = f"/dhcp/servers/ipv4/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_dhcp_servers_ipv4_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates DHCP IPv4 server."""
@@ -134,31 +134,31 @@ class DHCPServers(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_dhcp_servers_ipv4_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes DHCP IPv4 server."""
         endpoint = f"/dhcp/servers/ipv4/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_dhcp_servers_ipv4_status(self) -> dict[str, Any]:
         """Returns status of DHCPv4 servers."""
         endpoint = "/dhcp/servers/ipv4/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def dhcp_servers_ipv4_actions_restart(self) -> dict[str, Any]:
         """Restarts all DHCPv4 servers."""
         endpoint = "/dhcp/servers/ipv4/actions/restart"
 
-        return self._api_client.post(endpoint)
+        return self._client.request("POST", endpoint)
 
     def get_dhcp_servers_ipv6_config(self) -> dict[str, Any]:
         """Returns DHCP IPv6 servers."""
         endpoint = "/dhcp/servers/ipv6/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_dhcp_servers_ipv6_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates DHCP IPv6 server."""
@@ -166,7 +166,7 @@ class DHCPServers(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_dhcp_servers_ipv6_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates DHCP IPv6 servers."""
@@ -174,7 +174,7 @@ class DHCPServers(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_dhcp_servers_ipv6_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes DHCP IPv6 servers."""
@@ -184,7 +184,7 @@ class DHCPServers(Endpoint):
         """Returns DHCP IPv6 server."""
         endpoint = f"/dhcp/servers/ipv6/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_dhcp_servers_ipv6_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates DHCP IPv6 server."""
@@ -192,28 +192,28 @@ class DHCPServers(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_dhcp_servers_ipv6_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes DHCP IPv6 server."""
         endpoint = f"/dhcp/servers/ipv6/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_dhcp_servers_ipv6_status(self) -> dict[str, Any]:
         """Returns status of DHCPv6 servers."""
         endpoint = "/dhcp/servers/ipv6/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_dhcp_leases_ipv4_status(self) -> dict[str, Any]:
         """Returns active DHCPv4 servers leases."""
         endpoint = "/dhcp/leases/ipv4/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_dhcp_leases_ipv6_status(self) -> dict[str, Any]:
         """Returns active DHCPv6 servers leases."""
         endpoint = "/dhcp/leases/ipv6/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

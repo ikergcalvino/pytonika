@@ -8,7 +8,7 @@ class Relayd(Endpoint):
         """Returns Relayd configurations."""
         endpoint = "/relayd/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_relayd_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates Relayd configration."""
@@ -16,7 +16,7 @@ class Relayd(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_relayd_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates Relayd configurations."""
@@ -24,7 +24,7 @@ class Relayd(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_relayd_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes Relayd configurations."""
@@ -34,7 +34,7 @@ class Relayd(Endpoint):
         """Returns Relayd configuration."""
         endpoint = f"/relayd/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_relayd_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates Relayd configuration."""
@@ -42,10 +42,10 @@ class Relayd(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_relayd_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes Relayd configuration."""
         endpoint = f"/relayd/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

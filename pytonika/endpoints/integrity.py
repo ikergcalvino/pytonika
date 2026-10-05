@@ -8,7 +8,7 @@ class Integrity(Endpoint):
         """Returns integrity status."""
         endpoint = "/integrity/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def integrity_actions_generate(self, config: dict[str, Any]) -> dict[str, Any]:
         """Generates integrity database."""
@@ -16,22 +16,22 @@ class Integrity(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def integrity_actions_validate(self) -> dict[str, Any]:
         """Validates integrity database."""
         endpoint = "/integrity/actions/validate"
 
-        return self._api_client.post(endpoint)
+        return self._client.request("POST", endpoint)
 
     def integrity_actions_download(self) -> dict[str, Any]:
         """Downloads integrity database."""
         endpoint = "/integrity/actions/download"
 
-        return self._api_client.post(endpoint)
+        return self._client.request("POST", endpoint)
 
     def integrity_actions_validate_file(self, config: dict[str, Any]) -> dict[str, Any]:
         """Validates uploaded integrity database."""
         endpoint = "/integrity/actions/validate_file"
 
-        return self._api_client.post(endpoint, data=config)
+        return self._client.request("POST", endpoint, json=config)

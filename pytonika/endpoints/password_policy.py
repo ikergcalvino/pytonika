@@ -8,7 +8,7 @@ class PasswordPolicy(Endpoint):
         """Returns password policy configuration."""
         endpoint = "/password_policy/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_password_policy_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates password policy configuration."""
@@ -16,13 +16,13 @@ class PasswordPolicy(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_password_policy_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Returns password policy configuration."""
         endpoint = f"/password_policy/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_password_policy_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates password policy configuration."""
@@ -30,4 +30,4 @@ class PasswordPolicy(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)

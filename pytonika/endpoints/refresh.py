@@ -11,4 +11,4 @@ class Refresh(Endpoint):
         """
         endpoint = "/refresh"
 
-        return self._api_client.post(endpoint, data=config)
+        return self._client.request("POST", endpoint, json=config)

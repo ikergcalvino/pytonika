@@ -8,7 +8,7 @@ class ModemControl(Endpoint):
         """Returns all Modem Control configurations."""
         endpoint = "/modem_control/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_modem_control_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates Modem Control configuration."""
@@ -16,7 +16,7 @@ class ModemControl(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_modem_control_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified Modem Control configurations."""
@@ -24,7 +24,7 @@ class ModemControl(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_modem_control_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified Modem Control configurations."""
@@ -34,7 +34,7 @@ class ModemControl(Endpoint):
         """Returns the specified Modem Control configuration."""
         endpoint = f"/modem_control/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_modem_control_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified Modem Control configuration."""
@@ -42,16 +42,16 @@ class ModemControl(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_modem_control_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes the specified Modem Control configuration."""
         endpoint = f"/modem_control/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_modem_control_status(self) -> dict[str, Any]:
         """Returns Modem Control status."""
         endpoint = "/modem_control/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

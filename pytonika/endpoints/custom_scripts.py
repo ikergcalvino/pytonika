@@ -8,10 +8,10 @@ class CustomScripts(Endpoint):
         """Returns startup script file contents."""
         endpoint = "/uscripts/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def upload_uscripts(self, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads a startup script file."""
         endpoint = "/uscripts/actions/upload"
 
-        return self._api_client.post(endpoint, data={"data": data})
+        return self._client.request("POST", endpoint, json={"data": data})

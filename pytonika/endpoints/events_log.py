@@ -8,10 +8,10 @@ class EventsLog(Endpoint):
         """Returns events from all log groups."""
         endpoint = "/events_log/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_events_log_config_by_type(self, event_type: str) -> dict[str, Any]:
         """Returns events from specified log group."""
         endpoint = f"/events_log/config/{event_type}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

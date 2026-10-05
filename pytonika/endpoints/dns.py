@@ -8,7 +8,7 @@ class DNS(Endpoint):
         """Returns HTTPS DNS Proxy Global Settings."""
         endpoint = "/dns/https_proxy/global"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_dns_https_proxy_global(self, config: dict[str, Any]) -> dict[str, Any]:
         """Updates HTTPS DNS Proxy Global Settings."""
@@ -16,13 +16,13 @@ class DNS(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_dns_https_proxy_config(self) -> dict[str, Any]:
         """Returns HTTPS DNS Proxy configurations."""
         endpoint = "/dns/https_proxy/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_dns_https_proxy_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates HTTPS DNS Proxy configuration."""
@@ -30,7 +30,7 @@ class DNS(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_dns_https_proxy_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates HTTPS DNS Proxy configurations."""
@@ -38,7 +38,7 @@ class DNS(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_dns_https_proxy_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes HTTPS DNS Proxy configuration."""
@@ -48,7 +48,7 @@ class DNS(Endpoint):
         """Returns HTTPS DNS Proxy configuration."""
         endpoint = f"/dns/https_proxy/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_dns_https_proxy_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates HTTPS DNS Proxy configuration."""
@@ -56,19 +56,19 @@ class DNS(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_dns_https_proxy_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes HTTPS DNS Proxy configuration."""
         endpoint = f"/dns/https_proxy/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_dns_config(self) -> dict[str, Any]:
         """Returns DNS configurations."""
         endpoint = "/dns/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_dns_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates DNS configurations."""
@@ -76,19 +76,19 @@ class DNS(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_dns_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Returns DNS configuration."""
         endpoint = f"/dns/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def upload_dns_servers_file(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads DNS servers file."""
         endpoint = f"/dns/config/{config_id}"
 
-        return self._api_client.post(endpoint, data={"data": data})
+        return self._client.request("POST", endpoint, json={"data": data})
 
     def update_dns_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates DNS configuration."""
@@ -96,4 +96,4 @@ class DNS(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)

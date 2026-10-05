@@ -8,7 +8,7 @@ class SSTP(Endpoint):
         """Get sstp configurations."""
         endpoint = "/sstp/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_sstp_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create sstp configuration."""
@@ -16,7 +16,7 @@ class SSTP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_sstp_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update sstp configurations."""
@@ -24,7 +24,7 @@ class SSTP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_sstp_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Delete sstp configurations."""
@@ -34,13 +34,13 @@ class SSTP(Endpoint):
         """Get sstp configuration."""
         endpoint = f"/sstp/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def upload_sstp_files(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads SSTP configuration files."""
         endpoint = f"/sstp/config/{config_id}"
 
-        return self._api_client.post(endpoint, data={"data": data})
+        return self._client.request("POST", endpoint, json={"data": data})
 
     def update_sstp_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update sstp configuration."""
@@ -48,10 +48,10 @@ class SSTP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_sstp_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Delete sstp configuration."""
         endpoint = f"/sstp/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

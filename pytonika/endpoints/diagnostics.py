@@ -8,16 +8,16 @@ class Diagnostics(Endpoint):
         """Send ping command."""
         endpoint = "/diagnostics/actions/ping"
 
-        return self._api_client.post(endpoint, data={"data": data})
+        return self._client.request("POST", endpoint, json={"data": data})
 
     def traceroute(self, data: dict[str, Any]) -> dict[str, Any]:
         """Send traceroute command."""
         endpoint = "/diagnostics/actions/traceroute"
 
-        return self._api_client.post(endpoint, data={"data": data})
+        return self._client.request("POST", endpoint, json={"data": data})
 
     def nslookup(self, data: dict[str, Any]) -> dict[str, Any]:
         """Send nslookup command."""
         endpoint = "/diagnostics/actions/nslookup"
 
-        return self._api_client.post(endpoint, data={"data": data})
+        return self._client.request("POST", endpoint, json={"data": data})

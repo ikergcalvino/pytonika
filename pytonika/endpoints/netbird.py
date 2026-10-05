@@ -8,7 +8,7 @@ class Netbird(Endpoint):
         """Returns all NetBird configurations."""
         endpoint = "/netbird/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_netbird_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified NetBird configurations."""
@@ -16,13 +16,13 @@ class Netbird(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_netbird_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Returns the specified NetBird configuration."""
         endpoint = f"/netbird/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_netbird_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified NetBird configuration."""
@@ -30,10 +30,10 @@ class Netbird(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_netbird_status(self) -> dict[str, Any]:
         """Returns NetBird status."""
         endpoint = "/netbird/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

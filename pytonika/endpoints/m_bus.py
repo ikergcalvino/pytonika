@@ -11,7 +11,7 @@ class MBus(Endpoint):
         """
         endpoint = f"/mbus/client/config/{client_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_mbus_client_config_by_id(self, client_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update M-Bus Client configuration.
@@ -22,7 +22,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_mbus_client_config_by_id(self, client_id: str) -> dict[str, Any]:
         """Delete M-Bus Client configuration.
@@ -31,7 +31,7 @@ class MBus(Endpoint):
         """
         endpoint = f"/mbus/client/config/{client_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_mbus_client_config(self) -> dict[str, Any]:
         """List M-Bus Client configurations.
@@ -40,7 +40,7 @@ class MBus(Endpoint):
         """
         endpoint = "/mbus/client/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_mbus_client_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create M-Bus Client configuration.
@@ -51,7 +51,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_mbus_client_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update M-Bus Client configurations.
@@ -62,7 +62,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_mbus_client_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Delete M-Bus Client configurations."""
@@ -72,13 +72,13 @@ class MBus(Endpoint):
         """Start M-Bus secondary scan."""
         endpoint = "/mbus/scan/actions/start_secondary"
 
-        return self._api_client.post(endpoint)
+        return self._client.request("POST", endpoint)
 
     def mbus_scan_actions_stop(self) -> dict[str, Any]:
         """Stop M-Bus primary or secondary scan."""
         endpoint = "/mbus/scan/actions/stop"
 
-        return self._api_client.post(endpoint)
+        return self._client.request("POST", endpoint)
 
     def mbus_scan_actions_start_primary(self, config: dict[str, Any]) -> dict[str, Any]:
         """Start M-Bus primary scan."""
@@ -86,19 +86,19 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def get_mbus_scan_status(self) -> dict[str, Any]:
         """Get M-Bus global configuration."""
         endpoint = "/mbus/scan/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_mbus_found_devices_status(self) -> dict[str, Any]:
         """Get M-Bus devices found during scanning process."""
         endpoint = "/mbus/found_devices/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_mbus_records_config(self) -> dict[str, Any]:
         """List M-Bus Record configurations.
@@ -107,7 +107,7 @@ class MBus(Endpoint):
         """
         endpoint = "/mbus/records/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_mbus_records_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create M-Bus Record configuration.
@@ -118,7 +118,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_mbus_records_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update M-Bus Record configurations.
@@ -129,7 +129,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_mbus_records_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Delete M-Bus Record configurations."""
@@ -142,7 +142,7 @@ class MBus(Endpoint):
         """
         endpoint = f"/mbus/records/config/{record_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_mbus_records_config_by_id(self, record_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update M-Bus Record configuration.
@@ -153,7 +153,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_mbus_records_config_by_id(self, record_id: str) -> dict[str, Any]:
         """Delete M-Bus Record configuration.
@@ -162,7 +162,7 @@ class MBus(Endpoint):
         """
         endpoint = f"/mbus/records/config/{record_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def mbus_devices_actions_update_address_by_id(self, device_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the primary address of saved M-Bus device."""
@@ -170,7 +170,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def mbus_devices_actions_test(self, config: dict[str, Any]) -> dict[str, Any]:
         """Send a test request to M-Bus device."""
@@ -178,7 +178,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def mbus_devices_actions_reset(self, config: dict[str, Any]) -> dict[str, Any]:
         """Send reset request to M-Bus device."""
@@ -186,13 +186,13 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def get_mbus_devices_config_by_id(self, device_id: str) -> dict[str, Any]:
         """Returns the specified M-Bus device."""
         endpoint = f"/mbus/devices/config/{device_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_mbus_devices_config_by_id(self, device_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update M-Bus device."""
@@ -200,13 +200,13 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_mbus_devices_config_by_id(self, device_id: str) -> dict[str, Any]:
         """Delete M-Bus device."""
         endpoint = f"/mbus/devices/config/{device_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def mbus_devices_actions_update_baudrate(self, config: dict[str, Any]) -> dict[str, Any]:
         """Update baudrate of M-Bus device."""
@@ -214,7 +214,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def mbus_devices_actions_get_info(self, config: dict[str, Any]) -> dict[str, Any]:
         """Get manufacturer information from M-Bus device."""
@@ -222,13 +222,13 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def get_mbus_devices_config(self) -> dict[str, Any]:
         """List M-Bus devices."""
         endpoint = "/mbus/devices/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_mbus_devices_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create M-Bus device."""
@@ -236,7 +236,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_mbus_devices_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update M-Bus devices."""
@@ -244,7 +244,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_mbus_devices_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Delete M-Bus devices."""
@@ -256,7 +256,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def mbus_devices_actions_update_address(self, config: dict[str, Any]) -> dict[str, Any]:
         """Update primary address of M-Bus device."""
@@ -264,13 +264,13 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def get_mbus_global(self) -> dict[str, Any]:
         """Get M-Bus global configuration."""
         endpoint = "/mbus/global"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_mbus_global(self, config: dict[str, Any]) -> dict[str, Any]:
         """Update M-Bus global configuration."""
@@ -278,25 +278,25 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_mbus_database_entries_status(self) -> dict[str, Any]:
         """Returns all M-Bus database entries."""
         endpoint = "/mbus/database/entries/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_mbus_status(self) -> dict[str, Any]:
         """Get M-Bus service status."""
         endpoint = "/mbus/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_mbus_groups_values_config(self, group_id: str) -> dict[str, Any]:
         """List group values."""
         endpoint = f"/mbus/groups/{group_id}/values/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_mbus_groups_values_config(self, group_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Create group value."""
@@ -304,7 +304,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_mbus_groups_values_config(self, group_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update group values."""
@@ -312,7 +312,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_mbus_groups_values_config(self, group_id: str, config: list[str]) -> list[dict[str, Any]]:
         """Delete group values."""
@@ -322,7 +322,7 @@ class MBus(Endpoint):
         """Returns the specified group value."""
         endpoint = f"/mbus/groups/{group_id}/values/config/{value_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_mbus_groups_values_config_by_id(
         self, group_id: str, value_id: str, config: dict[str, Any]
@@ -332,25 +332,25 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_mbus_groups_values_config_by_id(self, group_id: str, value_id: str) -> dict[str, Any]:
         """Delete group value."""
         endpoint = f"/mbus/groups/{group_id}/values/config/{value_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_mbus_groups_values_status_by_id(self, group_id: str, value_id: str) -> dict[str, Any]:
         """Returns the specified current group value."""
         endpoint = f"/mbus/groups/{group_id}/values/status/{value_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_mbus_groups_config(self) -> dict[str, Any]:
         """List M-Bus groups."""
         endpoint = "/mbus/groups/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_mbus_groups_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create M-Bus group."""
@@ -358,7 +358,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_mbus_groups_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update M-Bus groups."""
@@ -366,7 +366,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_mbus_groups_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Delete M-Bus groups."""
@@ -376,7 +376,7 @@ class MBus(Endpoint):
         """Returns the specified M-Bus group."""
         endpoint = f"/mbus/groups/config/{group_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_mbus_groups_config_by_id(self, group_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update M-Bus group."""
@@ -384,13 +384,13 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_mbus_groups_config_by_id(self, group_id: str) -> dict[str, Any]:
         """Delete M-Bus group."""
         endpoint = f"/mbus/groups/config/{group_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def mbus_groups_actions_test(self, config: dict[str, Any]) -> dict[str, Any]:
         """Test response of group."""
@@ -398,13 +398,13 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def get_mbus_groups_status_by_id(self, group_id: str) -> dict[str, Any]:
         """Returns the current value of specified M-Bus group."""
         endpoint = f"/mbus/groups/status/{group_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def mbus_records_requests_actions_request_test(self, record_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Test Configuration of M-Bus Request.
@@ -415,7 +415,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def get_mbus_records_requests_config(self, record_id: str) -> dict[str, Any]:
         """List M-Bus Request configurations.
@@ -424,7 +424,7 @@ class MBus(Endpoint):
         """
         endpoint = f"/mbus/records/{record_id}/requests/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_mbus_records_requests_config(self, record_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Create M-Bus Request configuration.
@@ -435,7 +435,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_mbus_records_requests_config(self, record_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update M-Bus Request configurations.
@@ -446,7 +446,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_mbus_records_requests_config(self, record_id: str, config: list[str]) -> list[dict[str, Any]]:
         """Delete M-Bus Request configurations."""
@@ -459,7 +459,7 @@ class MBus(Endpoint):
         """
         endpoint = f"/mbus/records/{record_id}/requests/config/{request_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_mbus_records_requests_config_by_id(
         self, record_id: str, request_id: str, config: dict[str, Any]
@@ -472,7 +472,7 @@ class MBus(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_mbus_records_requests_config_by_id(self, record_id: str, request_id: str) -> dict[str, Any]:
         """Delete M-Bus Request configuration.
@@ -481,4 +481,4 @@ class MBus(Endpoint):
         """
         endpoint = f"/mbus/records/{record_id}/requests/config/{request_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

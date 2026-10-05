@@ -8,7 +8,7 @@ class Profiles(Endpoint):
         """Returns all Profiles Scheduler configurations."""
         endpoint = "/profiles/scheduler/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_profiles_scheduler_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates Profiles Scheduler configuration."""
@@ -16,7 +16,7 @@ class Profiles(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_profiles_scheduler_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified Profiles Scheduler configurations."""
@@ -24,7 +24,7 @@ class Profiles(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_profiles_scheduler_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified Profiles Scheduler configurations."""
@@ -34,7 +34,7 @@ class Profiles(Endpoint):
         """Returns the specified Profiles Scheduler configuration."""
         endpoint = f"/profiles/scheduler/config/{scheduler_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_profiles_scheduler_config_by_id(self, scheduler_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified Profiles Scheduler configuration."""
@@ -42,19 +42,19 @@ class Profiles(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_profiles_scheduler_config_by_id(self, scheduler_id: str) -> dict[str, Any]:
         """Deletes the specified Profiles Scheduler configuration."""
         endpoint = f"/profiles/scheduler/config/{scheduler_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_profiles_scheduler_global(self) -> dict[str, Any]:
         """Returns Profiles Scheduler general configuration."""
         endpoint = "/profiles/scheduler/global"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_profiles_scheduler_global(self, config: dict[str, Any]) -> dict[str, Any]:
         """Updates Profiles Scheduler general configuration."""
@@ -62,19 +62,19 @@ class Profiles(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_profiles_status(self) -> dict[str, Any]:
         """Get current profile in use."""
         endpoint = "/profiles/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_profiles_config(self) -> dict[str, Any]:
         """Returns all profiles configurations."""
         endpoint = "/profiles/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_profiles_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates profile configuration."""
@@ -82,7 +82,7 @@ class Profiles(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def delete_profiles_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified profiles configurations."""
@@ -92,16 +92,16 @@ class Profiles(Endpoint):
         """Returns specified profiles configuration."""
         endpoint = f"/profiles/config/{profile_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def delete_profiles_config_by_id(self, profile_id: str) -> dict[str, Any]:
         """Deletes specified profiles configuration."""
         endpoint = f"/profiles/config/{profile_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def profiles_apply_profile(self, data: dict[str, Any]) -> dict[str, Any]:
         """Applies provided profile."""
         endpoint = "/profiles/actions/apply_profile"
 
-        return self._api_client.post(endpoint, data={"data": data})
+        return self._client.request("POST", endpoint, json={"data": data})

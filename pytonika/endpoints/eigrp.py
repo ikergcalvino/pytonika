@@ -8,7 +8,7 @@ class EIGRP(Endpoint):
         """Returns EIGRP global configurations."""
         endpoint = "/eigrp/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_eigrp_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates EIGRP global configurations."""
@@ -16,13 +16,13 @@ class EIGRP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_eigrp_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Returns EIGRP global configuration."""
         endpoint = f"/eigrp/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_eigrp_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates EIGRP global configuration."""
@@ -30,10 +30,10 @@ class EIGRP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_eigrp_status(self) -> dict[str, Any]:
         """Fetches data about EIGRP neighbors."""
         endpoint = "/eigrp/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

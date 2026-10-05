@@ -8,4 +8,4 @@ class Services(Endpoint):
         """Returns information about installed services on the device."""
         endpoint = "/services/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

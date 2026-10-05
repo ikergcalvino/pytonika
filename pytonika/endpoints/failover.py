@@ -8,7 +8,7 @@ class Failover(Endpoint):
         """Returns failover configurations."""
         endpoint = "/failover/mode/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_failover_mode_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates failover configurations."""
@@ -16,13 +16,13 @@ class Failover(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_failover_mode_config_by_id(self, mode_id: str) -> dict[str, Any]:
         """Returns failover configuration."""
         endpoint = f"/failover/mode/config/{mode_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_failover_mode_config_by_id(self, mode_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates failover configuration."""
@@ -30,19 +30,19 @@ class Failover(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_failover_status(self) -> dict[str, Any]:
         """Returns failover status."""
         endpoint = "/failover/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_failover_interfaces_config(self) -> dict[str, Any]:
         """Returns failover interfaces."""
         endpoint = "/failover/interfaces/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_failover_interfaces_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates failover interface."""
@@ -50,7 +50,7 @@ class Failover(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_failover_interfaces_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates failover interfaces."""
@@ -58,7 +58,7 @@ class Failover(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_failover_interfaces_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes failover interfaces."""
@@ -68,7 +68,7 @@ class Failover(Endpoint):
         """Returns failover interface."""
         endpoint = f"/failover/interfaces/config/{interface_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_failover_interfaces_config_by_id(self, interface_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates failover interface."""
@@ -76,19 +76,19 @@ class Failover(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_failover_interfaces_config_by_id(self, interface_id: str) -> dict[str, Any]:
         """Deletes failover interface."""
         endpoint = f"/failover/interfaces/config/{interface_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_failover_policies_config(self) -> dict[str, Any]:
         """Returns failover policies."""
         endpoint = "/failover/policies/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_failover_policies_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates failover policies."""
@@ -96,7 +96,7 @@ class Failover(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_failover_policies_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates failover policies."""
@@ -104,7 +104,7 @@ class Failover(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_failover_policies_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes failover policies."""
@@ -114,7 +114,7 @@ class Failover(Endpoint):
         """Returns failover policy."""
         endpoint = f"/failover/policies/config/{policy_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_failover_policies_config_by_id(self, policy_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates failover policy."""
@@ -122,19 +122,19 @@ class Failover(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_failover_policies_config_by_id(self, policy_id: str) -> dict[str, Any]:
         """Deletes failover policy."""
         endpoint = f"/failover/policies/config/{policy_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_failover_rules_config(self) -> dict[str, Any]:
         """Returns failover rules."""
         endpoint = "/failover/rules/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_failover_rules_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates failover rules."""
@@ -142,7 +142,7 @@ class Failover(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_failover_rules_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates failover rules."""
@@ -150,7 +150,7 @@ class Failover(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_failover_rules_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes failover rules."""
@@ -160,7 +160,7 @@ class Failover(Endpoint):
         """Returns failover rule."""
         endpoint = f"/failover/rules/config/{rule_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_failover_rules_config_by_id(self, rule_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates failover rule."""
@@ -168,19 +168,19 @@ class Failover(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_failover_rules_config_by_id(self, rule_id: str) -> dict[str, Any]:
         """Deletes failover rule."""
         endpoint = f"/failover/rules/config/{rule_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_failover_members_config(self) -> dict[str, Any]:
         """Returns failover member configurations."""
         endpoint = "/failover/members/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_failover_members_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates failover member."""
@@ -188,7 +188,7 @@ class Failover(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_failover_members_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates failover member configurations."""
@@ -196,7 +196,7 @@ class Failover(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_failover_members_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes failover members."""
@@ -206,7 +206,7 @@ class Failover(Endpoint):
         """Returns failover member configuration."""
         endpoint = f"/failover/members/config/{member_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_failover_members_config_by_id(self, member_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates failover member."""
@@ -214,10 +214,10 @@ class Failover(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_failover_members_config_by_id(self, member_id: str) -> dict[str, Any]:
         """Deletes failover member."""
         endpoint = f"/failover/members/config/{member_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

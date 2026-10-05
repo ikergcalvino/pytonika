@@ -11,4 +11,4 @@ class JWTLogin(Endpoint):
         """
         endpoint = "/jwt_login"
 
-        return self._api_client.post(endpoint, data=config)
+        return self._client.request("POST", endpoint, json=config)

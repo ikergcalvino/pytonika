@@ -8,7 +8,7 @@ class OpenVPN(Endpoint):
         """Returns all openvpn tls client configuration sections."""
         endpoint = f"/openvpn/{openvpn_id}/clients/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_openvpn_clients_config(self, openvpn_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Creates openvpn tls section."""
@@ -16,7 +16,7 @@ class OpenVPN(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_openvpn_clients_config(self, openvpn_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified openvpn tls client configurations."""
@@ -24,7 +24,7 @@ class OpenVPN(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_openvpn_clients_config(self, openvpn_id: str, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified openvpn tls client configurations."""
@@ -34,7 +34,7 @@ class OpenVPN(Endpoint):
         """Returns specified openvpn tls client section."""
         endpoint = f"/openvpn/{openvpn_id}/clients/config/{clients_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_openvpn_clients_config_by_id(
         self, openvpn_id: str, clients_id: str, config: dict[str, Any]
@@ -44,19 +44,19 @@ class OpenVPN(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_openvpn_clients_config_by_id(self, openvpn_id: str, clients_id: str) -> dict[str, Any]:
         """Deletes specified openvpn tls client configuration."""
         endpoint = f"/openvpn/{openvpn_id}/clients/config/{clients_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_openvpn_config(self) -> dict[str, Any]:
         """Returns all openvpn configuration sections."""
         endpoint = "/openvpn/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_openvpn_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates openvpn section."""
@@ -64,7 +64,7 @@ class OpenVPN(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_openvpn_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified openvpn configurations."""
@@ -72,7 +72,7 @@ class OpenVPN(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_openvpn_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified openvpn child configurations."""
@@ -82,13 +82,13 @@ class OpenVPN(Endpoint):
         """Returns specified openvpn section."""
         endpoint = f"/openvpn/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def upload_openvpn_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads custom configuration file."""
         endpoint = f"/openvpn/config/{config_id}"
 
-        return self._api_client.post(endpoint, data={"data": data})
+        return self._client.request("POST", endpoint, json={"data": data})
 
     def update_openvpn_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates specified openvpn configuration."""
@@ -96,28 +96,28 @@ class OpenVPN(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_openvpn_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes specified openvpn configuration."""
         endpoint = f"/openvpn/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_openvpn_status(self) -> dict[str, Any]:
         """Returns all openvpn configuration sections statuses."""
         endpoint = "/openvpn/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_openvpn_status_by_id(self, status_id: str) -> dict[str, Any]:
         """Returns single openvpn configuration instance status."""
         endpoint = f"/openvpn/status/{status_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def openvpn_actions_download(self, openvpn_id: str) -> dict[str, Any]:
         """Downloads specified configuration file."""
         endpoint = f"/openvpn/{openvpn_id}/actions/download"
 
-        return self._api_client.post(endpoint)
+        return self._client.request("POST", endpoint)

@@ -8,7 +8,7 @@ class LLDP(Endpoint):
         """Returns all LLDP configurations."""
         endpoint = "/lldp/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_lldp_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified LLDP configurations."""
@@ -16,13 +16,13 @@ class LLDP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_lldp_config_by_id(self, lldp_id: str) -> dict[str, Any]:
         """Returns the specified LLDP configuration."""
         endpoint = f"/lldp/config/{lldp_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_lldp_config_by_id(self, lldp_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified LLDP configuration."""
@@ -30,10 +30,10 @@ class LLDP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_lldp_neighbor_status(self) -> dict[str, Any]:
         """Returns all status information."""
         endpoint = "/lldp/neighbor/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

@@ -8,7 +8,7 @@ class ITxPT(Endpoint):
         """Returns all ITxPT configurations."""
         endpoint = "/itxpt/global"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_itxpt_global(self, config: dict[str, Any]) -> dict[str, Any]:
         """Updates specified ITxPT configurations."""
@@ -16,13 +16,13 @@ class ITxPT(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_itxpt_services_config(self) -> dict[str, Any]:
         """Returns all ITxPT service configurations."""
         endpoint = "/itxpt/services/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_itxpt_services_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified ITxPT service configurations."""
@@ -30,13 +30,13 @@ class ITxPT(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_itxpt_services_config_by_id(self, service_id: str) -> dict[str, Any]:
         """Returns the specified ITxPT service configuration."""
         endpoint = f"/itxpt/services/config/{service_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_itxpt_services_config_by_id(self, service_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified ITxPT service configuration."""
@@ -44,4 +44,4 @@ class ITxPT(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)

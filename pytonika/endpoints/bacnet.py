@@ -8,7 +8,7 @@ class Bacnet(Endpoint):
         """Returns all BACnet BDT configurations."""
         endpoint = "/bacnet/bdt/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_bacnet_bdt_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates BACnet BDT configuration."""
@@ -16,7 +16,7 @@ class Bacnet(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_bacnet_bdt_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified BACnet BDT configurations."""
@@ -24,7 +24,7 @@ class Bacnet(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_bacnet_bdt_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified BACnet BDT configurations."""
@@ -34,7 +34,7 @@ class Bacnet(Endpoint):
         """Returns the specified BACnet BDT configuration."""
         endpoint = f"/bacnet/bdt/config/{bdt_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_bacnet_bdt_config_by_id(self, bdt_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified BACnet BDT configuration."""
@@ -42,19 +42,19 @@ class Bacnet(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_bacnet_bdt_config_by_id(self, bdt_id: str) -> dict[str, Any]:
         """Deletes the specified BACnet BDT configuration."""
         endpoint = f"/bacnet/bdt/config/{bdt_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_bacnet_config(self) -> dict[str, Any]:
         """Returns all BACnet configurations."""
         endpoint = "/bacnet/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_bacnet_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified BACnet configurations."""
@@ -62,13 +62,13 @@ class Bacnet(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_bacnet_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Returns the specified BACnet configuration."""
         endpoint = f"/bacnet/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_bacnet_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified BACnet configuration."""
@@ -76,13 +76,13 @@ class Bacnet(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_bacnet_bip_config(self) -> dict[str, Any]:
         """Returns all BACnet Over Internet Protocol configurations."""
         endpoint = "/bacnet/bip/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_bacnet_bip_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates BACnet Over Internet Protocol configurations."""
@@ -90,7 +90,7 @@ class Bacnet(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_bacnet_bip_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified BACnet Over Internet Protocol configurations."""
@@ -98,7 +98,7 @@ class Bacnet(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_bacnet_bip_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes BACnet configurations."""
@@ -108,7 +108,7 @@ class Bacnet(Endpoint):
         """Returns the specified BACnet Over Internet Protocol configurations."""
         endpoint = f"/bacnet/bip/config/{bip_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_bacnet_bip_config_by_id(self, bip_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified BACnet Over Internet Protocol configuration."""
@@ -116,19 +116,19 @@ class Bacnet(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_bacnet_bip_config_by_id(self, bip_id: str) -> dict[str, Any]:
         """Deletes the specified BACnet configuration."""
         endpoint = f"/bacnet/bip/config/{bip_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_bacnet_mstp_config(self) -> dict[str, Any]:
         """Returns all BACnet Server/Client token passing configurations."""
         endpoint = "/bacnet/mstp/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_bacnet_mstp_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates BACnet Server/Client token passing instance."""
@@ -136,7 +136,7 @@ class Bacnet(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_bacnet_mstp_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified BACnet Server/Client token passing configurations."""
@@ -144,7 +144,7 @@ class Bacnet(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_bacnet_mstp_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes BACnet Server/Client token passing configurations."""
@@ -154,7 +154,7 @@ class Bacnet(Endpoint):
         """Returns the specified BACnet Server/Client token passing configuration."""
         endpoint = f"/bacnet/mstp/config/{mstp_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_bacnet_mstp_config_by_id(self, mstp_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified BACnet Server/Client token passing configuration."""
@@ -162,10 +162,10 @@ class Bacnet(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_bacnet_mstp_config_by_id(self, mstp_id: str) -> dict[str, Any]:
         """Deletes BACnet Server/Client token passing configuration."""
         endpoint = f"/bacnet/mstp/config/{mstp_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

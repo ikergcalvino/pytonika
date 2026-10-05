@@ -8,19 +8,19 @@ class L2TP(Endpoint):
         """Returns the status of all l2tp instances."""
         endpoint = "/l2tp/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_l2tp_status_by_id(self, status_id: str) -> dict[str, Any]:
         """Return the status of the l2tp instance."""
         endpoint = f"/l2tp/status/{status_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_l2tp_client_config(self) -> dict[str, Any]:
         """Get l2tp client configurations."""
         endpoint = "/l2tp/client/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_l2tp_client_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create l2tp client configuration."""
@@ -28,7 +28,7 @@ class L2TP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_l2tp_client_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update l2tp client configurations."""
@@ -36,7 +36,7 @@ class L2TP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_l2tp_client_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Delete l2tp client configurations."""
@@ -46,7 +46,7 @@ class L2TP(Endpoint):
         """Get l2tp client configuration."""
         endpoint = f"/l2tp/client/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_l2tp_client_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update l2tp client configuration."""
@@ -54,19 +54,19 @@ class L2TP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_l2tp_client_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Delete l2tp client configuration."""
         endpoint = f"/l2tp/client/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_l2tp_server_config(self) -> dict[str, Any]:
         """Get l2tp server configurations."""
         endpoint = "/l2tp/server/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_l2tp_server_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create l2tp server configuration."""
@@ -74,7 +74,7 @@ class L2TP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_l2tp_server_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update l2tp server configurations."""
@@ -82,7 +82,7 @@ class L2TP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_l2tp_server_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Delete l2tp server configurations."""
@@ -92,7 +92,7 @@ class L2TP(Endpoint):
         """Get l2tp server configuration."""
         endpoint = f"/l2tp/server/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_l2tp_server_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update l2tp server configuration."""
@@ -100,19 +100,19 @@ class L2TP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_l2tp_server_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Delete l2tp server configuration."""
         endpoint = f"/l2tp/server/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_l2tp_users_config(self) -> dict[str, Any]:
         """Get l2tp user configurations."""
         endpoint = "/l2tp/users/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_l2tp_users_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create l2tp user configurations."""
@@ -120,7 +120,7 @@ class L2TP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_l2tp_users_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update l2tp user configurations."""
@@ -128,7 +128,7 @@ class L2TP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_l2tp_users_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Delete l2tp user configurations."""
@@ -138,7 +138,7 @@ class L2TP(Endpoint):
         """Get user configuration."""
         endpoint = f"/l2tp/users/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_l2tp_users_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update user configuration."""
@@ -146,10 +146,10 @@ class L2TP(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_l2tp_users_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Delete user configuration."""
         endpoint = f"/l2tp/users/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)

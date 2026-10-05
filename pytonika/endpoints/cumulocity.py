@@ -8,13 +8,13 @@ class Cumulocity(Endpoint):
         """Returns Cumulocity status."""
         endpoint = "/cumulocity/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_cumulocity_config(self) -> dict[str, Any]:
         """Returns Cumulocity configuration in an array."""
         endpoint = "/cumulocity/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_cumulocity_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates Cumulocity configuration in an array."""
@@ -22,13 +22,13 @@ class Cumulocity(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def get_cumulocity_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Returns Cumulocity configuration."""
         endpoint = f"/cumulocity/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_cumulocity_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates Cumulocity configuration."""
@@ -36,10 +36,10 @@ class Cumulocity(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def cumulocity_reset_auth(self, data: dict[str, Any]) -> dict[str, Any]:
         """Resets authentication data."""
         endpoint = "/cumulocity/actions/reset_auth"
 
-        return self._api_client.post(endpoint, data={"data": data})
+        return self._client.request("POST", endpoint, json={"data": data})

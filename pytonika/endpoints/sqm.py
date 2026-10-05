@@ -8,7 +8,7 @@ class SQM(Endpoint):
         """Returns SQM configurations."""
         endpoint = "/sqm/config"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def create_sqm_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create SQM configuration."""
@@ -16,7 +16,7 @@ class SQM(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.post(endpoint, data=data)
+        return self._client.request("POST", endpoint, json=data)
 
     def update_sqm_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates SQM configurations."""
@@ -24,7 +24,7 @@ class SQM(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_sqm_config(self, config: list[str]) -> list[dict[str, Any]]:
         """Deletes SQM configurations."""
@@ -34,7 +34,7 @@ class SQM(Endpoint):
         """Returns SQM configuration."""
         endpoint = f"/sqm/config/{config_id}"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def update_sqm_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates SQM configuration."""
@@ -42,16 +42,16 @@ class SQM(Endpoint):
 
         data = {"data": config}
 
-        return self._api_client.put(endpoint, data=data)
+        return self._client.request("PUT", endpoint, json=data)
 
     def delete_sqm_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes SQM configuration."""
         endpoint = f"/sqm/config/{config_id}"
 
-        return self._api_client.delete(endpoint)
+        return self._client.request("DELETE", endpoint)
 
     def get_sqm_options(self) -> dict[str, Any]:
         """Returns SQM options."""
         endpoint = "/sqm/options"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)

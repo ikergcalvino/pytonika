@@ -8,19 +8,19 @@ class Topology(Endpoint):
         """Get interfaces information for devices scanning."""
         endpoint = "/topology/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def get_topology_scan_status(self) -> dict[str, Any]:
         """Get history of started scans."""
         endpoint = "/topology/scan/status"
 
-        return self._api_client.get(endpoint)
+        return self._client.request("GET", endpoint)
 
     def topology_start_scan(self, data: dict[str, Any]) -> dict[str, Any]:
         """Start topology scan."""
         endpoint = "/topology/actions/start_scan"
 
-        return self._api_client.post(endpoint, data={"data": data})
+        return self._client.request("POST", endpoint, json={"data": data})
 
     def topology_devices_scan(self, data: dict[str, Any]) -> dict[str, Any]:
         """Get devices information.
@@ -30,4 +30,4 @@ class Topology(Endpoint):
         """
         endpoint = "/topology/actions/devices_scan"
 
-        return self._api_client.post(endpoint, data={"data": data})
+        return self._client.request("POST", endpoint, json={"data": data})
