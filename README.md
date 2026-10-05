@@ -5,25 +5,26 @@
 [![CI](https://github.com/ikergcalvino/pytonika/actions/workflows/ci.yml/badge.svg)](https://github.com/ikergcalvino/pytonika/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/ikergcalvino/pytonika)](https://github.com/ikergcalvino/pytonika/blob/main/LICENSE)
 
-Pytonika is a lightweight Python client library for the **Teltonika Networks Web API**.
-It provides device-aware wrappers and grouped endpoint interfaces to make automation and scripting straightforward.
+**Pytonika** is a typed Python client for the [Teltonika Networks Web API](https://developers.teltonika-networks.com/).
+It wraps the API in device-aware classes, so you can automate routers, gateways, access points and switches
+without building raw HTTP requests yourself.
 
 > [!IMPORTANT]
-> Pytonika is **not an official Teltonika library**.
-> This project is maintained by the community and is not affiliated with or endorsed by Teltonika Networks.
+> Pytonika is a community project. It is **not affiliated with, endorsed by or supported by Teltonika Networks**.
 
-## Why Pytonika?
+## Features
 
-Instead of crafting raw HTTP requests against the Teltonika Web API, Pytonika gives you:
-
-- **Device-aware wrappers** — every supported model exposes the endpoint set documented for it in the [official API reference](https://developers.teltonika-networks.com/).
-- **Clean, Pythonic interface** — authenticate once and call methods directly; the session token is handled for you.
-- **Full API coverage** — 160+ endpoint groups, from VPN and firewall to SMS, GPS and Modbus.
-- **Lightweight** — synchronous HTTP client built on [httpx](https://www.python-httpx.org/), with no other dependencies.
+- **Device-aware** — each of the 84 supported models exposes exactly the endpoint groups documented for it,
+  so your editor autocompletes only what that device actually supports.
+- **Broad API coverage** — 160+ endpoint groups and 2,000+ operations, from interfaces and firewall to VPNs,
+  mobile, GPS, Modbus and more.
+- **Simple session handling** — log in once and the Bearer token is attached to every subsequent request.
+- **Fully typed** — ships with `py.typed` and type hints on every public method.
+- **Lightweight** — synchronous client built on [httpx](https://www.python-httpx.org/), with no other runtime dependencies.
 
 ## Installation
 
-Requires Python **3.11+**:
+Pytonika requires Python **3.11** or later.
 
 ```bash
 pip install pytonika
@@ -34,78 +35,123 @@ pip install pytonika
 ```python
 from pytonika import RUTX50
 
-device = RUTX50("https://192.168.1.1/", verify=False)  # self-signed cert on the device
+with RUTX50("https://192.168.1.1/") as device:
+    device.authentication.login("admin", "<password>")
 
-# Authenticate — the Bearer token is stored and reused automatically
-device.authentication.login("admin", "admin01")
+    status = device.firmware.get_firmware_device_status()
+    print(status["data"]["version"])
 
-# Query the device
-status = device.firmware.get_firmware_device_status()
-print(status["data"]["version"])
-
-# Manage configuration
-device.wireguard.get_wireguard_config()
-device.interfaces.get_interfaces_status()
-
-# Log out when done
-device.authentication.logout()
+    device.authentication.logout()
 ```
 
+Using the device as a context manager closes the underlying HTTP connection when the block exits.
+Outside a `with` block, call `device.close()` when you are done.
+
+### Connection options
+
+Every device class accepts the same keyword arguments:
+
+| Argument  | Default | Description |
+|-----------|---------|-------------|
+| `timeout` | `10.0`  | Request timeout in seconds. |
+| `verify`  | `True`  | TLS certificate verification. Pass `False` to disable it. |
+
 > [!WARNING]
-> Teltonika devices usually ship with a self-signed certificate, so the example passes `verify=False`, which **disables TLS verification**. On an untrusted network, provide a trusted CA bundle instead — see [SECURITY.md](https://github.com/ikergcalvino/pytonika/blob/main/SECURITY.md).
+> Teltonika devices usually ship with a self-signed certificate, so connections fail with `verify=True`
+> unless the device has a trusted certificate. Use `verify=False` only on local, trusted networks: it disables
+> certificate checks and exposes the connection to man-in-the-middle attacks.
+> See the [Security Policy](https://github.com/ikergcalvino/pytonika/blob/main/SECURITY.md) for recommendations.
 
-Every method returns the raw API response as a `dict`, typically shaped as
-`{"success": True, "data": ...}` or `{"success": False, "errors": [...]}`.
+### Responses
 
-If you don't care about model-specific endpoints, the generic classes (`Router`,
-`Gateway`, `AccessPoint`, `Switch`) work with any device of that type:
+Methods return the API's JSON response as a `dict`, without modification:
+
+```python
+response = device.interfaces.get_interfaces_status()
+
+if response["success"]:
+    for interface in response["data"]:
+        ...
+else:
+    print(response["errors"])
+```
+
+Pytonika does not raise exceptions for API-level errors, so check the `success` field before using `data`.
+Network failures (timeouts, connection errors) are raised by `httpx` as usual.
+
+### Generic device classes
+
+If you don't need model-specific endpoints, use the generic class for the device family. It works with any model
+of that family and exposes the endpoint groups common to all of them:
 
 ```python
 from pytonika import Router
 
-router = Router("http://192.168.1.1/", timeout=10.0)
+with Router("https://192.168.1.1/", timeout=30.0) as router:
+    router.authentication.login("admin", "<password>")
+    router.wireguard.get_wireguard_config()
 ```
 
 ## Supported devices
 
-Pytonika supports **84 models** across four families. Use the generic class for a device type, or a model-specific subclass:
+Pytonika supports **84 models** across four families. Each family has a generic class, and each model has its own
+class with the endpoints specific to it:
 
-| Generic class | Count | Models |
+| Generic class | Models | Supported models |
 |---|---|---|
 | `Router` | 62 | ATRM50, CAP700, DAP140, DAP142, DAP145, OTD140, OTD144, OTD500, RUT140, RUT142, RUT145, RUT200, RUT202, RUT204, RUT206, RUT240, RUT241, RUT260, RUT271, RUT276, RUT281, RUT300, RUT301, RUT360, RUT361, RUT901, RUT906, RUT950, RUT951, RUT955, RUT956, RUT976, RUT981, RUT986, RUTC40, RUTC41, RUTC42, RUTC50, RUTM08, RUTM09, RUTM10, RUTM11, RUTM16, RUTM20, RUTM30, RUTM31, RUTM50, RUTM51, RUTM52, RUTM54, RUTM55, RUTM56, RUTM59, RUTX08, RUTX09, RUTX10, RUTX11, RUTX12, RUTX14, RUTX50, RUTXR1, TCR100 |
 | `Gateway` | 14 | TRB140, TRB141, TRB142, TRB143, TRB145, TRB160, TRB236, TRB245, TRB246, TRB247, TRB255, TRB256, TRB500, TRB501 |
 | `AccessPoint` | 3 | TAP100, TAP200, TAP400 |
 | `Switch` | 5 | SWM280, SWM281, SWM282, TSW202, TSW212 |
 
-Each model class exposes exactly the endpoints documented for its latest firmware,
-so your editor can autocomplete what a given device actually supports.
+Each model's endpoint set follows the official API reference for the latest firmware documented for that model.
+A few models are documented for older firmware lines (for example RUT240, RUT950 and RUT955), and their classes
+reflect that.
+
+Missing a device? [Open a device request](https://github.com/ikergcalvino/pytonika/issues/new/choose).
 
 ## Endpoints
 
-Every endpoint group from the official API reference is available as an attribute
-named after the group — a few examples:
+Each endpoint group from the official API reference is available as an attribute named after the group:
 
-| Attribute | Description |
+| Area | Attributes |
 |---|---|
-| `authentication` | Login, logout, session status |
-| `firmware`, `fota` | Firmware status, upgrades, FOTA |
-| `interfaces`, `dhcp_servers`, `firewall` | Networking essentials |
-| `wireguard`, `openvpn`, `ipsec`, `zerotier`, `tailscale` | VPN services |
-| `modems`, `sim_cards`, `messages`, `sms_utilities` | Mobile and SMS |
-| `gps`, `input_output`, `modbus`, `serial` | Industrial / IoT features |
-| `users`, `access_control`, `backup`, `system` | Administration |
+| Session | `authentication`, `unauthorized` |
+| System and administration | `system`, `users`, `access_control`, `backup`, `date_time`, `logging` |
+| Firmware | `firmware`, `fota` |
+| Networking | `interfaces`, `dhcp_servers`, `firewall`, `ip_routes`, `failover` |
+| VPN | `wireguard`, `openvpn`, `ipsec`, `zerotier`, `tailscale` |
+| Mobile and SMS | `modems`, `sim_cards`, `messages`, `sms_utilities` |
+| Industrial and IoT | `gps`, `input_output`, `modbus`, `serial`, `mqtt` |
 
-Method names follow the API structure: `get_*` / `create_*` / `update_*` / `delete_*`
-for configuration resources (with `_by_id` variants), and `<group>_actions_<action>`
-for actions. See [`pytonika/endpoints/`](https://github.com/ikergcalvino/pytonika/tree/main/pytonika/endpoints) for the full list of
-160+ groups, or browse the [Teltonika API reference](https://developers.teltonika-networks.com/)
-for request and response details.
+Method names follow the structure of the API:
+
+| Pattern | Example | HTTP |
+|---|---|---|
+| `get_<resource>` / `get_<resource>_by_id` | `get_wireguard_config_by_id(id)` | `GET` |
+| `create_<resource>` | `create_wireguard_config(config)` | `POST` |
+| `update_<resource>` / `update_<resource>_by_id` | `update_wireguard_config_by_id(id, config)` | `PUT` |
+| `delete_<resource>` / `delete_<resource>_by_id` | `delete_wireguard_config_by_id(id)` | `DELETE` |
+| `<group>_actions_<action>` | `wireguard_actions_generate_keys()` | `POST` |
+
+The full list of groups is in [`pytonika/endpoints/`](https://github.com/ikergcalvino/pytonika/tree/main/pytonika/endpoints).
+For request payloads and response schemas, see the [Teltonika Web API reference](https://developers.teltonika-networks.com/).
+
+## Project status
+
+Pytonika is in **beta** (pre-1.0). The public interface may change between minor releases; changes are
+documented in the [release notes](https://github.com/ikergcalvino/pytonika/releases).
 
 ## Contributing
 
-Contributions, bug reports and feature requests are welcome!
-Check out the [Contributing guidelines](https://github.com/ikergcalvino/pytonika/blob/main/CONTRIBUTING.md) to get started.
+Bug reports, device and endpoint requests and pull requests are welcome.
+See the [Contributing guidelines](https://github.com/ikergcalvino/pytonika/blob/main/CONTRIBUTING.md) to get started.
+
+## Security
+
+Please do not report vulnerabilities through public issues.
+See the [Security Policy](https://github.com/ikergcalvino/pytonika/blob/main/SECURITY.md) for how to report them privately.
 
 ## License
 
-[MIT License](https://github.com/ikergcalvino/pytonika/blob/main/LICENSE)
+Distributed under the [MIT License](https://github.com/ikergcalvino/pytonika/blob/main/LICENSE).
