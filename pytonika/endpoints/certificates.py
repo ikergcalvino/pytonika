@@ -1,6 +1,6 @@
 from typing import Any
 
-from ._base import Endpoint
+from ._endpoint import Endpoint
 
 
 class Certificates(Endpoint):
