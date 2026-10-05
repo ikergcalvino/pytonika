@@ -5,35 +5,49 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pytonika"
 version = "0.4.0"
-description = "Python client library for the Teltonika Networks Web API."
+description = "Typed Python client for the Teltonika Networks Web API: routers, gateways, access points and switches."
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
 license-files = ["LICENSE"]
-
 authors = [
-  { name = "Iker García Calviño", email = "iker.gcalvino@udc.es" }
+  { name = "Iker García Calviño", email = "iker.gcalvino@udc.es" },
 ]
-
-keywords = ["teltonika", "api", "python", "networking", "routers", "gateways", "access-points", "switches"]
-
+keywords = [
+  "teltonika",
+  "teltonika-networks",
+  "web-api",
+  "api-client",
+  "rest",
+  "networking",
+  "automation",
+  "iot",
+  "router",
+  "gateway",
+  "access-point",
+  "switch",
+  "rutos",
+]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
   "Intended Audience :: System Administrators",
-  "Topic :: Software Development :: Libraries :: Python Modules",
-  "Topic :: System :: Networking",
-  "Topic :: Communications",
+  "Intended Audience :: Telecommunications Industry",
+  "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
+  "Topic :: Communications",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: System :: Networking",
+  "Topic :: System :: Systems Administration",
   "Typing :: Typed",
 ]
-
 dependencies = [
-  "httpx>=0.28.1"
+  "httpx>=0.28.1",
 ]
 
 [project.optional-dependencies]
@@ -50,13 +64,15 @@ Repository = "https://github.com/ikergcalvino/pytonika.git"
 Issues = "https://github.com/ikergcalvino/pytonika/issues"
 Changelog = "https://github.com/ikergcalvino/pytonika/releases"
 
+# --- Packaging ---------------------------------------------------------------
+
 [tool.setuptools.packages.find]
-where = ["."]
 include = ["pytonika*"]
-exclude = ["tests*", "venv*", "dist*", "build*", "*.egg-info*"]
 
 [tool.setuptools.package-data]
 pytonika = ["py.typed"]
+
+# --- Linting and formatting --------------------------------------------------
 
 [tool.ruff]
 target-version = "py311"
@@ -64,16 +80,39 @@ line-length = 120
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "W", "UP", "B", "SIM", "RUF", "ANN", "PTH", "T20"]
+# Star imports are the established pattern in device modules.
 ignore = ["F403", "F405"]
-per-file-ignores = { "__init__.py" = ["I001", "RUF022"], "tests/*" = ["ANN"] }
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["I001", "RUF022"]
+"tests/*" = ["ANN"]
 
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-addopts = "--cov=pytonika --cov-report=term-missing --cov-fail-under=80"
+# --- Type checking -----------------------------------------------------------
 
 [tool.ty.environment]
 python-version = "3.11"
+
+# --- Testing -----------------------------------------------------------------
+
+[tool.pytest.ini_options]
+minversion = "9.0"
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-config", "--strict-markers", "--cov"]
+xfail_strict = true
+
+[tool.coverage.run]
+source = ["pytonika"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 80
+exclude_also = [
+  "if TYPE_CHECKING:",
+  "raise NotImplementedError",
+]
