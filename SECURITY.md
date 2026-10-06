@@ -84,7 +84,9 @@ itself, but they matter for operating it safely:
   manager) when you are done.
 - **TLS verification.** TLS verification is enabled by default. Teltonika
   devices usually ship with a self-signed certificate, so connections fail
-  unless you either provide a trusted CA bundle or pass `verify=False`.
+  unless you either trust the device's certificate authority, by passing
+  `verify=ssl.create_default_context(cafile="/path/to/ca.pem")`, or pass
+  `verify=False`.
   Disabling verification exposes the connection to man-in-the-middle attacks
   and should be limited to local, trusted networks. To keep it enabled, issue
   the device a certificate whose subject alternative names include the

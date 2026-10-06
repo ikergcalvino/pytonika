@@ -54,13 +54,26 @@ Every device class accepts the same keyword arguments:
 | Argument  | Default | Description |
 |-----------|---------|-------------|
 | `timeout` | `10.0`  | Request timeout in seconds. |
-| `verify`  | `True`  | TLS certificate verification. Pass `False` to disable it. |
+| `verify`  | `True`  | TLS certificate verification: `True`, `False`, or an `ssl.SSLContext` (e.g. with your own CA). |
 
 > [!WARNING]
 > Teltonika devices usually ship with a self-signed certificate, so connections fail with `verify=True`
 > unless the device has a trusted certificate. Use `verify=False` only on local, trusted networks: it disables
 > certificate checks and exposes the connection to man-in-the-middle attacks.
 > See the [Security Policy](https://github.com/ikergcalvino/pytonika/blob/main/SECURITY.md) for recommendations.
+
+To keep verification enabled with your own certificate authority, pass an `ssl.SSLContext`:
+
+```python
+import ssl
+
+from pytonika import RUTX50
+
+context = ssl.create_default_context(cafile="/path/to/ca.pem")
+
+with RUTX50("https://192.168.1.1/", verify=context) as device:
+    ...
+```
 
 ### Responses
 
