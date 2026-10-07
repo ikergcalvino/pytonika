@@ -62,7 +62,7 @@ class EventJuggler(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def create_event_juggler_operations_config(self, event_id: str, config: dict[str, Any]) -> dict[str, Any]:
+    def create_event_juggler_events_operations_config(self, event_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Creates a new Event Juggler service action configuration."""
         endpoint = f"/event_juggler/events/{event_id}/operations/config"
 
@@ -94,7 +94,7 @@ class EventJuggler(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_event_juggler_operations_files(self, operation_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_event_juggler_operations_config_by_id(self, operation_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads the Action necessary files."""
         endpoint = f"/event_juggler/operations/config/{operation_id}"
 
@@ -114,7 +114,7 @@ class EventJuggler(Endpoint):
 
         return self._client.request("DELETE", endpoint)
 
-    def download_example_operation_lua(self, data: dict[str, Any]) -> dict[str, Any]:
+    def event_juggler_operations_actions_download_example_operation_lua(self, data: dict[str, Any]) -> dict[str, Any]:
         """Downloads Lua script example file."""
         endpoint = "/event_juggler/operations/actions/download_example_operation_lua"
 
@@ -126,7 +126,7 @@ class EventJuggler(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def create_event_juggler_conditions_config(self, event_id: str, config: dict[str, Any]) -> dict[str, Any]:
+    def create_event_juggler_events_conditions_config(self, event_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Creates a new Event Juggler service condition configuration."""
         endpoint = f"/event_juggler/events/{event_id}/conditions/config"
 
@@ -158,7 +158,7 @@ class EventJuggler(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_event_juggler_conditions_files(self, condition_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_event_juggler_conditions_config_by_id(self, condition_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads the Condition necessary files."""
         endpoint = f"/event_juggler/conditions/config/{condition_id}"
 
@@ -178,7 +178,7 @@ class EventJuggler(Endpoint):
 
         return self._client.request("DELETE", endpoint)
 
-    def download_example_condition_lua(self, data: dict[str, Any]) -> dict[str, Any]:
+    def event_juggler_conditions_actions_download_example_condition_lua(self, data: dict[str, Any]) -> dict[str, Any]:
         """Downloads Lua script example file."""
         endpoint = "/event_juggler/conditions/actions/download_example_condition_lua"
 

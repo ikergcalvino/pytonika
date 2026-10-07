@@ -10,13 +10,13 @@ class Certificates(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_certificate(self, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_certificates_config(self, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads certificate."""
         endpoint = "/certificates/config"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def download_certificate(self, cert_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def certificates_actions_download(self, cert_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Downloads specified certificate file."""
         endpoint = f"/certificates/{cert_id}/actions/download"
 
@@ -70,13 +70,13 @@ class Certificates(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def certificates_generate(self, data: dict[str, Any]) -> dict[str, Any]:
+    def certificates_actions_generate(self, data: dict[str, Any]) -> dict[str, Any]:
         """Generates certificates based on provided parameters."""
         endpoint = "/certificates/actions/generate"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def certificates_sign(self, data: dict[str, Any]) -> dict[str, Any]:
+    def certificates_actions_sign(self, data: dict[str, Any]) -> dict[str, Any]:
         """Signs certificate based on provided parameters."""
         endpoint = "/certificates/actions/sign"
 
@@ -88,13 +88,13 @@ class Certificates(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_certificates_root_ca(self, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_certificates_root_ca_config(self, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads Root CA file."""
         endpoint = "/certificates/root_ca/config"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def update_certificates_root_ca(self, config: dict[str, Any]) -> dict[str, Any]:
+    def update_certificates_root_ca_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Updates Root CA file with provided data."""
         endpoint = "/certificates/root_ca/config"
 
@@ -102,13 +102,13 @@ class Certificates(Endpoint):
 
         return self._client.request("PUT", endpoint, json=data)
 
-    def certificates_root_ca_change(self, data: dict[str, Any]) -> dict[str, Any]:
+    def certificates_root_ca_actions_change(self, data: dict[str, Any]) -> dict[str, Any]:
         """Changes Root CA to new certificate from device."""
         endpoint = "/certificates/root_ca/actions/change"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def certificates_root_ca_reset(self, data: dict[str, Any]) -> dict[str, Any]:
+    def certificates_root_ca_actions_reset(self, data: dict[str, Any]) -> dict[str, Any]:
         """Resets Root CA to its initial value."""
         endpoint = "/certificates/root_ca/actions/reset"
 

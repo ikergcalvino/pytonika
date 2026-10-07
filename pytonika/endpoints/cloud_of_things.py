@@ -38,7 +38,7 @@ class CloudOfThings(Endpoint):
 
         return self._client.request("PUT", endpoint, json=data)
 
-    def cloud_of_things_reset_auth(self, data: dict[str, Any]) -> dict[str, Any]:
+    def cloud_of_things_actions_reset_auth(self, data: dict[str, Any]) -> dict[str, Any]:
         """Resets authentication data."""
         endpoint = "/cloud_of_things/actions/reset_auth"
 

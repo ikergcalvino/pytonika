@@ -10,7 +10,7 @@ class EventsLog(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def get_events_log_config_by_type(self, event_type: str) -> dict[str, Any]:
+    def get_events_log_config_by_event_type(self, event_type: str) -> dict[str, Any]:
         """Returns events from specified log group."""
         endpoint = f"/events_log/config/{event_type}"
 

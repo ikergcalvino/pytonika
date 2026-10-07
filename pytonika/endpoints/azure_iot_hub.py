@@ -82,7 +82,7 @@ class AzureIoTHub(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_azure_iot_hub_files(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_azure_iot_hub_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads Azure IoT Hub files."""
         endpoint = f"/azure/iot_hub/config/{config_id}"
 
@@ -102,7 +102,7 @@ class AzureIoTHub(Endpoint):
 
         return self._client.request("DELETE", endpoint)
 
-    def azure_iot_hub_merge(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def azure_iot_hub_actions_merge(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Merge the Azure IoT Hub configurations used in the Data to Server configuration.
 
         Uses the currently provided section ID and the data presented.

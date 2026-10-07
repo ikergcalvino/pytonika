@@ -38,7 +38,7 @@ class Cumulocity(Endpoint):
 
         return self._client.request("PUT", endpoint, json=data)
 
-    def cumulocity_reset_auth(self, data: dict[str, Any]) -> dict[str, Any]:
+    def cumulocity_actions_reset_auth(self, data: dict[str, Any]) -> dict[str, Any]:
         """Resets authentication data."""
         endpoint = "/cumulocity/actions/reset_auth"
 

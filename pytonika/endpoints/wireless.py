@@ -10,7 +10,7 @@ class Wireless(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def create_wireless_multi_ap_config(self, config: dict[str, Any]) -> dict[str, Any]:
+    def upload_wireless_multi_ap_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates wireless Multi AP configuration."""
         endpoint = "/wireless/multi_ap/config"
 

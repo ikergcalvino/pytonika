@@ -30,19 +30,19 @@ class Speedtest(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def speedtest_get_ip(self, data: dict[str, Any]) -> dict[str, Any]:
+    def speedtest_actions_get_ip(self, data: dict[str, Any]) -> dict[str, Any]:
         """Converts speed test server URL to IP address."""
         endpoint = "/speedtest/actions/get_ip"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def speedtest_refresh(self, data: dict[str, Any]) -> dict[str, Any]:
+    def speedtest_actions_refresh(self, data: dict[str, Any]) -> dict[str, Any]:
         """Refreshes speed test server list on device."""
         endpoint = "/speedtest/actions/refresh"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def speedtest_start(self, data: dict[str, Any]) -> dict[str, Any]:
+    def speedtest_actions_start(self, data: dict[str, Any]) -> dict[str, Any]:
         """Starts a new speed test."""
         endpoint = "/speedtest/actions/start"
 

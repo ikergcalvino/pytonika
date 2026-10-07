@@ -30,7 +30,7 @@ class Hotspot(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_hotspot_theme(self, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_hotspot_themes_config(self, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads custom Hotspot theme."""
         endpoint = "/hotspot/themes/config"
 
@@ -52,13 +52,13 @@ class Hotspot(Endpoint):
 
         return self._client.request("DELETE", endpoint)
 
-    def get_hotspot_theme_file(self, theme_id: str, file_id: str) -> dict[str, Any]:
+    def get_hotspot_themes_file_by_id(self, theme_id: str, file_id: str) -> dict[str, Any]:
         """Returns specified file contents of the specified Hotspot theme."""
         endpoint = f"/hotspot/themes/{theme_id}/config/{file_id}"
 
         return self._client.request("GET", endpoint)
 
-    def update_hotspot_theme_file(self, theme_id: str, file_id: str, config: dict[str, Any]) -> dict[str, Any]:
+    def update_hotspot_themes_file_by_id(self, theme_id: str, file_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates specified file contents of the specified Hotspot theme."""
         endpoint = f"/hotspot/themes/{theme_id}/config/{file_id}"
 
@@ -66,13 +66,13 @@ class Hotspot(Endpoint):
 
         return self._client.request("PUT", endpoint, json=data)
 
-    def download_hotspot_theme(self, theme_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def hotspot_themes_actions_download(self, theme_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Downloads specified Hotspot theme."""
         endpoint = f"/hotspot/themes/{theme_id}/actions/download"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def reset_hotspot_theme(self, theme_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def hotspot_themes_actions_reset(self, theme_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Resets the specified Hotspot theme file to default."""
         endpoint = f"/hotspot/themes/{theme_id}/actions/reset"
 
@@ -194,7 +194,7 @@ class Hotspot(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_hotspot_certificates(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_hotspot_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads certificates."""
         endpoint = f"/hotspot/config/{config_id}"
 
@@ -248,7 +248,7 @@ class Hotspot(Endpoint):
 
         return self._client.request("DELETE", endpoint)
 
-    def hotspot_logout_user(self, data: dict[str, Any]) -> dict[str, Any]:
+    def hotspot_user_management_actions_logout_user(self, data: dict[str, Any]) -> dict[str, Any]:
         """Logs out user identified by his MAC address."""
         endpoint = "/hotspot/user_management/actions/logout_user"
 

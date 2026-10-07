@@ -80,15 +80,15 @@ class WireGuard(Endpoint):
 
     def delete_wireguard_peers_config(self, wireguard_id: str, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified wireguard peer configurations."""
-        return [self.delete_wireguard_peer_config_by_id(wireguard_id, peer_id) for peer_id in config]
+        return [self.delete_wireguard_peers_config_by_id(wireguard_id, peer_id) for peer_id in config]
 
-    def get_wireguard_peer_config_by_id(self, wireguard_id: str, peer_id: str) -> dict[str, Any]:
+    def get_wireguard_peers_config_by_id(self, wireguard_id: str, peer_id: str) -> dict[str, Any]:
         """Returns specified wireguard peer section."""
         endpoint = f"/wireguard/{wireguard_id}/peers/config/{peer_id}"
 
         return self._client.request("GET", endpoint)
 
-    def update_wireguard_peer_config_by_id(
+    def update_wireguard_peers_config_by_id(
         self, wireguard_id: str, peer_id: str, config: dict[str, Any]
     ) -> dict[str, Any]:
         """Updates specified wireguard peer configuration."""
@@ -98,7 +98,7 @@ class WireGuard(Endpoint):
 
         return self._client.request("PUT", endpoint, json=data)
 
-    def delete_wireguard_peer_config_by_id(self, wireguard_id: str, peer_id: str) -> dict[str, Any]:
+    def delete_wireguard_peers_config_by_id(self, wireguard_id: str, peer_id: str) -> dict[str, Any]:
         """Deletes specified wireguard peer configuration."""
         endpoint = f"/wireguard/{wireguard_id}/peers/config/{peer_id}"
 

@@ -100,7 +100,7 @@ class Profiles(Endpoint):
 
         return self._client.request("DELETE", endpoint)
 
-    def profiles_apply_profile(self, data: dict[str, Any]) -> dict[str, Any]:
+    def profiles_actions_apply_profile(self, data: dict[str, Any]) -> dict[str, Any]:
         """Applies provided profile."""
         endpoint = "/profiles/actions/apply_profile"
 

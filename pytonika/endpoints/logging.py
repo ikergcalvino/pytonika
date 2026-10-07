@@ -90,7 +90,7 @@ class Logging(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def delete_log(self) -> dict[str, Any]:
+    def logging_actions_delete_log(self) -> dict[str, Any]:
         """Deletes log file."""
         endpoint = "/logging/actions/delete_log"
 

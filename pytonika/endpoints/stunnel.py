@@ -50,7 +50,7 @@ class Stunnel(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_stunnel_certificates(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_stunnel_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads certificates."""
         endpoint = f"/stunnel/config/{config_id}"
 

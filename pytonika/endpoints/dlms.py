@@ -112,13 +112,13 @@ class DLMS(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def get_dlms_cosem_config(self, cosem_group_id: str) -> dict[str, Any]:
+    def get_dlms_cosem_group_cosem_config(self, cosem_group_id: str) -> dict[str, Any]:
         """Returns all DLMS COSEM configurations."""
         endpoint = f"/dlms/cosem_group/{cosem_group_id}/cosem/config"
 
         return self._client.request("GET", endpoint)
 
-    def create_dlms_cosem_config(self, cosem_group_id: str, config: dict[str, Any]) -> dict[str, Any]:
+    def create_dlms_cosem_group_cosem_config(self, cosem_group_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Creates DLMS COSEM configuration."""
         endpoint = f"/dlms/cosem_group/{cosem_group_id}/cosem/config"
 
@@ -126,7 +126,7 @@ class DLMS(Endpoint):
 
         return self._client.request("POST", endpoint, json=data)
 
-    def update_dlms_cosem_config(self, cosem_group_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
+    def update_dlms_cosem_group_cosem_config(self, cosem_group_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified DLMS COSEM configurations."""
         endpoint = f"/dlms/cosem_group/{cosem_group_id}/cosem/config"
 
@@ -136,15 +136,15 @@ class DLMS(Endpoint):
 
     def delete_dlms_cosem_config(self, cosem_group_id: str, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified DLMS COSEM configurations."""
-        return [self.delete_dlms_cosem_config_by_id(cosem_group_id, cosem_id) for cosem_id in config]
+        return [self.delete_dlms_cosem_group_cosem_config_by_id(cosem_group_id, cosem_id) for cosem_id in config]
 
-    def get_dlms_cosem_config_by_id(self, cosem_group_id: str, cosem_id: str) -> dict[str, Any]:
+    def get_dlms_cosem_group_cosem_config_by_id(self, cosem_group_id: str, cosem_id: str) -> dict[str, Any]:
         """Returns the specified DLMS COSEM configuration."""
         endpoint = f"/dlms/cosem_group/{cosem_group_id}/cosem/config/{cosem_id}"
 
         return self._client.request("GET", endpoint)
 
-    def update_dlms_cosem_config_by_id(
+    def update_dlms_cosem_group_cosem_config_by_id(
         self, cosem_group_id: str, cosem_id: str, config: dict[str, Any]
     ) -> dict[str, Any]:
         """Updates the specified DLMS COSEM configuration."""
@@ -154,13 +154,13 @@ class DLMS(Endpoint):
 
         return self._client.request("PUT", endpoint, json=data)
 
-    def delete_dlms_cosem_config_by_id(self, cosem_group_id: str, cosem_id: str) -> dict[str, Any]:
+    def delete_dlms_cosem_group_cosem_config_by_id(self, cosem_group_id: str, cosem_id: str) -> dict[str, Any]:
         """Deletes the specified DLMS COSEM configuration."""
         endpoint = f"/dlms/cosem_group/{cosem_group_id}/cosem/config/{cosem_id}"
 
         return self._client.request("DELETE", endpoint)
 
-    def get_dlms_cosem_status_by_id(self, cosem_group_id: str, cosem_id: str) -> dict[str, Any]:
+    def get_dlms_cosem_group_cosem_status_by_id(self, cosem_group_id: str, cosem_id: str) -> dict[str, Any]:
         """Returns the specified DLMS COSEM configuration."""
         endpoint = f"/dlms/cosem_group/{cosem_group_id}/cosem/status/{cosem_id}"
 

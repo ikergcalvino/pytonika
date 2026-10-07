@@ -52,13 +52,13 @@ class Troubleshoot(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def download_troubleshoot(self) -> dict[str, Any]:
+    def troubleshoot_actions_download(self) -> dict[str, Any]:
         """Downloads generated troubleshoot/tcpdump archive."""
         endpoint = "/troubleshoot/actions/download"
 
         return self._client.request("POST", endpoint)
 
-    def generate_troubleshoot(self) -> dict[str, Any]:
+    def troubleshoot_actions_generate(self) -> dict[str, Any]:
         """Generates troubleshoot archive."""
         endpoint = "/troubleshoot/actions/generate"
 

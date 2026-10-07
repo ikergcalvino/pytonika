@@ -36,7 +36,7 @@ class SSTP(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_sstp_files(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_sstp_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads SSTP configuration files."""
         endpoint = f"/sstp/config/{config_id}"
 

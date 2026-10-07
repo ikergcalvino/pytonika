@@ -40,49 +40,49 @@ class PackageManager(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def package_manager_upload_package(self, data: dict[str, Any]) -> dict[str, Any]:
+    def package_manager_actions_upload_package(self, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads a zipped package to the device."""
         endpoint = "/package_manager/actions/upload_package"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def package_manager_install_package(self, data: dict[str, Any]) -> dict[str, Any]:
+    def package_manager_actions_install_package(self, data: dict[str, Any]) -> dict[str, Any]:
         """Installs a package."""
         endpoint = "/package_manager/actions/install_package"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def package_manager_update_package(self, data: dict[str, Any]) -> dict[str, Any]:
+    def package_manager_actions_update_package(self, data: dict[str, Any]) -> dict[str, Any]:
         """Upgrade a package from the server if possible."""
         endpoint = "/package_manager/actions/update_package"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def package_manager_remove_package(self, data: dict[str, Any]) -> dict[str, Any]:
+    def package_manager_actions_remove_package(self, data: dict[str, Any]) -> dict[str, Any]:
         """Deletes the specified package."""
         endpoint = "/package_manager/actions/remove_package"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def package_manager_delete_install_files(self, data: dict[str, Any]) -> dict[str, Any]:
+    def package_manager_actions_delete_install_files(self, data: dict[str, Any]) -> dict[str, Any]:
         """Deletes the uploaded package install files from the device."""
         endpoint = "/package_manager/actions/delete_install_files"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def package_manager_install_multiple_packages(self, data: dict[str, Any]) -> dict[str, Any]:
+    def package_manager_actions_install_multiple_packages(self, data: dict[str, Any]) -> dict[str, Any]:
         """Starts the installation of multiple packages."""
         endpoint = "/package_manager/actions/install_multiple_packages"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def package_manager_remove_multiple_packages(self, data: dict[str, Any]) -> dict[str, Any]:
+    def package_manager_actions_remove_multiple_packages(self, data: dict[str, Any]) -> dict[str, Any]:
         """Starts the removal of multiple packages."""
         endpoint = "/package_manager/actions/remove_multiple_packages"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def package_manager_update_multiple_packages(self, data: dict[str, Any]) -> dict[str, Any]:
+    def package_manager_actions_update_multiple_packages(self, data: dict[str, Any]) -> dict[str, Any]:
         """Starts the upgrade of multiple packages."""
         endpoint = "/package_manager/actions/update_multiple_packages"
 

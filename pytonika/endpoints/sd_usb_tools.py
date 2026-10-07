@@ -72,13 +72,13 @@ class SDUSBTools(Endpoint):
 
         return self._client.request("PUT", endpoint, json=data)
 
-    def usb_tools_format(self, data: dict[str, Any]) -> dict[str, Any]:
+    def usb_tools_actions_format(self, data: dict[str, Any]) -> dict[str, Any]:
         """Formats selected USB device."""
         endpoint = "/usb_tools/actions/format"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def usb_tools_safe_remove(self, data: dict[str, Any]) -> dict[str, Any]:
+    def usb_tools_actions_safe_remove(self, data: dict[str, Any]) -> dict[str, Any]:
         """Safe remove."""
         endpoint = "/usb_tools/actions/safe_remove"
 
@@ -90,13 +90,13 @@ class SDUSBTools(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def usb_tools_memory_expansion_enable(self, data: dict[str, Any]) -> dict[str, Any]:
+    def usb_tools_memory_expansion_actions_enable_expansion(self, data: dict[str, Any]) -> dict[str, Any]:
         """Enable memory expansion."""
         endpoint = "/usb_tools/memory_expansion/actions/enable_expansion"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def usb_tools_memory_expansion_disable(self, data: dict[str, Any]) -> dict[str, Any]:
+    def usb_tools_memory_expansion_actions_disable_expansion(self, data: dict[str, Any]) -> dict[str, Any]:
         """Disable memory expansion."""
         endpoint = "/usb_tools/memory_expansion/actions/disable_expansion"
 

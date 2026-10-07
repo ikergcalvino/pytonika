@@ -24,13 +24,13 @@ class IEC608705Client(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def iec60870_client_test_information_objects(self, data: dict[str, Any]) -> dict[str, Any]:
+    def iec60870_client_actions_test_information_objects(self, data: dict[str, Any]) -> dict[str, Any]:
         """Try reading the specified information objects from an IEC 60870-5 server."""
         endpoint = "/iec60870/client/actions/test_information_objects"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def iec60870_client_list_information_objects(self, data: dict[str, Any]) -> dict[str, Any]:
+    def iec60870_client_actions_list_information_objects(self, data: dict[str, Any]) -> dict[str, Any]:
         """List available information objects on IEC 60870-5 server."""
         endpoint = "/iec60870/client/actions/list_information_objects"
 

@@ -32,7 +32,7 @@ class SNMP(Endpoint):
 
         return self._client.request("PUT", endpoint, json=data)
 
-    def snmp_system_download_mib(self, data: dict[str, Any]) -> dict[str, Any]:
+    def snmp_system_actions_download_mib(self, data: dict[str, Any]) -> dict[str, Any]:
         """Downloads MIB File."""
         endpoint = "/snmp/system/actions/download_mib"
 

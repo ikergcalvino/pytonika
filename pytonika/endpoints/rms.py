@@ -38,13 +38,13 @@ class RMS(Endpoint):
 
         return self._client.request("PUT", endpoint, json=data)
 
-    def rms_connect(self, data: dict[str, Any]) -> dict[str, Any]:
+    def rms_actions_connect(self, data: dict[str, Any]) -> dict[str, Any]:
         """Connect to RMS."""
         endpoint = "/rms/actions/connect"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def rms_unregister(self, data: dict[str, Any]) -> dict[str, Any]:
+    def rms_actions_unregister(self, data: dict[str, Any]) -> dict[str, Any]:
         """Unregister from RMS."""
         endpoint = "/rms/actions/unregister"
 

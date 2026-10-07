@@ -80,7 +80,7 @@ class EventsReporting(Endpoint):
 
         return self._client.request("DELETE", endpoint)
 
-    def send_test_email(self, data: dict[str, Any]) -> dict[str, Any]:
+    def events_reporting_actions_send_test_email(self, data: dict[str, Any]) -> dict[str, Any]:
         """Sends test email.
 
         .. deprecated::

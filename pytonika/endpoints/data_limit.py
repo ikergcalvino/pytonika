@@ -50,7 +50,7 @@ class DataLimit(Endpoint):
 
         return self._client.request("DELETE", endpoint)
 
-    def data_limit_clear(self, data: dict[str, Any]) -> dict[str, Any]:
+    def data_limit_actions_clear(self, data: dict[str, Any]) -> dict[str, Any]:
         """Clears data limit of the specified interface."""
         endpoint = "/data_limit/actions/clear"
 

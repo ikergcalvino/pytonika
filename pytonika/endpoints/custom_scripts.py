@@ -10,7 +10,7 @@ class CustomScripts(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_uscripts(self, data: dict[str, Any]) -> dict[str, Any]:
+    def uscripts_actions_upload(self, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads a startup script file."""
         endpoint = "/uscripts/actions/upload"
 

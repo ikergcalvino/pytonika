@@ -52,7 +52,9 @@ class Zerotier(Endpoint):
 
         return self._client.request("DELETE", endpoint)
 
-    def upload_zerotier_planet_file(self, zerotier_id: str, network_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_zerotier_networks_config_by_id(
+        self, zerotier_id: str, network_id: str, data: dict[str, Any]
+    ) -> dict[str, Any]:
         """Uploads planet file for the specified Zerotier Network configuration."""
         endpoint = f"/zerotier/{zerotier_id}/networks/config/{network_id}"
 

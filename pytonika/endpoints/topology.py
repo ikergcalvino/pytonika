@@ -16,13 +16,13 @@ class Topology(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def topology_start_scan(self, data: dict[str, Any]) -> dict[str, Any]:
+    def topology_actions_start_scan(self, data: dict[str, Any]) -> dict[str, Any]:
         """Start topology scan."""
         endpoint = "/topology/actions/start_scan"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def topology_devices_scan(self, data: dict[str, Any]) -> dict[str, Any]:
+    def topology_actions_devices_scan(self, data: dict[str, Any]) -> dict[str, Any]:
         """Get devices information.
 
         .. deprecated::

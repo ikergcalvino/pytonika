@@ -16,13 +16,13 @@ class Firmware(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_firmware_device(self, data: dict[str, Any]) -> dict[str, Any]:
+    def firmware_actions_upload_device_firmware(self, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads firmware file."""
         endpoint = "/firmware/actions/upload_device_firmware"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def delete_firmware_device(self) -> dict[str, Any]:
+    def firmware_actions_delete_device_firmware(self) -> dict[str, Any]:
         """Deletes uploaded firmware file."""
         endpoint = "/firmware/actions/delete_device_firmware"
 
@@ -78,13 +78,13 @@ class Firmware(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_firmware_modem(self, data: dict[str, Any]) -> dict[str, Any]:
+    def firmware_actions_upload_modem_firmware(self, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads modem firmware file."""
         endpoint = "/firmware/actions/upload_modem_firmware"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def delete_firmware_modem(self) -> dict[str, Any]:
+    def firmware_actions_delete_modem_firmware(self) -> dict[str, Any]:
         """Deletes uploaded modem firmware file."""
         endpoint = "/firmware/actions/delete_modem_firmware"
 

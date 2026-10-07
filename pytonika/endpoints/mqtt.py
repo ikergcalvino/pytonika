@@ -36,7 +36,7 @@ class MQTT(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_mqtt_bridge_certificate(self, bridge_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_mqtt_bridge_config_by_id(self, bridge_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads MQTT bridge certificate files."""
         endpoint = f"/mqtt/bridge/config/{bridge_id}"
 
@@ -56,7 +56,7 @@ class MQTT(Endpoint):
 
         return self._client.request("DELETE", endpoint)
 
-    def create_mqtt_bridge_topic_config(self, bridge_id: str, config: dict[str, Any]) -> dict[str, Any]:
+    def create_mqtt_bridge_topics_config(self, bridge_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Creates a new MQTT Broker Bridge Topic configuration."""
         endpoint = f"/mqtt/bridge/{bridge_id}/topics/config"
 
@@ -122,7 +122,7 @@ class MQTT(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_mqtt_publisher_certificate(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_mqtt_publisher_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads MQTT Publisher certificate files."""
         endpoint = f"/mqtt/publisher/config/{config_id}"
 
@@ -156,7 +156,7 @@ class MQTT(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_mqtt_broker_files(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_mqtt_broker_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads MQTT broker files."""
         endpoint = f"/mqtt/broker/config/{config_id}"
 

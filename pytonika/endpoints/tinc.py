@@ -28,21 +28,21 @@ class Tinc(Endpoint):
 
     def delete_tinc_hosts_config(self, tinc_id: str, config: list[str]) -> list[dict[str, Any]]:
         """Deletes specified Tinc VPN Host configurations."""
-        return [self.delete_tinc_host_config_by_id(tinc_id, host_id) for host_id in config]
+        return [self.delete_tinc_hosts_config_by_id(tinc_id, host_id) for host_id in config]
 
-    def get_tinc_host_config_by_id(self, tinc_id: str, host_id: str) -> dict[str, Any]:
+    def get_tinc_hosts_config_by_id(self, tinc_id: str, host_id: str) -> dict[str, Any]:
         """Returns the specified Tinc VPN Host configuration."""
         endpoint = f"/tinc/{tinc_id}/hosts/config/{host_id}"
 
         return self._client.request("GET", endpoint)
 
-    def upload_tinc_host_key_file(self, tinc_id: str, host_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_tinc_hosts_config_by_id(self, tinc_id: str, host_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads key file."""
         endpoint = f"/tinc/{tinc_id}/hosts/config/{host_id}"
 
         return self._client.request("POST", endpoint, json={"data": data})
 
-    def update_tinc_host_config_by_id(self, tinc_id: str, host_id: str, config: dict[str, Any]) -> dict[str, Any]:
+    def update_tinc_hosts_config_by_id(self, tinc_id: str, host_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified Tinc VPN Host configuration."""
         endpoint = f"/tinc/{tinc_id}/hosts/config/{host_id}"
 
@@ -50,7 +50,7 @@ class Tinc(Endpoint):
 
         return self._client.request("PUT", endpoint, json=data)
 
-    def delete_tinc_host_config_by_id(self, tinc_id: str, host_id: str) -> dict[str, Any]:
+    def delete_tinc_hosts_config_by_id(self, tinc_id: str, host_id: str) -> dict[str, Any]:
         """Deletes the specified Tinc VPN Host configuration."""
         endpoint = f"/tinc/{tinc_id}/hosts/config/{host_id}"
 
@@ -88,7 +88,7 @@ class Tinc(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_tinc_key_file(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_tinc_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads key file."""
         endpoint = f"/tinc/config/{config_id}"
 

@@ -32,7 +32,7 @@ class SMPP(Endpoint):
 
         return self._client.request("PUT", endpoint, json=data)
 
-    def upload_smpp_files(self, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_smpp_config(self, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads SMPP files."""
         endpoint = "/smpp/config"
 

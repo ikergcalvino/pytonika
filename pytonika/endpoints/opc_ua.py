@@ -44,7 +44,7 @@ class OPCUA(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_opcua_server_config_certificates(self, server_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_opcua_server_config_by_id(self, server_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads the specified OPC UA Server configuration certificate files."""
         endpoint = f"/opcua/server/config/{server_id}"
 

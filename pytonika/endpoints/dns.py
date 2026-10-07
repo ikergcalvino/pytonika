@@ -84,7 +84,7 @@ class DNS(Endpoint):
 
         return self._client.request("GET", endpoint)
 
-    def upload_dns_servers_file(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_dns_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
         """Uploads DNS servers file."""
         endpoint = f"/dns/config/{config_id}"
 
