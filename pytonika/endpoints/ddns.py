@@ -4,66 +4,42 @@ from ._endpoint import Endpoint
 
 
 class DDNS(Endpoint):
-    def get_ddns_config(self) -> dict[str, Any]:
+    def get_ddns_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns all dynamic DNS configuration sections."""
-        endpoint = "/ddns/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/ddns/config", params={"all_options": all_options})
 
     def create_ddns_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates a new DDNS section."""
-        endpoint = "/ddns/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/ddns/config", json={"data": config})
 
     def update_ddns_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates the specified dynamic DNS configurations."""
-        endpoint = "/ddns/config"
+        return self._client.request("PUT", "/ddns/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_ddns_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_ddns_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes the specified dynamic DNS configurations."""
-        return [self.delete_ddns_config_by_id(ddns_id) for ddns_id in config]
+        return self._client.request("DELETE", "/ddns/config", json={"data": config})
 
-    def get_ddns_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_ddns_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns the specified dynamic DNS section."""
-        endpoint = f"/ddns/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/ddns/config/{config_id}", params={"all_options": all_options})
 
     def update_ddns_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified dynamic DNS configuration."""
-        endpoint = f"/ddns/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/ddns/config/{config_id}", json={"data": config})
 
     def delete_ddns_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes the specified dynamic DNS configuration."""
-        endpoint = f"/ddns/config/{config_id}"
-
-        return self._client.request("DELETE", endpoint)
-
-    def get_ddns_status(self) -> dict[str, Any]:
-        """Returns the status about all DDNS instances."""
-        endpoint = "/ddns/status"
-
-        return self._client.request("GET", endpoint)
-
-    def get_ddns_status_by_id(self, status_id: str) -> dict[str, Any]:
-        """Returns the status about the selected DDNS instance."""
-        endpoint = f"/ddns/status/{status_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("DELETE", f"/ddns/config/{config_id}")
 
     def get_ddns_options(self) -> dict[str, Any]:
         """Returns info needed to configure a DDNS section."""
-        endpoint = "/ddns/options"
+        return self._client.request("GET", "/ddns/options")
 
-        return self._client.request("GET", endpoint)
+    def get_ddns_status(self) -> dict[str, Any]:
+        """Returns the status about all DDNS instances."""
+        return self._client.request("GET", "/ddns/status")
+
+    def get_ddns_status_by_id(self, status_id: str) -> dict[str, Any]:
+        """Returns the status about the selected DDNS instance."""
+        return self._client.request("GET", f"/ddns/status/{status_id}")

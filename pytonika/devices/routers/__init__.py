@@ -17,9 +17,11 @@ from .rut206 import RUT206
 from .rut240 import RUT240
 from .rut241 import RUT241
 from .rut260 import RUT260
+from .rut261 import RUT261
 from .rut271 import RUT271
 from .rut276 import RUT276
 from .rut281 import RUT281
+from .rut286 import RUT286
 from .rut300 import RUT300
 from .rut301 import RUT301
 from .rut360 import RUT360
@@ -33,10 +35,12 @@ from .rut956 import RUT956
 from .rut976 import RUT976
 from .rut981 import RUT981
 from .rut986 import RUT986
+from .rutc16 import RUTC16
 from .rutc40 import RUTC40
 from .rutc41 import RUTC41
 from .rutc42 import RUTC42
 from .rutc50 import RUTC50
+from .rutc54 import RUTC54
 from .rutm08 import RUTM08
 from .rutm09 import RUTM09
 from .rutm10 import RUTM10
@@ -82,9 +86,11 @@ __all__ = [
     "RUT240",
     "RUT241",
     "RUT260",
+    "RUT261",
     "RUT271",
     "RUT276",
     "RUT281",
+    "RUT286",
     "RUT300",
     "RUT301",
     "RUT360",
@@ -98,10 +104,12 @@ __all__ = [
     "RUT976",
     "RUT981",
     "RUT986",
+    "RUTC16",
     "RUTC40",
     "RUTC41",
     "RUTC42",
     "RUTC50",
+    "RUTC54",
     "RUTM08",
     "RUTM09",
     "RUTM10",

@@ -4,100 +4,62 @@ from ._endpoint import Endpoint
 
 
 class BFD(Endpoint):
-    def get_bfd_peers_config(self) -> dict[str, Any]:
+    def get_bfd_peers_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns BFD peer configurations."""
-        endpoint = "/bfd/peers/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/bfd/peers/config", params={"all_options": all_options})
 
     def create_bfd_peers_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates BFD peer configuration."""
-        endpoint = "/bfd/peers/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/bfd/peers/config", json={"data": config})
 
     def update_bfd_peers_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates BFD peer configurations."""
-        endpoint = "/bfd/peers/config"
+        return self._client.request("PUT", "/bfd/peers/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_bfd_peers_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_bfd_peers_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes BFD peer configurations."""
-        return [self.delete_bfd_peers_config_by_id(peer_id) for peer_id in config]
+        return self._client.request("DELETE", "/bfd/peers/config", json={"data": config})
 
-    def get_bfd_peers_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_bfd_peers_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns BFD peer configuration."""
-        endpoint = f"/bfd/peers/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/bfd/peers/config/{config_id}", params={"all_options": all_options})
 
     def update_bfd_peers_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates BFD peer configuration."""
-        endpoint = f"/bfd/peers/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/bfd/peers/config/{config_id}", json=config)
 
     def delete_bfd_peers_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes BFD peer configuration."""
-        endpoint = f"/bfd/peers/config/{config_id}"
-
-        return self._client.request("DELETE", endpoint)
+        return self._client.request("DELETE", f"/bfd/peers/config/{config_id}")
 
     def get_bfd_peers_status(self) -> dict[str, Any]:
         """Returns BFD peers status."""
-        endpoint = "/bfd/peers/status"
+        return self._client.request("GET", "/bfd/peers/status")
 
-        return self._client.request("GET", endpoint)
-
-    def get_bfd_profiles_config(self) -> dict[str, Any]:
+    def get_bfd_profiles_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns BFD profile configurations."""
-        endpoint = "/bfd/profiles/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/bfd/profiles/config", params={"all_options": all_options})
 
     def create_bfd_profiles_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates BFD profile configuration."""
-        endpoint = "/bfd/profiles/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/bfd/profiles/config", json={"data": config})
 
     def update_bfd_profiles_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates BFD profile configurations."""
-        endpoint = "/bfd/profiles/config"
+        return self._client.request("PUT", "/bfd/profiles/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_bfd_profiles_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_bfd_profiles_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes BFD profile configurations."""
-        return [self.delete_bfd_profiles_config_by_id(profile_id) for profile_id in config]
+        return self._client.request("DELETE", "/bfd/profiles/config", json={"data": config})
 
-    def get_bfd_profiles_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_bfd_profiles_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns BFD profile configuration."""
-        endpoint = f"/bfd/profiles/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/bfd/profiles/config/{config_id}", params={"all_options": all_options})
 
     def update_bfd_profiles_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates BFD profile configuration."""
-        endpoint = f"/bfd/profiles/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/bfd/profiles/config/{config_id}", json=config)
 
     def delete_bfd_profiles_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes BFD profile configuration."""
-        endpoint = f"/bfd/profiles/config/{config_id}"
-
-        return self._client.request("DELETE", endpoint)
+        return self._client.request("DELETE", f"/bfd/profiles/config/{config_id}")

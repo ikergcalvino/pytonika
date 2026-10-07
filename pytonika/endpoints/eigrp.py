@@ -4,36 +4,22 @@ from ._endpoint import Endpoint
 
 
 class EIGRP(Endpoint):
-    def get_eigrp_config(self) -> dict[str, Any]:
+    def get_eigrp_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns EIGRP global configurations."""
-        endpoint = "/eigrp/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/eigrp/config", params={"all_options": all_options})
 
     def update_eigrp_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates EIGRP global configurations."""
-        endpoint = "/eigrp/config"
+        return self._client.request("PUT", "/eigrp/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_eigrp_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_eigrp_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns EIGRP global configuration."""
-        endpoint = f"/eigrp/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/eigrp/config/{config_id}", params={"all_options": all_options})
 
     def update_eigrp_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates EIGRP global configuration."""
-        endpoint = f"/eigrp/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/eigrp/config/{config_id}", json={"data": config})
 
     def get_eigrp_status(self) -> dict[str, Any]:
         """Fetches data about EIGRP neighbors."""
-        endpoint = "/eigrp/status"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/eigrp/status")

@@ -4,481 +4,310 @@ from ._endpoint import Endpoint
 
 
 class MBus(Endpoint):
-    def get_mbus_client_config_by_id(self, client_id: str) -> dict[str, Any]:
-        """Returns the specified M-Bus Client configuration.
-
-        .. deprecated::
-        """
-        endpoint = f"/mbus/client/config/{client_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_mbus_client_config_by_id(self, client_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Update M-Bus Client configuration.
-
-        .. deprecated::
-        """
-        endpoint = f"/mbus/client/config/{client_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_mbus_client_config_by_id(self, client_id: str) -> dict[str, Any]:
-        """Delete M-Bus Client configuration.
-
-        .. deprecated::
-        """
-        endpoint = f"/mbus/client/config/{client_id}"
-
-        return self._client.request("DELETE", endpoint)
-
     def get_mbus_client_config(self) -> dict[str, Any]:
-        """List M-Bus Client configurations.
-
-        .. deprecated::
-        """
-        endpoint = "/mbus/client/config"
-
-        return self._client.request("GET", endpoint)
+        """List M-Bus Client configurations."""
+        return self._client.request("GET", "/mbus/client/config")
 
     def create_mbus_client_config(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Create M-Bus Client configuration.
-
-        .. deprecated::
-        """
-        endpoint = "/mbus/client/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        """Create M-Bus Client configuration."""
+        return self._client.request("POST", "/mbus/client/config", json={"data": config})
 
     def update_mbus_client_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Update M-Bus Client configurations.
+        """Update M-Bus Client configurations."""
+        return self._client.request("PUT", "/mbus/client/config", json={"data": config})
 
-        .. deprecated::
-        """
-        endpoint = "/mbus/client/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_mbus_client_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_mbus_client_config(self, config: list[str]) -> dict[str, Any]:
         """Delete M-Bus Client configurations."""
-        return [self.delete_mbus_client_config_by_id(client_id) for client_id in config]
+        return self._client.request("DELETE", "/mbus/client/config", json={"data": config})
 
-    def mbus_scan_actions_start_secondary(self) -> dict[str, Any]:
-        """Start M-Bus secondary scan."""
-        endpoint = "/mbus/scan/actions/start_secondary"
+    def get_mbus_client_config_by_id(self, client_id: str) -> dict[str, Any]:
+        """Returns the specified M-Bus Client configuration."""
+        return self._client.request("GET", f"/mbus/client/config/{client_id}")
 
-        return self._client.request("POST", endpoint)
+    def update_mbus_client_config_by_id(self, client_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Update M-Bus Client configuration."""
+        return self._client.request("PUT", f"/mbus/client/config/{client_id}", json={"data": config})
 
-    def mbus_scan_actions_stop(self) -> dict[str, Any]:
-        """Stop M-Bus primary or secondary scan."""
-        endpoint = "/mbus/scan/actions/stop"
+    def delete_mbus_client_config_by_id(self, client_id: str) -> dict[str, Any]:
+        """Delete M-Bus Client configuration."""
+        return self._client.request("DELETE", f"/mbus/client/config/{client_id}")
 
-        return self._client.request("POST", endpoint)
+    def get_mbus_database_entries_status(
+        self,
+        *,
+        limit: int | None = None,
+        offset: int | None = None,
+        id: str | None = None,
+        group_name: str | None = None,
+        group_id: str | None = None,
+        data_type: str | None = None,
+    ) -> dict[str, Any]:
+        """Returns all M-Bus database entries."""
+        return self._client.request(
+            "GET",
+            "/mbus/database/entries/status",
+            params={
+                "limit": limit,
+                "offset": offset,
+                "id": id,
+                "group_name": group_name,
+                "group_id": group_id,
+                "data_type": data_type,
+            },
+        )
 
-    def mbus_scan_actions_start_primary(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Start M-Bus primary scan."""
-        endpoint = "/mbus/scan/actions/start_primary"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def get_mbus_scan_status(self) -> dict[str, Any]:
-        """Get M-Bus global configuration."""
-        endpoint = "/mbus/scan/status"
-
-        return self._client.request("GET", endpoint)
-
-    def get_mbus_found_devices_status(self) -> dict[str, Any]:
-        """Get M-Bus devices found during scanning process."""
-        endpoint = "/mbus/found_devices/status"
-
-        return self._client.request("GET", endpoint)
-
-    def get_mbus_records_config(self) -> dict[str, Any]:
-        """List M-Bus Record configurations.
-
-        .. deprecated::
-        """
-        endpoint = "/mbus/records/config"
-
-        return self._client.request("GET", endpoint)
-
-    def create_mbus_records_config(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Create M-Bus Record configuration.
-
-        .. deprecated::
-        """
-        endpoint = "/mbus/records/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def update_mbus_records_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Update M-Bus Record configurations.
-
-        .. deprecated::
-        """
-        endpoint = "/mbus/records/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_mbus_records_config(self, config: list[str]) -> list[dict[str, Any]]:
-        """Delete M-Bus Record configurations."""
-        return [self.delete_mbus_records_config_by_id(record_id) for record_id in config]
-
-    def get_mbus_records_config_by_id(self, record_id: str) -> dict[str, Any]:
-        """Returns the specified M-Bus Record configuration.
-
-        .. deprecated::
-        """
-        endpoint = f"/mbus/records/config/{record_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_mbus_records_config_by_id(self, record_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Update M-Bus Record configuration.
-
-        .. deprecated::
-        """
-        endpoint = f"/mbus/records/config/{record_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_mbus_records_config_by_id(self, record_id: str) -> dict[str, Any]:
-        """Delete M-Bus Record configuration.
-
-        .. deprecated::
-        """
-        endpoint = f"/mbus/records/config/{record_id}"
-
-        return self._client.request("DELETE", endpoint)
-
-    def mbus_devices_actions_update_address_by_id(self, device_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Updates the primary address of saved M-Bus device."""
-        endpoint = f"/mbus/devices/{device_id}/actions/update_address"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def mbus_devices_actions_test(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Send a test request to M-Bus device."""
-        endpoint = "/mbus/devices/actions/test"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def mbus_devices_actions_reset(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Send reset request to M-Bus device."""
-        endpoint = "/mbus/devices/actions/reset"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def get_mbus_devices_config_by_id(self, device_id: str) -> dict[str, Any]:
-        """Returns the specified M-Bus device."""
-        endpoint = f"/mbus/devices/config/{device_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_mbus_devices_config_by_id(self, device_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Update M-Bus device."""
-        endpoint = f"/mbus/devices/config/{device_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_mbus_devices_config_by_id(self, device_id: str) -> dict[str, Any]:
-        """Delete M-Bus device."""
-        endpoint = f"/mbus/devices/config/{device_id}"
-
-        return self._client.request("DELETE", endpoint)
-
-    def mbus_devices_actions_update_baudrate(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Update baudrate of M-Bus device."""
-        endpoint = "/mbus/devices/actions/update_baudrate"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def mbus_devices_actions_get_info(self, config: dict[str, Any]) -> dict[str, Any]:
+    def mbus_devices_actions_get_info(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
         """Get manufacturer information from M-Bus device."""
-        endpoint = "/mbus/devices/actions/get_info"
+        return self._client.request(
+            "POST", "/mbus/devices/actions/get_info", json=None if config is None else {"data": config}
+        )
 
-        data = {"data": config}
+    def mbus_devices_actions_ping(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Test if M-Bus device is reachable."""
+        return self._client.request(
+            "POST", "/mbus/devices/actions/ping", json=None if config is None else {"data": config}
+        )
 
-        return self._client.request("POST", endpoint, json=data)
+    def mbus_devices_actions_reset(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Send reset request to M-Bus device."""
+        return self._client.request(
+            "POST", "/mbus/devices/actions/reset", json=None if config is None else {"data": config}
+        )
 
-    def get_mbus_devices_config(self) -> dict[str, Any]:
+    def mbus_devices_actions_test(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Send a test request to M-Bus device."""
+        return self._client.request(
+            "POST", "/mbus/devices/actions/test", json=None if config is None else {"data": config}
+        )
+
+    def mbus_devices_actions_update_address(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Update primary address of M-Bus device."""
+        return self._client.request(
+            "POST", "/mbus/devices/actions/update_address", json=None if config is None else {"data": config}
+        )
+
+    def mbus_devices_actions_update_baudrate(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Update baudrate of M-Bus device."""
+        return self._client.request(
+            "POST", "/mbus/devices/actions/update_baudrate", json=None if config is None else {"data": config}
+        )
+
+    def get_mbus_devices_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """List M-Bus devices."""
-        endpoint = "/mbus/devices/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/mbus/devices/config", params={"all_options": all_options})
 
     def create_mbus_devices_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create M-Bus device."""
-        endpoint = "/mbus/devices/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/mbus/devices/config", json={"data": config})
 
     def update_mbus_devices_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update M-Bus devices."""
-        endpoint = "/mbus/devices/config"
+        return self._client.request("PUT", "/mbus/devices/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_mbus_devices_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_mbus_devices_config(self, config: list[str]) -> dict[str, Any]:
         """Delete M-Bus devices."""
-        return [self.delete_mbus_devices_config_by_id(device_id) for device_id in config]
+        return self._client.request("DELETE", "/mbus/devices/config", json={"data": config})
 
-    def mbus_devices_actions_ping(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Test if M-Bus device is reachable."""
-        endpoint = "/mbus/devices/actions/ping"
+    def get_mbus_devices_config_by_id(self, device_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns the specified M-Bus device."""
+        return self._client.request("GET", f"/mbus/devices/config/{device_id}", params={"all_options": all_options})
 
-        data = {"data": config}
+    def update_mbus_devices_config_by_id(self, device_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Update M-Bus device."""
+        return self._client.request("PUT", f"/mbus/devices/config/{device_id}", json={"data": config})
 
-        return self._client.request("POST", endpoint, json=data)
+    def delete_mbus_devices_config_by_id(self, device_id: str) -> dict[str, Any]:
+        """Delete M-Bus device."""
+        return self._client.request("DELETE", f"/mbus/devices/config/{device_id}")
 
-    def mbus_devices_actions_update_address(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Update primary address of M-Bus device."""
-        endpoint = "/mbus/devices/actions/update_address"
+    def mbus_devices_actions_update_address_by_id(
+        self, device_id: str, config: dict[str, Any] | None = None
+    ) -> dict[str, Any]:
+        """Updates the primary address of saved M-Bus device."""
+        return self._client.request(
+            "POST",
+            f"/mbus/devices/{device_id}/actions/update_address",
+            json=None if config is None else {"data": config},
+        )
 
-        data = {"data": config}
+    def get_mbus_found_devices_status(self) -> dict[str, Any]:
+        """Get M-Bus devices found during scanning process."""
+        return self._client.request("GET", "/mbus/found_devices/status")
 
-        return self._client.request("POST", endpoint, json=data)
-
-    def get_mbus_global(self) -> dict[str, Any]:
+    def get_mbus_global(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Get M-Bus global configuration."""
-        endpoint = "/mbus/global"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/mbus/global", params={"all_options": all_options})
 
     def update_mbus_global(self, config: dict[str, Any]) -> dict[str, Any]:
         """Update M-Bus global configuration."""
-        endpoint = "/mbus/global"
+        return self._client.request("PUT", "/mbus/global", json={"data": config})
 
-        data = {"data": config}
+    def mbus_groups_actions_test(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Test response of group."""
+        return self._client.request(
+            "POST", "/mbus/groups/actions/test", json=None if config is None else {"data": config}
+        )
 
-        return self._client.request("PUT", endpoint, json=data)
+    def get_mbus_groups_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """List M-Bus groups."""
+        return self._client.request("GET", "/mbus/groups/config", params={"all_options": all_options})
 
-    def get_mbus_database_entries_status(self) -> dict[str, Any]:
-        """Returns all M-Bus database entries."""
-        endpoint = "/mbus/database/entries/status"
+    def create_mbus_groups_config(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Create M-Bus group."""
+        return self._client.request("POST", "/mbus/groups/config", json={"data": config})
 
-        return self._client.request("GET", endpoint)
+    def update_mbus_groups_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Update M-Bus groups."""
+        return self._client.request("PUT", "/mbus/groups/config", json={"data": config})
 
-    def get_mbus_status(self) -> dict[str, Any]:
-        """Get M-Bus service status."""
-        endpoint = "/mbus/status"
+    def delete_mbus_groups_config(self, config: list[str]) -> dict[str, Any]:
+        """Delete M-Bus groups."""
+        return self._client.request("DELETE", "/mbus/groups/config", json={"data": config})
 
-        return self._client.request("GET", endpoint)
+    def get_mbus_groups_config_by_id(self, group_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns the specified M-Bus group."""
+        return self._client.request("GET", f"/mbus/groups/config/{group_id}", params={"all_options": all_options})
 
-    def get_mbus_groups_values_config(self, group_id: str) -> dict[str, Any]:
+    def update_mbus_groups_config_by_id(self, group_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Update M-Bus group."""
+        return self._client.request("PUT", f"/mbus/groups/config/{group_id}", json={"data": config})
+
+    def delete_mbus_groups_config_by_id(self, group_id: str) -> dict[str, Any]:
+        """Delete M-Bus group."""
+        return self._client.request("DELETE", f"/mbus/groups/config/{group_id}")
+
+    def get_mbus_groups_status_by_id(self, group_id: str) -> dict[str, Any]:
+        """Returns the current value of specified M-Bus group."""
+        return self._client.request("GET", f"/mbus/groups/status/{group_id}")
+
+    def get_mbus_groups_values_config(self, group_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """List group values."""
-        endpoint = f"/mbus/groups/{group_id}/values/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request(
+            "GET", f"/mbus/groups/{group_id}/values/config", params={"all_options": all_options}
+        )
 
     def create_mbus_groups_values_config(self, group_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Create group value."""
-        endpoint = f"/mbus/groups/{group_id}/values/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", f"/mbus/groups/{group_id}/values/config", json={"data": config})
 
     def update_mbus_groups_values_config(self, group_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update group values."""
-        endpoint = f"/mbus/groups/{group_id}/values/config"
+        return self._client.request("PUT", f"/mbus/groups/{group_id}/values/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_mbus_groups_values_config(self, group_id: str, config: list[str]) -> list[dict[str, Any]]:
+    def delete_mbus_groups_values_config(self, group_id: str, config: list[str]) -> dict[str, Any]:
         """Delete group values."""
-        return [self.delete_mbus_groups_values_config_by_id(group_id, value_id) for value_id in config]
+        return self._client.request("DELETE", f"/mbus/groups/{group_id}/values/config", json={"data": config})
 
-    def get_mbus_groups_values_config_by_id(self, group_id: str, value_id: str) -> dict[str, Any]:
+    def get_mbus_groups_values_config_by_id(
+        self, group_id: str, value_id: str, *, all_options: bool | None = None
+    ) -> dict[str, Any]:
         """Returns the specified group value."""
-        endpoint = f"/mbus/groups/{group_id}/values/config/{value_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request(
+            "GET", f"/mbus/groups/{group_id}/values/config/{value_id}", params={"all_options": all_options}
+        )
 
     def update_mbus_groups_values_config_by_id(
         self, group_id: str, value_id: str, config: dict[str, Any]
     ) -> dict[str, Any]:
         """Update group value."""
-        endpoint = f"/mbus/groups/{group_id}/values/config/{value_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/mbus/groups/{group_id}/values/config/{value_id}", json={"data": config})
 
     def delete_mbus_groups_values_config_by_id(self, group_id: str, value_id: str) -> dict[str, Any]:
         """Delete group value."""
-        endpoint = f"/mbus/groups/{group_id}/values/config/{value_id}"
-
-        return self._client.request("DELETE", endpoint)
+        return self._client.request("DELETE", f"/mbus/groups/{group_id}/values/config/{value_id}")
 
     def get_mbus_groups_values_status_by_id(self, group_id: str, value_id: str) -> dict[str, Any]:
         """Returns the specified current group value."""
-        endpoint = f"/mbus/groups/{group_id}/values/status/{value_id}"
+        return self._client.request("GET", f"/mbus/groups/{group_id}/values/status/{value_id}")
 
-        return self._client.request("GET", endpoint)
+    def get_mbus_records_config(self) -> dict[str, Any]:
+        """List M-Bus Record configurations."""
+        return self._client.request("GET", "/mbus/records/config")
 
-    def get_mbus_groups_config(self) -> dict[str, Any]:
-        """List M-Bus groups."""
-        endpoint = "/mbus/groups/config"
+    def create_mbus_records_config(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Create M-Bus Record configuration."""
+        return self._client.request("POST", "/mbus/records/config", json={"data": config})
 
-        return self._client.request("GET", endpoint)
+    def update_mbus_records_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Update M-Bus Record configurations."""
+        return self._client.request("PUT", "/mbus/records/config", json={"data": config})
 
-    def create_mbus_groups_config(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Create M-Bus group."""
-        endpoint = "/mbus/groups/config"
+    def delete_mbus_records_config(self, config: list[str]) -> dict[str, Any]:
+        """Delete M-Bus Record configurations."""
+        return self._client.request("DELETE", "/mbus/records/config", json={"data": config})
 
-        data = {"data": config}
+    def get_mbus_records_config_by_id(self, record_id: str) -> dict[str, Any]:
+        """Returns the specified M-Bus Record configuration."""
+        return self._client.request("GET", f"/mbus/records/config/{record_id}")
 
-        return self._client.request("POST", endpoint, json=data)
+    def update_mbus_records_config_by_id(self, record_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Update M-Bus Record configuration."""
+        return self._client.request("PUT", f"/mbus/records/config/{record_id}", json={"data": config})
 
-    def update_mbus_groups_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Update M-Bus groups."""
-        endpoint = "/mbus/groups/config"
+    def delete_mbus_records_config_by_id(self, record_id: str) -> dict[str, Any]:
+        """Delete M-Bus Record configuration."""
+        return self._client.request("DELETE", f"/mbus/records/config/{record_id}")
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_mbus_groups_config(self, config: list[str]) -> list[dict[str, Any]]:
-        """Delete M-Bus groups."""
-        return [self.delete_mbus_groups_config_by_id(group_id) for group_id in config]
-
-    def get_mbus_groups_config_by_id(self, group_id: str) -> dict[str, Any]:
-        """Returns the specified M-Bus group."""
-        endpoint = f"/mbus/groups/config/{group_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_mbus_groups_config_by_id(self, group_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Update M-Bus group."""
-        endpoint = f"/mbus/groups/config/{group_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_mbus_groups_config_by_id(self, group_id: str) -> dict[str, Any]:
-        """Delete M-Bus group."""
-        endpoint = f"/mbus/groups/config/{group_id}"
-
-        return self._client.request("DELETE", endpoint)
-
-    def mbus_groups_actions_test(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Test response of group."""
-        endpoint = "/mbus/groups/actions/test"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def get_mbus_groups_status_by_id(self, group_id: str) -> dict[str, Any]:
-        """Returns the current value of specified M-Bus group."""
-        endpoint = f"/mbus/groups/status/{group_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def mbus_records_requests_actions_request_test(self, record_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Test Configuration of M-Bus Request.
-
-        .. deprecated::
-        """
-        endpoint = f"/mbus/records/{record_id}/requests/actions/request_test"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+    def mbus_records_requests_actions_request_test(
+        self, record_id: str, config: dict[str, Any] | None = None
+    ) -> dict[str, Any]:
+        """Test Configuration of M-Bus Request."""
+        return self._client.request(
+            "POST",
+            f"/mbus/records/{record_id}/requests/actions/request_test",
+            json=None if config is None else {"data": config},
+        )
 
     def get_mbus_records_requests_config(self, record_id: str) -> dict[str, Any]:
-        """List M-Bus Request configurations.
-
-        .. deprecated::
-        """
-        endpoint = f"/mbus/records/{record_id}/requests/config"
-
-        return self._client.request("GET", endpoint)
+        """List M-Bus Request configurations."""
+        return self._client.request("GET", f"/mbus/records/{record_id}/requests/config")
 
     def create_mbus_records_requests_config(self, record_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Create M-Bus Request configuration.
-
-        .. deprecated::
-        """
-        endpoint = f"/mbus/records/{record_id}/requests/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        """Create M-Bus Request configuration."""
+        return self._client.request("POST", f"/mbus/records/{record_id}/requests/config", json={"data": config})
 
     def update_mbus_records_requests_config(self, record_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Update M-Bus Request configurations.
+        """Update M-Bus Request configurations."""
+        return self._client.request("PUT", f"/mbus/records/{record_id}/requests/config", json={"data": config})
 
-        .. deprecated::
-        """
-        endpoint = f"/mbus/records/{record_id}/requests/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_mbus_records_requests_config(self, record_id: str, config: list[str]) -> list[dict[str, Any]]:
+    def delete_mbus_records_requests_config(self, record_id: str, config: list[str]) -> dict[str, Any]:
         """Delete M-Bus Request configurations."""
-        return [self.delete_mbus_records_requests_config_by_id(record_id, request_id) for request_id in config]
+        return self._client.request("DELETE", f"/mbus/records/{record_id}/requests/config", json={"data": config})
 
     def get_mbus_records_requests_config_by_id(self, record_id: str, request_id: str) -> dict[str, Any]:
-        """Returns the specified M-Bus Request configuration.
-
-        .. deprecated::
-        """
-        endpoint = f"/mbus/records/{record_id}/requests/config/{request_id}"
-
-        return self._client.request("GET", endpoint)
+        """Returns the specified M-Bus Request configuration."""
+        return self._client.request("GET", f"/mbus/records/{record_id}/requests/config/{request_id}")
 
     def update_mbus_records_requests_config_by_id(
         self, record_id: str, request_id: str, config: dict[str, Any]
     ) -> dict[str, Any]:
-        """Update M-Bus Request configuration.
-
-        .. deprecated::
-        """
-        endpoint = f"/mbus/records/{record_id}/requests/config/{request_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        """Update M-Bus Request configuration."""
+        return self._client.request(
+            "PUT", f"/mbus/records/{record_id}/requests/config/{request_id}", json={"data": config}
+        )
 
     def delete_mbus_records_requests_config_by_id(self, record_id: str, request_id: str) -> dict[str, Any]:
-        """Delete M-Bus Request configuration.
+        """Delete M-Bus Request configuration."""
+        return self._client.request("DELETE", f"/mbus/records/{record_id}/requests/config/{request_id}")
 
-        .. deprecated::
-        """
-        endpoint = f"/mbus/records/{record_id}/requests/config/{request_id}"
+    def mbus_scan_actions_start_primary(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Start M-Bus primary scan."""
+        return self._client.request(
+            "POST", "/mbus/scan/actions/start_primary", json=None if config is None else {"data": config}
+        )
 
-        return self._client.request("DELETE", endpoint)
+    def mbus_scan_actions_start_secondary(self) -> dict[str, Any]:
+        """Start M-Bus secondary scan."""
+        return self._client.request("POST", "/mbus/scan/actions/start_secondary")
+
+    def mbus_scan_actions_stop(self) -> dict[str, Any]:
+        """Stop M-Bus primary or secondary scan."""
+        return self._client.request("POST", "/mbus/scan/actions/stop")
+
+    def get_mbus_scan_status(self) -> dict[str, Any]:
+        """Get M-Bus global configuration."""
+        return self._client.request("GET", "/mbus/scan/status")
+
+    def get_mbus_status(self) -> dict[str, Any]:
+        """Get M-Bus service status."""
+        return self._client.request("GET", "/mbus/status")

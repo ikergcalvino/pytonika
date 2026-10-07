@@ -1,193 +1,191 @@
 from typing import Any
 
-from ._endpoint import Endpoint
+from ._endpoint import Endpoint, File
 
 
 class DataToServer(Endpoint):
-    def get_data_to_server_format_options(self) -> dict[str, Any]:
-        """Returns Data to Server all available format plugin names."""
-        endpoint = "/data_to_server/format/options"
+    def get_data_to_server_collections_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns all Data to Server Collections configurations."""
+        return self._client.request("GET", "/data_to_server/collections/config", params={"all_options": all_options})
 
-        return self._client.request("GET", endpoint)
+    def create_data_to_server_collections_config(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates a new Data to Server Collection configuration."""
+        return self._client.request("POST", "/data_to_server/collections/config", json={"data": config})
 
-    def data_to_server_format_actions_download_example_format_lua(
-        self,
+    def update_data_to_server_collections_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates the selected Data to Server Collections configurations."""
+        return self._client.request("PUT", "/data_to_server/collections/config", json={"data": config})
+
+    def delete_data_to_server_collections_config(self, config: list[str]) -> dict[str, Any]:
+        """Deletes the selected Data to Server Collections configurations."""
+        return self._client.request("DELETE", "/data_to_server/collections/config", json={"data": config})
+
+    def get_data_to_server_collections_config_by_id(
+        self, config_id: str, *, all_options: bool | None = None
     ) -> dict[str, Any]:
-        """Downloads Lua format script example file."""
-        endpoint = "/data_to_server/format/actions/download_example_format_lua"
+        """Returns the specified Data to Server Collection configuration."""
+        return self._client.request(
+            "GET", f"/data_to_server/collections/config/{config_id}", params={"all_options": all_options}
+        )
 
-        return self._client.request("POST", endpoint)
+    def upload_data_to_server_collections_config_by_id(
+        self, config_id: str, file: File, *, option: str | None = None
+    ) -> dict[str, Any]:
+        """Uploads the Data to Server Collection necessary files."""
+        return self._client.request(
+            "POST", f"/data_to_server/collections/config/{config_id}", files={"file": file}, form={"option": option}
+        )
 
-    def get_data_to_server_data_options(self) -> dict[str, Any]:
-        """Returns Data to Server all available Data Plugin names, description and tags."""
-        endpoint = "/data_to_server/data/options"
+    def update_data_to_server_collections_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates the specified Data to Server Collection configuration."""
+        return self._client.request("PUT", f"/data_to_server/collections/config/{config_id}", json={"data": config})
 
-        return self._client.request("GET", endpoint)
+    def delete_data_to_server_collections_config_by_id(self, config_id: str) -> dict[str, Any]:
+        """Deletes the specified Data to Server configuration."""
+        return self._client.request("DELETE", f"/data_to_server/collections/config/{config_id}")
+
+    def get_data_to_server_collections_status(self) -> dict[str, Any]:
+        """Returns status for all Data to Server collections."""
+        return self._client.request("GET", "/data_to_server/collections/status")
+
+    def get_data_to_server_collections_status_by_id(self, status_id: str) -> dict[str, Any]:
+        """Returns status for the specified Data to Server collection."""
+        return self._client.request("GET", f"/data_to_server/collections/status/{status_id}")
+
+    def data_to_server_collections_actions_trigger(self, collections_id: str) -> dict[str, Any]:
+        """Triggers an immediate data send for the specified collection."""
+        return self._client.request("POST", f"/data_to_server/collections/{collections_id}/actions/trigger")
+
+    def get_data_to_server_collections_data_config(
+        self, collections_id: str, *, all_options: bool | None = None
+    ) -> dict[str, Any]:
+        """Returns all Data to Server Data Plugins configuration."""
+        return self._client.request(
+            "GET", f"/data_to_server/collections/{collections_id}/data/config", params={"all_options": all_options}
+        )
 
     def create_data_to_server_collections_data_config(
         self, collection_id: str, config: dict[str, Any]
     ) -> dict[str, Any]:
         """Creates a new Data to Server Data Plugin configuration."""
-        endpoint = f"/data_to_server/collections/{collection_id}/data/config"
+        return self._client.request(
+            "POST", f"/data_to_server/collections/{collection_id}/data/config", json={"data": config}
+        )
 
-        data = {"data": config}
+    def update_data_to_server_collections_data_config(
+        self, collections_id: str, config: list[dict[str, Any]]
+    ) -> dict[str, Any]:
+        """Updates the selected Data to Server Data Plugins configurations."""
+        return self._client.request(
+            "PUT", f"/data_to_server/collections/{collections_id}/data/config", json={"data": config}
+        )
 
-        return self._client.request("POST", endpoint, json=data)
+    def delete_data_to_server_collections_data_config(self, collections_id: str, config: list[str]) -> dict[str, Any]:
+        """Deletes the selected Data to Server Data Plugins configurations."""
+        return self._client.request(
+            "DELETE", f"/data_to_server/collections/{collections_id}/data/config", json={"data": config}
+        )
 
-    def get_data_to_server_data_config(self) -> dict[str, Any]:
+    def get_data_to_server_compression_options(self) -> dict[str, Any]:
+        """Returns Data to Server all available compression plugin names."""
+        return self._client.request("GET", "/data_to_server/compression/options")
+
+    def data_to_server_data_actions_download_example_input_lua(self) -> bytes | dict[str, Any]:
+        """Downloads Lua script example file."""
+        return self._client.request("POST", "/data_to_server/data/actions/download_example_input_lua", download=True)
+
+    def get_data_to_server_data_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns all Data to Server Data Plugins configuration."""
-        endpoint = "/data_to_server/data/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/data_to_server/data/config", params={"all_options": all_options})
 
     def update_data_to_server_data_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates the selected Data to Server Data Plugins configurations."""
-        endpoint = "/data_to_server/data/config"
+        return self._client.request("PUT", "/data_to_server/data/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_data_to_server_data_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_data_to_server_data_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes the selected Data to Server Plugins configurations."""
-        return [self.delete_data_to_server_data_config_by_id(config_id) for config_id in config]
+        return self._client.request("DELETE", "/data_to_server/data/config", json={"data": config})
 
-    def get_data_to_server_data_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_data_to_server_data_config_by_id(
+        self, config_id: str, *, all_options: bool | None = None
+    ) -> dict[str, Any]:
         """Returns the specified Data to Server Data Plugin configuration."""
-        endpoint = f"/data_to_server/data/config/{config_id}"
+        return self._client.request(
+            "GET", f"/data_to_server/data/config/{config_id}", params={"all_options": all_options}
+        )
 
-        return self._client.request("GET", endpoint)
-
-    def upload_data_to_server_data_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_data_to_server_data_config_by_id(
+        self, config_id: str, file: File, *, option: str | None = None
+    ) -> dict[str, Any]:
         """Uploads the Data Plugin necessary files."""
-        endpoint = f"/data_to_server/data/config/{config_id}"
-
-        return self._client.request("POST", endpoint, json={"data": data})
+        return self._client.request(
+            "POST", f"/data_to_server/data/config/{config_id}", files={"file": file}, form={"option": option}
+        )
 
     def update_data_to_server_data_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the selected Data to Server Data Plugins configurations."""
-        endpoint = f"/data_to_server/data/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/data_to_server/data/config/{config_id}", json={"data": config})
 
     def delete_data_to_server_data_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes the specified Data to Server Data Plugins configurations."""
-        endpoint = f"/data_to_server/data/config/{config_id}"
+        return self._client.request("DELETE", f"/data_to_server/data/config/{config_id}")
 
-        return self._client.request("DELETE", endpoint)
-
-    def data_to_server_data_actions_download_example_input_lua(
-        self,
-    ) -> dict[str, Any]:
-        """Downloads Lua script example file."""
-        endpoint = "/data_to_server/data/actions/download_example_input_lua"
-
-        return self._client.request("POST", endpoint)
-
-    def get_data_to_server_servers_options(self) -> dict[str, Any]:
-        """Returns Data to Server all available Server Plugin names, description and tags."""
-        endpoint = "/data_to_server/servers/options"
-
-        return self._client.request("GET", endpoint)
-
-    def get_data_to_server_servers_config(self) -> dict[str, Any]:
-        """Returns all Data to Server Server Plugins configuration."""
-        endpoint = "/data_to_server/servers/config"
-
-        return self._client.request("GET", endpoint)
-
-    def update_data_to_server_servers_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates the selected Data to Server Server Plugins configurations."""
-        endpoint = "/data_to_server/servers/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_data_to_server_servers_config_by_id(self, config_id: str) -> dict[str, Any]:
-        """Returns the specified Data to Server Server Plugin configuration."""
-        endpoint = f"/data_to_server/servers/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def upload_data_to_server_servers_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
-        """Uploads the Server Plugin necessary files."""
-        endpoint = f"/data_to_server/servers/config/{config_id}"
-
-        return self._client.request("POST", endpoint, json={"data": data})
-
-    def update_data_to_server_servers_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Updates the specified Data to Server Server Plugin configuration."""
-        endpoint = f"/data_to_server/servers/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def data_to_server_servers_actions_download_example_output_lua(
-        self,
-    ) -> dict[str, Any]:
-        """Downloads Lua output script example file."""
-        endpoint = "/data_to_server/servers/actions/download_example_output_lua"
-
-        return self._client.request("POST", endpoint)
-
-    def get_data_to_server_collections_config(self) -> dict[str, Any]:
-        """Returns all Data to Server Collections configurations."""
-        endpoint = "/data_to_server/collections/config"
-
-        return self._client.request("GET", endpoint)
-
-    def create_data_to_server_collections_config(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Creates a new Data to Server Collection configuration."""
-        endpoint = "/data_to_server/collections/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def update_data_to_server_collections_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates the selected Data to Server Collections configurations."""
-        endpoint = "/data_to_server/collections/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_data_to_server_collections_config(self, config: list[str]) -> list[dict[str, Any]]:
-        """Deletes the selected Data to Server Collections configurations."""
-        return [self.delete_data_to_server_collections_config_by_id(config_id) for config_id in config]
-
-    def get_data_to_server_collections_config_by_id(self, config_id: str) -> dict[str, Any]:
-        """Returns the specified Data to Server Collection configuration."""
-        endpoint = f"/data_to_server/collections/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def upload_data_to_server_collections_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
-        """Uploads the Data to Server Collection necessary files."""
-        endpoint = f"/data_to_server/collections/config/{config_id}"
-
-        return self._client.request("POST", endpoint, json={"data": data})
-
-    def update_data_to_server_collections_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Updates the specified Data to Server Collection configuration."""
-        endpoint = f"/data_to_server/collections/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_data_to_server_collections_config_by_id(self, config_id: str) -> dict[str, Any]:
-        """Deletes the specified Data to Server configuration."""
-        endpoint = f"/data_to_server/collections/config/{config_id}"
-
-        return self._client.request("DELETE", endpoint)
+    def get_data_to_server_data_options(self) -> dict[str, Any]:
+        """Returns Data to Server all available Data Plugin names, description and tags."""
+        return self._client.request("GET", "/data_to_server/data/options")
 
     def get_data_to_server_encoder_options(self) -> dict[str, Any]:
         """Returns Data to Server all available encoder plugin names."""
-        endpoint = "/data_to_server/encoder/options"
+        return self._client.request("GET", "/data_to_server/encoder/options")
 
-        return self._client.request("GET", endpoint)
+    def data_to_server_format_actions_download_example_format_lua(self) -> bytes | dict[str, Any]:
+        """Downloads Lua format script example file."""
+        return self._client.request("POST", "/data_to_server/format/actions/download_example_format_lua", download=True)
+
+    def get_data_to_server_format_options(self) -> dict[str, Any]:
+        """Returns Data to Server all available format plugin names."""
+        return self._client.request("GET", "/data_to_server/format/options")
+
+    def data_to_server_servers_actions_download_example_output_lua(self) -> bytes | dict[str, Any]:
+        """Downloads Lua output script example file."""
+        return self._client.request(
+            "POST", "/data_to_server/servers/actions/download_example_output_lua", download=True
+        )
+
+    def data_to_server_servers_actions_scan_key(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Scan SFTP server's public key."""
+        return self._client.request(
+            "POST", "/data_to_server/servers/actions/scan_key", json=None if data is None else data
+        )
+
+    def get_data_to_server_servers_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns all Data to Server Server Plugins configuration."""
+        return self._client.request("GET", "/data_to_server/servers/config", params={"all_options": all_options})
+
+    def update_data_to_server_servers_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates the selected Data to Server Server Plugins configurations."""
+        return self._client.request("PUT", "/data_to_server/servers/config", json={"data": config})
+
+    def get_data_to_server_servers_config_by_id(
+        self, config_id: str, *, all_options: bool | None = None
+    ) -> dict[str, Any]:
+        """Returns the specified Data to Server Server Plugin configuration."""
+        return self._client.request(
+            "GET", f"/data_to_server/servers/config/{config_id}", params={"all_options": all_options}
+        )
+
+    def upload_data_to_server_servers_config_by_id(
+        self, config_id: str, file: File, *, option: str | None = None
+    ) -> dict[str, Any]:
+        """Uploads the Server Plugin necessary files."""
+        return self._client.request(
+            "POST", f"/data_to_server/servers/config/{config_id}", files={"file": file}, form={"option": option}
+        )
+
+    def update_data_to_server_servers_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates the specified Data to Server Server Plugin configuration."""
+        return self._client.request("PUT", f"/data_to_server/servers/config/{config_id}", json={"data": config})
+
+    def get_data_to_server_servers_options(self) -> dict[str, Any]:
+        """Returns Data to Server all available Server Plugin names, description and tags."""
+        return self._client.request("GET", "/data_to_server/servers/options")

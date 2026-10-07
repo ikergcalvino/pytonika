@@ -4,30 +4,18 @@ from ._endpoint import Endpoint
 
 
 class FOTA(Endpoint):
-    def get_fota_config(self) -> dict[str, Any]:
+    def get_fota_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns Fota configuration."""
-        endpoint = "/fota/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/fota/config", params={"all_options": all_options})
 
     def update_fota_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates Fota configuration."""
-        endpoint = "/fota/config"
+        return self._client.request("PUT", "/fota/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_fota_config_by_id(self, fota_id: str) -> dict[str, Any]:
+    def get_fota_config_by_id(self, fota_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns Fota configuration."""
-        endpoint = f"/fota/config/{fota_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/fota/config/{fota_id}", params={"all_options": all_options})
 
     def update_fota_config_by_id(self, fota_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates Fota configuration."""
-        endpoint = f"/fota/config/{fota_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/fota/config/{fota_id}", json={"data": config})

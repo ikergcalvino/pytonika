@@ -1,75 +1,55 @@
 from typing import Any
 
-from ._endpoint import Endpoint
+from ._endpoint import Endpoint, File
 
 
 class OpenConnect(Endpoint):
+    def openconnect_client_actions_check_fingerprint(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+        """POST /openconnect/client/actions/check_fingerprint."""
+        return self._client.request(
+            "POST", "/openconnect/client/actions/check_fingerprint", json=None if data is None else data
+        )
+
     def get_openconnect_client_config(self) -> dict[str, Any]:
         """Returns all OpenConnect configuration sections."""
-        endpoint = "/openconnect/client/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/openconnect/client/config")
 
     def create_openconnect_client_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates OpenConnect client section."""
-        endpoint = "/openconnect/client/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/openconnect/client/config", json={"data": config})
 
     def update_openconnect_client_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates the specified OpenConnect configurations."""
-        endpoint = "/openconnect/client/config"
+        return self._client.request("PUT", "/openconnect/client/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_openconnect_client_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_openconnect_client_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes specified OpenConnect configurations."""
-        return [self.delete_openconnect_client_config_by_id(config_id) for config_id in config]
+        return self._client.request("DELETE", "/openconnect/client/config", json={"data": config})
 
     def get_openconnect_client_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Returns the specified OpenConnect client section."""
-        endpoint = f"/openconnect/client/config/{config_id}"
+        return self._client.request("GET", f"/openconnect/client/config/{config_id}")
 
-        return self._client.request("GET", endpoint)
-
-    def upload_openconnect_client_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_openconnect_client_config_by_id(
+        self, config_id: str, file: File, *, option: str | None = None
+    ) -> dict[str, Any]:
         """Uploads OpenConnect client certificates."""
-        endpoint = f"/openconnect/client/config/{config_id}"
-
-        return self._client.request("POST", endpoint, json={"data": data})
+        return self._client.request(
+            "POST", f"/openconnect/client/config/{config_id}", files={"file": file}, form={"option": option}
+        )
 
     def update_openconnect_client_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified OpenConnect configuration."""
-        endpoint = f"/openconnect/client/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/openconnect/client/config/{config_id}", json={"data": config})
 
     def delete_openconnect_client_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes the specified OpenConnect configuration."""
-        endpoint = f"/openconnect/client/config/{config_id}"
-
-        return self._client.request("DELETE", endpoint)
+        return self._client.request("DELETE", f"/openconnect/client/config/{config_id}")
 
     def get_openconnect_client_status(self) -> dict[str, Any]:
         """Returns status of OpenConnect instances."""
-        endpoint = "/openconnect/client/status"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/openconnect/client/status")
 
     def get_openconnect_client_status_by_id(self, status_id: str) -> dict[str, Any]:
         """Returns status of OpenConnect instance."""
-        endpoint = f"/openconnect/client/status/{status_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def openconnect_client_actions_check_fingerprint(self, data: dict[str, Any]) -> dict[str, Any]:
-        """Checks OpenConnect client fingerprint."""
-        endpoint = "/openconnect/client/actions/check_fingerprint"
-
-        return self._client.request("POST", endpoint, json={"data": data})
+        return self._client.request("GET", f"/openconnect/client/status/{status_id}")

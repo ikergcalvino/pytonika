@@ -4,30 +4,22 @@ from ._endpoint import Endpoint
 
 
 class SIMIdleProtection(Endpoint):
-    def get_sim_idle_protection_config(self) -> dict[str, Any]:
+    def get_sim_idle_protection_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns multiple SIM idle protection configurations."""
-        endpoint = "/sim_idle_protection/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/sim_idle_protection/config", params={"all_options": all_options})
 
     def update_sim_idle_protection_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update multiple SIM idle protection configurations."""
-        endpoint = "/sim_idle_protection/config"
+        return self._client.request("PUT", "/sim_idle_protection/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_sim_idle_protection_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_sim_idle_protection_config_by_id(
+        self, config_id: str, *, all_options: bool | None = None
+    ) -> dict[str, Any]:
         """Returns specified SIM idle protection configuration."""
-        endpoint = f"/sim_idle_protection/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request(
+            "GET", f"/sim_idle_protection/config/{config_id}", params={"all_options": all_options}
+        )
 
     def update_sim_idle_protection_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update specified SIM idle protection configuration."""
-        endpoint = f"/sim_idle_protection/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/sim_idle_protection/config/{config_id}", json={"data": config})

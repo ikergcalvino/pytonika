@@ -4,51 +4,30 @@ from ._endpoint import Endpoint
 
 
 class UDPBroadcastRelay(Endpoint):
-    def get_udprelay_config(self) -> dict[str, Any]:
+    def get_udprelay_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns UDP Broadcast Relay configurations."""
-        endpoint = "/udprelay/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/udprelay/config", params={"all_options": all_options})
 
     def create_udprelay_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates UDP Broadcast Relay configuration."""
-        endpoint = "/udprelay/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/udprelay/config", json={"data": config})
 
     def update_udprelay_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates UDP Broadcast Relay configurations.
+        """Updates UDP Broadcast Relay configurations."""
+        return self._client.request("PUT", "/udprelay/config", json={"data": config})
 
-        .. deprecated::
-        """
-        endpoint = "/udprelay/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_udprelay_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_udprelay_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes UDP Broadcast Relay configurations."""
-        return [self.delete_udprelay_config_by_id(config_id) for config_id in config]
+        return self._client.request("DELETE", "/udprelay/config", json={"data": config})
 
-    def get_udprelay_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_udprelay_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns UDP Broadcast Relay configuration."""
-        endpoint = f"/udprelay/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/udprelay/config/{config_id}", params={"all_options": all_options})
 
     def update_udprelay_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates UDP Broadcast Relay configuration."""
-        endpoint = f"/udprelay/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/udprelay/config/{config_id}", json={"data": config})
 
     def delete_udprelay_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes UDP Broadcast Relay configuration."""
-        endpoint = f"/udprelay/config/{config_id}"
-
-        return self._client.request("DELETE", endpoint)
+        return self._client.request("DELETE", f"/udprelay/config/{config_id}")

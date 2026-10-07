@@ -1,37 +1,27 @@
 from typing import Any
 
-from ._endpoint import Endpoint
+from ._endpoint import Endpoint, File
 
 
 class Integrity(Endpoint):
-    def get_integrity_status(self) -> dict[str, Any]:
-        """Returns integrity status."""
-        endpoint = "/integrity/status"
+    def integrity_actions_download(self) -> bytes | dict[str, Any]:
+        """Downloads integrity database."""
+        return self._client.request("POST", "/integrity/actions/download", download=True)
 
-        return self._client.request("GET", endpoint)
-
-    def integrity_actions_generate(self, config: dict[str, Any]) -> dict[str, Any]:
+    def integrity_actions_generate(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
         """Generates integrity database."""
-        endpoint = "/integrity/actions/generate"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request(
+            "POST", "/integrity/actions/generate", json=None if config is None else {"data": config}
+        )
 
     def integrity_actions_validate(self) -> dict[str, Any]:
         """Validates integrity database."""
-        endpoint = "/integrity/actions/validate"
+        return self._client.request("POST", "/integrity/actions/validate")
 
-        return self._client.request("POST", endpoint)
-
-    def integrity_actions_download(self) -> dict[str, Any]:
-        """Downloads integrity database."""
-        endpoint = "/integrity/actions/download"
-
-        return self._client.request("POST", endpoint)
-
-    def integrity_actions_validate_file(self, config: dict[str, Any]) -> dict[str, Any]:
+    def integrity_actions_validate_file(self, file: File) -> dict[str, Any]:
         """Validates uploaded integrity database."""
-        endpoint = "/integrity/actions/validate_file"
+        return self._client.request("POST", "/integrity/actions/validate_file", files={"file": file})
 
-        return self._client.request("POST", endpoint, json=config)
+    def get_integrity_status(self) -> dict[str, Any]:
+        """Returns integrity status."""
+        return self._client.request("GET", "/integrity/status")

@@ -1,115 +1,87 @@
 from typing import Any
 
-from ._endpoint import Endpoint
+from ._endpoint import Endpoint, File
 
 
 class Certificates(Endpoint):
-    def get_certificates_config(self) -> dict[str, Any]:
-        """Returns all generated and uploaded certificates, keys, DH parameters and CAs."""
-        endpoint = "/certificates/config"
+    def certificates_actions_generate(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Generates certificates based on provided parameters."""
+        return self._client.request(
+            "POST", "/certificates/actions/generate", json=None if data is None else {"data": data}
+        )
 
-        return self._client.request("GET", endpoint)
+    def certificates_actions_import_tpm2(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Import key to tpm2 storage."""
+        return self._client.request(
+            "POST", "/certificates/actions/import_tpm2", json=None if data is None else {"data": data}
+        )
 
-    def upload_certificates_config(self, data: dict[str, Any]) -> dict[str, Any]:
-        """Uploads certificate."""
-        endpoint = "/certificates/config"
-
-        return self._client.request("POST", endpoint, json={"data": data})
-
-    def certificates_actions_download(self, cert_id: str, data: dict[str, Any]) -> dict[str, Any]:
-        """Downloads specified certificate file."""
-        endpoint = f"/certificates/{cert_id}/actions/download"
-
-        return self._client.request("POST", endpoint, json={"data": data})
-
-    def get_certificates_config_by_id(self, cert_id: str) -> dict[str, Any]:
-        """Returns specified certificate file."""
-        endpoint = f"/certificates/config/{cert_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def delete_certificates_config_by_id(self, cert_id: str) -> dict[str, Any]:
-        """Deletes specified certificate file."""
-        endpoint = f"/certificates/config/{cert_id}"
-
-        return self._client.request("DELETE", endpoint)
-
-    def get_certificates_certs_config(self) -> dict[str, Any]:
-        """Returns all generated and uploaded signed certificates."""
-        endpoint = "/certificates/certs/config"
-
-        return self._client.request("GET", endpoint)
+    def certificates_actions_sign(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Signs certificate based on provided parameters."""
+        return self._client.request("POST", "/certificates/actions/sign", json=None if data is None else {"data": data})
 
     def get_certificates_ca_config(self) -> dict[str, Any]:
         """Returns all generated and uploaded certificate authorities."""
-        endpoint = "/certificates/ca/config"
+        return self._client.request("GET", "/certificates/ca/config")
 
-        return self._client.request("GET", endpoint)
+    def get_certificates_certs_config(self) -> dict[str, Any]:
+        """Returns all generated and uploaded signed certificates."""
+        return self._client.request("GET", "/certificates/certs/config")
 
     def get_certificates_client_config(self) -> dict[str, Any]:
         """Returns all generated and uploaded client certificates."""
-        endpoint = "/certificates/client/config"
+        return self._client.request("GET", "/certificates/client/config")
 
-        return self._client.request("GET", endpoint)
+    def get_certificates_config(self, *, include_tpm2: bool | None = None) -> dict[str, Any]:
+        """Returns all generated and uploaded certificates, keys, DH parameters and CAs."""
+        return self._client.request("GET", "/certificates/config", params={"include_tpm2": include_tpm2})
 
-    def get_certificates_server_config(self) -> dict[str, Any]:
-        """Returns all generated and uploaded server certificates."""
-        endpoint = "/certificates/server/config"
+    def upload_certificates_config(self, file: File) -> dict[str, Any]:
+        """Uploads certificate."""
+        return self._client.request("POST", "/certificates/config", files={"file": file})
 
-        return self._client.request("GET", endpoint)
+    def get_certificates_config_by_id(self, cert_id: str) -> dict[str, Any]:
+        """Returns specified certificate file."""
+        return self._client.request("GET", f"/certificates/config/{cert_id}")
 
-    def get_certificates_keys_config(self) -> dict[str, Any]:
-        """Returns all generated and uploaded keys."""
-        endpoint = "/certificates/keys/config"
-
-        return self._client.request("GET", endpoint)
+    def delete_certificates_config_by_id(self, cert_id: str) -> dict[str, Any]:
+        """Deletes specified certificate file."""
+        return self._client.request("DELETE", f"/certificates/config/{cert_id}")
 
     def get_certificates_dh_config(self) -> dict[str, Any]:
         """Returns all generated and uploaded DH parameters."""
-        endpoint = "/certificates/dh/config"
+        return self._client.request("GET", "/certificates/dh/config")
 
-        return self._client.request("GET", endpoint)
+    def get_certificates_keys_config(self) -> dict[str, Any]:
+        """Returns all generated and uploaded keys."""
+        return self._client.request("GET", "/certificates/keys/config")
 
-    def certificates_actions_generate(self, data: dict[str, Any]) -> dict[str, Any]:
-        """Generates certificates based on provided parameters."""
-        endpoint = "/certificates/actions/generate"
+    def certificates_root_ca_actions_change(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Changes Root CA to new certificate from device."""
+        return self._client.request(
+            "POST", "/certificates/root_ca/actions/change", json=None if data is None else {"data": data}
+        )
 
-        return self._client.request("POST", endpoint, json={"data": data})
-
-    def certificates_actions_sign(self, data: dict[str, Any]) -> dict[str, Any]:
-        """Signs certificate based on provided parameters."""
-        endpoint = "/certificates/actions/sign"
-
-        return self._client.request("POST", endpoint, json={"data": data})
+    def certificates_root_ca_actions_reset(self) -> dict[str, Any]:
+        """Resets Root CA to its initial value."""
+        return self._client.request("POST", "/certificates/root_ca/actions/reset")
 
     def get_certificates_root_ca_config(self) -> dict[str, Any]:
         """Returns Root CA file contents."""
-        endpoint = "/certificates/root_ca/config"
+        return self._client.request("GET", "/certificates/root_ca/config")
 
-        return self._client.request("GET", endpoint)
-
-    def upload_certificates_root_ca_config(self, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_certificates_root_ca_config(self, file: File) -> dict[str, Any]:
         """Uploads Root CA file."""
-        endpoint = "/certificates/root_ca/config"
-
-        return self._client.request("POST", endpoint, json={"data": data})
+        return self._client.request("POST", "/certificates/root_ca/config", files={"file": file})
 
     def update_certificates_root_ca_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Updates Root CA file with provided data."""
-        endpoint = "/certificates/root_ca/config"
+        return self._client.request("PUT", "/certificates/root_ca/config", json={"data": config})
 
-        data = {"data": config}
+    def get_certificates_server_config(self) -> dict[str, Any]:
+        """Returns all generated and uploaded server certificates."""
+        return self._client.request("GET", "/certificates/server/config")
 
-        return self._client.request("PUT", endpoint, json=data)
-
-    def certificates_root_ca_actions_change(self, data: dict[str, Any]) -> dict[str, Any]:
-        """Changes Root CA to new certificate from device."""
-        endpoint = "/certificates/root_ca/actions/change"
-
-        return self._client.request("POST", endpoint, json={"data": data})
-
-    def certificates_root_ca_actions_reset(self, data: dict[str, Any]) -> dict[str, Any]:
-        """Resets Root CA to its initial value."""
-        endpoint = "/certificates/root_ca/actions/reset"
-
-        return self._client.request("POST", endpoint, json={"data": data})
+    def certificates_actions_download(self, cert_id: str) -> bytes | dict[str, Any]:
+        """Downloads specified certificate file."""
+        return self._client.request("POST", f"/certificates/{cert_id}/actions/download", download=True)

@@ -4,36 +4,22 @@ from ._endpoint import Endpoint
 
 
 class Netbird(Endpoint):
-    def get_netbird_config(self) -> dict[str, Any]:
+    def get_netbird_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns all NetBird configurations."""
-        endpoint = "/netbird/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/netbird/config", params={"all_options": all_options})
 
     def update_netbird_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified NetBird configurations."""
-        endpoint = "/netbird/config"
+        return self._client.request("PUT", "/netbird/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_netbird_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_netbird_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns the specified NetBird configuration."""
-        endpoint = f"/netbird/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/netbird/config/{config_id}", params={"all_options": all_options})
 
     def update_netbird_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified NetBird configuration."""
-        endpoint = f"/netbird/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/netbird/config/{config_id}", json={"data": config})
 
     def get_netbird_status(self) -> dict[str, Any]:
         """Returns NetBird status."""
-        endpoint = "/netbird/status"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/netbird/status")

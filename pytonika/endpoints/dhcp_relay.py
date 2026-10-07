@@ -4,46 +4,30 @@ from ._endpoint import Endpoint
 
 
 class DHCPRelay(Endpoint):
-    def get_dhcp_relays_ipv4_config(self) -> dict[str, Any]:
+    def get_dhcp_relays_ipv4_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns DHCP Relay configurations."""
-        endpoint = "/dhcp/relays/ipv4/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/dhcp/relays/ipv4/config", params={"all_options": all_options})
 
     def create_dhcp_relays_ipv4_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates DHCP Relay configuration."""
-        endpoint = "/dhcp/relays/ipv4/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/dhcp/relays/ipv4/config", json={"data": config})
 
     def update_dhcp_relays_ipv4_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates DHCP Relay configurations."""
-        endpoint = "/dhcp/relays/ipv4/config"
+        return self._client.request("PUT", "/dhcp/relays/ipv4/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_dhcp_relays_ipv4_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_dhcp_relays_ipv4_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes DHCP Relay configurations."""
-        return [self.delete_dhcp_relays_ipv4_config_by_id(ipv4_id) for ipv4_id in config]
+        return self._client.request("DELETE", "/dhcp/relays/ipv4/config", json={"data": config})
 
-    def get_dhcp_relays_ipv4_config_by_id(self, ipv4_id: str) -> dict[str, Any]:
+    def get_dhcp_relays_ipv4_config_by_id(self, ipv4_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns DHCP Relay configuration."""
-        endpoint = f"/dhcp/relays/ipv4/config/{ipv4_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/dhcp/relays/ipv4/config/{ipv4_id}", params={"all_options": all_options})
 
     def update_dhcp_relays_ipv4_config_by_id(self, ipv4_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates DHCP Relay configuration."""
-        endpoint = f"/dhcp/relays/ipv4/config/{ipv4_id}"
-
-        return self._client.request("PUT", endpoint, json=config)
+        return self._client.request("PUT", f"/dhcp/relays/ipv4/config/{ipv4_id}", json=config)
 
     def delete_dhcp_relays_ipv4_config_by_id(self, ipv4_id: str) -> dict[str, Any]:
         """Deletes DHCP Relay configuration."""
-        endpoint = f"/dhcp/relays/ipv4/config/{ipv4_id}"
-
-        return self._client.request("DELETE", endpoint)
+        return self._client.request("DELETE", f"/dhcp/relays/ipv4/config/{ipv4_id}")

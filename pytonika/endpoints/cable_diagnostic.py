@@ -4,10 +4,13 @@ from ._endpoint import Endpoint
 
 
 class CableDiagnostic(Endpoint):
-    def cable_diagnostic_actions_run(self, config: dict[str, Any]) -> dict[str, Any]:
+    def cable_diagnostic_actions_run(
+        self, config: dict[str, Any] | None = None, *, use_cache: bool | None = None
+    ) -> dict[str, Any]:
         """Runs selected port's cable diagnostic and retrieves the results."""
-        endpoint = "/cable_diagnostic/actions/run"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request(
+            "POST",
+            "/cable_diagnostic/actions/run",
+            params={"use_cache": use_cache},
+            json=None if config is None else {"data": config},
+        )

@@ -5,12 +5,8 @@ from ._endpoint import Endpoint
 
 class Authentication(Endpoint):
     def login(self, username: str, password: str) -> dict[str, Any]:
-        """Authenticates user for API access."""
-        endpoint = "/login"
-
-        data = {"username": username, "password": password}
-
-        response = self._client.request("POST", endpoint, json=data)
+        """Authenticates user for API access and stores the session token for later requests."""
+        response = self._client.request("POST", "/login", json={"username": username, "password": password})
 
         token = (response.get("data") or {}).get("token")
 
@@ -20,10 +16,8 @@ class Authentication(Endpoint):
         return response
 
     def logout(self) -> dict[str, Any]:
-        """Logs out user from API."""
-        endpoint = "/logout"
-
-        response = self._client.request("POST", endpoint)
+        """Logs out user from API and forgets the session token."""
+        response = self._client.request("POST", "/logout")
 
         self._client.clear_token()
 
@@ -31,6 +25,4 @@ class Authentication(Endpoint):
 
     def get_session_status(self) -> dict[str, Any]:
         """Returns if API session is alive and resets session's timer."""
-        endpoint = "/session/status"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/session/status")

@@ -4,11 +4,6 @@ from ._endpoint import Endpoint
 
 
 class Refresh(Endpoint):
-    def refresh(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Refresh endpoint.
-
-        .. deprecated::
-        """
-        endpoint = "/refresh"
-
-        return self._client.request("POST", endpoint, json=config)
+    def refresh(self, config: dict[str, Any]) -> bytes | dict[str, Any]:
+        """Refresh endpoint."""
+        return self._client.request("POST", "/refresh", json=config, download=True)

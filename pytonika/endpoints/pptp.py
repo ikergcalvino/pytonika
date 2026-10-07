@@ -4,142 +4,102 @@ from ._endpoint import Endpoint
 
 
 class PPTP(Endpoint):
-    def get_pptp_client_config(self) -> dict[str, Any]:
+    def get_pptp_client_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Get pptp client configurations."""
-        endpoint = "/pptp/client/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/pptp/client/config", params={"all_options": all_options})
 
     def create_pptp_client_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create pptp client configuration."""
-        endpoint = "/pptp/client/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/pptp/client/config", json={"data": config})
 
     def update_pptp_client_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update pptp client configurations."""
-        endpoint = "/pptp/client/config"
+        return self._client.request("PUT", "/pptp/client/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_pptp_client_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_pptp_client_config(self, config: list[str]) -> dict[str, Any]:
         """Delete pptp client configurations."""
-        return [self.delete_pptp_client_config_by_id(client_id) for client_id in config]
+        return self._client.request("DELETE", "/pptp/client/config", json={"data": config})
 
-    def get_pptp_client_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_pptp_client_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Get pptp client configuration."""
-        endpoint = f"/pptp/client/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/pptp/client/config/{config_id}", params={"all_options": all_options})
 
     def update_pptp_client_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update pptp client configuration."""
-        endpoint = f"/pptp/client/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/pptp/client/config/{config_id}", json={"data": config})
 
     def delete_pptp_client_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Delete pptp client configuration."""
-        endpoint = f"/pptp/client/config/{config_id}"
+        return self._client.request("DELETE", f"/pptp/client/config/{config_id}")
 
-        return self._client.request("DELETE", endpoint)
-
-    def get_pptp_server_config(self) -> dict[str, Any]:
+    def get_pptp_server_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Delete pptp server configurations."""
-        endpoint = "/pptp/server/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/pptp/server/config", params={"all_options": all_options})
 
     def create_pptp_server_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create pptp server configuration."""
-        endpoint = "/pptp/server/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/pptp/server/config", json={"data": config})
 
     def update_pptp_server_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update pptp server configurations."""
-        endpoint = "/pptp/server/config"
+        return self._client.request("PUT", "/pptp/server/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_pptp_server_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_pptp_server_config(self, config: list[str]) -> dict[str, Any]:
         """Delete pptp server configurations."""
-        return [self.delete_pptp_server_config_by_id(server_id) for server_id in config]
+        return self._client.request("DELETE", "/pptp/server/config", json={"data": config})
 
-    def get_pptp_server_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_pptp_server_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Get pptp server configuration."""
-        endpoint = f"/pptp/server/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/pptp/server/config/{config_id}", params={"all_options": all_options})
 
     def update_pptp_server_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update pptp server configuration."""
-        endpoint = f"/pptp/server/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/pptp/server/config/{config_id}", json={"data": config})
 
     def delete_pptp_server_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Delete pptp server configuration."""
-        endpoint = f"/pptp/server/config/{config_id}"
+        return self._client.request("DELETE", f"/pptp/server/config/{config_id}")
 
-        return self._client.request("DELETE", endpoint)
-
-    def get_pptp_server_users_config(self, server_id: str) -> dict[str, Any]:
+    def get_pptp_server_users_config(self, server_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Get pptp users configurations."""
-        endpoint = f"/pptp/server/{server_id}/users/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request(
+            "GET", f"/pptp/server/{server_id}/users/config", params={"all_options": all_options}
+        )
 
     def create_pptp_server_users_config(self, server_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Create pptp user configuration."""
-        endpoint = f"/pptp/server/{server_id}/users/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", f"/pptp/server/{server_id}/users/config", json={"data": config})
 
     def update_pptp_server_users_config(self, server_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update pptp user configurations."""
-        endpoint = f"/pptp/server/{server_id}/users/config"
+        return self._client.request("PUT", f"/pptp/server/{server_id}/users/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_pptp_server_users_config(self, server_id: str, config: list[str]) -> list[dict[str, Any]]:
+    def delete_pptp_server_users_config(self, server_id: str, config: list[str]) -> dict[str, Any]:
         """Delete pptp user configurations."""
-        return [self.delete_pptp_server_users_config_by_id(server_id, user_id) for user_id in config]
+        return self._client.request("DELETE", f"/pptp/server/{server_id}/users/config", json={"data": config})
 
-    def get_pptp_server_users_config_by_id(self, server_id: str, users_id: str) -> dict[str, Any]:
+    def get_pptp_server_users_config_by_id(
+        self, server_id: str, users_id: str, *, all_options: bool | None = None
+    ) -> dict[str, Any]:
         """Get pptp user configuration."""
-        endpoint = f"/pptp/server/{server_id}/users/config/{users_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request(
+            "GET", f"/pptp/server/{server_id}/users/config/{users_id}", params={"all_options": all_options}
+        )
 
     def update_pptp_server_users_config_by_id(
         self, server_id: str, users_id: str, config: dict[str, Any]
     ) -> dict[str, Any]:
         """Update pptp user configuration."""
-        endpoint = f"/pptp/server/{server_id}/users/config/{users_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/pptp/server/{server_id}/users/config/{users_id}", json={"data": config})
 
     def delete_pptp_server_users_config_by_id(self, server_id: str, users_id: str) -> dict[str, Any]:
         """Delete pptp user configuration."""
-        endpoint = f"/pptp/server/{server_id}/users/config/{users_id}"
+        return self._client.request("DELETE", f"/pptp/server/{server_id}/users/config/{users_id}")
 
-        return self._client.request("DELETE", endpoint)
+    def get_pptp_status(self) -> dict[str, Any]:
+        """Returns the status of all pptp instances."""
+        return self._client.request("GET", "/pptp/status")
+
+    def get_pptp_status_by_id(self, status_id: str) -> dict[str, Any]:
+        """Return the status of the pptp instance."""
+        return self._client.request("GET", f"/pptp/status/{status_id}")

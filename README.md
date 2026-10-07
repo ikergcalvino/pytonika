@@ -14,10 +14,10 @@ without building raw HTTP requests yourself.
 
 ## Features
 
-- **Device-aware** — each of the 84 supported models exposes exactly the endpoint groups documented for it,
+- **Device-aware** — each of the 88 supported models exposes the endpoint groups documented for it,
   so your editor autocompletes only what that device actually supports.
-- **Broad API coverage** — 160+ endpoint groups and 2,000+ operations, from interfaces and firewall to VPNs,
-  mobile, GPS, Modbus and more.
+- **Full API coverage** — 160+ endpoint groups and 2,500+ operations, from interfaces and firewall to VPNs,
+  mobile, GPS, Modbus and more, including file uploads and downloads.
 - **Simple session handling** — log in once and the Bearer token is attached to every subsequent request.
 - **Fully typed** — ships with `py.typed` and type hints on every public method.
 - **Lightweight** — synchronous client built on [httpx](https://www.python-httpx.org/), with no other runtime dependencies.
@@ -92,6 +92,30 @@ else:
 Pytonika does not raise exceptions for API-level errors, so check the `success` field before using `data`.
 Network failures (timeouts, connection errors) are raised by `httpx` as usual.
 
+### Query parameters, uploads and downloads
+
+Optional query parameters are keyword arguments, and are only sent when you pass them:
+
+```python
+device.wireguard.get_wireguard_config(all_options=True)
+```
+
+Methods that upload a file take a `file` argument: raw bytes, an open binary file, or a `(filename, content)` pair.
+Methods that download a file return its content as `bytes`, or the JSON error `dict` if the device refuses:
+
+```python
+from pathlib import Path
+
+with open("firmware.bin", "rb") as firmware:
+    device.firmware.firmware_actions_upload_device_firmware(firmware)
+
+device.backup.backup_actions_generate()
+backup = device.backup.backup_actions_download()
+
+if isinstance(backup, bytes):
+    Path("backup.tar.gz").write_bytes(backup)
+```
+
 ### Generic device classes
 
 If you don't need model-specific endpoints, use the generic class for the device family. It works with any model
@@ -107,19 +131,21 @@ with Router("https://192.168.1.1/", timeout=30.0) as router:
 
 ## Supported devices
 
-Pytonika supports **84 models** across four families. Each family has a generic class, and each model has its own
+Pytonika supports **88 models** across four families. Each family has a generic class, and each model has its own
 class with the endpoints specific to it:
 
 | Generic class | Models | Supported models |
 |---|---|---|
-| `Router` | 62 | ATRM50, CAP700, DAP140, DAP142, DAP145, OTD140, OTD144, OTD500, RUT140, RUT142, RUT145, RUT200, RUT202, RUT204, RUT206, RUT240, RUT241, RUT260, RUT271, RUT276, RUT281, RUT300, RUT301, RUT360, RUT361, RUT901, RUT906, RUT950, RUT951, RUT955, RUT956, RUT976, RUT981, RUT986, RUTC40, RUTC41, RUTC42, RUTC50, RUTM08, RUTM09, RUTM10, RUTM11, RUTM16, RUTM20, RUTM30, RUTM31, RUTM50, RUTM51, RUTM52, RUTM54, RUTM55, RUTM56, RUTM59, RUTX08, RUTX09, RUTX10, RUTX11, RUTX12, RUTX14, RUTX50, RUTXR1, TCR100 |
+| `Router` | 66 | ATRM50, CAP700, DAP140, DAP142, DAP145, OTD140, OTD144, OTD500, RUT140, RUT142, RUT145, RUT200, RUT202, RUT204, RUT206, RUT240, RUT241, RUT260, RUT261, RUT271, RUT276, RUT281, RUT286, RUT300, RUT301, RUT360, RUT361, RUT901, RUT906, RUT950, RUT951, RUT955, RUT956, RUT976, RUT981, RUT986, RUTC16, RUTC40, RUTC41, RUTC42, RUTC50, RUTC54, RUTM08, RUTM09, RUTM10, RUTM11, RUTM16, RUTM20, RUTM30, RUTM31, RUTM50, RUTM51, RUTM52, RUTM54, RUTM55, RUTM56, RUTM59, RUTX08, RUTX09, RUTX10, RUTX11, RUTX12, RUTX14, RUTX50, RUTXR1, TCR100 |
 | `Gateway` | 14 | TRB140, TRB141, TRB142, TRB143, TRB145, TRB160, TRB236, TRB245, TRB246, TRB247, TRB255, TRB256, TRB500, TRB501 |
 | `AccessPoint` | 3 | TAP100, TAP200, TAP400 |
 | `Switch` | 5 | SWM280, SWM281, SWM282, TSW202, TSW212 |
 
-Each model's endpoint set follows the official API reference for the latest firmware documented for that model.
-A few models are documented for older firmware lines (for example RUT240, RUT950 and RUT955), and their classes
-reflect that.
+Endpoints are generated from the official API reference for the latest firmware documented for each model:
+**RutOS 7.25.3** for most models. A few models are documented for older firmware lines (7.23.8 for RUTM31,
+7.14.5 for RUT300, RUT360, TCR100, TRB245 and TRB255, 7.6.21 for RUT240, RUT950 and RUT955, and SwOS 1.10.2
+for the switches), and their classes reflect that. Operations added in newer firmware return an error on devices
+running an older version.
 
 Missing a device? [Open a device request](https://github.com/ikergcalvino/pytonika/issues/new/choose).
 

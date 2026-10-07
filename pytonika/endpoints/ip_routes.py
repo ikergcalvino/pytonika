@@ -4,106 +4,66 @@ from ._endpoint import Endpoint
 
 
 class IPRoutes(Endpoint):
-    def get_ip_routes_ipv4_status(self) -> dict[str, Any]:
-        """Returns IPv4 routes."""
-        endpoint = "/ip_routes/ipv4/status"
-
-        return self._client.request("GET", endpoint)
-
-    def get_ip_routes_ipv4_config(self) -> dict[str, Any]:
+    def get_ip_routes_ipv4_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns static IPv4 route configurations."""
-        endpoint = "/ip_routes/ipv4/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/ip_routes/ipv4/config", params={"all_options": all_options})
 
     def create_ip_routes_ipv4_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates static IPv4 route configuration."""
-        endpoint = "/ip_routes/ipv4/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/ip_routes/ipv4/config", json={"data": config})
 
     def update_ip_routes_ipv4_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates static IPv4 route configurations."""
-        endpoint = "/ip_routes/ipv4/config"
+        return self._client.request("PUT", "/ip_routes/ipv4/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_ip_routes_ipv4_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_ip_routes_ipv4_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes static IPv4 route configurations."""
-        return [self.delete_ip_routes_ipv4_config_by_id(route_id) for route_id in config]
+        return self._client.request("DELETE", "/ip_routes/ipv4/config", json={"data": config})
 
-    def get_ip_routes_ipv4_config_by_id(self, route_id: str) -> dict[str, Any]:
+    def get_ip_routes_ipv4_config_by_id(self, route_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns static IPv4 route configuration."""
-        endpoint = f"/ip_routes/ipv4/config/{route_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/ip_routes/ipv4/config/{route_id}", params={"all_options": all_options})
 
     def update_ip_routes_ipv4_config_by_id(self, route_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates static IPv4 route configuration."""
-        endpoint = f"/ip_routes/ipv4/config/{route_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/ip_routes/ipv4/config/{route_id}", json={"data": config})
 
     def delete_ip_routes_ipv4_config_by_id(self, route_id: str) -> dict[str, Any]:
         """Deletes static IPv4 route configuration."""
-        endpoint = f"/ip_routes/ipv4/config/{route_id}"
+        return self._client.request("DELETE", f"/ip_routes/ipv4/config/{route_id}")
 
-        return self._client.request("DELETE", endpoint)
+    def get_ip_routes_ipv4_status(self) -> dict[str, Any]:
+        """Returns IPv4 routes."""
+        return self._client.request("GET", "/ip_routes/ipv4/status")
 
-    def get_ip_routes_ipv6_status(self) -> dict[str, Any]:
-        """Returns IPv6 routes."""
-        endpoint = "/ip_routes/ipv6/status"
-
-        return self._client.request("GET", endpoint)
-
-    def get_ip_routes_ipv6_config(self) -> dict[str, Any]:
+    def get_ip_routes_ipv6_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns static IPv6 route configurations."""
-        endpoint = "/ip_routes/ipv6/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/ip_routes/ipv6/config", params={"all_options": all_options})
 
     def create_ip_routes_ipv6_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates static IPv6 route configuration."""
-        endpoint = "/ip_routes/ipv6/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/ip_routes/ipv6/config", json={"data": config})
 
     def update_ip_routes_ipv6_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates static IPv6 route configurations."""
-        endpoint = "/ip_routes/ipv6/config"
+        return self._client.request("PUT", "/ip_routes/ipv6/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_ip_routes_ipv6_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_ip_routes_ipv6_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes static IPv6 route configurations."""
-        return [self.delete_ip_routes_ipv6_config_by_id(route_id) for route_id in config]
+        return self._client.request("DELETE", "/ip_routes/ipv6/config", json={"data": config})
 
-    def get_ip_routes_ipv6_config_by_id(self, route_id: str) -> dict[str, Any]:
+    def get_ip_routes_ipv6_config_by_id(self, route_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns static IPv6 route configuration."""
-        endpoint = f"/ip_routes/ipv6/config/{route_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/ip_routes/ipv6/config/{route_id}", params={"all_options": all_options})
 
     def update_ip_routes_ipv6_config_by_id(self, route_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates static IPv6 route configuration."""
-        endpoint = f"/ip_routes/ipv6/config/{route_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/ip_routes/ipv6/config/{route_id}", json={"data": config})
 
     def delete_ip_routes_ipv6_config_by_id(self, route_id: str) -> dict[str, Any]:
         """Deletes static IPv6 route configuration."""
-        endpoint = f"/ip_routes/ipv6/config/{route_id}"
+        return self._client.request("DELETE", f"/ip_routes/ipv6/config/{route_id}")
 
-        return self._client.request("DELETE", endpoint)
+    def get_ip_routes_ipv6_status(self) -> dict[str, Any]:
+        """Returns IPv6 routes."""
+        return self._client.request("GET", "/ip_routes/ipv6/status")

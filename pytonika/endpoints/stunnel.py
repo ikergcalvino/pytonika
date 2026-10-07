@@ -1,71 +1,47 @@
 from typing import Any
 
-from ._endpoint import Endpoint
+from ._endpoint import Endpoint, File
 
 
 class Stunnel(Endpoint):
-    def get_stunnel_global(self) -> dict[str, Any]:
-        """Returns specified stunnel global section."""
-        endpoint = "/stunnel/global"
-
-        return self._client.request("GET", endpoint)
-
-    def update_stunnel_global(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates specified stunnel global configuration."""
-        endpoint = "/stunnel/global"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_stunnel_config(self) -> dict[str, Any]:
+    def get_stunnel_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns all stunnel configuration sections."""
-        endpoint = "/stunnel/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/stunnel/config", params={"all_options": all_options})
 
     def create_stunnel_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates stunnel section."""
-        endpoint = "/stunnel/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/stunnel/config", json={"data": config})
 
     def update_stunnel_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update all section options."""
-        endpoint = "/stunnel/config"
+        return self._client.request("PUT", "/stunnel/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_stunnel_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_stunnel_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes specified stunnel configurations."""
-        return [self.delete_stunnel_config_by_id(stunnel_id) for stunnel_id in config]
+        return self._client.request("DELETE", "/stunnel/config", json={"data": config})
 
-    def get_stunnel_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_stunnel_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns specified stunnel section."""
-        endpoint = f"/stunnel/config/{config_id}"
+        return self._client.request("GET", f"/stunnel/config/{config_id}", params={"all_options": all_options})
 
-        return self._client.request("GET", endpoint)
-
-    def upload_stunnel_config_by_id(self, config_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_stunnel_config_by_id(self, config_id: str, file: File, *, option: str | None = None) -> dict[str, Any]:
         """Uploads certificates."""
-        endpoint = f"/stunnel/config/{config_id}"
-
-        return self._client.request("POST", endpoint, json={"data": data})
+        return self._client.request(
+            "POST", f"/stunnel/config/{config_id}", files={"file": file}, form={"option": option}
+        )
 
     def update_stunnel_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates specified stunnel configuration."""
-        endpoint = f"/stunnel/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/stunnel/config/{config_id}", json={"data": config})
 
     def delete_stunnel_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes specified stunnel configuration."""
-        endpoint = f"/stunnel/config/{config_id}"
+        return self._client.request("DELETE", f"/stunnel/config/{config_id}")
 
-        return self._client.request("DELETE", endpoint)
+    def get_stunnel_global(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns specified stunnel global section."""
+        return self._client.request("GET", "/stunnel/global", params={"all_options": all_options})
+
+    def update_stunnel_global(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates specified stunnel global configuration."""
+        return self._client.request("PUT", "/stunnel/global", json={"data": config})

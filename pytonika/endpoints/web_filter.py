@@ -4,90 +4,56 @@ from ._endpoint import Endpoint
 
 
 class WebFilter(Endpoint):
-    def get_webfilter_global(self) -> dict[str, Any]:
-        """Returns Site Blocking configuration."""
-        endpoint = "/webfilter/global"
-
-        return self._client.request("GET", endpoint)
-
-    def update_webfilter_global(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Updates Site Blocking configuration."""
-        endpoint = "/webfilter/global"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_webfilter_config(self) -> dict[str, Any]:
+    def get_webfilter_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns all Site Blocking rules."""
-        endpoint = "/webfilter/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/webfilter/config", params={"all_options": all_options})
 
     def create_webfilter_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates Site Blocking rule."""
-        endpoint = "/webfilter/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/webfilter/config", json={"data": config})
 
     def update_webfilter_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified Site Blocking rules."""
-        endpoint = "/webfilter/config"
+        return self._client.request("PUT", "/webfilter/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_webfilter_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_webfilter_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes specified Site Blocking rules."""
-        return [self.delete_webfilter_config_by_id(rule_id) for rule_id in config]
+        return self._client.request("DELETE", "/webfilter/config", json={"data": config})
 
-    def get_webfilter_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_webfilter_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns the specified Site Blocking rule."""
-        endpoint = f"/webfilter/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/webfilter/config/{config_id}", params={"all_options": all_options})
 
     def update_webfilter_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified Site Blocking rule."""
-        endpoint = f"/webfilter/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/webfilter/config/{config_id}", json={"data": config})
 
     def delete_webfilter_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes the specified Site Blocking rule."""
-        endpoint = f"/webfilter/config/{config_id}"
+        return self._client.request("DELETE", f"/webfilter/config/{config_id}")
 
-        return self._client.request("DELETE", endpoint)
+    def get_webfilter_global(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns Site Blocking configuration."""
+        return self._client.request("GET", "/webfilter/global", params={"all_options": all_options})
 
-    def get_webfilter_privoxy_config(self) -> dict[str, Any]:
+    def update_webfilter_global(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates Site Blocking configuration."""
+        return self._client.request("PUT", "/webfilter/global", json={"data": config})
+
+    def get_webfilter_privoxy_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns all Proxy Based URL Content Blocker configurations."""
-        endpoint = "/webfilter/privoxy/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/webfilter/privoxy/config", params={"all_options": all_options})
 
     def update_webfilter_privoxy_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified Proxy Based URL Content Blocker configurations."""
-        endpoint = "/webfilter/privoxy/config"
+        return self._client.request("PUT", "/webfilter/privoxy/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_webfilter_privoxy_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_webfilter_privoxy_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns the specified Proxy Based URL Content Blocker configuration."""
-        endpoint = f"/webfilter/privoxy/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request(
+            "GET", f"/webfilter/privoxy/config/{config_id}", params={"all_options": all_options}
+        )
 
     def update_webfilter_privoxy_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified Proxy Based URL Content Blocker configuration."""
-        endpoint = f"/webfilter/privoxy/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/webfilter/privoxy/config/{config_id}", json={"data": config})

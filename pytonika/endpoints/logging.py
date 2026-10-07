@@ -4,94 +4,60 @@ from ._endpoint import Endpoint
 
 
 class Logging(Endpoint):
-    def get_logging_services_config(self) -> dict[str, Any]:
-        """Returns Logging Services configuration."""
-        endpoint = "/logging/services/config"
+    def logging_actions_delete_log(self) -> dict[str, Any]:
+        """Deletes log file."""
+        return self._client.request("POST", "/logging/actions/delete_log")
 
-        return self._client.request("GET", endpoint)
-
-    def create_logging_services_config(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Creates Service Logging section."""
-        endpoint = "/logging/services/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def update_logging_services_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates Logging configuration."""
-        endpoint = "/logging/services/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_logging_services_config(self, config: list[str]) -> list[dict[str, Any]]:
-        """Deletes specified service's logging configuration."""
-        return [self.delete_logging_services_config_by_id(service_id) for service_id in config]
-
-    def get_logging_services_config_by_id(self, service_id: str) -> dict[str, Any]:
+    def get_logging_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns Logging configuration."""
-        endpoint = f"/logging/services/config/{service_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_logging_services_config_by_id(self, service_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Updates Logging configuration."""
-        endpoint = f"/logging/services/config/{service_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_logging_services_config_by_id(self, service_id: str) -> dict[str, Any]:
-        """Deletes specified service's logging configuration."""
-        endpoint = f"/logging/services/config/{service_id}"
-
-        return self._client.request("DELETE", endpoint)
-
-    def get_logging_services_status_by_id(self, service_id: str) -> dict[str, Any]:
-        """Returns information about log file."""
-        endpoint = f"/logging/services/status/{service_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def get_logging_config(self) -> dict[str, Any]:
-        """Returns Logging configuration."""
-        endpoint = "/logging/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/logging/config", params={"all_options": all_options})
 
     def update_logging_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates Logging configuration."""
-        endpoint = "/logging/config"
+        return self._client.request("PUT", "/logging/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_logging_config_by_id(self, logging_id: str) -> dict[str, Any]:
+    def get_logging_config_by_id(self, logging_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns Logging configuration."""
-        endpoint = f"/logging/config/{logging_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/logging/config/{logging_id}", params={"all_options": all_options})
 
     def update_logging_config_by_id(self, logging_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates Logging configuration."""
-        endpoint = f"/logging/config/{logging_id}"
+        return self._client.request("PUT", f"/logging/config/{logging_id}", json={"data": config})
 
-        data = {"data": config}
+    def get_logging_services_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns Logging Services configuration."""
+        return self._client.request("GET", "/logging/services/config", params={"all_options": all_options})
 
-        return self._client.request("PUT", endpoint, json=data)
+    def create_logging_services_config(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates Service Logging section."""
+        return self._client.request("POST", "/logging/services/config", json={"data": config})
+
+    def update_logging_services_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates Logging configuration."""
+        return self._client.request("PUT", "/logging/services/config", json={"data": config})
+
+    def delete_logging_services_config(self, config: list[str]) -> dict[str, Any]:
+        """Deletes specified service's logging configuration."""
+        return self._client.request("DELETE", "/logging/services/config", json={"data": config})
+
+    def get_logging_services_config_by_id(self, service_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns Logging configuration."""
+        return self._client.request(
+            "GET", f"/logging/services/config/{service_id}", params={"all_options": all_options}
+        )
+
+    def update_logging_services_config_by_id(self, service_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates Logging configuration."""
+        return self._client.request("PUT", f"/logging/services/config/{service_id}", json={"data": config})
+
+    def delete_logging_services_config_by_id(self, service_id: str) -> dict[str, Any]:
+        """Deletes specified service's logging configuration."""
+        return self._client.request("DELETE", f"/logging/services/config/{service_id}")
+
+    def get_logging_services_status_by_id(self, service_id: str) -> dict[str, Any]:
+        """Returns information about log file."""
+        return self._client.request("GET", f"/logging/services/status/{service_id}")
 
     def get_logging_status(self) -> dict[str, Any]:
         """Returns information about log file."""
-        endpoint = "/logging/status"
-
-        return self._client.request("GET", endpoint)
-
-    def logging_actions_delete_log(self) -> dict[str, Any]:
-        """Deletes log file."""
-        endpoint = "/logging/actions/delete_log"
-
-        return self._client.request("POST", endpoint)
+        return self._client.request("GET", "/logging/status")

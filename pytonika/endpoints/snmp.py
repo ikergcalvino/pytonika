@@ -4,268 +4,204 @@ from ._endpoint import Endpoint
 
 
 class SNMP(Endpoint):
-    def get_snmp_system_config(self) -> dict[str, Any]:
-        """Returns the general SNMP configuration in an array."""
-        endpoint = "/snmp/system/config"
-
-        return self._client.request("GET", endpoint)
-
-    def update_snmp_system_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates the general SNMP configuration in an array."""
-        endpoint = "/snmp/system/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_snmp_system_config_by_id(self, config_id: str) -> dict[str, Any]:
-        """Returns the general SNMP configuration."""
-        endpoint = f"/snmp/system/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_snmp_system_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Updates the general SNMP configuration."""
-        endpoint = f"/snmp/system/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def snmp_system_actions_download_mib(self, data: dict[str, Any]) -> dict[str, Any]:
-        """Downloads MIB File."""
-        endpoint = "/snmp/system/actions/download_mib"
-
-        return self._client.request("POST", endpoint, json={"data": data})
-
-    def get_snmp_communities_v6_config(self) -> dict[str, Any]:
-        """Returns all SNMP Communities V6 configurations."""
-        endpoint = "/snmp/communities_v6/config"
-
-        return self._client.request("GET", endpoint)
-
-    def create_snmp_communities_v6_config(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Creates SNMP Communities V6 configuration."""
-        endpoint = "/snmp/communities_v6/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def update_snmp_communities_v6_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates the specified SNMP Communities V6 configurations."""
-        endpoint = "/snmp/communities_v6/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_snmp_communities_v6_config(self, config: list[str]) -> list[dict[str, Any]]:
-        """Deletes specified SNMP Communities V6 configurations."""
-        return [self.delete_snmp_communities_v6_config_by_id(community_id) for community_id in config]
-
-    def get_snmp_communities_v6_config_by_id(self, community_id: str) -> dict[str, Any]:
-        """Returns the specified SNMP Communities V6 configuration."""
-        endpoint = f"/snmp/communities_v6/config/{community_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_snmp_communities_v6_config_by_id(self, community_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Updates the specified SNMP Communities V6 configuration."""
-        endpoint = f"/snmp/communities_v6/config/{community_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_snmp_communities_v6_config_by_id(self, community_id: str) -> dict[str, Any]:
-        """Deletes the specified SNMP Communities V6 configuration."""
-        endpoint = f"/snmp/communities_v6/config/{community_id}"
-
-        return self._client.request("DELETE", endpoint)
-
-    def get_snmp_trap_options(self) -> dict[str, Any]:
-        """Returns SNMP Trap Rules options."""
-        endpoint = "/snmp/trap/options"
-
-        return self._client.request("GET", endpoint)
-
-    def get_snmp_trap_config(self) -> dict[str, Any]:
-        """Returns all SNMP Trap Rules configurations."""
-        endpoint = "/snmp/trap/config"
-
-        return self._client.request("GET", endpoint)
-
-    def create_snmp_trap_config(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Creates a new SNMP Trap Rules configuration."""
-        endpoint = "/snmp/trap/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def update_snmp_trap_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates the specified SNMP Trap Rules configurations."""
-        endpoint = "/snmp/trap/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_snmp_trap_config(self, config: list[str]) -> list[dict[str, Any]]:
-        """Deletes the specified SNMP Trap Rules configurations."""
-        return [self.delete_snmp_trap_config_by_id(trap_id) for trap_id in config]
-
-    def get_snmp_trap_config_by_id(self, trap_id: str) -> dict[str, Any]:
-        """Returns the specified SNMP Trap Rules configuration."""
-        endpoint = f"/snmp/trap/config/{trap_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_snmp_trap_config_by_id(self, trap_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Updates the specified SNMP Trap Rules configuration."""
-        endpoint = f"/snmp/trap/config/{trap_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_snmp_trap_config_by_id(self, trap_id: str) -> dict[str, Any]:
-        """Deletes the specified SNMP Trap Rules configuration."""
-        endpoint = f"/snmp/trap/config/{trap_id}"
-
-        return self._client.request("DELETE", endpoint)
-
-    def get_snmp_agent_config(self) -> dict[str, Any]:
+    def get_snmp_agent_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns the general SNMP Settings configuration in an array."""
-        endpoint = "/snmp/agent/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/snmp/agent/config", params={"all_options": all_options})
 
     def update_snmp_agent_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates the general SNMP Settings configuration in an array."""
-        endpoint = "/snmp/agent/config"
+        return self._client.request("PUT", "/snmp/agent/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_snmp_agent_config_by_id(self, agent_id: str) -> dict[str, Any]:
+    def get_snmp_agent_config_by_id(self, agent_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns the general SNMP Settings configuration."""
-        endpoint = f"/snmp/agent/config/{agent_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/snmp/agent/config/{agent_id}", params={"all_options": all_options})
 
     def update_snmp_agent_config_by_id(self, agent_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the general SNMP Settings configuration."""
-        endpoint = f"/snmp/agent/config/{agent_id}"
+        return self._client.request("PUT", f"/snmp/agent/config/{agent_id}", json={"data": config})
 
-        data = {"data": config}
+    def get_snmp_agent_objects_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns all object configurations. Data sources can be found using /universal_gateway/options endpoint."""
+        return self._client.request("GET", "/snmp/agent/objects/config", params={"all_options": all_options})
 
-        return self._client.request("PUT", endpoint, json=data)
+    def create_snmp_agent_objects_config(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates a new object configuration."""
+        return self._client.request("POST", "/snmp/agent/objects/config", json={"data": config})
 
-    def get_snmp_users_config(self) -> dict[str, Any]:
-        """Returns all SNMP V3 user configurations."""
-        endpoint = "/snmp/users/config"
+    def update_snmp_agent_objects_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates specified object configuration. Data sources can be found using /universal_gateway/options
+        endpoint.
+        """
+        return self._client.request("PUT", "/snmp/agent/objects/config", json={"data": config})
 
-        return self._client.request("GET", endpoint)
+    def delete_snmp_agent_objects_config(self, config: list[str]) -> dict[str, Any]:
+        """Deletes specified object configurations."""
+        return self._client.request("DELETE", "/snmp/agent/objects/config", json={"data": config})
 
-    def create_snmp_users_config(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Creates a new SNMP V3 user configuration."""
-        endpoint = "/snmp/users/config"
+    def get_snmp_agent_objects_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Return object configuration. Data sources can be found using /universal_gateway/options endpoint."""
+        return self._client.request(
+            "GET", f"/snmp/agent/objects/config/{config_id}", params={"all_options": all_options}
+        )
 
-        data = {"data": config}
+    def update_snmp_agent_objects_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates the specified object configuration. Data sources can be found using /universal_gateway/options
+        endpoint.
+        """
+        return self._client.request("PUT", f"/snmp/agent/objects/config/{config_id}", json={"data": config})
 
-        return self._client.request("POST", endpoint, json=data)
+    def delete_snmp_agent_objects_config_by_id(self, config_id: str) -> dict[str, Any]:
+        """Deletes the specified object configuration."""
+        return self._client.request("DELETE", f"/snmp/agent/objects/config/{config_id}")
 
-    def update_snmp_users_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates the specified SNMP V3 user configurations."""
-        endpoint = "/snmp/users/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_snmp_users_config(self, config: list[str]) -> list[dict[str, Any]]:
-        """Deletes the specified SNMP V3 user configurations."""
-        return [self.delete_snmp_users_config_by_id(user_id) for user_id in config]
-
-    def get_snmp_users_config_by_id(self, user_id: str) -> dict[str, Any]:
-        """Returns the specified SNMP V3 user configuration."""
-        endpoint = f"/snmp/users/config/{user_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_snmp_users_config_by_id(self, user_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Updates the specified SNMP V3 user configuration."""
-        endpoint = f"/snmp/users/config/{user_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_snmp_users_config_by_id(self, user_id: str) -> dict[str, Any]:
-        """Deletes the specified SNMP V3 user configuration."""
-        endpoint = f"/snmp/users/config/{user_id}"
-
-        return self._client.request("DELETE", endpoint)
-
-    def get_snmp_communities_config(self) -> dict[str, Any]:
+    def get_snmp_communities_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns all SNMP Communities configurations."""
-        endpoint = "/snmp/communities/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/snmp/communities/config", params={"all_options": all_options})
 
     def create_snmp_communities_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates SNMP Communities configuration."""
-        endpoint = "/snmp/communities/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/snmp/communities/config", json={"data": config})
 
     def update_snmp_communities_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates the specified SNMP Communities configurations."""
-        endpoint = "/snmp/communities/config"
+        return self._client.request("PUT", "/snmp/communities/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_snmp_communities_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_snmp_communities_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes specified SNMP Communities configurations."""
-        return [self.delete_snmp_communities_config_by_id(community_id) for community_id in config]
+        return self._client.request("DELETE", "/snmp/communities/config", json={"data": config})
 
-    def get_snmp_communities_config_by_id(self, community_id: str) -> dict[str, Any]:
+    def get_snmp_communities_config_by_id(
+        self, community_id: str, *, all_options: bool | None = None
+    ) -> dict[str, Any]:
         """Returns the specified SNMP Communities configuration."""
-        endpoint = f"/snmp/communities/config/{community_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request(
+            "GET", f"/snmp/communities/config/{community_id}", params={"all_options": all_options}
+        )
 
     def update_snmp_communities_config_by_id(self, community_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified SNMP Communities configuration."""
-        endpoint = f"/snmp/communities/config/{community_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/snmp/communities/config/{community_id}", json={"data": config})
 
     def delete_snmp_communities_config_by_id(self, community_id: str) -> dict[str, Any]:
         """Deletes the specified SNMP Communities configuration."""
-        endpoint = f"/snmp/communities/config/{community_id}"
+        return self._client.request("DELETE", f"/snmp/communities/config/{community_id}")
 
-        return self._client.request("DELETE", endpoint)
+    def get_snmp_communities_v6_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns all SNMP Communities V6 configurations."""
+        return self._client.request("GET", "/snmp/communities_v6/config", params={"all_options": all_options})
 
-    def get_snmp_trap_global(self) -> dict[str, Any]:
+    def create_snmp_communities_v6_config(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates SNMP Communities V6 configuration."""
+        return self._client.request("POST", "/snmp/communities_v6/config", json={"data": config})
+
+    def update_snmp_communities_v6_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates the specified SNMP Communities V6 configurations."""
+        return self._client.request("PUT", "/snmp/communities_v6/config", json={"data": config})
+
+    def delete_snmp_communities_v6_config(self, config: list[str]) -> dict[str, Any]:
+        """Deletes specified SNMP Communities V6 configurations."""
+        return self._client.request("DELETE", "/snmp/communities_v6/config", json={"data": config})
+
+    def get_snmp_communities_v6_config_by_id(
+        self, community_id: str, *, all_options: bool | None = None
+    ) -> dict[str, Any]:
+        """Returns the specified SNMP Communities V6 configuration."""
+        return self._client.request(
+            "GET", f"/snmp/communities_v6/config/{community_id}", params={"all_options": all_options}
+        )
+
+    def update_snmp_communities_v6_config_by_id(self, community_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates the specified SNMP Communities V6 configuration."""
+        return self._client.request("PUT", f"/snmp/communities_v6/config/{community_id}", json={"data": config})
+
+    def delete_snmp_communities_v6_config_by_id(self, community_id: str) -> dict[str, Any]:
+        """Deletes the specified SNMP Communities V6 configuration."""
+        return self._client.request("DELETE", f"/snmp/communities_v6/config/{community_id}")
+
+    def snmp_system_actions_download_mib(self) -> bytes | dict[str, Any]:
+        """Downloads MIB File."""
+        return self._client.request("POST", "/snmp/system/actions/download_mib", download=True)
+
+    def get_snmp_system_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns the general SNMP configuration in an array."""
+        return self._client.request("GET", "/snmp/system/config", params={"all_options": all_options})
+
+    def update_snmp_system_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates the general SNMP configuration in an array."""
+        return self._client.request("PUT", "/snmp/system/config", json={"data": config})
+
+    def get_snmp_system_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns the general SNMP configuration."""
+        return self._client.request("GET", f"/snmp/system/config/{config_id}", params={"all_options": all_options})
+
+    def update_snmp_system_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates the general SNMP configuration."""
+        return self._client.request("PUT", f"/snmp/system/config/{config_id}", json={"data": config})
+
+    def get_snmp_trap_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns all SNMP Trap Rules configurations."""
+        return self._client.request("GET", "/snmp/trap/config", params={"all_options": all_options})
+
+    def create_snmp_trap_config(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates a new SNMP Trap Rules configuration."""
+        return self._client.request("POST", "/snmp/trap/config", json={"data": config})
+
+    def update_snmp_trap_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates the specified SNMP Trap Rules configurations."""
+        return self._client.request("PUT", "/snmp/trap/config", json={"data": config})
+
+    def delete_snmp_trap_config(self, config: list[str]) -> dict[str, Any]:
+        """Deletes the specified SNMP Trap Rules configurations."""
+        return self._client.request("DELETE", "/snmp/trap/config", json={"data": config})
+
+    def get_snmp_trap_config_by_id(self, trap_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns the specified SNMP Trap Rules configuration."""
+        return self._client.request("GET", f"/snmp/trap/config/{trap_id}", params={"all_options": all_options})
+
+    def update_snmp_trap_config_by_id(self, trap_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates the specified SNMP Trap Rules configuration."""
+        return self._client.request("PUT", f"/snmp/trap/config/{trap_id}", json={"data": config})
+
+    def delete_snmp_trap_config_by_id(self, trap_id: str) -> dict[str, Any]:
+        """Deletes the specified SNMP Trap Rules configuration."""
+        return self._client.request("DELETE", f"/snmp/trap/config/{trap_id}")
+
+    def get_snmp_trap_global(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns the general SNMP trap settings configuration."""
-        endpoint = "/snmp/trap/global"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/snmp/trap/global", params={"all_options": all_options})
 
     def update_snmp_trap_global(self, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the general SNMP trap settings configuration."""
-        endpoint = "/snmp/trap/global"
+        return self._client.request("PUT", "/snmp/trap/global", json={"data": config})
 
-        data = {"data": config}
+    def get_snmp_trap_options(self) -> dict[str, Any]:
+        """Returns SNMP Trap Rules options."""
+        return self._client.request("GET", "/snmp/trap/options")
 
-        return self._client.request("PUT", endpoint, json=data)
+    def get_snmp_users_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns all SNMP V3 user configurations."""
+        return self._client.request("GET", "/snmp/users/config", params={"all_options": all_options})
+
+    def create_snmp_users_config(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates a new SNMP V3 user configuration."""
+        return self._client.request("POST", "/snmp/users/config", json={"data": config})
+
+    def update_snmp_users_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates the specified SNMP V3 user configurations."""
+        return self._client.request("PUT", "/snmp/users/config", json={"data": config})
+
+    def delete_snmp_users_config(self, config: list[str]) -> dict[str, Any]:
+        """Deletes the specified SNMP V3 user configurations."""
+        return self._client.request("DELETE", "/snmp/users/config", json={"data": config})
+
+    def get_snmp_users_config_by_id(self, user_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns the specified SNMP V3 user configuration."""
+        return self._client.request("GET", f"/snmp/users/config/{user_id}", params={"all_options": all_options})
+
+    def update_snmp_users_config_by_id(self, user_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates the specified SNMP V3 user configuration."""
+        return self._client.request("PUT", f"/snmp/users/config/{user_id}", json={"data": config})
+
+    def delete_snmp_users_config_by_id(self, user_id: str) -> dict[str, Any]:
+        """Deletes the specified SNMP V3 user configuration."""
+        return self._client.request("DELETE", f"/snmp/users/config/{user_id}")

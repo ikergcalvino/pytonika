@@ -50,6 +50,9 @@ class APIClient:
         if params:
             params = {name: value for name, value in params.items() if value is not None}
 
+        if form:
+            form = {name: value for name, value in form.items() if value is not None}
+
         response = self._session.request(method, path, params=params, json=json, files=files, data=form)
 
         if download and not response.headers.get("Content-Type", "").startswith("application/json"):

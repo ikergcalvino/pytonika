@@ -5,21 +5,13 @@ from ._endpoint import Endpoint
 
 class UniversalGateway(Endpoint):
     def get_universal_gateway_options(self) -> dict[str, Any]:
-        """Returns available tag options.
-
-        A tag is an abstraction representing a single data point (such as a value or parameter)
-        that can be read from or written to various protocol clients.
+        """Returns available tag options. A tag is an abstraction representing a single data point (such as a value
+        or parameter) that can be read from or written to various protocol clients.
         """
-        endpoint = "/universal_gateway/options"
+        return self._client.request("GET", "/universal_gateway/options")
 
-        return self._client.request("GET", endpoint)
-
-    def get_universal_gateway_status(self) -> dict[str, Any]:
-        """Returns tag ids from all configured data sources.
-
-        A tag is an abstraction representing a single data point (such as a value or parameter)
-        that can be read from or written to various protocol clients.
+    def get_universal_gateway_status(self, *, client_service: str | None = None) -> dict[str, Any]:
+        """Returns tag ids from all configured data sources. A tag is an abstraction representing a single data point
+        (such as a value or parameter) that can be read from or written to various protocol clients.
         """
-        endpoint = "/universal_gateway/status"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/universal_gateway/status", params={"client_service": client_service})

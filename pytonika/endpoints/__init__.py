@@ -10,9 +10,11 @@ from .bacnet import Bacnet
 from .bfd import BFD
 from .bgp import BGP
 from .bluetooth import Bluetooth
+from .bonding import Bonding
 from .cable_diagnostic import CableDiagnostic
 from .call_utilities import CallUtilities
 from .can import CAN
+from .canopen_sdo_client import CANopenSDOClient
 from .certificates import Certificates
 from .cloud_of_things import CloudOfThings
 from .console import Console
@@ -93,6 +95,7 @@ from .openconnect import OpenConnect
 from .openvpn import OpenVPN
 from .operator_lists import OperatorLists
 from .ospf import OSPF
+from .ospfv3 import OSPFv3
 from .overip import OverIP
 from .package_manager import PackageManager
 from .password_policy import PasswordPolicy
@@ -151,12 +154,12 @@ from .udp_broadcast_relay import UDPBroadcastRelay
 from .unauthorized import Unauthorized
 from .universal_gateway import UniversalGateway
 from .upnp import UPnP
-from .usb_tools import UsbTools
 from .users import Users
 from .vrf import VRF
 from .vrrp import VRRP
 from .wake_on_lan import WakeOnLan
 from .web_filter import WebFilter
+from .wfq import WFQ
 from .wifi_scanner import WiFiScanner
 from .wireguard import WireGuard
 from .wireless import Wireless
@@ -176,9 +179,11 @@ __all__ = [
     "BFD",
     "BGP",
     "Bluetooth",
+    "Bonding",
     "CableDiagnostic",
     "CallUtilities",
     "CAN",
+    "CANopenSDOClient",
     "Certificates",
     "CloudOfThings",
     "Console",
@@ -259,6 +264,7 @@ __all__ = [
     "OpenVPN",
     "OperatorLists",
     "OSPF",
+    "OSPFv3",
     "OverIP",
     "PackageManager",
     "PasswordPolicy",
@@ -317,12 +323,12 @@ __all__ = [
     "Unauthorized",
     "UniversalGateway",
     "UPnP",
-    "UsbTools",
     "Users",
     "VRF",
     "VRRP",
     "WakeOnLan",
     "WebFilter",
+    "WFQ",
     "WiFiScanner",
     "WireGuard",
     "Wireless",

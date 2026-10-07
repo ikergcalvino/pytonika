@@ -4,48 +4,38 @@ from ._endpoint import Endpoint
 
 
 class VRF(Endpoint):
-    def get_vrf_config(self) -> dict[str, Any]:
+    def get_vrf_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns VRF configurations."""
-        endpoint = "/vrf/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/vrf/config", params={"all_options": all_options})
 
     def create_vrf_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates VRF configuration."""
-        endpoint = "/vrf/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/vrf/config", json={"data": config})
 
     def update_vrf_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates VRF configurations."""
-        endpoint = "/vrf/config"
+        return self._client.request("PUT", "/vrf/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_vrf_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_vrf_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes VRF configurations."""
-        return [self.delete_vrf_config_by_id(config_id) for config_id in config]
+        return self._client.request("DELETE", "/vrf/config", json={"data": config})
 
-    def get_vrf_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_vrf_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns VRF configuration."""
-        endpoint = f"/vrf/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/vrf/config/{config_id}", params={"all_options": all_options})
 
     def update_vrf_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates VRF configuration."""
-        endpoint = f"/vrf/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/vrf/config/{config_id}", json={"data": config})
 
     def delete_vrf_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Deletes VRF configuration."""
-        endpoint = f"/vrf/config/{config_id}"
+        return self._client.request("DELETE", f"/vrf/config/{config_id}")
 
-        return self._client.request("DELETE", endpoint)
+    def get_vrf_global(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns global VRF configuration."""
+        return self._client.request("GET", "/vrf/global", params={"all_options": all_options})
+
+    def update_vrf_global(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates global VRF configuration."""
+        return self._client.request("PUT", "/vrf/global", json={"data": config})

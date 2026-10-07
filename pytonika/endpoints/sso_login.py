@@ -6,8 +6,4 @@ from ._endpoint import Endpoint
 class SSOLogin(Endpoint):
     def sso_login(self, config: dict[str, Any]) -> dict[str, Any]:
         """Authenticates user via SSO provider."""
-        endpoint = "/sso_login"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/sso_login", json={"data": config})

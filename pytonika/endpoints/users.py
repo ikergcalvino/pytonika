@@ -4,100 +4,62 @@ from ._endpoint import Endpoint
 
 
 class Users(Endpoint):
-    def get_users_config(self) -> dict[str, Any]:
-        """Returns all users configurations."""
-        endpoint = "/users/config"
+    def get_users_acls_options(self) -> dict[str, Any]:
+        """Returns current user's permissions (ACL's)."""
+        return self._client.request("GET", "/users/acls/options")
 
-        return self._client.request("GET", endpoint)
+    def get_users_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns all users configurations."""
+        return self._client.request("GET", "/users/config", params={"all_options": all_options})
 
     def create_users_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates users configuration."""
-        endpoint = "/users/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/users/config", json={"data": config})
 
     def update_users_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified users configurations."""
-        endpoint = "/users/config"
+        return self._client.request("PUT", "/users/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_users_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_users_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes specified users configurations."""
-        return [self.delete_users_config_by_id(user_id) for user_id in config]
+        return self._client.request("DELETE", "/users/config", json={"data": config})
 
-    def get_users_config_by_id(self, user_id: str) -> dict[str, Any]:
+    def get_users_config_by_id(self, user_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns the specified users configuration."""
-        endpoint = f"/users/config/{user_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/users/config/{user_id}", params={"all_options": all_options})
 
     def update_users_config_by_id(self, user_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates the specified users configuration."""
-        endpoint = f"/users/config/{user_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/users/config/{user_id}", json={"data": config})
 
     def delete_users_config_by_id(self, user_id: str) -> dict[str, Any]:
         """Deletes the specified users configuration."""
-        endpoint = f"/users/config/{user_id}"
+        return self._client.request("DELETE", f"/users/config/{user_id}")
 
-        return self._client.request("DELETE", endpoint)
-
-    def get_users_acls_options(self) -> dict[str, Any]:
-        """Returns current user's permissions (ACL's)."""
-        endpoint = "/users/acls/options"
-
-        return self._client.request("GET", endpoint)
-
-    def get_users_groups_config(self) -> dict[str, Any]:
+    def get_users_groups_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns all groups configurations."""
-        endpoint = "/users/groups/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/users/groups/config", params={"all_options": all_options})
 
     def create_users_groups_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates a new group configuration."""
-        endpoint = "/users/groups/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/users/groups/config", json={"data": config})
 
     def update_users_groups_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates specified groups configurations."""
-        endpoint = "/users/groups/config"
+        return self._client.request("PUT", "/users/groups/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_users_groups_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_users_groups_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes the specified group configurations."""
-        return [self.delete_users_groups_config_by_id(group_id) for group_id in config]
+        return self._client.request("DELETE", "/users/groups/config", json={"data": config})
 
-    def get_users_groups_config_by_id(self, group_id: str) -> dict[str, Any]:
+    def get_users_groups_config_by_id(self, group_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns specified groups configuration."""
-        endpoint = f"/users/groups/config/{group_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/users/groups/config/{group_id}", params={"all_options": all_options})
 
     def update_users_groups_config_by_id(self, group_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates specified groups configuration."""
-        endpoint = f"/users/groups/config/{group_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/users/groups/config/{group_id}", json={"data": config})
 
     def delete_users_groups_config_by_id(self, group_id: str) -> dict[str, Any]:
         """Deletes the specified group configuration."""
-        endpoint = f"/users/groups/config/{group_id}"
-
-        return self._client.request("DELETE", endpoint)
+        return self._client.request("DELETE", f"/users/groups/config/{group_id}")

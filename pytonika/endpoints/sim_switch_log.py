@@ -4,14 +4,10 @@ from ._endpoint import Endpoint
 
 
 class SIMSwitchLog(Endpoint):
-    def get_sim_switch_log(self) -> dict[str, Any]:
+    def get_sim_switch_log(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns SIM switch operation log for all modems."""
-        endpoint = "/sim_switch/log"
+        return self._client.request("GET", "/sim_switch/log", params={"all_options": all_options})
 
-        return self._client.request("GET", endpoint)
-
-    def get_sim_switch_log_by_id(self, modem_id: str) -> dict[str, Any]:
+    def get_sim_switch_log_by_id(self, modem_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns SIM switch operation log for specified modem."""
-        endpoint = f"/sim_switch/log/{modem_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/sim_switch/log/{modem_id}", params={"all_options": all_options})

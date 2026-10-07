@@ -1,57 +1,37 @@
 from typing import Any
 
-from ._endpoint import Endpoint
+from ._endpoint import Endpoint, File
 
 
 class SSO(Endpoint):
-    def get_sso_config(self) -> dict[str, Any]:
+    def get_sso_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns SSO configurations."""
-        endpoint = "/sso/config"
+        return self._client.request("GET", "/sso/config", params={"all_options": all_options})
 
-        return self._client.request("GET", endpoint)
-
-    def create_sso_config(self, config: dict[str, Any]) -> dict[str, Any]:
+    def create_sso_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Creates SSO configuration."""
-        endpoint = "/sso/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/sso/config", json={"data": config})
 
     def update_sso_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates SSO configurations."""
-        endpoint = "/sso/config"
+        return self._client.request("PUT", "/sso/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_sso_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_sso_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes SSO configurations."""
-        return [self.delete_sso_config_by_id(sso_id) for sso_id in config]
+        return self._client.request("DELETE", "/sso/config", json={"data": config})
 
-    def get_sso_config_by_id(self, sso_id: str) -> dict[str, Any]:
+    def get_sso_config_by_id(self, sso_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns SSO configuration."""
-        endpoint = f"/sso/config/{sso_id}"
+        return self._client.request("GET", f"/sso/config/{sso_id}", params={"all_options": all_options})
 
-        return self._client.request("GET", endpoint)
-
-    def upload_sso_config_by_id(self, sso_id: str, data: dict[str, Any]) -> dict[str, Any]:
+    def upload_sso_config_by_id(self, sso_id: str, file: File, *, option: str | None = None) -> dict[str, Any]:
         """Uploads icon file for SSO configuration."""
-        endpoint = f"/sso/config/{sso_id}"
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", f"/sso/config/{sso_id}", files={"file": file}, form={"option": option})
 
     def update_sso_config_by_id(self, sso_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates SSO configuration."""
-        endpoint = f"/sso/config/{sso_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/sso/config/{sso_id}", json={"data": config})
 
     def delete_sso_config_by_id(self, sso_id: str) -> dict[str, Any]:
         """Deletes SSO configuration."""
-        endpoint = f"/sso/config/{sso_id}"
-
-        return self._client.request("DELETE", endpoint)
+        return self._client.request("DELETE", f"/sso/config/{sso_id}")

@@ -4,152 +4,94 @@ from ._endpoint import Endpoint
 
 
 class L2TP(Endpoint):
-    def get_l2tp_status(self) -> dict[str, Any]:
-        """Returns the status of all l2tp instances."""
-        endpoint = "/l2tp/status"
-
-        return self._client.request("GET", endpoint)
-
-    def get_l2tp_status_by_id(self, status_id: str) -> dict[str, Any]:
-        """Return the status of the l2tp instance."""
-        endpoint = f"/l2tp/status/{status_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def get_l2tp_client_config(self) -> dict[str, Any]:
+    def get_l2tp_client_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Get l2tp client configurations."""
-        endpoint = "/l2tp/client/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/l2tp/client/config", params={"all_options": all_options})
 
     def create_l2tp_client_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create l2tp client configuration."""
-        endpoint = "/l2tp/client/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/l2tp/client/config", json={"data": config})
 
     def update_l2tp_client_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update l2tp client configurations."""
-        endpoint = "/l2tp/client/config"
+        return self._client.request("PUT", "/l2tp/client/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_l2tp_client_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_l2tp_client_config(self, config: list[str]) -> dict[str, Any]:
         """Delete l2tp client configurations."""
-        return [self.delete_l2tp_client_config_by_id(config_id) for config_id in config]
+        return self._client.request("DELETE", "/l2tp/client/config", json={"data": config})
 
-    def get_l2tp_client_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_l2tp_client_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Get l2tp client configuration."""
-        endpoint = f"/l2tp/client/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/l2tp/client/config/{config_id}", params={"all_options": all_options})
 
     def update_l2tp_client_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update l2tp client configuration."""
-        endpoint = f"/l2tp/client/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/l2tp/client/config/{config_id}", json={"data": config})
 
     def delete_l2tp_client_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Delete l2tp client configuration."""
-        endpoint = f"/l2tp/client/config/{config_id}"
+        return self._client.request("DELETE", f"/l2tp/client/config/{config_id}")
 
-        return self._client.request("DELETE", endpoint)
-
-    def get_l2tp_server_config(self) -> dict[str, Any]:
+    def get_l2tp_server_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Get l2tp server configurations."""
-        endpoint = "/l2tp/server/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/l2tp/server/config", params={"all_options": all_options})
 
     def create_l2tp_server_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create l2tp server configuration."""
-        endpoint = "/l2tp/server/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/l2tp/server/config", json={"data": config})
 
     def update_l2tp_server_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update l2tp server configurations."""
-        endpoint = "/l2tp/server/config"
+        return self._client.request("PUT", "/l2tp/server/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_l2tp_server_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_l2tp_server_config(self, config: list[str]) -> dict[str, Any]:
         """Delete l2tp server configurations."""
-        return [self.delete_l2tp_server_config_by_id(config_id) for config_id in config]
+        return self._client.request("DELETE", "/l2tp/server/config", json={"data": config})
 
-    def get_l2tp_server_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_l2tp_server_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Get l2tp server configuration."""
-        endpoint = f"/l2tp/server/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/l2tp/server/config/{config_id}", params={"all_options": all_options})
 
     def update_l2tp_server_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update l2tp server configuration."""
-        endpoint = f"/l2tp/server/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/l2tp/server/config/{config_id}", json={"data": config})
 
     def delete_l2tp_server_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Delete l2tp server configuration."""
-        endpoint = f"/l2tp/server/config/{config_id}"
+        return self._client.request("DELETE", f"/l2tp/server/config/{config_id}")
 
-        return self._client.request("DELETE", endpoint)
+    def get_l2tp_status(self) -> dict[str, Any]:
+        """Returns the status of all l2tp instances."""
+        return self._client.request("GET", "/l2tp/status")
 
-    def get_l2tp_users_config(self) -> dict[str, Any]:
+    def get_l2tp_status_by_id(self, status_id: str) -> dict[str, Any]:
+        """Return the status of the l2tp instance."""
+        return self._client.request("GET", f"/l2tp/status/{status_id}")
+
+    def get_l2tp_users_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Get l2tp user configurations."""
-        endpoint = "/l2tp/users/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/l2tp/users/config", params={"all_options": all_options})
 
     def create_l2tp_users_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Create l2tp user configurations."""
-        endpoint = "/l2tp/users/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/l2tp/users/config", json={"data": config})
 
     def update_l2tp_users_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Update l2tp user configurations."""
-        endpoint = "/l2tp/users/config"
+        return self._client.request("PUT", "/l2tp/users/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_l2tp_users_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_l2tp_users_config(self, config: list[str]) -> dict[str, Any]:
         """Delete l2tp user configurations."""
-        return [self.delete_l2tp_users_config_by_id(config_id) for config_id in config]
+        return self._client.request("DELETE", "/l2tp/users/config", json={"data": config})
 
-    def get_l2tp_users_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def get_l2tp_users_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
         """Get user configuration."""
-        endpoint = f"/l2tp/users/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/l2tp/users/config/{config_id}", params={"all_options": all_options})
 
     def update_l2tp_users_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Update user configuration."""
-        endpoint = f"/l2tp/users/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/l2tp/users/config/{config_id}", json={"data": config})
 
     def delete_l2tp_users_config_by_id(self, config_id: str) -> dict[str, Any]:
         """Delete user configuration."""
-        endpoint = f"/l2tp/users/config/{config_id}"
-
-        return self._client.request("DELETE", endpoint)
+        return self._client.request("DELETE", f"/l2tp/users/config/{config_id}")

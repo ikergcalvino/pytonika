@@ -4,30 +4,18 @@ from ._endpoint import Endpoint
 
 
 class WiFiScanner(Endpoint):
-    def get_wifi_scanner_config(self) -> dict[str, Any]:
+    def get_wifi_scanner_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns Wifi Scanner configurations."""
-        endpoint = "/wifi_scanner/config"
-
-        return self._client.request("GET", endpoint)
-
-    def get_wifi_scanner_config_by_id(self, config_id: str) -> dict[str, Any]:
-        """Returns Wifi Scanner configuration."""
-        endpoint = f"/wifi_scanner/config/{config_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/wifi_scanner/config", params={"all_options": all_options})
 
     def update_wifi_scanner_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates Wifi Scanner configurations."""
-        endpoint = "/wifi_scanner/config"
+        return self._client.request("PUT", "/wifi_scanner/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+    def get_wifi_scanner_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns Wifi Scanner configuration."""
+        return self._client.request("GET", f"/wifi_scanner/config/{config_id}", params={"all_options": all_options})
 
     def update_wifi_scanner_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
         """Updates Wifi Scanner configuration."""
-        endpoint = f"/wifi_scanner/config/{config_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", f"/wifi_scanner/config/{config_id}", json={"data": config})

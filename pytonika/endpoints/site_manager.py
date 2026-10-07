@@ -4,496 +4,362 @@ from ._endpoint import Endpoint
 
 
 class SiteManager(Endpoint):
-    def get_site_manager_interfaces_config(self) -> dict[str, Any]:
-        """Returns all Site manager network interface configurations."""
-        endpoint = "/site_manager/interfaces/config"
-
-        return self._client.request("GET", endpoint)
-
-    def update_site_manager_interfaces_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates the selected Site manager network interface configurations."""
-        endpoint = "/site_manager/interfaces/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_site_manager_interfaces_config_by_id(self, interface_id: str) -> dict[str, Any]:
-        """Returns the selected Site manager network interface configuration."""
-        endpoint = f"/site_manager/interfaces/config/{interface_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_site_manager_interfaces_config_by_id(self, interface_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Updates the selected Site manager network interface configuration."""
-        endpoint = f"/site_manager/interfaces/config/{interface_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_site_manager_wireless_interfaces_config(self) -> dict[str, Any]:
-        """Returns all Site manager wireless interface configurations."""
-        endpoint = "/site_manager/wireless/interfaces/config"
-
-        return self._client.request("GET", endpoint)
-
-    def create_site_manager_wireless_interfaces_config(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Creates a new Site manager wireless interface configuration."""
-        endpoint = "/site_manager/wireless/interfaces/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def update_site_manager_wireless_interfaces_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates the selected Site manager wireless interface configurations."""
-        endpoint = "/site_manager/wireless/interfaces/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_site_manager_wireless_interfaces_config(self, config: list[str]) -> list[dict[str, Any]]:
-        """Deletes the selected Site manager wireless interface configurations."""
-        return [self.delete_site_manager_wireless_interfaces_config_by_id(interface_id) for interface_id in config]
-
-    def get_site_manager_wireless_interfaces_config_by_id(self, interface_id: str) -> dict[str, Any]:
-        """Returns the selected Site manager wireless interface configuration."""
-        endpoint = f"/site_manager/wireless/interfaces/config/{interface_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_site_manager_wireless_interfaces_config_by_id(
-        self, interface_id: str, config: dict[str, Any]
-    ) -> dict[str, Any]:
-        """Updates the selected Site manager wireless interface configuration."""
-        endpoint = f"/site_manager/wireless/interfaces/config/{interface_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_site_manager_wireless_interfaces_config_by_id(self, interface_id: str) -> dict[str, Any]:
-        """Deletes the selected Site manager wireless interface configuration."""
-        endpoint = f"/site_manager/wireless/interfaces/config/{interface_id}"
-
-        return self._client.request("DELETE", endpoint)
-
-    def get_site_manager_global(self) -> dict[str, Any]:
-        """Returns Site manager global configuration."""
-        endpoint = "/site_manager/global"
-
-        return self._client.request("GET", endpoint)
-
-    def update_site_manager_global(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Updates Site manager global configuration."""
-        endpoint = "/site_manager/global"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_site_manager_groups_config(self) -> dict[str, Any]:
-        """Returns all Site manager group configurations."""
-        endpoint = "/site_manager/groups/config"
-
-        return self._client.request("GET", endpoint)
-
-    def create_site_manager_groups_config(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Creates a new Site manager group configuration."""
-        endpoint = "/site_manager/groups/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def update_site_manager_groups_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates the selected Site manager group configurations."""
-        endpoint = "/site_manager/groups/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_site_manager_groups_config(self, config: list[str]) -> list[dict[str, Any]]:
-        """Deletes the selected Site manager group configurations."""
-        return [self.delete_site_manager_groups_config_by_id(group_id) for group_id in config]
-
-    def get_site_manager_groups_config_by_id(self, group_id: str) -> dict[str, Any]:
-        """Returns the selected Site manager group configuration."""
-        endpoint = f"/site_manager/groups/config/{group_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_site_manager_groups_config_by_id(self, group_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Updates the selected Site manager group configuration."""
-        endpoint = f"/site_manager/groups/config/{group_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_site_manager_groups_config_by_id(self, group_id: str) -> dict[str, Any]:
-        """Deletes the selected Site manager group configuration."""
-        endpoint = f"/site_manager/groups/config/{group_id}"
-
-        return self._client.request("DELETE", endpoint)
-
-    def get_site_manager_ports_settings_config(self) -> dict[str, Any]:
-        """Returns all Site manager switch port configurations."""
-        endpoint = "/site_manager/ports_settings/config"
-
-        return self._client.request("GET", endpoint)
-
-    def update_site_manager_ports_settings_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates the selected Site manager switch port configurations."""
-        endpoint = "/site_manager/ports_settings/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_site_manager_ports_settings_config_by_id(self, ports_setting_id: str) -> dict[str, Any]:
-        """Returns the selected Site manager switch port configuration."""
-        endpoint = f"/site_manager/ports_settings/config/{ports_setting_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_site_manager_ports_settings_config_by_id(
-        self, ports_setting_id: str, config: dict[str, Any]
-    ) -> dict[str, Any]:
-        """Updates the selected Site manager switch port configuration."""
-        endpoint = f"/site_manager/ports_settings/config/{ports_setting_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_site_manager_switch_interfaces_config(self) -> dict[str, Any]:
-        """Returns all Site manager switch interface configurations."""
-        endpoint = "/site_manager/switch/interfaces/config"
-
-        return self._client.request("GET", endpoint)
-
-    def create_site_manager_switch_interfaces_config(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Creates a new Site manager switch interface configuration."""
-        endpoint = "/site_manager/switch/interfaces/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def update_site_manager_switch_interfaces_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates the selected Site manager switch interface configurations."""
-        endpoint = "/site_manager/switch/interfaces/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_site_manager_switch_interfaces_config(self, config: list[str]) -> list[dict[str, Any]]:
-        """Deletes the selected Site manager switch interface configurations."""
-        return [self.delete_site_manager_switch_interfaces_config_by_id(interface_id) for interface_id in config]
-
-    def get_site_manager_switch_interfaces_config_by_id(self, interface_id: str) -> dict[str, Any]:
-        """Returns the selected Site manager switch interface configuration."""
-        endpoint = f"/site_manager/switch/interfaces/config/{interface_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_site_manager_switch_interfaces_config_by_id(
-        self, interface_id: str, config: dict[str, Any]
-    ) -> dict[str, Any]:
-        """Updates the selected Site manager switch interface configuration."""
-        endpoint = f"/site_manager/switch/interfaces/config/{interface_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_site_manager_switch_interfaces_config_by_id(self, interface_id: str) -> dict[str, Any]:
-        """Deletes the selected Site manager switch interface configuration."""
-        endpoint = f"/site_manager/switch/interfaces/config/{interface_id}"
-
-        return self._client.request("DELETE", endpoint)
-
-    def get_site_manager_switch_vlan_config(self) -> dict[str, Any]:
-        """Returns all Site manager VLAN configurations."""
-        endpoint = "/site_manager/switch/vlan/config"
-
-        return self._client.request("GET", endpoint)
-
-    def create_site_manager_switch_vlan_config(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Creates a new Site manager VLAN configuration."""
-        endpoint = "/site_manager/switch/vlan/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def update_site_manager_switch_vlan_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates the selected Site manager VLAN configurations."""
-        endpoint = "/site_manager/switch/vlan/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_site_manager_switch_vlan_config(self, config: list[str]) -> list[dict[str, Any]]:
-        """Deletes the selected Site manager VLAN configurations."""
-        return [self.delete_site_manager_switch_vlan_config_by_id(vlan_id) for vlan_id in config]
-
-    def get_site_manager_switch_vlan_config_by_id(self, vlan_id: str) -> dict[str, Any]:
-        """Returns the selected Site manager VLAN configuration."""
-        endpoint = f"/site_manager/switch/vlan/config/{vlan_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_site_manager_switch_vlan_config_by_id(self, vlan_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Updates the selected Site manager VLAN configuration."""
-        endpoint = f"/site_manager/switch/vlan/config/{vlan_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_site_manager_switch_vlan_config_by_id(self, vlan_id: str) -> dict[str, Any]:
-        """Deletes the selected Site manager VLAN configuration."""
-        endpoint = f"/site_manager/switch/vlan/config/{vlan_id}"
-
-        return self._client.request("DELETE", endpoint)
-
-    def get_site_manager_auto_reboot_scheduler_config(self) -> dict[str, Any]:
-        """Returns all Site manager Reboot Scheduler configurations."""
-        endpoint = "/site_manager/auto_reboot/scheduler/config"
-
-        return self._client.request("GET", endpoint)
-
-    def create_site_manager_auto_reboot_scheduler_config(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Creates a new Site manager Reboot Scheduler configuration."""
-        endpoint = "/site_manager/auto_reboot/scheduler/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def update_site_manager_auto_reboot_scheduler_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates the selected Site manager Reboot Scheduler configurations."""
-        endpoint = "/site_manager/auto_reboot/scheduler/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_site_manager_auto_reboot_scheduler_config(self, config: list[str]) -> list[dict[str, Any]]:
-        """Deletes the selected Site manager Reboot Scheduler configurations."""
-        return [self.delete_site_manager_auto_reboot_scheduler_config_by_id(scheduler_id) for scheduler_id in config]
-
-    def get_site_manager_auto_reboot_scheduler_config_by_id(self, scheduler_id: str) -> dict[str, Any]:
-        """Returns the selected Site manager Reboot Scheduler configuration."""
-        endpoint = f"/site_manager/auto_reboot/scheduler/config/{scheduler_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_site_manager_auto_reboot_scheduler_config_by_id(
-        self, scheduler_id: str, config: dict[str, Any]
-    ) -> dict[str, Any]:
-        """Updates the selected Site manager Reboot Scheduler configuration."""
-        endpoint = f"/site_manager/auto_reboot/scheduler/config/{scheduler_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_site_manager_auto_reboot_scheduler_config_by_id(self, scheduler_id: str) -> dict[str, Any]:
-        """Deletes the selected Site manager Reboot Scheduler configuration."""
-        endpoint = f"/site_manager/auto_reboot/scheduler/config/{scheduler_id}"
-
-        return self._client.request("DELETE", endpoint)
-
     def get_site_manager_auto_reboot_ping_wget_config(self) -> dict[str, Any]:
         """Returns all Site manager Ping/Wget Reboot configurations."""
-        endpoint = "/site_manager/auto_reboot/ping_wget/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/site_manager/auto_reboot/ping_wget/config")
 
     def create_site_manager_auto_reboot_ping_wget_config(self, config: dict[str, Any]) -> dict[str, Any]:
         """Creates a new Site manager Ping/Wget Reboot configuration."""
-        endpoint = "/site_manager/auto_reboot/ping_wget/config"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+        return self._client.request("POST", "/site_manager/auto_reboot/ping_wget/config", json={"data": config})
 
     def update_site_manager_auto_reboot_ping_wget_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates the selected Site manager Ping/Wget Reboot configurations."""
-        endpoint = "/site_manager/auto_reboot/ping_wget/config"
+        return self._client.request("PUT", "/site_manager/auto_reboot/ping_wget/config", json={"data": config})
 
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def delete_site_manager_auto_reboot_ping_wget_config(self, config: list[str]) -> list[dict[str, Any]]:
+    def delete_site_manager_auto_reboot_ping_wget_config(self, config: list[str]) -> dict[str, Any]:
         """Deletes the selected Site manager Ping/Wget Reboot configurations."""
-        return [self.delete_site_manager_auto_reboot_ping_wget_config_by_id(ping_wget_id) for ping_wget_id in config]
+        return self._client.request("DELETE", "/site_manager/auto_reboot/ping_wget/config", json={"data": config})
 
     def get_site_manager_auto_reboot_ping_wget_config_by_id(self, ping_wget_id: str) -> dict[str, Any]:
         """Returns the selected Site manager Ping/Wget Reboot configuration."""
-        endpoint = f"/site_manager/auto_reboot/ping_wget/config/{ping_wget_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/site_manager/auto_reboot/ping_wget/config/{ping_wget_id}")
 
     def update_site_manager_auto_reboot_ping_wget_config_by_id(
         self, ping_wget_id: str, config: dict[str, Any]
     ) -> dict[str, Any]:
         """Updates the selected Site manager Ping/Wget Reboot configuration."""
-        endpoint = f"/site_manager/auto_reboot/ping_wget/config/{ping_wget_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request(
+            "PUT", f"/site_manager/auto_reboot/ping_wget/config/{ping_wget_id}", json={"data": config}
+        )
 
     def delete_site_manager_auto_reboot_ping_wget_config_by_id(self, ping_wget_id: str) -> dict[str, Any]:
         """Deletes the selected Site manager Ping/Wget Reboot configuration."""
-        endpoint = f"/site_manager/auto_reboot/ping_wget/config/{ping_wget_id}"
+        return self._client.request("DELETE", f"/site_manager/auto_reboot/ping_wget/config/{ping_wget_id}")
 
-        return self._client.request("DELETE", endpoint)
+    def get_site_manager_auto_reboot_scheduler_config(self) -> dict[str, Any]:
+        """Returns all Site manager Reboot Scheduler configurations."""
+        return self._client.request("GET", "/site_manager/auto_reboot/scheduler/config")
+
+    def create_site_manager_auto_reboot_scheduler_config(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates a new Site manager Reboot Scheduler configuration."""
+        return self._client.request("POST", "/site_manager/auto_reboot/scheduler/config", json={"data": config})
+
+    def update_site_manager_auto_reboot_scheduler_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates the selected Site manager Reboot Scheduler configurations."""
+        return self._client.request("PUT", "/site_manager/auto_reboot/scheduler/config", json={"data": config})
+
+    def delete_site_manager_auto_reboot_scheduler_config(self, config: list[str]) -> dict[str, Any]:
+        """Deletes the selected Site manager Reboot Scheduler configurations."""
+        return self._client.request("DELETE", "/site_manager/auto_reboot/scheduler/config", json={"data": config})
+
+    def get_site_manager_auto_reboot_scheduler_config_by_id(self, scheduler_id: str) -> dict[str, Any]:
+        """Returns the selected Site manager Reboot Scheduler configuration."""
+        return self._client.request("GET", f"/site_manager/auto_reboot/scheduler/config/{scheduler_id}")
+
+    def update_site_manager_auto_reboot_scheduler_config_by_id(
+        self, scheduler_id: str, config: dict[str, Any]
+    ) -> dict[str, Any]:
+        """Updates the selected Site manager Reboot Scheduler configuration."""
+        return self._client.request(
+            "PUT", f"/site_manager/auto_reboot/scheduler/config/{scheduler_id}", json={"data": config}
+        )
+
+    def delete_site_manager_auto_reboot_scheduler_config_by_id(self, scheduler_id: str) -> dict[str, Any]:
+        """Deletes the selected Site manager Reboot Scheduler configuration."""
+        return self._client.request("DELETE", f"/site_manager/auto_reboot/scheduler/config/{scheduler_id}")
+
+    def site_manager_devices_actions_api(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Proxy API request to the device."""
+        return self._client.request(
+            "POST", "/site_manager/devices/actions/api", json=None if config is None else {"data": config}
+        )
+
+    def site_manager_devices_actions_clear_errors(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Clears device's errors which happened during synchronization."""
+        return self._client.request(
+            "POST", "/site_manager/devices/actions/clear_errors", json=None if config is None else {"data": config}
+        )
+
+    def site_manager_devices_actions_download(self, config: dict[str, Any] | None = None) -> bytes | dict[str, Any]:
+        """Downloads a file from the selected device."""
+        return self._client.request(
+            "POST",
+            "/site_manager/devices/actions/download",
+            json=None if config is None else {"data": config},
+            download=True,
+        )
+
+    def site_manager_devices_actions_pair(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Pairs the selected device."""
+        return self._client.request(
+            "POST", "/site_manager/devices/actions/pair", json=None if config is None else {"data": config}
+        )
+
+    def site_manager_devices_actions_reboot(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Reboots the selected device."""
+        return self._client.request(
+            "POST", "/site_manager/devices/actions/reboot", json=None if config is None else {"data": config}
+        )
+
+    def site_manager_devices_actions_unpair(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Unpairs the selected device."""
+        return self._client.request(
+            "POST", "/site_manager/devices/actions/unpair", json=None if config is None else {"data": config}
+        )
+
+    def site_manager_devices_actions_upgrade_fota(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Upgrades firmware for the selected devices."""
+        return self._client.request(
+            "POST", "/site_manager/devices/actions/upgrade_fota", json=None if config is None else {"data": config}
+        )
+
+    def get_site_manager_devices_config(self) -> dict[str, Any]:
+        """Returns all paired device configurations."""
+        return self._client.request("GET", "/site_manager/devices/config")
+
+    def update_site_manager_devices_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates the selected paired device configurations."""
+        return self._client.request("PUT", "/site_manager/devices/config", json={"data": config})
+
+    def get_site_manager_devices_config_by_id(self, device_id: str) -> dict[str, Any]:
+        """Returns the selected paired device configuration."""
+        return self._client.request("GET", f"/site_manager/devices/config/{device_id}")
+
+    def update_site_manager_devices_config_by_id(self, device_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates the selected paired device configuration."""
+        return self._client.request("PUT", f"/site_manager/devices/config/{device_id}", json={"data": config})
+
+    def get_site_manager_devices_status(self, *, exclude_firmware_status: int | None = None) -> dict[str, Any]:
+        """Returns the status of all devices."""
+        return self._client.request(
+            "GET", "/site_manager/devices/status", params={"exclude_firmware_status": exclude_firmware_status}
+        )
+
+    def get_site_manager_devices_status_by_id_or_mac(
+        self, id_or_mac: str, *, exclude_firmware_status: int | None = None
+    ) -> dict[str, Any]:
+        """Returns the status of the selected device."""
+        return self._client.request(
+            "GET",
+            f"/site_manager/devices/status/{id_or_mac}",
+            params={"exclude_firmware_status": exclude_firmware_status},
+        )
+
+    def get_site_manager_devices_status_full(
+        self,
+        *,
+        events_log_limit: int | None = None,
+        data: str | None = None,
+        exclude_firmware_status: int | None = None,
+    ) -> dict[str, Any]:
+        """Returns the full status of all devices."""
+        return self._client.request(
+            "GET",
+            "/site_manager/devices/status_full",
+            params={
+                "events_log_limit": events_log_limit,
+                "data": data,
+                "exclude_firmware_status": exclude_firmware_status,
+            },
+        )
+
+    def get_site_manager_devices_status_full_by_id_or_mac(
+        self,
+        id_or_mac: str,
+        *,
+        events_log_limit: int | None = None,
+        data: str | None = None,
+        exclude_firmware_status: int | None = None,
+    ) -> dict[str, Any]:
+        """Returns the full status of the selected device."""
+        return self._client.request(
+            "GET",
+            f"/site_manager/devices/status_full/{id_or_mac}",
+            params={
+                "events_log_limit": events_log_limit,
+                "data": data,
+                "exclude_firmware_status": exclude_firmware_status,
+            },
+        )
+
+    def get_site_manager_global(self) -> dict[str, Any]:
+        """Returns Site manager global configuration."""
+        return self._client.request("GET", "/site_manager/global")
+
+    def update_site_manager_global(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates Site manager global configuration."""
+        return self._client.request("PUT", "/site_manager/global", json={"data": config})
+
+    def get_site_manager_groups_config(self) -> dict[str, Any]:
+        """Returns all Site manager group configurations."""
+        return self._client.request("GET", "/site_manager/groups/config")
+
+    def create_site_manager_groups_config(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates a new Site manager group configuration."""
+        return self._client.request("POST", "/site_manager/groups/config", json={"data": config})
+
+    def update_site_manager_groups_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates the selected Site manager group configurations."""
+        return self._client.request("PUT", "/site_manager/groups/config", json={"data": config})
+
+    def delete_site_manager_groups_config(self, config: list[str]) -> dict[str, Any]:
+        """Deletes the selected Site manager group configurations."""
+        return self._client.request("DELETE", "/site_manager/groups/config", json={"data": config})
+
+    def get_site_manager_groups_config_by_id(self, group_id: str) -> dict[str, Any]:
+        """Returns the selected Site manager group configuration."""
+        return self._client.request("GET", f"/site_manager/groups/config/{group_id}")
+
+    def update_site_manager_groups_config_by_id(self, group_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates the selected Site manager group configuration."""
+        return self._client.request("PUT", f"/site_manager/groups/config/{group_id}", json={"data": config})
+
+    def delete_site_manager_groups_config_by_id(self, group_id: str) -> dict[str, Any]:
+        """Deletes the selected Site manager group configuration."""
+        return self._client.request("DELETE", f"/site_manager/groups/config/{group_id}")
+
+    def get_site_manager_interfaces_config(self) -> dict[str, Any]:
+        """Returns all Site manager network interface configurations."""
+        return self._client.request("GET", "/site_manager/interfaces/config")
+
+    def update_site_manager_interfaces_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates the selected Site manager network interface configurations."""
+        return self._client.request("PUT", "/site_manager/interfaces/config", json={"data": config})
+
+    def get_site_manager_interfaces_config_by_id(self, interface_id: str) -> dict[str, Any]:
+        """Returns the selected Site manager network interface configuration."""
+        return self._client.request("GET", f"/site_manager/interfaces/config/{interface_id}")
+
+    def update_site_manager_interfaces_config_by_id(self, interface_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates the selected Site manager network interface configuration."""
+        return self._client.request("PUT", f"/site_manager/interfaces/config/{interface_id}", json={"data": config})
+
+    def get_site_manager_ports_settings_config(self) -> dict[str, Any]:
+        """Returns all Site manager switch port configurations."""
+        return self._client.request("GET", "/site_manager/ports_settings/config")
+
+    def update_site_manager_ports_settings_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates the selected Site manager switch port configurations."""
+        return self._client.request("PUT", "/site_manager/ports_settings/config", json={"data": config})
+
+    def get_site_manager_ports_settings_config_by_id(self, ports_setting_id: str) -> dict[str, Any]:
+        """Returns the selected Site manager switch port configuration."""
+        return self._client.request("GET", f"/site_manager/ports_settings/config/{ports_setting_id}")
+
+    def update_site_manager_ports_settings_config_by_id(
+        self, ports_setting_id: str, config: dict[str, Any]
+    ) -> dict[str, Any]:
+        """Updates the selected Site manager switch port configuration."""
+        return self._client.request(
+            "PUT", f"/site_manager/ports_settings/config/{ports_setting_id}", json={"data": config}
+        )
+
+    def get_site_manager_switch_interfaces_config(self) -> dict[str, Any]:
+        """Returns all Site manager switch interface configurations."""
+        return self._client.request("GET", "/site_manager/switch/interfaces/config")
+
+    def create_site_manager_switch_interfaces_config(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates a new Site manager switch interface configuration."""
+        return self._client.request("POST", "/site_manager/switch/interfaces/config", json={"data": config})
+
+    def update_site_manager_switch_interfaces_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates the selected Site manager switch interface configurations."""
+        return self._client.request("PUT", "/site_manager/switch/interfaces/config", json={"data": config})
+
+    def delete_site_manager_switch_interfaces_config(self, config: list[str]) -> dict[str, Any]:
+        """Deletes the selected Site manager switch interface configurations."""
+        return self._client.request("DELETE", "/site_manager/switch/interfaces/config", json={"data": config})
+
+    def get_site_manager_switch_interfaces_config_by_id(self, interface_id: str) -> dict[str, Any]:
+        """Returns the selected Site manager switch interface configuration."""
+        return self._client.request("GET", f"/site_manager/switch/interfaces/config/{interface_id}")
+
+    def update_site_manager_switch_interfaces_config_by_id(
+        self, interface_id: str, config: dict[str, Any]
+    ) -> dict[str, Any]:
+        """Updates the selected Site manager switch interface configuration."""
+        return self._client.request(
+            "PUT", f"/site_manager/switch/interfaces/config/{interface_id}", json={"data": config}
+        )
+
+    def delete_site_manager_switch_interfaces_config_by_id(self, interface_id: str) -> dict[str, Any]:
+        """Deletes the selected Site manager switch interface configuration."""
+        return self._client.request("DELETE", f"/site_manager/switch/interfaces/config/{interface_id}")
+
+    def get_site_manager_switch_vlan_config(self) -> dict[str, Any]:
+        """Returns all Site manager VLAN configurations."""
+        return self._client.request("GET", "/site_manager/switch/vlan/config")
+
+    def create_site_manager_switch_vlan_config(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates a new Site manager VLAN configuration."""
+        return self._client.request("POST", "/site_manager/switch/vlan/config", json={"data": config})
+
+    def update_site_manager_switch_vlan_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates the selected Site manager VLAN configurations."""
+        return self._client.request("PUT", "/site_manager/switch/vlan/config", json={"data": config})
+
+    def delete_site_manager_switch_vlan_config(self, config: list[str]) -> dict[str, Any]:
+        """Deletes the selected Site manager VLAN configurations."""
+        return self._client.request("DELETE", "/site_manager/switch/vlan/config", json={"data": config})
+
+    def get_site_manager_switch_vlan_config_by_id(self, vlan_id: str) -> dict[str, Any]:
+        """Returns the selected Site manager VLAN configuration."""
+        return self._client.request("GET", f"/site_manager/switch/vlan/config/{vlan_id}")
+
+    def update_site_manager_switch_vlan_config_by_id(self, vlan_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates the selected Site manager VLAN configuration."""
+        return self._client.request("PUT", f"/site_manager/switch/vlan/config/{vlan_id}", json={"data": config})
+
+    def delete_site_manager_switch_vlan_config_by_id(self, vlan_id: str) -> dict[str, Any]:
+        """Deletes the selected Site manager VLAN configuration."""
+        return self._client.request("DELETE", f"/site_manager/switch/vlan/config/{vlan_id}")
 
     def get_site_manager_wireless_devices_config(self) -> dict[str, Any]:
         """Returns all Site manager wireless device configurations."""
-        endpoint = "/site_manager/wireless/devices/config"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/site_manager/wireless/devices/config")
 
     def update_site_manager_wireless_devices_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
         """Updates the selected Site manager wireless device configurations."""
-        endpoint = "/site_manager/wireless/devices/config"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
+        return self._client.request("PUT", "/site_manager/wireless/devices/config", json={"data": config})
 
     def get_site_manager_wireless_devices_config_by_id(self, device_id: str) -> dict[str, Any]:
         """Returns the selected Site manager wireless device configuration."""
-        endpoint = f"/site_manager/wireless/devices/config/{device_id}"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", f"/site_manager/wireless/devices/config/{device_id}")
 
     def update_site_manager_wireless_devices_config_by_id(
         self, device_id: str, config: dict[str, Any]
     ) -> dict[str, Any]:
         """Updates the selected Site manager wireless device configuration."""
-        endpoint = f"/site_manager/wireless/devices/config/{device_id}"
+        return self._client.request("PUT", f"/site_manager/wireless/devices/config/{device_id}", json={"data": config})
 
-        data = {"data": config}
+    def get_site_manager_wireless_interfaces_config(self) -> dict[str, Any]:
+        """Returns all Site manager wireless interface configurations."""
+        return self._client.request("GET", "/site_manager/wireless/interfaces/config")
 
-        return self._client.request("PUT", endpoint, json=data)
+    def create_site_manager_wireless_interfaces_config(self, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates a new Site manager wireless interface configuration."""
+        return self._client.request("POST", "/site_manager/wireless/interfaces/config", json={"data": config})
 
-    def get_site_manager_devices_config(self) -> dict[str, Any]:
-        """Returns all paired device configurations."""
-        endpoint = "/site_manager/devices/config"
+    def update_site_manager_wireless_interfaces_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates the selected Site manager wireless interface configurations."""
+        return self._client.request("PUT", "/site_manager/wireless/interfaces/config", json={"data": config})
 
-        return self._client.request("GET", endpoint)
+    def delete_site_manager_wireless_interfaces_config(self, config: list[str]) -> dict[str, Any]:
+        """Deletes the selected Site manager wireless interface configurations."""
+        return self._client.request("DELETE", "/site_manager/wireless/interfaces/config", json={"data": config})
 
-    def update_site_manager_devices_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates the selected paired device configurations."""
-        endpoint = "/site_manager/devices/config"
+    def get_site_manager_wireless_interfaces_config_by_id(self, interface_id: str) -> dict[str, Any]:
+        """Returns the selected Site manager wireless interface configuration."""
+        return self._client.request("GET", f"/site_manager/wireless/interfaces/config/{interface_id}")
 
-        data = {"data": config}
+    def update_site_manager_wireless_interfaces_config_by_id(
+        self, interface_id: str, config: dict[str, Any]
+    ) -> dict[str, Any]:
+        """Updates the selected Site manager wireless interface configuration."""
+        return self._client.request(
+            "PUT", f"/site_manager/wireless/interfaces/config/{interface_id}", json={"data": config}
+        )
 
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_site_manager_devices_config_by_id(self, device_id: str) -> dict[str, Any]:
-        """Returns the selected paired device configuration."""
-        endpoint = f"/site_manager/devices/config/{device_id}"
-
-        return self._client.request("GET", endpoint)
-
-    def update_site_manager_devices_config_by_id(self, device_id: str, config: dict[str, Any]) -> dict[str, Any]:
-        """Updates the selected paired device configuration."""
-        endpoint = f"/site_manager/devices/config/{device_id}"
-
-        data = {"data": config}
-
-        return self._client.request("PUT", endpoint, json=data)
-
-    def get_site_manager_devices_status(self) -> dict[str, Any]:
-        """Returns the status of all devices."""
-        endpoint = "/site_manager/devices/status"
-
-        return self._client.request("GET", endpoint)
-
-    def get_site_manager_devices_status_by_id_or_mac(self, id_or_mac: str) -> dict[str, Any]:
-        """Returns the status of the selected device."""
-        endpoint = f"/site_manager/devices/status/{id_or_mac}"
-
-        return self._client.request("GET", endpoint)
-
-    def get_site_manager_devices_status_full(self) -> dict[str, Any]:
-        """Returns the full status of all devices."""
-        endpoint = "/site_manager/devices/status_full"
-
-        return self._client.request("GET", endpoint)
-
-    def get_site_manager_devices_status_full_by_id_or_mac(self, id_or_mac: str) -> dict[str, Any]:
-        """Returns the full status of the selected device."""
-        endpoint = f"/site_manager/devices/status_full/{id_or_mac}"
-
-        return self._client.request("GET", endpoint)
-
-    def site_manager_devices_actions_pair(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Pairs the selected device."""
-        endpoint = "/site_manager/devices/actions/pair"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def site_manager_devices_actions_unpair(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Unpairs the selected device."""
-        endpoint = "/site_manager/devices/actions/unpair"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def site_manager_devices_actions_download(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Downloads a file from the selected device."""
-        endpoint = "/site_manager/devices/actions/download"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def site_manager_devices_actions_reboot(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Reboots the selected device."""
-        endpoint = "/site_manager/devices/actions/reboot"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def site_manager_devices_actions_api(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Proxy API request to the device."""
-        endpoint = "/site_manager/devices/actions/api"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def site_manager_devices_actions_upgrade_fota(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Upgrades firmware for the selected devices."""
-        endpoint = "/site_manager/devices/actions/upgrade_fota"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
-
-    def site_manager_devices_actions_clear_errors(self, config: dict[str, Any]) -> dict[str, Any]:
-        """Clears device's errors which happened during synchronization."""
-        endpoint = "/site_manager/devices/actions/clear_errors"
-
-        data = {"data": config}
-
-        return self._client.request("POST", endpoint, json=data)
+    def delete_site_manager_wireless_interfaces_config_by_id(self, interface_id: str) -> dict[str, Any]:
+        """Deletes the selected Site manager wireless interface configuration."""
+        return self._client.request("DELETE", f"/site_manager/wireless/interfaces/config/{interface_id}")

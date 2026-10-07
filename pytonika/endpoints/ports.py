@@ -6,6 +6,4 @@ from ._endpoint import Endpoint
 class Ports(Endpoint):
     def get_ports_traffic_errors_status(self) -> dict[str, Any]:
         """Returns port status."""
-        endpoint = "/ports/traffic/errors/status"
-
-        return self._client.request("GET", endpoint)
+        return self._client.request("GET", "/ports/traffic/errors/status")
