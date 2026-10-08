@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -57,7 +57,7 @@ class OPCUA(Endpoint):
         )
 
     def upload_opcua_destination_server_config_by_id(
-        self, server_id: str, file: File, *, option: str | None = None
+        self, server_id: str, file: File, *, option: Literal["certificate", "key", "tcl"] | None = None
     ) -> dict[str, Any]:
         """Uploads the specified OPC UA server configuration certificate files."""
         return self._client.request(
@@ -233,7 +233,7 @@ class OPCUA(Endpoint):
         return self._client.request("GET", f"/opcua/server/config/{server_id}", params={"all_options": all_options})
 
     def upload_opcua_server_config_by_id(
-        self, server_id: str, file: File, *, option: str | None = None
+        self, server_id: str, file: File, *, option: Literal["certificate", "key", "tcl"] | None = None
     ) -> dict[str, Any]:
         """Uploads the specified OPC UA Server configuration certificate files."""
         return self._client.request(

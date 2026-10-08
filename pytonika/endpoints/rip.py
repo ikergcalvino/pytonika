@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -36,7 +36,7 @@ class RIP(Endpoint):
         """Returns RIP global configuration."""
         return self._client.request("GET", "/rip/global", params={"all_options": all_options})
 
-    def upload_rip_global(self, file: File, *, option: str | None = None) -> dict[str, Any]:
+    def upload_rip_global(self, file: File, *, option: Literal["ripd_custom_conf"] | None = None) -> dict[str, Any]:
         """Uploads custom RIP configuration file."""
         return self._client.request("POST", "/rip/global", files={"file": file}, form={"option": option})
 

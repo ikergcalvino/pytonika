@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -24,7 +24,16 @@ class OpenVPN(Endpoint):
         """Returns specified openvpn section."""
         return self._client.request("GET", f"/openvpn/config/{config_id}", params={"all_options": all_options})
 
-    def upload_openvpn_config_by_id(self, config_id: str, file: File, *, option: str | None = None) -> dict[str, Any]:
+    def upload_openvpn_config_by_id(
+        self,
+        config_id: str,
+        file: File,
+        *,
+        option: Literal[
+            "ca", "cert", "config", "crl_verify", "dh", "key", "pkcs12", "secret", "tls_auth", "tls_crypt", "userpass"
+        ]
+        | None = None,
+    ) -> dict[str, Any]:
         """Uploads custom configuration file."""
         return self._client.request(
             "POST", f"/openvpn/config/{config_id}", files={"file": file}, form={"option": option}

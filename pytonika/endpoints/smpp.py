@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -8,7 +8,9 @@ class SMPP(Endpoint):
         """Returns SMPP configuration in an array."""
         return self._client.request("GET", "/smpp/config", params={"all_options": all_options})
 
-    def upload_smpp_config(self, file: File, *, option: str | None = None) -> dict[str, Any]:
+    def upload_smpp_config(
+        self, file: File, *, option: Literal["tls_ciphers", "tls_crt", "tls_key"] | None = None
+    ) -> dict[str, Any]:
         """Uploads SMPP files."""
         return self._client.request("POST", "/smpp/config", files={"file": file}, form={"option": option})
 

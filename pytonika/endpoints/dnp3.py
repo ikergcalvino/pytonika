@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint
 
@@ -9,7 +9,7 @@ class DNP3(Endpoint):
         *,
         limit: int | None = None,
         offset: int | None = None,
-        db_location: str | None = None,
+        db_location: Literal["flash", "ram"] | None = None,
         id: str | None = None,
         data_type: str | None = None,
         client_id: str | None = None,

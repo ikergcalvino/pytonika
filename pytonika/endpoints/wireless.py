@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -36,7 +36,7 @@ class Wireless(Endpoint):
         )
 
     def wireless_actions_scan(
-        self, data: dict[str, Any] | None = None, *, use_cache: str | None = None
+        self, data: dict[str, Any] | None = None, *, use_cache: Literal["force", "prefer"] | None = None
     ) -> dict[str, Any]:
         """Scans the environment for nearby Wi-Fi networks."""
         return self._client.request(
@@ -169,7 +169,12 @@ class Wireless(Endpoint):
         return self._client.request("GET", f"/wireless/interfaces/config/{interface_id}")
 
     def upload_wireless_interfaces_config_by_id(
-        self, interface_id: str, file: File, *, option: str | None = None
+        self,
+        interface_id: str,
+        file: File,
+        *,
+        option: Literal["ca_cert", "ca_cert2", "client_cert", "client_cert2", "pkcs_cert", "priv_key", "priv_key2"]
+        | None = None,
     ) -> dict[str, Any]:
         """Uploads certificate file."""
         return self._client.request(

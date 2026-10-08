@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -157,7 +157,12 @@ class Modbus(Endpoint):
         )
 
     def upload_modbus_client_serial_servers_alarms_config_by_id(
-        self, servers_id: str, alarm_id: str, file: File, *, option: str | None = None
+        self,
+        servers_id: str,
+        alarm_id: str,
+        file: File,
+        *,
+        option: Literal["ca_file", "cert_file", "key_file"] | None = None,
     ) -> dict[str, Any]:
         """Uploads the specified Modbus Serial Client Server Alarm certificate files."""
         return self._client.request(
@@ -296,7 +301,12 @@ class Modbus(Endpoint):
         return self._client.request("GET", f"/modbus/client/tcp/config/{config_id}/alarms/{alarm_id}")
 
     def upload_modbus_client_tcp_config_alarms_by_id(
-        self, config_id: str, alarm_id: str, file: File, *, option: str | None = None
+        self,
+        config_id: str,
+        alarm_id: str,
+        file: File,
+        *,
+        option: Literal["ca_file", "cert_file", "key_file"] | None = None,
     ) -> dict[str, Any]:
         """Upload Modbus alarm certificates."""
         return self._client.request(
@@ -349,7 +359,12 @@ class Modbus(Endpoint):
         )
 
     def upload_modbus_client_tcp_alarms_config_by_id(
-        self, client_id: str, alarm_id: str, file: File, *, option: str | None = None
+        self,
+        client_id: str,
+        alarm_id: str,
+        file: File,
+        *,
+        option: Literal["ca_file", "cert_file", "key_file"] | None = None,
     ) -> dict[str, Any]:
         """Uploads the specified Modbus TCP Client Alarm certificate files."""
         return self._client.request(
@@ -450,7 +465,7 @@ class Modbus(Endpoint):
         return self._client.request("GET", f"/modbus/gateway/config/{config_id}", params={"all_options": all_options})
 
     def upload_modbus_gateway_config_by_id(
-        self, config_id: str, file: File, *, option: str | None = None
+        self, config_id: str, file: File, *, option: Literal["cafile", "certfile", "keyfile"] | None = None
     ) -> dict[str, Any]:
         """Uploads the specified MQTT Modbus Gateway certificate files."""
         return self._client.request(

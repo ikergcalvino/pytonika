@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -155,7 +155,7 @@ class AccessControl(Endpoint):
         )
 
     def get_access_control_sessions_status(
-        self, *, type: str | None = None, seen_ip: str | None = None
+        self, *, type: Literal["ssh", "telnet", "webui"] | None = None, seen_ip: str | None = None
     ) -> dict[str, Any]:
         """Get active sessions."""
         return self._client.request("GET", "/access_control/sessions/status", params={"type": type, "seen_ip": seen_ip})
@@ -227,7 +227,7 @@ class AccessControl(Endpoint):
         )
 
     def upload_access_control_webui_config_by_id(
-        self, webui_id: str, file: File, *, option: str | None = None
+        self, webui_id: str, file: File, *, option: Literal["cert", "key"] | None = None
     ) -> dict[str, Any]:
         """Uploads certificate or private key file."""
         return self._client.request(

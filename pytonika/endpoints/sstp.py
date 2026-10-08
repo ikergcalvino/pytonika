@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -24,7 +24,9 @@ class SSTP(Endpoint):
         """Get sstp configuration."""
         return self._client.request("GET", f"/sstp/config/{config_id}", params={"all_options": all_options})
 
-    def upload_sstp_config_by_id(self, config_id: str, file: File, *, option: str | None = None) -> dict[str, Any]:
+    def upload_sstp_config_by_id(
+        self, config_id: str, file: File, *, option: Literal["ca"] | None = None
+    ) -> dict[str, Any]:
         """POST /sstp/config/{id}."""
         return self._client.request("POST", f"/sstp/config/{config_id}", files={"file": file}, form={"option": option})
 

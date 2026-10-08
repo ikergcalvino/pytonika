@@ -68,11 +68,14 @@ class Switch:
         self.users = Users(self._client)
         self.wake_on_lan = WakeOnLan(self._client)
 
-    def close(self) -> None:
-        self._client.close()
+    def __repr__(self) -> str:
+        return f"<{type(self).__name__} {self._client.base_url}>"
 
     def __enter__(self) -> Self:
         return self
 
     def __exit__(self, *exc: object) -> None:
         self.close()
+
+    def close(self) -> None:
+        self._client.close()

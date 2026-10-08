@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -17,7 +17,7 @@ class CAN(Endpoint):
         return self._client.request("GET", f"/can/gateway/config/{gateway_id}", params={"all_options": all_options})
 
     def upload_can_gateway_config_by_id(
-        self, gateway_id: str, file: File, *, option: str | None = None
+        self, gateway_id: str, file: File, *, option: Literal["ca_file", "cert_file", "key_file"] | None = None
     ) -> dict[str, Any]:
         """Uploads the specified CAN gateway configuration certificate files."""
         return self._client.request(

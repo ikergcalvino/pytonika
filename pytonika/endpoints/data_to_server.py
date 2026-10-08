@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -29,7 +29,7 @@ class DataToServer(Endpoint):
         )
 
     def upload_data_to_server_collections_config_by_id(
-        self, config_id: str, file: File, *, option: str | None = None
+        self, config_id: str, file: File, *, option: Literal["format_script"] | None = None
     ) -> dict[str, Any]:
         """Uploads the Data to Server Collection necessary files."""
         return self._client.request(
@@ -115,7 +115,12 @@ class DataToServer(Endpoint):
         )
 
     def upload_data_to_server_data_config_by_id(
-        self, config_id: str, file: File, *, option: str | None = None
+        self,
+        config_id: str,
+        file: File,
+        *,
+        option: Literal["format_script", "lua_script", "mqtt_in_cafile", "mqtt_in_certfile", "mqtt_in_keyfile"]
+        | None = None,
     ) -> dict[str, Any]:
         """Uploads the Data Plugin necessary files."""
         return self._client.request(
@@ -175,7 +180,25 @@ class DataToServer(Endpoint):
         )
 
     def upload_data_to_server_servers_config_by_id(
-        self, config_id: str, file: File, *, option: str | None = None
+        self,
+        config_id: str,
+        file: File,
+        *,
+        option: Literal[
+            "azure_x509certificate",
+            "azure_x509privatekey",
+            "ftp_cafile",
+            "ftp_certfile",
+            "ftp_keyfile",
+            "ftp_private_key",
+            "http_cafile",
+            "http_certfile",
+            "http_keyfile",
+            "mqtt_cafile",
+            "mqtt_certfile",
+            "mqtt_keyfile",
+        ]
+        | None = None,
     ) -> dict[str, Any]:
         """Uploads the Server Plugin necessary files."""
         return self._client.request(

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -36,7 +36,7 @@ class OSPF(Endpoint):
         """Returns ospf global configuration."""
         return self._client.request("GET", "/ospf/global", params={"all_options": all_options})
 
-    def upload_ospf_global(self, file: File, *, option: str | None = None) -> dict[str, Any]:
+    def upload_ospf_global(self, file: File, *, option: Literal["ospfd_custom_conf"] | None = None) -> dict[str, Any]:
         """Uploads custom OSPF configuration file."""
         return self._client.request("POST", "/ospf/global", files={"file": file}, form={"option": option})
 

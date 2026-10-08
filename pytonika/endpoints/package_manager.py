@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -48,14 +48,16 @@ class PackageManager(Endpoint):
         """Uploads a zipped package to the device."""
         return self._client.request("POST", "/package_manager/actions/upload_package", files={"file": file})
 
-    def get_package_manager_all_packages_status(self, *, refresh_package_list: str | None = None) -> dict[str, Any]:
+    def get_package_manager_all_packages_status(
+        self, *, refresh_package_list: Literal["0", "1"] | None = None
+    ) -> dict[str, Any]:
         """Returns the status of all packages from all feeds."""
         return self._client.request(
             "GET", "/package_manager/all_packages/status", params={"refresh_package_list": refresh_package_list}
         )
 
     def get_package_manager_all_packages_status_by_id(
-        self, status_id: str, *, refresh_package_list: str | None = None
+        self, status_id: str, *, refresh_package_list: Literal["0", "1"] | None = None
     ) -> dict[str, Any]:
         """Returns the status of all packages for a specific feed."""
         return self._client.request(
@@ -65,7 +67,7 @@ class PackageManager(Endpoint):
         )
 
     def get_package_manager_available_packages_status(
-        self, *, refresh_package_list: str | None = None
+        self, *, refresh_package_list: Literal["0", "1"] | None = None
     ) -> dict[str, Any]:
         """Returns the status of packages available to be installed."""
         return self._client.request(
@@ -77,7 +79,7 @@ class PackageManager(Endpoint):
         return self._client.request("GET", "/package_manager/installed_packages/status")
 
     def get_package_manager_language_packages_status(
-        self, *, refresh_package_list: str | None = None
+        self, *, refresh_package_list: Literal["0", "1"] | None = None
     ) -> dict[str, Any]:
         """Returns language packages available to be installed."""
         return self._client.request(

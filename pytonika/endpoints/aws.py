@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -24,7 +24,9 @@ class AWS(Endpoint):
         """Returns the selected AWS IoT Core job configuration."""
         return self._client.request("GET", f"/aws/jobs/config/{config_id}", params={"all_options": all_options})
 
-    def upload_aws_jobs_config_by_id(self, config_id: str, file: File, *, option: str | None = None) -> dict[str, Any]:
+    def upload_aws_jobs_config_by_id(
+        self, config_id: str, file: File, *, option: Literal["cafile", "certfile", "keyfile"] | None = None
+    ) -> dict[str, Any]:
         """Uploads AWS IoT Core job files."""
         return self._client.request(
             "POST", f"/aws/jobs/config/{config_id}", files={"file": file}, form={"option": option}
@@ -63,7 +65,7 @@ class AWS(Endpoint):
         return self._client.request("GET", f"/aws/provisioning/config/{config_id}", params={"all_options": all_options})
 
     def upload_aws_provisioning_config_by_id(
-        self, config_id: str, file: File, *, option: str | None = None
+        self, config_id: str, file: File, *, option: Literal["certfile", "keyfile"] | None = None
     ) -> dict[str, Any]:
         """Uploads AWS IoT Core provisioning files."""
         return self._client.request(

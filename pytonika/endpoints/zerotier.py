@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -59,7 +59,7 @@ class Zerotier(Endpoint):
         )
 
     def upload_zerotier_networks_config_by_id(
-        self, zerotier_id: str, network_id: str, file: File, *, option: str | None = None
+        self, zerotier_id: str, network_id: str, file: File, *, option: Literal["custom_planet_file"] | None = None
     ) -> dict[str, Any]:
         """Uploads planet file for the specified Zerotier Network configuration."""
         return self._client.request(

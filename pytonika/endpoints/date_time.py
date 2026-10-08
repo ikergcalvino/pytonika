@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -93,7 +93,7 @@ class DateTime(Endpoint):
         return self._client.request("GET", f"/date_time/ntpd/config/{ntpd_id}", params={"all_options": all_options})
 
     def upload_date_time_ntpd_config_by_id(
-        self, ntpd_id: str, file: File, *, option: str | None = None
+        self, ntpd_id: str, file: File, *, option: Literal["config_file"] | None = None
     ) -> dict[str, Any]:
         """Uploads the NTPD config file."""
         return self._client.request(

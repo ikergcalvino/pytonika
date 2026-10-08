@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -16,7 +16,9 @@ class TR069(Endpoint):
         """Returns the TR-069 configuration."""
         return self._client.request("GET", f"/tr069/config/{config_id}", params={"all_options": all_options})
 
-    def upload_tr069_config_by_id(self, config_id: str, file: File, *, option: str | None = None) -> dict[str, Any]:
+    def upload_tr069_config_by_id(
+        self, config_id: str, file: File, *, option: Literal["ssl_cacert", "ssl_cert", "ssl_key"] | None = None
+    ) -> dict[str, Any]:
         """Uploads necessary files for TR-069 configuration."""
         return self._client.request("POST", f"/tr069/config/{config_id}", files={"file": file}, form={"option": option})
 

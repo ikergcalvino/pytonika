@@ -23,6 +23,10 @@ class APIClient:
             verify=verify,
         )
 
+    @property
+    def base_url(self) -> str:
+        return str(self._session.base_url).rstrip("/")
+
     def close(self) -> None:
         self._session.close()
 

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -36,7 +36,7 @@ class BGP(Endpoint):
         """Returns BGP global configuration."""
         return self._client.request("GET", "/bgp/global", params={"all_options": all_options})
 
-    def upload_bgp_global(self, file: File, *, option: str | None = None) -> dict[str, Any]:
+    def upload_bgp_global(self, file: File, *, option: Literal["bgpd_custom_conf"] | None = None) -> dict[str, Any]:
         """Uploads custom BGP configuration file."""
         return self._client.request("POST", "/bgp/global", files={"file": file}, form={"option": option})
 

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -31,7 +31,7 @@ class EventJuggler(Endpoint):
         )
 
     def upload_event_juggler_conditions_config_by_id(
-        self, condition_id: str, file: File, *, option: str | None = None
+        self, condition_id: str, file: File, *, option: Literal["lua_cond_path"] | None = None
     ) -> dict[str, Any]:
         """Uploads the Condition necessary files."""
         return self._client.request(
@@ -170,7 +170,22 @@ class EventJuggler(Endpoint):
         )
 
     def upload_event_juggler_operations_config_by_id(
-        self, operation_id: str, file: File, *, option: str | None = None
+        self,
+        operation_id: str,
+        file: File,
+        *,
+        option: Literal[
+            "exec_file_upload",
+            "http_cafile",
+            "http_certfile",
+            "http_keyfile",
+            "lua_action_path",
+            "lua_cond_path",
+            "mqtt_cafile",
+            "mqtt_certfile",
+            "mqtt_keyfile",
+        ]
+        | None = None,
     ) -> dict[str, Any]:
         """Uploads the Action necessary files."""
         return self._client.request(

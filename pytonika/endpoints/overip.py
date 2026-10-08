@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -24,7 +24,9 @@ class OverIP(Endpoint):
         """Returns the specified OverIP configuration."""
         return self._client.request("GET", f"/overip/config/{config_id}", params={"all_options": all_options})
 
-    def upload_overip_config_by_id(self, config_id: str, file: File, *, option: str | None = None) -> dict[str, Any]:
+    def upload_overip_config_by_id(
+        self, config_id: str, file: File, *, option: Literal["ca_file", "cert_file", "key_file"] | None = None
+    ) -> dict[str, Any]:
         """Uploads the specified OverIP configuration certificate files."""
         return self._client.request(
             "POST", f"/overip/config/{config_id}", files={"file": file}, form={"option": option}

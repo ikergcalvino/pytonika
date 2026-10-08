@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -31,7 +31,7 @@ class OpenConnect(Endpoint):
         return self._client.request("GET", f"/openconnect/client/config/{config_id}")
 
     def upload_openconnect_client_config_by_id(
-        self, config_id: str, file: File, *, option: str | None = None
+        self, config_id: str, file: File, *, option: Literal["ca_cert", "user_cert", "user_key"] | None = None
     ) -> dict[str, Any]:
         """Uploads OpenConnect client certificates."""
         return self._client.request(

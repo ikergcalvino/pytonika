@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -24,7 +24,13 @@ class IPSec(Endpoint):
         """Returns the specified IPsec configuration."""
         return self._client.request("GET", f"/ipsec/config/{config_id}", params={"all_options": all_options})
 
-    def upload_ipsec_config_by_id(self, config_id: str, file: File, *, option: str | None = None) -> dict[str, Any]:
+    def upload_ipsec_config_by_id(
+        self,
+        config_id: str,
+        file: File,
+        *,
+        option: Literal["cacert", "key", "leftcert", "pkcs12_path", "rightcert"] | None = None,
+    ) -> dict[str, Any]:
         """Uploads certificates."""
         return self._client.request("POST", f"/ipsec/config/{config_id}", files={"file": file}, form={"option": option})
 
@@ -65,7 +71,7 @@ class IPSec(Endpoint):
         return self._client.request("GET", f"/ipsec/secrets/config/{config_id}", params={"all_options": all_options})
 
     def upload_ipsec_secrets_config_by_id(
-        self, config_id: str, file: File, *, option: str | None = None
+        self, config_id: str, file: File, *, option: Literal["key", "pkcs12_path"] | None = None
     ) -> dict[str, Any]:
         """Uploads certificates."""
         return self._client.request(

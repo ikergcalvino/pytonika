@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint
 
@@ -52,7 +52,9 @@ class ImpulseCounter(Endpoint):
         """Update Impulse counter global configuration."""
         return self._client.request("PUT", "/impulse_counter/global", json={"data": config})
 
-    def get_impulse_counter_historic_status(self, *, filter: str | None = None) -> dict[str, Any]:
+    def get_impulse_counter_historic_status(
+        self, *, filter: Literal["day", "month", "week"] | None = None
+    ) -> dict[str, Any]:
         """Returns database entries."""
         return self._client.request("GET", "/impulse_counter/historic/status", params={"filter": filter})
 

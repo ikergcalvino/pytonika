@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -113,7 +113,7 @@ class InputOutput(Endpoint):
         )
 
     def upload_io_juggler_operations_config_by_id(
-        self, operation_id: str, file: File, *, option: str | None = None
+        self, operation_id: str, file: File, *, option: Literal["cafile", "certfile", "keyfile", "upload"] | None = None
     ) -> dict[str, Any]:
         """Uploads I/O Juggler Action certificate files or script file."""
         return self._client.request(

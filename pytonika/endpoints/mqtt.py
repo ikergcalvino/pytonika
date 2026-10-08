@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -25,7 +25,11 @@ class MQTT(Endpoint):
         return self._client.request("GET", f"/mqtt/bridge/config/{bridge_id}", params={"all_options": all_options})
 
     def upload_mqtt_bridge_config_by_id(
-        self, bridge_id: str, file: File, *, option: str | None = None
+        self,
+        bridge_id: str,
+        file: File,
+        *,
+        option: Literal["bridge_cafile", "bridge_certfile", "bridge_keyfile"] | None = None,
     ) -> dict[str, Any]:
         """Uploads MQTT bridge certificate files."""
         return self._client.request(
@@ -83,7 +87,22 @@ class MQTT(Endpoint):
         return self._client.request("GET", f"/mqtt/broker/config/{config_id}", params={"all_options": all_options})
 
     def upload_mqtt_broker_config_by_id(
-        self, config_id: str, file: File, *, option: str | None = None
+        self,
+        config_id: str,
+        file: File,
+        *,
+        option: Literal[
+            "acl_file_path",
+            "ca_file",
+            "cafile",
+            "cert_file",
+            "certfile",
+            "custom_section_id",
+            "key_file",
+            "keyfile",
+            "password_file",
+        ]
+        | None = None,
     ) -> dict[str, Any]:
         """Uploads MQTT broker files."""
         return self._client.request(
@@ -107,7 +126,7 @@ class MQTT(Endpoint):
         return self._client.request("GET", f"/mqtt/publisher/config/{config_id}", params={"all_options": all_options})
 
     def upload_mqtt_publisher_config_by_id(
-        self, config_id: str, file: File, *, option: str | None = None
+        self, config_id: str, file: File, *, option: Literal["cafile", "certfile", "keyfile"] | None = None
     ) -> dict[str, Any]:
         """Uploads MQTT Publisher certificate files."""
         return self._client.request(

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -8,7 +8,9 @@ class Bonding(Endpoint):
         """Returns Bonding global configuration."""
         return self._client.request("GET", "/bonding/global", params={"all_options": all_options})
 
-    def upload_bonding_global(self, file: File, *, option: str | None = None) -> dict[str, Any]:
+    def upload_bonding_global(
+        self, file: File, *, option: Literal["ca_cert", "client_cert", "client_key"] | None = None
+    ) -> dict[str, Any]:
         """Uploads a Bonding certificate or key file."""
         return self._client.request("POST", "/bonding/global", files={"file": file}, form={"option": option})
 

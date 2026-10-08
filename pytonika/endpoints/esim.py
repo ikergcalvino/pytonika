@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint
 
@@ -9,7 +9,7 @@ class eSIM(Endpoint):
         return self._client.request("POST", "/esim/actions/clear_errors", json=None if data is None else {"data": data})
 
     def esim_actions_download(
-        self, data: dict[str, Any] | None = None, *, switch_sim: str | None = None
+        self, data: dict[str, Any] | None = None, *, switch_sim: Literal["0", "1"] | None = None
     ) -> dict[str, Any]:
         """Downloads eSIM profile."""
         return self._client.request(
@@ -33,7 +33,7 @@ class eSIM(Endpoint):
         """Updates multiple eSIM configurations."""
         return self._client.request("PUT", "/esim/config", json={"data": config})
 
-    def delete_esim_config(self, config: list[str], *, skip_switch: str | None = None) -> dict[str, Any]:
+    def delete_esim_config(self, config: list[str], *, skip_switch: Literal["0", "1"] | None = None) -> dict[str, Any]:
         """Deletes multiple eSIM configurations."""
         return self._client.request(
             "DELETE", "/esim/config", params={"skip_switch": skip_switch}, json={"data": config}
@@ -47,7 +47,9 @@ class eSIM(Endpoint):
         """Updates specified eSIM configuration."""
         return self._client.request("PUT", f"/esim/config/{config_id}", json={"data": config})
 
-    def delete_esim_config_by_id(self, config_id: str, *, skip_switch: str | None = None) -> dict[str, Any]:
+    def delete_esim_config_by_id(
+        self, config_id: str, *, skip_switch: Literal["0", "1"] | None = None
+    ) -> dict[str, Any]:
         """Deletes specified eSIM configuration."""
         return self._client.request("DELETE", f"/esim/config/{config_id}", params={"skip_switch": skip_switch})
 

@@ -83,11 +83,14 @@ class Router:
         self.wireguard = WireGuard(self._client)
         self.zerotier = Zerotier(self._client)
 
-    def close(self) -> None:
-        self._client.close()
+    def __repr__(self) -> str:
+        return f"<{type(self).__name__} {self._client.base_url}>"
 
     def __enter__(self) -> Self:
         return self
 
     def __exit__(self, *exc: object) -> None:
         self.close()
+
+    def close(self) -> None:
+        self._client.close()

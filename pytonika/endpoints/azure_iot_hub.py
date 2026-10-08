@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -33,7 +33,7 @@ class AzureIoTHub(Endpoint):
         return self._client.request("GET", f"/azure/iot_hub/config/{config_id}", params={"all_options": all_options})
 
     def upload_azure_iot_hub_config_by_id(
-        self, config_id: str, file: File, *, option: str | None = None
+        self, config_id: str, file: File, *, option: Literal["x509certificate", "x509privatekey"] | None = None
     ) -> dict[str, Any]:
         """Uploads Azure IoT Hub files."""
         return self._client.request(

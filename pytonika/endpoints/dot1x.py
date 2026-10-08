@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -33,7 +33,11 @@ class Dot1X(Endpoint):
         return self._client.request("GET", f"/dot1x/ports/config/{config_id}", params={"all_options": all_options})
 
     def upload_dot1x_ports_config_by_id(
-        self, config_id: str, file: File, *, option: str | None = None
+        self,
+        config_id: str,
+        file: File,
+        *,
+        option: Literal["ca_cert", "client_cert", "pac_file", "private_key"] | None = None,
     ) -> dict[str, Any]:
         """Upload 802.1X client certificates."""
         return self._client.request(

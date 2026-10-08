@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -39,7 +39,7 @@ class Backup(Endpoint):
         )
 
     def backup_actions_upload(
-        self, file: File, *, encrypt: str | None = None, password: str | None = None
+        self, file: File, *, encrypt: Literal["0", "1"] | None = None, password: str | None = None
     ) -> dict[str, Any]:
         """Uploads backup into device to apply."""
         return self._client.request(

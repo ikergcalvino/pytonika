@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from ._endpoint import Endpoint, File
 
@@ -25,7 +25,7 @@ class EmailRelay(Endpoint):
         return self._client.request("GET", f"/email_relay/config/{config_id}", params={"all_options": all_options})
 
     def upload_email_relay_config_by_id(
-        self, config_id: str, file: File, *, option: str | None = None
+        self, config_id: str, file: File, *, option: Literal["server_tls_certificate"] | None = None
     ) -> dict[str, Any]:
         """Uploads TLS certificate."""
         return self._client.request(
