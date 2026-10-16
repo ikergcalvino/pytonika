@@ -1,5 +1,9 @@
-from ._base import Endpoint
+from typing import Any
+
+from ._endpoint import Endpoint
 
 
 class Services(Endpoint):
-    pass
+    def get_services_status(self) -> dict[str, Any]:
+        """Returns information about installed services on the device."""
+        return self._client.request("GET", "/services/status")

@@ -1,5 +1,191 @@
-from ._base import Endpoint
+from typing import Any
+
+from ._endpoint import Endpoint
 
 
 class Hotspot2(Endpoint):
-    pass
+    def get_hotspot2_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns all Hotspot 2.0 configurations."""
+        return self._client.request("GET", "/hotspot2/config", params={"all_options": all_options})
+
+    def update_hotspot2_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates sepcified Hotspot 2.0 configurations."""
+        return self._client.request("PUT", "/hotspot2/config", json={"data": config})
+
+    def get_hotspot2_config_by_id(self, config_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns the specified Hotspot 2.0 configuration."""
+        return self._client.request("GET", f"/hotspot2/config/{config_id}", params={"all_options": all_options})
+
+    def update_hotspot2_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates the specified Hotspot 2.0 configuration."""
+        return self._client.request("PUT", f"/hotspot2/config/{config_id}", json={"data": config})
+
+    def get_hotspot2_3gpp_config(self, hotspot_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns all 3GPP configurations for specified Hotspot 2.0 instance."""
+        return self._client.request("GET", f"/hotspot2/{hotspot_id}/3gpp/config", params={"all_options": all_options})
+
+    def create_hotspot2_3gpp_config(self, hotspot_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates 3GPP configuration for specified Hotspot 2.0 instance."""
+        return self._client.request("POST", f"/hotspot2/{hotspot_id}/3gpp/config", json={"data": config})
+
+    def update_hotspot2_3gpp_config(self, hotspot_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates specified 3GPP configurations for specified Hotspot 2.0 instance."""
+        return self._client.request("PUT", f"/hotspot2/{hotspot_id}/3gpp/config", json={"data": config})
+
+    def delete_hotspot2_3gpp_config(self, hotspot_id: str, config: list[str]) -> dict[str, Any]:
+        """Deletes specified 3GPP configurations for specified Hotspot 2.0 instance."""
+        return self._client.request("DELETE", f"/hotspot2/{hotspot_id}/3gpp/config", json={"data": config})
+
+    def get_hotspot2_3gpp_config_by_id(
+        self, hotspot_id: str, gpp_id: str, *, all_options: bool | None = None
+    ) -> dict[str, Any]:
+        """Returns specified 3GPP configuration for specified Hotspot 2.0 instance."""
+        return self._client.request(
+            "GET", f"/hotspot2/{hotspot_id}/3gpp/config/{gpp_id}", params={"all_options": all_options}
+        )
+
+    def update_hotspot2_3gpp_config_by_id(self, hotspot_id: str, gpp_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates specified 3GPP configuration for specified Hotspot 2.0 instance."""
+        return self._client.request("PUT", f"/hotspot2/{hotspot_id}/3gpp/config/{gpp_id}", json={"data": config})
+
+    def delete_hotspot2_3gpp_config_by_id(self, hotspot_id: str, gpp_id: str) -> dict[str, Any]:
+        """Deletes specified 3GPP configuration for specified Hotspot 2.0 instance."""
+        return self._client.request("DELETE", f"/hotspot2/{hotspot_id}/3gpp/config/{gpp_id}")
+
+    def get_hotspot2_capabilities_config(self, hotspot_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns all Connection capability configurations for specified Hotspot 2.0 instance."""
+        return self._client.request(
+            "GET", f"/hotspot2/{hotspot_id}/capabilities/config", params={"all_options": all_options}
+        )
+
+    def create_hotspot2_capabilities_config(self, hotspot_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates Connection capability configuration for specified Hotspot 2.0 instance."""
+        return self._client.request("POST", f"/hotspot2/{hotspot_id}/capabilities/config", json={"data": config})
+
+    def update_hotspot2_capabilities_config(self, hotspot_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates specified Connection capability configurations for specified Hotspot 2.0 instance."""
+        return self._client.request("PUT", f"/hotspot2/{hotspot_id}/capabilities/config", json={"data": config})
+
+    def delete_hotspot2_capabilities_config(self, hotspot_id: str, config: list[str]) -> dict[str, Any]:
+        """Deletes specified Connection capability configurations for specified Hotspot 2.0 instance."""
+        return self._client.request("DELETE", f"/hotspot2/{hotspot_id}/capabilities/config", json={"data": config})
+
+    def get_hotspot2_capabilities_config_by_id(
+        self, hotspot_id: str, capabilities_id: str, *, all_options: bool | None = None
+    ) -> dict[str, Any]:
+        """Returns specified Connection capability configuration for specified Hotspot 2.0 instance."""
+        return self._client.request(
+            "GET", f"/hotspot2/{hotspot_id}/capabilities/config/{capabilities_id}", params={"all_options": all_options}
+        )
+
+    def update_hotspot2_capabilities_config_by_id(
+        self, hotspot_id: str, capabilities_id: str, config: dict[str, Any]
+    ) -> dict[str, Any]:
+        """Updates specified Connection capability configuration for specified Hotspot 2.0 instance."""
+        return self._client.request(
+            "PUT", f"/hotspot2/{hotspot_id}/capabilities/config/{capabilities_id}", json={"data": config}
+        )
+
+    def delete_hotspot2_capabilities_config_by_id(self, hotspot_id: str, capabilities_id: str) -> dict[str, Any]:
+        """Deletes specified Connection capability configuration for specified Hotspot 2.0 instance."""
+        return self._client.request("DELETE", f"/hotspot2/{hotspot_id}/capabilities/config/{capabilities_id}")
+
+    def get_hotspot2_nai_config(self, hotspot_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns all NAI realm configurations for specified Hotspot 2.0 instance."""
+        return self._client.request("GET", f"/hotspot2/{hotspot_id}/nai/config", params={"all_options": all_options})
+
+    def create_hotspot2_nai_config(self, hotspot_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates NAI realm configuration for specified Hotspot 2.0 instance."""
+        return self._client.request("POST", f"/hotspot2/{hotspot_id}/nai/config", json={"data": config})
+
+    def update_hotspot2_nai_config(self, hotspot_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates specified NAI realm configurations for specified Hotspot 2.0 instance."""
+        return self._client.request("PUT", f"/hotspot2/{hotspot_id}/nai/config", json={"data": config})
+
+    def delete_hotspot2_nai_config(self, hotspot_id: str, config: list[str]) -> dict[str, Any]:
+        """Deletes specified NAI realm configurations for specified Hotspot 2.0 instance."""
+        return self._client.request("DELETE", f"/hotspot2/{hotspot_id}/nai/config", json={"data": config})
+
+    def get_hotspot2_nai_config_by_id(
+        self, hotspot_id: str, nai_id: str, *, all_options: bool | None = None
+    ) -> dict[str, Any]:
+        """Returns specified NAI realm configuration for specified Hotspot 2.0 instance."""
+        return self._client.request(
+            "GET", f"/hotspot2/{hotspot_id}/nai/config/{nai_id}", params={"all_options": all_options}
+        )
+
+    def update_hotspot2_nai_config_by_id(self, hotspot_id: str, nai_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates specified NAI realm configuration for specified Hotspot 2.0 instance."""
+        return self._client.request("PUT", f"/hotspot2/{hotspot_id}/nai/config/{nai_id}", json={"data": config})
+
+    def delete_hotspot2_nai_config_by_id(self, hotspot_id: str, nai_id: str) -> dict[str, Any]:
+        """Deletes specified NAI realm configuration for specified Hotspot 2.0 instance."""
+        return self._client.request("DELETE", f"/hotspot2/{hotspot_id}/nai/config/{nai_id}")
+
+    def get_hotspot2_names_config(self, hotspot_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns all Operator configurations for specified Hotspot 2.0 instance."""
+        return self._client.request("GET", f"/hotspot2/{hotspot_id}/names/config", params={"all_options": all_options})
+
+    def create_hotspot2_names_config(self, hotspot_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates Operator configuration for specified Hotspot 2.0 instance."""
+        return self._client.request("POST", f"/hotspot2/{hotspot_id}/names/config", json={"data": config})
+
+    def update_hotspot2_names_config(self, hotspot_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates specified Operator configurations for specified Hotspot 2.0 instance."""
+        return self._client.request("PUT", f"/hotspot2/{hotspot_id}/names/config", json={"data": config})
+
+    def delete_hotspot2_names_config(self, hotspot_id: str, config: list[str]) -> dict[str, Any]:
+        """Deletes specified Operator configurations for specified Hotspot 2.0 instance."""
+        return self._client.request("DELETE", f"/hotspot2/{hotspot_id}/names/config", json={"data": config})
+
+    def get_hotspot2_names_config_by_id(
+        self, hotspot_id: str, name_id: str, *, all_options: bool | None = None
+    ) -> dict[str, Any]:
+        """Returns specified Operator configuration for specified Hotspot 2.0 instance."""
+        return self._client.request(
+            "GET", f"/hotspot2/{hotspot_id}/names/config/{name_id}", params={"all_options": all_options}
+        )
+
+    def update_hotspot2_names_config_by_id(
+        self, hotspot_id: str, name_id: str, config: dict[str, Any]
+    ) -> dict[str, Any]:
+        """Updates specified Operator configuration for specified Hotspot 2.0 instance."""
+        return self._client.request("PUT", f"/hotspot2/{hotspot_id}/names/config/{name_id}", json={"data": config})
+
+    def delete_hotspot2_names_config_by_id(self, hotspot_id: str, name_id: str) -> dict[str, Any]:
+        """Deletes specified Operator configuration for specified Hotspot 2.0 instance."""
+        return self._client.request("DELETE", f"/hotspot2/{hotspot_id}/names/config/{name_id}")
+
+    def get_hotspot2_venues_config(self, hotspot_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns all Venue configurations for specified Hotspot 2.0 instance."""
+        return self._client.request("GET", f"/hotspot2/{hotspot_id}/venues/config", params={"all_options": all_options})
+
+    def create_hotspot2_venues_config(self, hotspot_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Creates Venue configuration for specified Hotspot 2.0 instance."""
+        return self._client.request("POST", f"/hotspot2/{hotspot_id}/venues/config", json={"data": config})
+
+    def update_hotspot2_venues_config(self, hotspot_id: str, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates specified Venue configurations for specified Hotspot 2.0 instance."""
+        return self._client.request("PUT", f"/hotspot2/{hotspot_id}/venues/config", json={"data": config})
+
+    def delete_hotspot2_venues_config(self, hotspot_id: str, config: list[str]) -> dict[str, Any]:
+        """Deletes specified Venue configurations for specified Hotspot 2.0 instance."""
+        return self._client.request("DELETE", f"/hotspot2/{hotspot_id}/venues/config", json={"data": config})
+
+    def get_hotspot2_venues_config_by_id(
+        self, hotspot_id: str, venue_id: str, *, all_options: bool | None = None
+    ) -> dict[str, Any]:
+        """Returns specified Venue configuration for specified Hotspot 2.0 instance."""
+        return self._client.request(
+            "GET", f"/hotspot2/{hotspot_id}/venues/config/{venue_id}", params={"all_options": all_options}
+        )
+
+    def update_hotspot2_venues_config_by_id(
+        self, hotspot_id: str, venue_id: str, config: dict[str, Any]
+    ) -> dict[str, Any]:
+        """Updates specified Venue configuration for specified Hotspot 2.0 instance."""
+        return self._client.request("PUT", f"/hotspot2/{hotspot_id}/venues/config/{venue_id}", json={"data": config})
+
+    def delete_hotspot2_venues_config_by_id(self, hotspot_id: str, venue_id: str) -> dict[str, Any]:
+        """Deletes specified Venue configuration for specified Hotspot 2.0 instance."""
+        return self._client.request("DELETE", f"/hotspot2/{hotspot_id}/venues/config/{venue_id}")

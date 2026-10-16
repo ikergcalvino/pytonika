@@ -1,1 +1,11 @@
 blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/ikergcalvino/pytonika/security/advisories/new
+    about: Please report vulnerabilities in Pytonika privately, not as a public issue.
+  - name: Device or firmware issue
+    url: https://teltonika-networks.com/
+    about: Bugs in Teltonika devices, firmware or the Web API itself must be reported to Teltonika Networks.
+  - name: Teltonika Web API reference
+    url: https://developers.teltonika-networks.com/
+    about: Official documentation of every endpoint, its parameters and responses.

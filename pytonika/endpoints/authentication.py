@@ -1,33 +1,28 @@
 from typing import Any
 
-from ._base import Endpoint
+from ._endpoint import Endpoint
 
 
 class Authentication(Endpoint):
     def login(self, username: str, password: str) -> dict[str, Any]:
-        endpoint = "/login"
+        """Authenticates user for API access and stores the session token for later requests."""
+        response = self._client.request("POST", "/login", json={"username": username, "password": password})
 
-        data = {"username": username, "password": password}
+        token = (response.get("data") or {}).get("token")
 
-        response = self._api_client.post(endpoint, data=data)
-
-        token = response["data"].get("token")
-
-        if token:
-            self._api_client.set_token(token)
+        if isinstance(token, str):
+            self._client.set_token(token)
 
         return response
 
     def logout(self) -> dict[str, Any]:
-        endpoint = "/logout"
+        """Logs out user from API and forgets the session token."""
+        response = self._client.request("POST", "/logout")
 
-        response = self._api_client.post(endpoint)
-
-        self._api_client.clear_token()
+        self._client.clear_token()
 
         return response
 
     def get_session_status(self) -> dict[str, Any]:
-        endpoint = "/session/status"
-
-        return self._api_client.get(endpoint)
+        """Returns if API session is alive and resets session's timer."""
+        return self._client.request("GET", "/session/status")
