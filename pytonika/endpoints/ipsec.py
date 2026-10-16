@@ -3,7 +3,7 @@ from typing import Any, Literal
 from ._endpoint import Endpoint, File
 
 
-class IPSec(Endpoint):
+class IPsec(Endpoint):
     def get_ipsec_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns all IPsec configurations."""
         return self._client.request("GET", "/ipsec/config", params={"all_options": all_options})

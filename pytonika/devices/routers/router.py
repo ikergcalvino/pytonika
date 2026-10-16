@@ -45,7 +45,7 @@ class Router:
         self.ip_neighbors = IPNeighbors(self._client)
         self.ip_routes = IPRoutes(self._client)
         self.ip_rules = IPRules(self._client)
-        self.ipsec = IPSec(self._client)
+        self.ipsec = IPsec(self._client)
         self.l2tp = L2TP(self._client)
         self.l2tpv3 = L2TPv3(self._client)
         self.logging = Logging(self._client)
@@ -70,10 +70,10 @@ class Router:
         self.sstp = SSTP(self._client)
         self.stunnel = Stunnel(self._client)
         self.system = System(self._client)
-        self.thingworx = Thingworx(self._client)
+        self.thingworx = ThingWorx(self._client)
         self.tinc = Tinc(self._client)
         self.topology = Topology(self._client)
-        self.tr_069 = TR069(self._client)
+        self.tr069 = TR069(self._client)
         self.troubleshoot = Troubleshoot(self._client)
         self.unauthorized = Unauthorized(self._client)
         self.upnp = UPnP(self._client)
@@ -81,7 +81,7 @@ class Router:
         self.wake_on_lan = WakeOnLan(self._client)
         self.web_filter = WebFilter(self._client)
         self.wireguard = WireGuard(self._client)
-        self.zerotier = Zerotier(self._client)
+        self.zerotier = ZeroTier(self._client)
 
     def __repr__(self) -> str:
         return f"<{type(self).__name__} {self._client.base_url}>"

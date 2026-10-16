@@ -3,7 +3,7 @@ from typing import Any
 from ._endpoint import Endpoint
 
 
-class Profinet(Endpoint):
+class PROFINET(Endpoint):
     def profinet_actions_download_gsdml(self) -> bytes | dict[str, Any]:
         """Download GSDML file."""
         return self._client.request("POST", "/profinet/actions/download_gsdml", download=True)

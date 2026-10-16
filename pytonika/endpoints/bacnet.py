@@ -3,7 +3,7 @@ from typing import Any
 from ._endpoint import Endpoint
 
 
-class Bacnet(Endpoint):
+class BACnet(Endpoint):
     def get_bacnet_bdt_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns all BACnet BDT configurations."""
         return self._client.request("GET", "/bacnet/bdt/config", params={"all_options": all_options})

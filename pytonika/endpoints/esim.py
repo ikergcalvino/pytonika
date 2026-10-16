@@ -3,7 +3,7 @@ from typing import Any, Literal
 from ._endpoint import Endpoint
 
 
-class eSIM(Endpoint):
+class ESIM(Endpoint):
     def esim_actions_clear_errors(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
         """Clear eSIM errors."""
         return self._client.request("POST", "/esim/actions/clear_errors", json=None if data is None else {"data": data})

@@ -3,7 +3,7 @@ from typing import Any
 from ._endpoint import Endpoint
 
 
-class IEC608705Client(Endpoint):
+class IEC60870Client(Endpoint):
     def iec60870_client_actions_list_information_objects(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
         """List available information objects on IEC 60870-5 server."""
         return self._client.request(

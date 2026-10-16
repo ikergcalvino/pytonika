@@ -3,7 +3,7 @@ from typing import Any
 from ._endpoint import Endpoint
 
 
-class Netbird(Endpoint):
+class NetBird(Endpoint):
     def get_netbird_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns all NetBird configurations."""
         return self._client.request("GET", "/netbird/config", params={"all_options": all_options})

@@ -8,13 +8,14 @@ class TRB141(Gateway):
     def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool | ssl.SSLContext = True) -> None:
         super().__init__(base_url, timeout=timeout, verify=verify)
 
-        self.bonding = Bonding(self._client)
         self.call_utilities = CallUtilities(self._client)
         self.dhcp_relay = DHCPRelay(self._client)
-        self.iec_60870_5_client = IEC608705Client(self._client)
-        self.iec_60870_5_server = IEC608705Server(self._client)
+        self.greengrass_v2 = GreengrassV2(self._client)
+        self.iec60870_client = IEC60870Client(self._client)
+        self.iec60870_server = IEC60870Server(self._client)
         self.integrity = Integrity(self._client)
         self.ldp = LDP(self._client)
+        self.lwm2m_client = LwM2MClient(self._client)
         self.network_usage = NetworkUsage(self._client)
         self.openconnect = OpenConnect(self._client)
         self.operator_lists = OperatorLists(self._client)

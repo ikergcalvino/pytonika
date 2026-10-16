@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pytonika"
-version = "0.4.0"
+version = "0.5.0"
 description = "Typed Python client for the Teltonika Networks Web API: routers, gateways, access points and switches."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -51,9 +51,9 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-lint = ["ruff>=0.17.0"]
+lint = ["ruff>=0.17.1"]
 test = ["pytest>=9.1.1", "pytest-cov>=7.1.0", "respx>=0.23.1"]
-type = ["ty>=0.0.86"]
+type = ["ty>=0.0.89"]
 build = ["build>=1.6.1", "twine>=7.0.0"]
 dev = ["pytonika[lint,test,type,build]"]
 

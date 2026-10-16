@@ -4,6 +4,26 @@ from ._endpoint import Endpoint
 
 
 class Network(Endpoint):
+    def get_network_devices_batadv_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
+        """Returns batadv network device configurations."""
+        return self._client.request("GET", "/network/devices/batadv/config", params={"all_options": all_options})
+
+    def update_network_devices_batadv_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+        """Updates batadv network device configurations."""
+        return self._client.request("PUT", "/network/devices/batadv/config", json={"data": config})
+
+    def get_network_devices_batadv_config_by_id(
+        self, config_id: str, *, all_options: bool | None = None
+    ) -> dict[str, Any]:
+        """Returns batadv network device configurations."""
+        return self._client.request(
+            "GET", f"/network/devices/batadv/config/{config_id}", params={"all_options": all_options}
+        )
+
+    def update_network_devices_batadv_config_by_id(self, config_id: str, config: dict[str, Any]) -> dict[str, Any]:
+        """Updates batadv network device configurations."""
+        return self._client.request("PUT", f"/network/devices/batadv/config/{config_id}", json={"data": config})
+
     def get_network_devices_bridge_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns bridge network device configurations."""
         return self._client.request("GET", "/network/devices/bridge/config", params={"all_options": all_options})

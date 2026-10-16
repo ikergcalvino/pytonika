@@ -142,8 +142,8 @@ class with the endpoints specific to it:
 | `Switch` | 5 | SWM280, SWM281, SWM282, TSW202, TSW212 |
 
 Endpoints are generated from the official API reference for the latest firmware documented for each model:
-**RutOS 7.25.3** for most models. A few models are documented for older firmware lines (7.23.8 for RUTM31,
-7.14.5 for RUT300, RUT360, TCR100, TRB245 and TRB255, 7.6.21 for RUT240, RUT950 and RUT955, and SwOS 1.10.2
+**RutOS 7.26** for most models. A few models are documented for older firmware lines (7.23.8 for RUTM31,
+7.14.5 for RUT300, RUT360, TCR100, TRB245 and TRB255, 7.6.21 for RUT240, RUT950 and RUT955, and SwOS 1.10.4
 for the switches), and their classes reflect that. Operations added in newer firmware return an error on devices
 running an older version.
 

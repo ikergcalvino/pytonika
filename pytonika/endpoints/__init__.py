@@ -1,4 +1,5 @@
 from .access_control import AccessControl
+from .advanced_mesh import AdvancedMesh
 from .apn_database import APNDatabase
 from .attack_prevention import AttackPrevention
 from .authentication import Authentication
@@ -6,11 +7,10 @@ from .auto_reboot import AutoReboot
 from .aws import AWS
 from .azure_iot_hub import AzureIoTHub
 from .backup import Backup
-from .bacnet import Bacnet
+from .bacnet import BACnet
 from .bfd import BFD
 from .bgp import BGP
 from .bluetooth import Bluetooth
-from .bonding import Bonding
 from .cable_diagnostic import CableDiagnostic
 from .call_utilities import CallUtilities
 from .can import CAN
@@ -40,7 +40,7 @@ from .dot1x import Dot1X
 from .eigrp import EIGRP
 from .email_relay import EmailRelay
 from .eoip import EoIP
-from .esim import eSIM
+from .esim import ESIM
 from .ethernet_ip import EthernetIP
 from .event_juggler import EventJuggler
 from .events_log import EventsLog
@@ -52,10 +52,11 @@ from .forwarding_table import ForwardingTable
 from .fota import FOTA
 from .gps import GPS
 from .gre import GRE
+from .greengrass_v2 import GreengrassV2
 from .hotspot import Hotspot
-from .hotspot_2 import Hotspot2
-from .iec_60870_5_client import IEC608705Client
-from .iec_60870_5_server import IEC608705Server
+from .hotspot2 import Hotspot2
+from .iec60870_client import IEC60870Client
+from .iec60870_server import IEC60870Server
 from .igmp_proxy import IGMPProxy
 from .impulse_counter import ImpulseCounter
 from .input_output import InputOutput
@@ -65,7 +66,7 @@ from .internet_connection import InternetConnection
 from .ip_neighbors import IPNeighbors
 from .ip_routes import IPRoutes
 from .ip_rules import IPRules
-from .ipsec import IPSec
+from .ipsec import IPsec
 from .itxpt import ITxPT
 from .jwt_login import JWTLogin
 from .l2tp import L2TP
@@ -75,8 +76,9 @@ from .link_aggregation import LinkAggregation
 from .lldp import LLDP
 from .logging import Logging
 from .loopback import Loopback
-from .m_bus import MBus
+from .lwm2m_client import LwM2MClient
 from .macfilter import MACFilter
+from .mbus import MBus
 from .messages import Messages
 from .modbus import Modbus
 from .modem_control import ModemControl
@@ -85,7 +87,7 @@ from .mqtt import MQTT
 from .mrp import MRP
 from .nat64 import NAT64
 from .nat_offloading import NATOffloading
-from .netbird import Netbird
+from .netbird import NetBird
 from .network import Network
 from .network_usage import NetworkUsage
 from .nhrp import NHRP
@@ -107,7 +109,7 @@ from .ports_settings import PortsSettings
 from .power_control import PowerControl
 from .pptp import PPTP
 from .profiles import Profiles
-from .profinet import Profinet
+from .profinet import PROFINET
 from .qos import QoS
 from .recipients import Recipients
 from .refresh import Refresh
@@ -142,10 +144,10 @@ from .stp import STP
 from .stunnel import Stunnel
 from .system import System
 from .tailscale import Tailscale
-from .thingworx import Thingworx
+from .thingworx import ThingWorx
 from .tinc import Tinc
 from .topology import Topology
-from .tr_069 import TR069
+from .tr069 import TR069
 from .traffic_logging import TrafficLogging
 from .troubleshoot import Troubleshoot
 from .two_fa import TwoFA
@@ -164,10 +166,11 @@ from .wifi_scanner import WiFiScanner
 from .wireguard import WireGuard
 from .wireless import Wireless
 from .wireless_reboot import WirelessReboot
-from .zerotier import Zerotier
+from .zerotier import ZeroTier
 
 __all__ = [
     "AccessControl",
+    "AdvancedMesh",
     "APNDatabase",
     "AttackPrevention",
     "Authentication",
@@ -175,11 +178,10 @@ __all__ = [
     "AWS",
     "AzureIoTHub",
     "Backup",
-    "Bacnet",
+    "BACnet",
     "BFD",
     "BGP",
     "Bluetooth",
-    "Bonding",
     "CableDiagnostic",
     "CallUtilities",
     "CAN",
@@ -209,7 +211,7 @@ __all__ = [
     "EIGRP",
     "EmailRelay",
     "EoIP",
-    "eSIM",
+    "ESIM",
     "EthernetIP",
     "EventJuggler",
     "EventsLog",
@@ -221,10 +223,11 @@ __all__ = [
     "FOTA",
     "GPS",
     "GRE",
+    "GreengrassV2",
     "Hotspot",
     "Hotspot2",
-    "IEC608705Client",
-    "IEC608705Server",
+    "IEC60870Client",
+    "IEC60870Server",
     "IGMPProxy",
     "ImpulseCounter",
     "InputOutput",
@@ -234,7 +237,7 @@ __all__ = [
     "IPNeighbors",
     "IPRoutes",
     "IPRules",
-    "IPSec",
+    "IPsec",
     "ITxPT",
     "JWTLogin",
     "L2TP",
@@ -244,8 +247,9 @@ __all__ = [
     "LLDP",
     "Logging",
     "Loopback",
-    "MBus",
+    "LwM2MClient",
     "MACFilter",
+    "MBus",
     "Messages",
     "Modbus",
     "ModemControl",
@@ -254,7 +258,7 @@ __all__ = [
     "MRP",
     "NAT64",
     "NATOffloading",
-    "Netbird",
+    "NetBird",
     "Network",
     "NetworkUsage",
     "NHRP",
@@ -276,7 +280,7 @@ __all__ = [
     "PowerControl",
     "PPTP",
     "Profiles",
-    "Profinet",
+    "PROFINET",
     "QoS",
     "Recipients",
     "Refresh",
@@ -311,7 +315,7 @@ __all__ = [
     "Stunnel",
     "System",
     "Tailscale",
-    "Thingworx",
+    "ThingWorx",
     "Tinc",
     "Topology",
     "TR069",
@@ -333,5 +337,5 @@ __all__ = [
     "WireGuard",
     "Wireless",
     "WirelessReboot",
-    "Zerotier",
+    "ZeroTier",
 ]

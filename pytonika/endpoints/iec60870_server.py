@@ -3,7 +3,7 @@ from typing import Any
 from ._endpoint import Endpoint
 
 
-class IEC608705Server(Endpoint):
+class IEC60870Server(Endpoint):
     def get_iec60870_server_global(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Get IEC 60870-5 Server global configuration."""
         return self._client.request("GET", "/iec60870/server/global", params={"all_options": all_options})

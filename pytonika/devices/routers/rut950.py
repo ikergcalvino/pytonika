@@ -12,7 +12,7 @@ class RUT950(Router):
         self.call_utilities = CallUtilities(self._client)
         self.data_limit = DataLimit(self._client)
         self.data_usage = DataUsage(self._client)
-        self.hotspot_2 = Hotspot2(self._client)
+        self.hotspot2 = Hotspot2(self._client)
         self.input_output = InputOutput(self._client)
         self.messages = Messages(self._client)
         self.modems = Modems(self._client)

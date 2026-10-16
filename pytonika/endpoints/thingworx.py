@@ -3,7 +3,7 @@ from typing import Any
 from ._endpoint import Endpoint
 
 
-class Thingworx(Endpoint):
+class ThingWorx(Endpoint):
     def get_thingworx_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns the ThingWorx configuration in an array."""
         return self._client.request("GET", "/thingworx/config", params={"all_options": all_options})

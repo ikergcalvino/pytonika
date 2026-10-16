@@ -151,7 +151,7 @@ class AccessControl(Endpoint):
     def access_control_sessions_actions_terminate(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
         """Terminate an active session."""
         return self._client.request(
-            "POST", "/access_control/sessions/actions/terminate", json=None if data is None else data
+            "POST", "/access_control/sessions/actions/terminate", json=None if data is None else {"data": data}
         )
 
     def get_access_control_sessions_status(

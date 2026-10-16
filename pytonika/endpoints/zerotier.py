@@ -3,7 +3,7 @@ from typing import Any, Literal
 from ._endpoint import Endpoint, File
 
 
-class Zerotier(Endpoint):
+class ZeroTier(Endpoint):
     def get_zerotier_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
         """Returns all Zerotier configurations."""
         return self._client.request("GET", "/zerotier/config", params={"all_options": all_options})

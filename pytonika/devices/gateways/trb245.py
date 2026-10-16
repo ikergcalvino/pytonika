@@ -12,7 +12,7 @@ class TRB245(Gateway):
         self.console = Console(self._client)
         self.dfota = DFOTA(self._client)
         self.dot1x = Dot1X(self._client)
-        self.esim = eSIM(self._client)
+        self.esim = ESIM(self._client)
         self.gps = GPS(self._client)
         self.hotspot = Hotspot(self._client)
         self.modem_control = ModemControl(self._client)
