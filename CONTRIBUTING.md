@@ -1,8 +1,8 @@
 # Contributing to Pytonika
 
 Thanks for your interest in improving Pytonika! Contributions, bug reports and
-feature requests are all welcome. This guide covers how to set up your
-environment and the conventions the project follows.
+feature requests are all welcome. This guide covers how the project is
+organized, how to set up your environment and the conventions it follows.
 
 > [!NOTE]
 > Pytonika is **not an official Teltonika library** and is not affiliated with
@@ -11,103 +11,119 @@ environment and the conventions the project follows.
 
 ## Ways to contribute
 
-- **Report a bug** or **request a feature / new device / new endpoint** by
-  opening an [issue](https://github.com/ikergcalvino/pytonika/issues) — there
-  are dedicated templates for each.
-- **Open a pull request** to fix a bug, add an endpoint, or add a device model.
+- **Report a bug** or **request a feature** by opening an
+  [issue](https://github.com/ikergcalvino/pytonika/issues/new/choose).
+- **Report a missing or incorrect endpoint, or an unsupported device**, using
+  the dedicated issue templates. Include the device model, its firmware version
+  and a link to the API reference: that is what is needed to fix it.
+- **Open a pull request** to fix a bug in the hand-written code, improve the
+  documentation, the tests or the CI.
+
+## How the code is organized
+
+```
+pytonika/
+├── _client.py           # APIClient: the HTTP layer (hand-written)
+├── endpoints/
+│   ├── _endpoint.py     # Endpoint base class and the File upload type (hand-written)
+│   ├── authentication.py# login / logout / session (hand-written)
+│   └── <group>.py       # one class per API documentation page (generated)
+└── devices/
+    └── <family>/        # Router, Gateway, AccessPoint, Switch and one class per model (generated)
+```
+
+- **`APIClient`** wraps an `httpx.Client` and exposes a single `request()`
+  method. Responses are returned as the device sends them.
+- **Endpoint classes** have one method per API operation. Each method is a
+  single call to `self._client.request(...)`.
+- **Device classes**: each family base attaches the endpoint groups common to
+  all its models; each model adds only the groups specific to it.
+
+### Generated code
+
+The modules in `pytonika/endpoints/` (except `_endpoint.py` and
+`authentication.py`) and in `pytonika/devices/` are **generated from the
+Teltonika OpenAPI specifications**, for the latest firmware documented for each
+model. Manual edits to these files are overwritten the next time they are
+regenerated.
+
+To fix or add an endpoint or a device, please
+[open an issue](https://github.com/ikergcalvino/pytonika/issues/new/choose)
+instead of editing the generated files: the maintainer regenerates the code from
+the specification.
+
+Generated code follows these rules, which any manual change must respect:
+
+| API operation | Method name |
+|---|---|
+| `GET /wireguard/config` | `get_wireguard_config` |
+| `GET /wireguard/config/{id}` | `get_wireguard_config_by_id` |
+| `POST /wireguard/config` | `create_wireguard_config` |
+| `PUT /wireguard/config/{id}` | `update_wireguard_config_by_id` |
+| `DELETE /wireguard/config` | `delete_wireguard_config` |
+| `POST` with a file upload | `upload_<path>` |
+| `POST /wireguard/actions/generate_keys` | `wireguard_actions_generate_keys` |
+
+- Request bodies are wrapped as `{"data": ...}`, as the API expects.
+- Query parameters and extra upload fields are optional keyword-only arguments.
+- File uploads take a `file` argument; downloads return `bytes`.
+- The docstring is the summary from the API reference.
+
+```python
+def get_wireguard_config_by_id(self, wireguard_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+    """Returns the specified Wireguard configuration."""
+    return self._client.request("GET", f"/wireguard/config/{wireguard_id}", params={"all_options": all_options})
+```
 
 ## Development setup
 
 > [!IMPORTANT]
-> An **editable install is required** — the package reads its own version via
+> An **editable install is required**: the package reads its own version via
 > `importlib.metadata`, so it must be installed to import correctly.
 
 ```bash
-# Clone and enter the repository
 git clone https://github.com/ikergcalvino/pytonika.git
 cd pytonika
 
-# Create and activate a virtual environment
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 
-# Install in editable mode with all dev dependencies
 pip install -e ".[dev]"
 ```
+
+Pytonika supports Python **3.11** and later.
+
+## Quality checks
+
+CI runs these checks on every push and pull request to `main` and `develop`,
+with the tests on every supported Python version. Run them locally before
+pushing:
+
+```bash
+ruff check .                 # lint
+ruff format --check .        # formatting (use `ruff format .` to fix)
+ty check pytonika tests      # type checking
+pytest                       # tests, with a coverage threshold of 80%
+python -m build              # build sdist + wheel
+twine check dist/*           # validate package metadata
+```
+
+- The codebase is fully typed (`py.typed`) and the `ANN` lint rules are
+  enforced, so **all signatures must have type hints**.
+- Line length is 120 and strings use double quotes (enforced by ruff).
+- Tests use [respx](https://lundberg.github.io/respx/) to mock HTTP requests;
+  no real device is needed.
 
 ## Branching and pull requests
 
 - Branch off **`develop`** and target your pull request at **`develop`**.
   `main` is reserved for releases.
-- Keep pull requests focused; one logical change per PR.
-- Fill in the PR template and make sure the checklist passes before requesting
-  review.
+- Keep pull requests focused: one logical change per PR.
+- Fill in the PR template and make sure the checks pass before requesting
+  review. If your change modifies or removes public API, mark it as a breaking
+  change.
 - Commit messages follow a [Conventional Commits](https://www.conventionalcommits.org/)
-  style (`feat:`, `fix:`, `chore:`, `docs:`, …).
-
-## Quality checks
-
-CI runs lint, format, type-check and build-check on every push and pull request
-to `main` and `develop`. Run them locally before pushing:
-
-```bash
-ruff check .                 # lint
-ruff format --check .        # formatting (use `ruff format .` to fix)
-ty check pytonika            # type checking
-pytest                       # tests
-python -m build              # build sdist + wheel
-twine check dist/*           # validate package metadata
-```
-
-The codebase is fully typed (`py.typed`) and the `ANN` lint rules are enforced,
-so **all public method signatures must have type hints**. Line length is 120 and
-strings use double quotes (both enforced by ruff).
-
-## Adding a new endpoint
-
-Endpoints live in `pytonika/endpoints/`, one module per Web API feature area.
-Each class inherits `Endpoint` and its methods build a path and delegate to the
-shared `APIClient`, returning the raw JSON response as `dict[str, Any]`.
-
-1. Create `pytonika/endpoints/<name>.py` with a class inheriting `Endpoint`.
-   Each method defines `endpoint = "/path"` and calls
-   `self._api_client.<get|post|put|delete>(...)`. Follow the existing naming
-   convention: `get_*` / `create_*` / `update_*` / `delete_*` for resources
-   (with `_by_id` variants), and `<group>_actions_<action>` for actions.
-2. Register the class in `pytonika/endpoints/__init__.py` (alphabetical import
-   and `__all__` entry).
-3. Attach it in the `__init__` of every device class that supports it.
-
-```python
-from typing import Any
-
-from ._base import Endpoint
-
-
-class Example(Endpoint):
-    def get_example_config(self) -> dict[str, Any]:
-        """Returns the Example configuration."""
-        endpoint = "/example/config"
-
-        return self._api_client.get(endpoint)
-```
-
-## Adding a new device model
-
-Device classes live in `pytonika/devices/`, grouped into four families
-(`routers/`, `gateways/`, `access_points/`, `switches/`). Each model subclasses
-its family base and declares the full set of endpoints it exposes — the model
-files are intentionally repetitive because each model supports a different
-subset of the API.
-
-1. Create `pytonika/devices/<family>/<model>.py` subclassing the family base,
-   calling `super().__init__()` and assigning the model's endpoint attributes.
-2. Register it in the family `__init__.py`, in `pytonika/devices/__init__.py`,
-   and in the `__all__` of `pytonika/__init__.py`.
-3. Add the model to the supported-devices table in `README.md`.
-
-When in doubt about which endpoints a model exposes, check the device's page in
-the [Teltonika Web API reference](https://developers.teltonika-networks.com/).
+  style (`feat:`, `fix:`, `docs:`, `ci:`, `chore:`, …).
 
 ## License
 
