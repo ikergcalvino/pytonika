@@ -12,19 +12,17 @@ without building raw HTTP requests yourself.
 > [!IMPORTANT]
 > Pytonika is a community project. It is **not affiliated with, endorsed by or supported by Teltonika Networks**.
 
-## Features
+## Highlights
 
-- **Device-aware** — each of the 88 supported models exposes the endpoint groups documented for it,
-  so your editor autocompletes only what that device actually supports.
-- **Full API coverage** — 160+ endpoint groups and 2,500+ operations, from interfaces and firewall to VPNs,
-  mobile, GPS, Modbus and more, including file uploads and downloads.
-- **Simple session handling** — log in once and the Bearer token is attached to every subsequent request.
-- **Fully typed** — ships with `py.typed` and type hints on every public method.
-- **Lightweight** — synchronous client built on [httpx](https://www.python-httpx.org/), with no other runtime dependencies.
+- **The whole Web API**: one method per operation of the official reference, including file uploads and downloads.
+- **Device-aware**: each of the 88 supported models exposes the endpoint groups documented for it, so your editor
+  autocompletes only what that device supports.
+- **Typed and lightweight**: type hints on every method, and [httpx](https://www.python-httpx.org/) as its only
+  dependency.
 
 ## Installation
 
-Pytonika requires Python **3.11** or later.
+Pytonika requires Python 3.11 or later.
 
 ```bash
 pip install pytonika
@@ -33,10 +31,12 @@ pip install pytonika
 ## Quick start
 
 ```python
+import os
+
 from pytonika import RUTX50
 
-with RUTX50("https://192.168.1.1/") as device:
-    device.authentication.login("admin", "<password>")
+with RUTX50("https://192.168.1.1") as device:
+    device.authentication.login("admin", os.environ["TELTONIKA_PASSWORD"])
 
     status = device.firmware.get_firmware_device_status()
     print(status["data"]["version"])
@@ -44,70 +44,85 @@ with RUTX50("https://192.168.1.1/") as device:
     device.authentication.logout()
 ```
 
-Using the device as a context manager closes the underlying HTTP connection when the block exits.
-Outside a `with` block, call `device.close()` when you are done.
+The `with` block closes the connection when it exits; outside it, call `device.close()`.
+The Bearer token returned by `login()` is sent with every request until `logout()`.
 
-### Connection options
+> [!TIP]
+> Not sure which model or firmware a device has? The unauthenticated status endpoint tells you, without logging in:
+>
+> ```python
+> from pytonika import Router
+>
+> with Router("https://192.168.1.1") as router:
+>     info = router.unauthorized.get_unauthorized_status()["data"]
+>     print(info["device_model"], info["api_version"])  # RUT956 1.16.3
+> ```
 
-Every device class accepts the same keyword arguments:
+## Usage
 
-| Argument  | Default | Description |
-|-----------|---------|-------------|
-| `timeout` | `10.0`  | Request timeout in seconds. |
-| `verify`  | `True`  | TLS certificate verification: `True`, `False`, or an `ssl.SSLContext` (e.g. with your own CA). |
+### From the Teltonika documentation to Pytonika
 
-> [!WARNING]
-> Teltonika devices usually ship with a self-signed certificate, so connections fail with `verify=True`
-> unless the device has a trusted certificate. Use `verify=False` only on local, trusted networks: it disables
-> certificate checks and exposes the connection to man-in-the-middle attacks.
-> See the [Security Policy](https://github.com/ikergcalvino/pytonika/blob/main/SECURITY.md) for recommendations.
+Pytonika mirrors the [Teltonika Web API reference](https://developers.teltonika-networks.com/): each documentation
+page is a device attribute, and each operation is a method named after its path.
 
-To keep verification enabled with your own certificate authority, pass an `ssl.SSLContext`:
+| Teltonika Web API reference | Pytonika |
+|---|---|
+| Page "WireGuard" | `device.wireguard` |
+| `GET /wireguard/config/{id}` | `device.wireguard.get_wireguard_config_by_id(wireguard_id)` |
+| `POST /wireguard/config` with body `{"data": {...}}` | `device.wireguard.create_wireguard_config({...})` |
+| `POST /wireguard/actions/generate_keys` | `device.wireguard.wireguard_actions_generate_keys()` |
 
-```python
-import ssl
+Method names follow the same pattern everywhere:
 
-from pytonika import RUTX50
+| Pattern | HTTP |
+|---|---|
+| `get_<path>` / `get_<path>_by_id` | `GET` |
+| `create_<path>` | `POST` |
+| `update_<path>` / `update_<path>_by_id` | `PUT` |
+| `delete_<path>` / `delete_<path>_by_id` | `DELETE` |
+| `upload_<path>` | `POST` with a file |
+| `<group>_actions_<action>` | `POST` to an action |
 
-context = ssl.create_default_context(cafile="/path/to/ca.pem")
+For every endpoint group and method, see the
+[endpoint reference](https://github.com/ikergcalvino/pytonika/blob/main/docs/endpoints.md). For request payloads
+and response fields, see the Teltonika Web API reference.
 
-with RUTX50("https://192.168.1.1/", verify=context) as device:
-    ...
-```
+### Responses and errors
 
-### Responses
+Methods return the device's JSON response as a `dict`, without modification.
 
-Methods return the API's JSON response as a `dict`, without modification:
+> [!NOTE]
+> Pytonika does not raise exceptions for API errors: check `success` before using `data`.
 
 ```python
 response = device.interfaces.get_interfaces_status()
 
 if response["success"]:
     for interface in response["data"]:
-        ...
+        print(interface["id"], interface["is_up"])
 else:
     print(response["errors"])
 ```
 
-Pytonika does not raise exceptions for API-level errors, so check the `success` field before using `data`.
-Network failures (timeouts, connection errors) are raised by `httpx` as usual.
+Network failures, such as timeouts or an unreachable device, raise the usual
+[httpx exceptions](https://www.python-httpx.org/exceptions/) (`httpx.TimeoutException`, `httpx.ConnectError`, …).
 
 ### Query parameters, uploads and downloads
 
-Optional query parameters are keyword arguments, and are only sent when you pass them:
+Optional query parameters are keyword arguments, sent only when you pass them:
 
 ```python
 device.wireguard.get_wireguard_config(all_options=True)
 ```
 
-Methods that upload a file take a `file` argument: raw bytes, an open binary file, or a `(filename, content)` pair.
-Methods that download a file return its content as `bytes`, or the JSON error `dict` if the device refuses:
+Methods that upload a file take a `file` argument: bytes, an open binary file or a `(filename, content)` pair.
+Methods that download a file return its content as `bytes`, or the error `dict` if the device refuses:
 
 ```python
 from pathlib import Path
 
-with open("firmware.bin", "rb") as firmware:
-    device.firmware.firmware_actions_upload_device_firmware(firmware)
+with open("ca.pem", "rb") as certificate:
+    device.certificates.upload_certificates_config(("ca.pem", certificate))
 
 device.backup.backup_actions_generate()
 backup = device.backup.backup_actions_download()
@@ -118,79 +133,59 @@ if isinstance(backup, bytes):
 
 ### Generic device classes
 
-If you don't need model-specific endpoints, use the generic class for the device family. It works with any model
-of that family and exposes the endpoint groups common to all of them:
+`Router`, `Gateway`, `AccessPoint` and `Switch` work with any model of their family and expose the endpoint groups
+common to all of them. Use them when your code does not depend on a specific model:
 
 ```python
 from pytonika import Router
 
-with Router("https://192.168.1.1/", timeout=30.0) as router:
-    router.authentication.login("admin", "<password>")
-    router.wireguard.get_wireguard_config()
+with Router("https://192.168.1.1") as router:
+    ...
 ```
+
+### Connection options
+
+Every device class accepts the same keyword arguments:
+
+| Argument | Default | Description |
+|---|---|---|
+| `timeout` | `10.0` | Request timeout in seconds. |
+| `verify` | `True` | TLS verification: `True`, `False`, or an `ssl.SSLContext` with your own certificate authority. |
+
+> [!WARNING]
+> Teltonika devices ship with a self-signed certificate, so connecting with the default `verify=True` fails until
+> the device has a trusted certificate. `verify=False` disables certificate checks and exposes the connection to
+> man-in-the-middle attacks: use it only on local, trusted networks. See the
+> [Security Policy](https://github.com/ikergcalvino/pytonika/blob/main/SECURITY.md#using-pytonika-securely) for how to
+> keep verification enabled.
 
 ## Supported devices
 
-Pytonika supports **88 models** across four families. Each family has a generic class, and each model has its own
-class with the endpoints specific to it:
+| Family | Generic class | Models | Firmware |
+|---|---|---|---|
+| Routers | `Router` | 66: RUT, RUTX, RUTM, RUTC, OTD, DAP, CAP, ATRM and TCR series | RutOS 7.26 |
+| Gateways | `Gateway` | 14: TRB series | RutOS 7.26 |
+| Access points | `AccessPoint` | 3: TAP series | RutOS 7.26 |
+| Switches | `Switch` | 5: TSW and SWM series | SwOS 1.10.4 |
 
-| Generic class | Models | Supported models |
-|---|---|---|
-| `Router` | 66 | ATRM50, CAP700, DAP140, DAP142, DAP145, OTD140, OTD144, OTD500, RUT140, RUT142, RUT145, RUT200, RUT202, RUT204, RUT206, RUT240, RUT241, RUT260, RUT261, RUT271, RUT276, RUT281, RUT286, RUT300, RUT301, RUT360, RUT361, RUT901, RUT906, RUT950, RUT951, RUT955, RUT956, RUT976, RUT981, RUT986, RUTC16, RUTC40, RUTC41, RUTC42, RUTC50, RUTC54, RUTM08, RUTM09, RUTM10, RUTM11, RUTM16, RUTM20, RUTM30, RUTM31, RUTM50, RUTM51, RUTM52, RUTM54, RUTM55, RUTM56, RUTM59, RUTX08, RUTX09, RUTX10, RUTX11, RUTX12, RUTX14, RUTX50, RUTXR1, TCR100 |
-| `Gateway` | 14 | TRB140, TRB141, TRB142, TRB143, TRB145, TRB160, TRB236, TRB245, TRB246, TRB247, TRB255, TRB256, TRB500, TRB501 |
-| `AccessPoint` | 3 | TAP100, TAP200, TAP400 |
-| `Switch` | 5 | SWM280, SWM281, SWM282, TSW202, TSW212 |
+Endpoints follow the latest firmware documented for each model. A few models are documented only for older
+firmware lines.
 
-Endpoints are generated from the official API reference for the latest firmware documented for each model:
-**RutOS 7.26** for most models. A few models are documented for older firmware lines (7.23.8 for RUTM31,
-7.14.5 for RUT300, RUT360, TCR100, TRB245 and TRB255, 7.6.21 for RUT240, RUT950 and RUT955, and SwOS 1.10.4
-for the switches), and their classes reflect that. Operations added in newer firmware return an error on devices
-running an older version.
+> [!NOTE]
+> Operations added in a newer firmware than your device's return an error from the device.
 
-Missing a device? [Open a device request](https://github.com/ikergcalvino/pytonika/issues/new/choose).
+The [device reference](https://github.com/ikergcalvino/pytonika/blob/main/docs/devices.md) lists every model,
+its reference firmware and its endpoint groups. Missing a device?
+[Open a device request](https://github.com/ikergcalvino/pytonika/issues/new/choose).
 
-## Endpoints
+## Project
 
-Each endpoint group from the official API reference is available as an attribute named after the group:
+> [!CAUTION]
+> Pytonika is in **beta** (pre-1.0): the public interface may change between minor releases. Check the
+> [release notes](https://github.com/ikergcalvino/pytonika/releases) before upgrading.
 
-| Area | Attributes |
-|---|---|
-| Session | `authentication`, `unauthorized` |
-| System and administration | `system`, `users`, `access_control`, `backup`, `date_time`, `logging` |
-| Firmware | `firmware`, `fota` |
-| Networking | `interfaces`, `dhcp_servers`, `firewall`, `ip_routes`, `failover` |
-| VPN | `wireguard`, `openvpn`, `ipsec`, `zerotier`, `tailscale` |
-| Mobile and SMS | `modems`, `sim_cards`, `messages`, `sms_utilities` |
-| Industrial and IoT | `gps`, `input_output`, `modbus`, `serial`, `mqtt` |
-
-Method names follow the structure of the API:
-
-| Pattern | Example | HTTP |
-|---|---|---|
-| `get_<resource>` / `get_<resource>_by_id` | `get_wireguard_config_by_id(id)` | `GET` |
-| `create_<resource>` | `create_wireguard_config(config)` | `POST` |
-| `update_<resource>` / `update_<resource>_by_id` | `update_wireguard_config_by_id(id, config)` | `PUT` |
-| `delete_<resource>` / `delete_<resource>_by_id` | `delete_wireguard_config_by_id(id)` | `DELETE` |
-| `<group>_actions_<action>` | `wireguard_actions_generate_keys()` | `POST` |
-
-The full list of groups is in [`pytonika/endpoints/`](https://github.com/ikergcalvino/pytonika/tree/main/pytonika/endpoints).
-For request payloads and response schemas, see the [Teltonika Web API reference](https://developers.teltonika-networks.com/).
-
-## Project status
-
-Pytonika is in **beta** (pre-1.0). The public interface may change between minor releases; changes are
-documented in the [release notes](https://github.com/ikergcalvino/pytonika/releases).
-
-## Contributing
-
-Bug reports, device and endpoint requests and pull requests are welcome.
-See the [Contributing guidelines](https://github.com/ikergcalvino/pytonika/blob/main/CONTRIBUTING.md) to get started.
-
-## Security
-
-Please do not report vulnerabilities through public issues.
-See the [Security Policy](https://github.com/ikergcalvino/pytonika/blob/main/SECURITY.md) for how to report them privately.
-
-## License
-
-Distributed under the [MIT License](https://github.com/ikergcalvino/pytonika/blob/main/LICENSE).
+- **Contributing:** bug reports, device and endpoint requests and pull requests are welcome. See the
+  [contributing guidelines](https://github.com/ikergcalvino/pytonika/blob/main/CONTRIBUTING.md).
+- **Security:** report vulnerabilities privately, as described in the
+  [security policy](https://github.com/ikergcalvino/pytonika/blob/main/SECURITY.md).
+- **License:** [MIT](https://github.com/ikergcalvino/pytonika/blob/main/LICENSE).

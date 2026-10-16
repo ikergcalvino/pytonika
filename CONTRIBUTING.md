@@ -44,8 +44,9 @@ pytonika/
 The modules in `pytonika/endpoints/` (except `_endpoint.py` and
 `authentication.py`) and in `pytonika/devices/` are **generated from the
 Teltonika OpenAPI specifications**, for the latest firmware documented for each
-model. Manual edits to these files are overwritten the next time they are
-regenerated.
+model, together with the reference pages [`docs/devices.md`](docs/devices.md)
+and [`docs/endpoints.md`](docs/endpoints.md). Manual edits to these files are
+overwritten the next time they are regenerated.
 
 To fix or add an endpoint or a device, please
 [open an issue](https://github.com/ikergcalvino/pytonika/issues/new/choose)
