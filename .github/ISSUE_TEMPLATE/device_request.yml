@@ -32,7 +32,7 @@ body:
     attributes:
       label: Firmware version
       description: Firmware version of the device, if known.
-      placeholder: "RUTX_R_00.07.08"
+      placeholder: "RUTX_R_00.07.24.5"
     validations:
       required: false
 

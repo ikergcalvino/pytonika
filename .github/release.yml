@@ -1,0 +1,21 @@
+changelog:
+  exclude:
+    labels:
+      - dependencies
+  categories:
+    - title: ⚠️ Breaking changes
+      labels:
+        - breaking
+    - title: New devices and endpoints
+      labels:
+        - new device
+        - new endpoint
+    - title: Features
+      labels:
+        - enhancement
+    - title: Bug fixes
+      labels:
+        - bug
+    - title: Other changes
+      labels:
+        - "*"

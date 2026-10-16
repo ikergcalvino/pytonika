@@ -4,7 +4,7 @@ updates:
     directory: /
     target-branch: develop
     schedule:
-      interval: weekly
+      interval: monthly
     labels: [dependencies]
     commit-message:
       prefix: deps
@@ -18,6 +18,7 @@ updates:
           - "pytest*"
           - "respx"
           - "ruff"
+          - "setuptools"
           - "twine"
           - "ty"
 
@@ -25,7 +26,7 @@ updates:
     directory: /
     target-branch: develop
     schedule:
-      interval: weekly
+      interval: monthly
     labels: [dependencies]
     commit-message:
       prefix: ci

@@ -1,30 +1,33 @@
-name: New endpoint request
-description: Request support for a new API endpoint for a Teltonika device.
-title: "[Endpoint]: <name>"
+name: Missing or incorrect endpoint
+description: An endpoint documented by Teltonika is missing, or a method sends the wrong request.
+title: "[Endpoint]: <path>"
 labels: ["new endpoint"]
 assignees: []
 
 body:
-  - type: input
-    id: endpoint_name
+  - type: markdown
     attributes:
-      label: Endpoint name
-      description: Name of the endpoint (e.g., BGP, SMSGateway, OpenVPN).
-      placeholder: "BGP"
+      value: |
+        Pytonika's endpoints are generated from the official [Teltonika Web API reference](https://developers.teltonika-networks.com/).
+        The firmware version and the documentation link below are what is needed to regenerate them.
+
+  - type: dropdown
+    id: problem
+    attributes:
+      label: Problem
+      options:
+        - The endpoint is missing
+        - The method sends the wrong path, method or body
+        - The endpoint is missing on a specific device model
     validations:
       required: true
 
-  - type: dropdown
-    id: device_type
+  - type: input
+    id: endpoint_path
     attributes:
-      label: Device type
-      description: Select the type of device this endpoint applies to.
-      options:
-        - Router
-        - Gateway
-        - Access Point
-        - Switch
-        - All / Multiple
+      label: API path and method
+      description: As shown in the Teltonika documentation.
+      placeholder: "GET /bgp/instance/config"
     validations:
       required: true
 
@@ -32,33 +35,31 @@ body:
     id: device_model
     attributes:
       label: Device model
-      description: Specific device model, if applicable.
       placeholder: "RUTX50"
     validations:
-      required: false
+      required: true
 
   - type: input
-    id: endpoint_path
+    id: firmware_version
     attributes:
-      label: API path
-      description: The API path for this endpoint, if known.
-      placeholder: "/api/bgp/config"
+      label: Firmware version
+      placeholder: "RUTX_R_00.07.24.5"
     validations:
-      required: false
+      required: true
 
   - type: input
     id: documentation_link
     attributes:
       label: API documentation link
-      description: Link to the Teltonika API documentation for this endpoint.
+      description: Link to this endpoint in the Teltonika Web API reference.
       placeholder: "https://developers.teltonika-networks.com/..."
     validations:
-      required: false
+      required: true
 
   - type: textarea
     id: additional_info
     attributes:
       label: Additional context
-      description: Any other relevant information (parameters, expected output, use case, etc.).
+      description: Current behavior, the device's response, or anything else relevant.
     validations:
       required: false
