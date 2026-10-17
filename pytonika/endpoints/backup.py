@@ -4,9 +4,18 @@ from ._endpoint import Endpoint, File
 
 
 class Backup(Endpoint):
-    def backup_actions_apply(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Endpoints of the "Backup" page of the Teltonika Web API reference."""
+
+    def backup_actions_apply(
+        self,
+        data: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """Applies backup from backup file."""
-        return self._client.request("POST", "/backup/actions/apply", json=None if data is None else {"data": data})
+        return self._client.request(
+            "POST",
+            "/backup/actions/apply",
+            json=None if data is None else {"data": data},
+        )
 
     def backup_actions_clear_errors(self) -> dict[str, Any]:
         """Returns and clears errors from last backup apply."""
@@ -22,33 +31,63 @@ class Backup(Endpoint):
 
     def backup_actions_download(self) -> bytes | dict[str, Any]:
         """Downloads generated backup file."""
-        return self._client.request("POST", "/backup/actions/download", download=True)
+        return self._client.request(
+            "POST",
+            "/backup/actions/download",
+            download=True,
+        )
 
-    def backup_actions_generate(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+    def backup_actions_generate(
+        self,
+        data: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """Generates backup configuration to download."""
-        return self._client.request("POST", "/backup/actions/generate", json=None if data is None else {"data": data})
+        return self._client.request(
+            "POST",
+            "/backup/actions/generate",
+            json=None if data is None else {"data": data},
+        )
 
     def backup_actions_remove_default(self) -> dict[str, Any]:
         """Removes default configuration."""
         return self._client.request("POST", "/backup/actions/remove_default")
 
-    def backup_actions_reset_settings(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+    def backup_actions_reset_settings(
+        self,
+        data: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """Resets device configuration."""
         return self._client.request(
-            "POST", "/backup/actions/reset_settings", json=None if data is None else {"data": data}
+            "POST",
+            "/backup/actions/reset_settings",
+            json=None if data is None else {"data": data},
         )
 
     def backup_actions_upload(
-        self, file: File, *, encrypt: Literal["0", "1"] | None = None, password: str | None = None
+        self,
+        file: File,
+        *,
+        encrypt: Literal["0", "1"] | None = None,
+        password: str | None = None,
     ) -> dict[str, Any]:
         """Uploads backup into device to apply."""
         return self._client.request(
-            "POST", "/backup/actions/upload", files={"file": file}, form={"encrypt": encrypt, "password": password}
+            "POST",
+            "/backup/actions/upload",
+            files={"file": file},
+            form={"encrypt": encrypt, "password": password},
         )
 
-    def backup_actions_validate(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+    def backup_actions_validate(
+        self,
+        data: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """Validates uploaded backup file."""
-        return self._client.request("POST", "/backup/actions/validate", json=None if data is None else {"data": data})
+        return self._client.request(
+            "POST",
+            "/backup/actions/validate",
+            json=None if data is None else {"data": data},
+        )
 
     def get_backup_errors_status(self) -> dict[str, Any]:
         """Returns informations about collected errors from last backup apply."""

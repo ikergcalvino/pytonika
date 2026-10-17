@@ -6,7 +6,15 @@ from ...endpoints import *
 
 
 class Gateway:
-    def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool | ssl.SSLContext = True) -> None:
+    """Generic Teltonika gateway, with the endpoint groups common to every gateway model."""
+
+    def __init__(
+        self,
+        base_url: str,
+        *,
+        timeout: float = 10.0,
+        verify: bool | ssl.SSLContext = True,
+    ) -> None:
         self._client = APIClient(base_url, timeout=timeout, verify=verify)
 
         self.access_control = AccessControl(self._client)
@@ -110,8 +118,12 @@ class Gateway:
     def __enter__(self) -> Self:
         return self
 
-    def __exit__(self, *exc: object) -> None:
+    def __exit__(
+        self,
+        *exc: object,
+    ) -> None:
         self.close()
 
     def close(self) -> None:
+        """Closes the HTTP connection to the device."""
         self._client.close()

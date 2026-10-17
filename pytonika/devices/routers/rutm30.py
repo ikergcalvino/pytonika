@@ -5,7 +5,15 @@ from .router import Router
 
 
 class RUTM30(Router):
-    def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool | ssl.SSLContext = True) -> None:
+    """Teltonika RUTM30 router, with the endpoints documented for RutOS 7.26."""
+
+    def __init__(
+        self,
+        base_url: str,
+        *,
+        timeout: float = 10.0,
+        verify: bool | ssl.SSLContext = True,
+    ) -> None:
         super().__init__(base_url, timeout=timeout, verify=verify)
 
         self.advanced_mesh = AdvancedMesh(self._client)

@@ -4,16 +4,28 @@ from ._endpoint import Endpoint
 
 
 class IEC60870Client(Endpoint):
-    def iec60870_client_actions_list_information_objects(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Endpoints of the "IEC 60870-5 Client" page of the Teltonika Web API reference."""
+
+    def iec60870_client_actions_list_information_objects(
+        self,
+        data: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """List available information objects on IEC 60870-5 server."""
         return self._client.request(
-            "POST", "/iec60870/client/actions/list_information_objects", json=None if data is None else {"data": data}
+            "POST",
+            "/iec60870/client/actions/list_information_objects",
+            json=None if data is None else {"data": data},
         )
 
-    def iec60870_client_actions_test_information_objects(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+    def iec60870_client_actions_test_information_objects(
+        self,
+        data: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """Try reading the specified information objects from an IEC 60870-5 server."""
         return self._client.request(
-            "POST", "/iec60870/client/actions/test_information_objects", json=None if data is None else {"data": data}
+            "POST",
+            "/iec60870/client/actions/test_information_objects",
+            json=None if data is None else {"data": data},
         )
 
     def get_iec60870_client_database_entries_status(
@@ -44,79 +56,180 @@ class IEC60870Client(Endpoint):
             },
         )
 
-    def get_iec60870_client_global(self, *, all_options: bool | None = None) -> dict[str, Any]:
+    def get_iec60870_client_global(
+        self,
+        *,
+        all_options: bool | None = None,
+    ) -> dict[str, Any]:
         """Get IEC 60870-5 Client global configuration."""
-        return self._client.request("GET", "/iec60870/client/global", params={"all_options": all_options})
+        return self._client.request(
+            "GET",
+            "/iec60870/client/global",
+            params={"all_options": all_options},
+        )
 
-    def update_iec60870_client_global(self, config: dict[str, Any]) -> dict[str, Any]:
+    def update_iec60870_client_global(
+        self,
+        config: dict[str, Any],
+    ) -> dict[str, Any]:
         """Update IEC 60870-5 Client global configuration."""
-        return self._client.request("PUT", "/iec60870/client/global", json={"data": config})
+        return self._client.request(
+            "PUT",
+            "/iec60870/client/global",
+            json={"data": config},
+        )
 
-    def get_iec60870_client_instances_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
+    def get_iec60870_client_instances_config(
+        self,
+        *,
+        all_options: bool | None = None,
+    ) -> dict[str, Any]:
         """Read IEC 60870-5 Client instances."""
-        return self._client.request("GET", "/iec60870/client/instances/config", params={"all_options": all_options})
+        return self._client.request(
+            "GET",
+            "/iec60870/client/instances/config",
+            params={"all_options": all_options},
+        )
 
-    def create_iec60870_client_instances_config(self, config: dict[str, Any]) -> dict[str, Any]:
+    def create_iec60870_client_instances_config(
+        self,
+        config: dict[str, Any],
+    ) -> dict[str, Any]:
         """Create IEC 60870-5 Client instance."""
-        return self._client.request("POST", "/iec60870/client/instances/config", json={"data": config})
+        return self._client.request(
+            "POST",
+            "/iec60870/client/instances/config",
+            json={"data": config},
+        )
 
-    def update_iec60870_client_instances_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+    def update_iec60870_client_instances_config(
+        self,
+        config: list[dict[str, Any]],
+    ) -> dict[str, Any]:
         """Update IEC 60870-5 Client instances."""
-        return self._client.request("PUT", "/iec60870/client/instances/config", json={"data": config})
+        return self._client.request(
+            "PUT",
+            "/iec60870/client/instances/config",
+            json={"data": config},
+        )
 
-    def delete_iec60870_client_instances_config(self, config: list[str]) -> dict[str, Any]:
+    def delete_iec60870_client_instances_config(
+        self,
+        config: list[str],
+    ) -> dict[str, Any]:
         """Delete IEC 60870-5 Client instances."""
-        return self._client.request("DELETE", "/iec60870/client/instances/config", json={"data": config})
+        return self._client.request(
+            "DELETE",
+            "/iec60870/client/instances/config",
+            json={"data": config},
+        )
 
     def get_iec60870_client_instances_config_by_id(
-        self, instance_id: str, *, all_options: bool | None = None
+        self,
+        instance_id: str,
+        *,
+        all_options: bool | None = None,
     ) -> dict[str, Any]:
         """Read IEC 60870-5 Client instance."""
         return self._client.request(
-            "GET", f"/iec60870/client/instances/config/{instance_id}", params={"all_options": all_options}
+            "GET",
+            f"/iec60870/client/instances/config/{instance_id}",
+            params={"all_options": all_options},
         )
 
-    def update_iec60870_client_instances_config_by_id(self, instance_id: str, config: dict[str, Any]) -> dict[str, Any]:
+    def update_iec60870_client_instances_config_by_id(
+        self,
+        instance_id: str,
+        config: dict[str, Any],
+    ) -> dict[str, Any]:
         """Update IEC 60870-5 Client instance."""
-        return self._client.request("PUT", f"/iec60870/client/instances/config/{instance_id}", json={"data": config})
+        return self._client.request(
+            "PUT",
+            f"/iec60870/client/instances/config/{instance_id}",
+            json={"data": config},
+        )
 
-    def delete_iec60870_client_instances_config_by_id(self, instance_id: str) -> dict[str, Any]:
+    def delete_iec60870_client_instances_config_by_id(
+        self,
+        instance_id: str,
+    ) -> dict[str, Any]:
         """Delete IEC 60870-5 Client instance."""
         return self._client.request("DELETE", f"/iec60870/client/instances/config/{instance_id}")
 
-    def get_iec60870_client_serial_devices_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
+    def get_iec60870_client_serial_devices_config(
+        self,
+        *,
+        all_options: bool | None = None,
+    ) -> dict[str, Any]:
         """Read IEC 60870-5 Serial device configurations."""
         return self._client.request(
-            "GET", "/iec60870/client/serial_devices/config", params={"all_options": all_options}
+            "GET",
+            "/iec60870/client/serial_devices/config",
+            params={"all_options": all_options},
         )
 
-    def create_iec60870_client_serial_devices_config(self, config: dict[str, Any]) -> dict[str, Any]:
+    def create_iec60870_client_serial_devices_config(
+        self,
+        config: dict[str, Any],
+    ) -> dict[str, Any]:
         """Create IEC 60870-5 Serial device configurations."""
-        return self._client.request("POST", "/iec60870/client/serial_devices/config", json={"data": config})
+        return self._client.request(
+            "POST",
+            "/iec60870/client/serial_devices/config",
+            json={"data": config},
+        )
 
-    def update_iec60870_client_serial_devices_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
+    def update_iec60870_client_serial_devices_config(
+        self,
+        config: list[dict[str, Any]],
+    ) -> dict[str, Any]:
         """Update IEC 60870-5 Serial device configurations."""
-        return self._client.request("PUT", "/iec60870/client/serial_devices/config", json={"data": config})
+        return self._client.request(
+            "PUT",
+            "/iec60870/client/serial_devices/config",
+            json={"data": config},
+        )
 
-    def delete_iec60870_client_serial_devices_config(self, config: list[str]) -> dict[str, Any]:
+    def delete_iec60870_client_serial_devices_config(
+        self,
+        config: list[str],
+    ) -> dict[str, Any]:
         """Delete IEC 60870 Client Serial device configurations."""
-        return self._client.request("DELETE", "/iec60870/client/serial_devices/config", json={"data": config})
+        return self._client.request(
+            "DELETE",
+            "/iec60870/client/serial_devices/config",
+            json={"data": config},
+        )
 
     def get_iec60870_client_serial_devices_config_by_id(
-        self, config_id: str, *, all_options: bool | None = None
+        self,
+        config_id: str,
+        *,
+        all_options: bool | None = None,
     ) -> dict[str, Any]:
         """Read IEC 60870-5 Serial device configuration."""
         return self._client.request(
-            "GET", f"/iec60870/client/serial_devices/config/{config_id}", params={"all_options": all_options}
+            "GET",
+            f"/iec60870/client/serial_devices/config/{config_id}",
+            params={"all_options": all_options},
         )
 
     def update_iec60870_client_serial_devices_config_by_id(
-        self, config_id: str, config: dict[str, Any]
+        self,
+        config_id: str,
+        config: dict[str, Any],
     ) -> dict[str, Any]:
         """Update IEC 60870-5 Serial device configuration."""
-        return self._client.request("PUT", f"/iec60870/client/serial_devices/config/{config_id}", json={"data": config})
+        return self._client.request(
+            "PUT",
+            f"/iec60870/client/serial_devices/config/{config_id}",
+            json={"data": config},
+        )
 
-    def delete_iec60870_client_serial_devices_config_by_id(self, config_id: str) -> dict[str, Any]:
+    def delete_iec60870_client_serial_devices_config_by_id(
+        self,
+        config_id: str,
+    ) -> dict[str, Any]:
         """Delete IEC 60870-5 Serial device configuration."""
         return self._client.request("DELETE", f"/iec60870/client/serial_devices/config/{config_id}")
 

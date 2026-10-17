@@ -5,7 +5,15 @@ from .gateway import Gateway
 
 
 class TRB245(Gateway):
-    def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool | ssl.SSLContext = True) -> None:
+    """Teltonika TRB245 gateway, with the endpoints documented for RutOS 7.14.5."""
+
+    def __init__(
+        self,
+        base_url: str,
+        *,
+        timeout: float = 10.0,
+        verify: bool | ssl.SSLContext = True,
+    ) -> None:
         super().__init__(base_url, timeout=timeout, verify=verify)
 
         self.call_utilities = CallUtilities(self._client)

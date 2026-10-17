@@ -4,35 +4,78 @@ from ._endpoint import Endpoint
 
 
 class Troubleshoot(Endpoint):
-    def troubleshoot_actions_download(self, data: dict[str, Any] | None = None) -> bytes | dict[str, Any]:
+    """Endpoints of the "Troubleshoot" page of the Teltonika Web API reference."""
+
+    def troubleshoot_actions_download(
+        self,
+        data: dict[str, Any] | None = None,
+    ) -> bytes | dict[str, Any]:
         """Downloads generated troubleshoot/tcpdump archive."""
         return self._client.request(
-            "POST", "/troubleshoot/actions/download", json=None if data is None else {"data": data}, download=True
+            "POST",
+            "/troubleshoot/actions/download",
+            json=None if data is None else {"data": data},
+            download=True,
         )
 
-    def troubleshoot_actions_generate(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+    def troubleshoot_actions_generate(
+        self,
+        data: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """Generates troubleshoot archive."""
         return self._client.request(
-            "POST", "/troubleshoot/actions/generate", json=None if data is None else {"data": data}
+            "POST",
+            "/troubleshoot/actions/generate",
+            json=None if data is None else {"data": data},
         )
 
-    def get_troubleshoot_config(self, *, all_options: bool | None = None) -> dict[str, Any]:
-        """Returns Troubleshoot configuration."""
-        return self._client.request("GET", "/troubleshoot/config", params={"all_options": all_options})
-
-    def update_troubleshoot_config(self, config: list[dict[str, Any]]) -> dict[str, Any]:
-        """Updates Troubleshoot configuration."""
-        return self._client.request("PUT", "/troubleshoot/config", json={"data": config})
-
-    def get_troubleshoot_config_by_id(self, troubleshoot_id: str, *, all_options: bool | None = None) -> dict[str, Any]:
+    def get_troubleshoot_config(
+        self,
+        *,
+        all_options: bool | None = None,
+    ) -> dict[str, Any]:
         """Returns Troubleshoot configuration."""
         return self._client.request(
-            "GET", f"/troubleshoot/config/{troubleshoot_id}", params={"all_options": all_options}
+            "GET",
+            "/troubleshoot/config",
+            params={"all_options": all_options},
         )
 
-    def update_troubleshoot_config_by_id(self, troubleshoot_id: str, config: dict[str, Any]) -> dict[str, Any]:
+    def update_troubleshoot_config(
+        self,
+        config: list[dict[str, Any]],
+    ) -> dict[str, Any]:
         """Updates Troubleshoot configuration."""
-        return self._client.request("PUT", f"/troubleshoot/config/{troubleshoot_id}", json={"data": config})
+        return self._client.request(
+            "PUT",
+            "/troubleshoot/config",
+            json={"data": config},
+        )
+
+    def get_troubleshoot_config_by_id(
+        self,
+        troubleshoot_id: str,
+        *,
+        all_options: bool | None = None,
+    ) -> dict[str, Any]:
+        """Returns Troubleshoot configuration."""
+        return self._client.request(
+            "GET",
+            f"/troubleshoot/config/{troubleshoot_id}",
+            params={"all_options": all_options},
+        )
+
+    def update_troubleshoot_config_by_id(
+        self,
+        troubleshoot_id: str,
+        config: dict[str, Any],
+    ) -> dict[str, Any]:
+        """Updates Troubleshoot configuration."""
+        return self._client.request(
+            "PUT",
+            f"/troubleshoot/config/{troubleshoot_id}",
+            json={"data": config},
+        )
 
     def get_troubleshoot_kernel_status(self) -> dict[str, Any]:
         """Returns kernel log contents."""

@@ -4,6 +4,8 @@ from ._endpoint import Endpoint
 
 
 class IPNeighbors(Endpoint):
+    """Endpoints of the "IP Neighbors" page of the Teltonika Web API reference."""
+
     def get_ip_neighbors_ipv4_status(self) -> dict[str, Any]:
         """Returns ARP tables."""
         return self._client.request("GET", "/ip_neighbors/ipv4/status")

@@ -4,8 +4,13 @@ from ._endpoint import Endpoint
 
 
 class CableDiagnostic(Endpoint):
+    """Endpoints of the "Cable Diagnostic" page of the Teltonika Web API reference."""
+
     def cable_diagnostic_actions_run(
-        self, config: dict[str, Any] | None = None, *, use_cache: bool | None = None
+        self,
+        config: dict[str, Any] | None = None,
+        *,
+        use_cache: bool | None = None,
     ) -> dict[str, Any]:
         """Runs selected port's cable diagnostic and retrieves the results."""
         return self._client.request(

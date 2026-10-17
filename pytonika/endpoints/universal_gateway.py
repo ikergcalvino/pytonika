@@ -4,6 +4,8 @@ from ._endpoint import Endpoint
 
 
 class UniversalGateway(Endpoint):
+    """Endpoints of the "Universal Gateway" page of the Teltonika Web API reference."""
+
     def get_universal_gateway_options(self) -> dict[str, Any]:
         """Returns available tag options. A tag is an abstraction representing a single data point (such as a value
         or parameter) that can be read from or written to various protocol clients.
@@ -21,4 +23,8 @@ class UniversalGateway(Endpoint):
         """Returns tag ids from all configured data sources. A tag is an abstraction representing a single data point
         (such as a value or parameter) that can be read from or written to various protocol clients.
         """
-        return self._client.request("GET", "/universal_gateway/status", params={"client_service": client_service})
+        return self._client.request(
+            "GET",
+            "/universal_gateway/status",
+            params={"client_service": client_service},
+        )

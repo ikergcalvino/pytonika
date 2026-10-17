@@ -4,6 +4,8 @@ from ._endpoint import Endpoint
 
 
 class Ports(Endpoint):
+    """Endpoints of the "Ports" page of the Teltonika Web API reference."""
+
     def get_ports_traffic_errors_status(self) -> dict[str, Any]:
         """Returns port status."""
         return self._client.request("GET", "/ports/traffic/errors/status")

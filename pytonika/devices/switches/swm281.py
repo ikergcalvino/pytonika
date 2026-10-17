@@ -2,4 +2,4 @@ from .switch import Switch
 
 
 class SWM281(Switch):
-    pass
+    """Teltonika SWM281 switch, with the endpoints documented for SwOS 1.10.4."""

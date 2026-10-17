@@ -4,6 +4,8 @@ from ._endpoint import Endpoint, File
 
 
 class Firmware(Endpoint):
+    """Endpoints of the "Firmware" page of the Teltonika Web API reference."""
+
     def firmware_actions_delete_device_firmware(self) -> dict[str, Any]:
         """Deletes uploaded firmware file."""
         return self._client.request("POST", "/firmware/actions/delete_device_firmware")
@@ -12,32 +14,52 @@ class Firmware(Endpoint):
         """Deletes uploaded modem firmware file."""
         return self._client.request("POST", "/firmware/actions/delete_modem_firmware")
 
-    def firmware_actions_factory_reset(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+    def firmware_actions_factory_reset(
+        self,
+        data: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """Factory resets device configuration."""
         return self._client.request(
-            "POST", "/firmware/actions/factory_reset", json=None if data is None else {"data": data}
+            "POST",
+            "/firmware/actions/factory_reset",
+            json=None if data is None else {"data": data},
         )
 
     def firmware_actions_fota_cancel(self) -> dict[str, Any]:
         """Cancels firmware download from Fota."""
         return self._client.request("POST", "/firmware/actions/fota_cancel")
 
-    def firmware_actions_fota_download(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+    def firmware_actions_fota_download(
+        self,
+        data: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """Starts firmware download from Fota."""
         return self._client.request(
-            "POST", "/firmware/actions/fota_download", json=None if data is None else {"data": data}
+            "POST",
+            "/firmware/actions/fota_download",
+            json=None if data is None else {"data": data},
         )
 
-    def firmware_actions_fota_download_modem(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+    def firmware_actions_fota_download_modem(
+        self,
+        data: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """Starts modem firmware download from Fota."""
         return self._client.request(
-            "POST", "/firmware/actions/fota_download_modem", json=None if data is None else {"data": data}
+            "POST",
+            "/firmware/actions/fota_download_modem",
+            json=None if data is None else {"data": data},
         )
 
-    def firmware_actions_upgrade(self, config: dict[str, Any] | None = None) -> dict[str, Any]:
+    def firmware_actions_upgrade(
+        self,
+        config: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """Starts firmware upgrade."""
         return self._client.request(
-            "POST", "/firmware/actions/upgrade", json=None if config is None else {"data": config}
+            "POST",
+            "/firmware/actions/upgrade",
+            json=None if config is None else {"data": config},
         )
 
     def firmware_actions_upgrade_modem(self) -> dict[str, Any]:
@@ -64,7 +86,12 @@ class Firmware(Endpoint):
             },
         )
 
-    def firmware_actions_upload_modem_firmware(self, file: File, *, force_upgrade: str | None = None) -> dict[str, Any]:
+    def firmware_actions_upload_modem_firmware(
+        self,
+        file: File,
+        *,
+        force_upgrade: str | None = None,
+    ) -> dict[str, Any]:
         """Uploads modem firmware file."""
         return self._client.request(
             "POST",

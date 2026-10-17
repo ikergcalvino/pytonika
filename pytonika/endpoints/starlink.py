@@ -4,6 +4,8 @@ from ._endpoint import Endpoint
 
 
 class Starlink(Endpoint):
+    """Endpoints of the "Starlink" page of the Teltonika Web API reference."""
+
     def starlink_actions_reboot(self) -> dict[str, Any]:
         """Reboots the Starlink dish."""
         return self._client.request("POST", "/starlink/actions/reboot")

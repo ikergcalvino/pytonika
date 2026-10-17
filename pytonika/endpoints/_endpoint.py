@@ -7,5 +7,10 @@ File: TypeAlias = bytes | IO[bytes] | tuple[str, bytes | IO[bytes]]
 
 
 class Endpoint:
-    def __init__(self, client: APIClient) -> None:
+    """Base class of every endpoint group: holds the API client shared with its device."""
+
+    def __init__(
+        self,
+        client: APIClient,
+    ) -> None:
         self._client = client

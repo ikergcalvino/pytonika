@@ -4,6 +4,8 @@ from ._endpoint import Endpoint
 
 
 class EventsLog(Endpoint):
+    """Endpoints of the "Events Log" page of the Teltonika Web API reference."""
+
     def get_events_log_config(
         self,
         *,

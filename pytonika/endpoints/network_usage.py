@@ -4,19 +4,33 @@ from ._endpoint import Endpoint
 
 
 class NetworkUsage(Endpoint):
-    def network_usage_actions_delete_data(self, data: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Endpoints of the "Network Usage" page of the Teltonika Web API reference."""
+
+    def network_usage_actions_delete_data(
+        self,
+        data: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         """Delete specified data."""
         return self._client.request(
-            "POST", "/network_usage/actions/delete_data", json=None if data is None else {"data": data}
+            "POST",
+            "/network_usage/actions/delete_data",
+            json=None if data is None else {"data": data},
         )
 
     def get_network_usage_global(self) -> dict[str, Any]:
         """Returns Network Usage global configuration."""
         return self._client.request("GET", "/network_usage/global")
 
-    def update_network_usage_global(self, config: dict[str, Any]) -> dict[str, Any]:
+    def update_network_usage_global(
+        self,
+        config: dict[str, Any],
+    ) -> dict[str, Any]:
         """Updates Network Usage global configuration."""
-        return self._client.request("PUT", "/network_usage/global", json={"data": config})
+        return self._client.request(
+            "PUT",
+            "/network_usage/global",
+            json={"data": config},
+        )
 
     def get_network_usage_metrics_day_status(self) -> dict[str, Any]:
         """Get single day metrics information."""

@@ -15,7 +15,13 @@ class APIClient:
     envelope of failed requests. Transport errors such as timeouts are raised by ``httpx``.
     """
 
-    def __init__(self, base_url: str, *, timeout: float, verify: bool | ssl.SSLContext) -> None:
+    def __init__(
+        self,
+        base_url: str,
+        *,
+        timeout: float,
+        verify: bool | ssl.SSLContext,
+    ) -> None:
         self._session = httpx.Client(
             base_url=f"{base_url.rstrip('/')}/api",
             headers={"User-Agent": USER_AGENT},
@@ -25,15 +31,22 @@ class APIClient:
 
     @property
     def base_url(self) -> str:
+        """The API root of the device, e.g. ``https://192.168.1.1/api``."""
         return str(self._session.base_url).rstrip("/")
 
     def close(self) -> None:
+        """Closes the HTTP connection to the device."""
         self._session.close()
 
-    def set_token(self, token: str) -> None:
+    def set_token(
+        self,
+        token: str,
+    ) -> None:
+        """Sends ``token`` as Bearer authentication with every following request."""
         self._session.headers["Authorization"] = f"Bearer {token}"
 
     def clear_token(self) -> None:
+        """Stops sending the Bearer token."""
         self._session.headers.pop("Authorization", None)
 
     def request(

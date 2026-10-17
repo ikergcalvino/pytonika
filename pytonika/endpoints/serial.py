@@ -4,6 +4,8 @@ from ._endpoint import Endpoint
 
 
 class Serial(Endpoint):
+    """Endpoints of the "Serial" page of the Teltonika Web API reference."""
+
     def get_serial_options(self) -> dict[str, Any]:
         """Returns available serial options."""
         return self._client.request("GET", "/serial/options")

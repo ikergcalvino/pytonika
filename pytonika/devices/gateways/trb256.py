@@ -5,7 +5,15 @@ from .gateway import Gateway
 
 
 class TRB256(Gateway):
-    def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool | ssl.SSLContext = True) -> None:
+    """Teltonika TRB256 gateway, with the endpoints documented for RutOS 7.26."""
+
+    def __init__(
+        self,
+        base_url: str,
+        *,
+        timeout: float = 10.0,
+        verify: bool | ssl.SSLContext = True,
+    ) -> None:
         super().__init__(base_url, timeout=timeout, verify=verify)
 
         self.console = Console(self._client)

@@ -5,7 +5,15 @@ from .router import Router
 
 
 class TCR100(Router):
-    def __init__(self, base_url: str, *, timeout: float = 10.0, verify: bool | ssl.SSLContext = True) -> None:
+    """Teltonika TCR100 router, with the endpoints documented for RutOS 7.14.5."""
+
+    def __init__(
+        self,
+        base_url: str,
+        *,
+        timeout: float = 10.0,
+        verify: bool | ssl.SSLContext = True,
+    ) -> None:
         super().__init__(base_url, timeout=timeout, verify=verify)
 
         self.apn_database = APNDatabase(self._client)

@@ -4,9 +4,19 @@ from ._endpoint import Endpoint
 
 
 class Authentication(Endpoint):
-    def login(self, username: str, password: str) -> dict[str, Any]:
+    """Session endpoints: login, logout and session status. Manages the token sent with every request."""
+
+    def login(
+        self,
+        username: str,
+        password: str,
+    ) -> dict[str, Any]:
         """Authenticates user for API access and stores the session token for later requests."""
-        response = self._client.request("POST", "/login", json={"username": username, "password": password})
+        response = self._client.request(
+            "POST",
+            "/login",
+            json={"username": username, "password": password},
+        )
 
         token = (response.get("data") or {}).get("token")
 
