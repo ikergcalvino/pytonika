@@ -4,8 +4,8 @@ from .tap200 import TAP200
 from .tap400 import TAP400
 
 __all__ = [
-    "AccessPoint",
     "TAP100",
     "TAP200",
     "TAP400",
+    "AccessPoint",
 ]

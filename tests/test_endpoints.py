@@ -24,7 +24,7 @@ METHODS = [
 ]
 
 
-def dummy_argument(parameter: inspect.Parameter) -> Any:
+def dummy_argument(parameter: inspect.Parameter) -> Any:  # noqa: ANN401 - a value of any parameter type
     annotation = parameter.annotation
     origin = get_origin(annotation) or annotation
 

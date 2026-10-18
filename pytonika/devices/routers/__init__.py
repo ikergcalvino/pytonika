@@ -1,4 +1,3 @@
-from .router import Router
 from .atrm50 import ATRM50
 from .cap700 import CAP700
 from .dap140 import DAP140
@@ -7,6 +6,7 @@ from .dap145 import DAP145
 from .otd140 import OTD140
 from .otd144 import OTD144
 from .otd500 import OTD500
+from .router import Router
 from .rut140 import RUT140
 from .rut142 import RUT142
 from .rut145 import RUT145
@@ -67,7 +67,6 @@ from .rutxr1 import RUTXR1
 from .tcr100 import TCR100
 
 __all__ = [
-    "Router",
     "ATRM50",
     "CAP700",
     "DAP140",
@@ -134,4 +133,5 @@ __all__ = [
     "RUTX50",
     "RUTXR1",
     "TCR100",
+    "Router",
 ]

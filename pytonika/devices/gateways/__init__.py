@@ -15,7 +15,6 @@ from .trb500 import TRB500
 from .trb501 import TRB501
 
 __all__ = [
-    "Gateway",
     "TRB140",
     "TRB141",
     "TRB142",
@@ -30,4 +29,5 @@ __all__ = [
     "TRB256",
     "TRB500",
     "TRB501",
+    "Gateway",
 ]

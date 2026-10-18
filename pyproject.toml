@@ -57,7 +57,8 @@ Repository = "https://github.com/ikergcalvino/pytonika.git"
 Issues = "https://github.com/ikergcalvino/pytonika/issues"
 Changelog = "https://github.com/ikergcalvino/pytonika/releases"
 
-# --- Development dependencies (PEP 735: not published, install with `pip install --group <name>`) ----------
+# --- Development dependencies -----------------------------------------------
+# PEP 735 groups: not published with the package. Install with `pip install --group <name>`.
 
 [dependency-groups]
 lint = ["ruff>=0.17.1"]
@@ -80,28 +81,23 @@ include = ["pytonika*"]
 pytonika = ["py.typed"]
 
 # --- Linting and formatting --------------------------------------------------
+# Ruff and ty take the target Python version from `requires-python`.
 
 [tool.ruff]
-target-version = "py311"
 line-length = 120
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "W", "UP", "B", "SIM", "RUF", "ANN", "PTH", "T20"]
-# Star imports are the established pattern in device modules.
-ignore = ["F403", "F405"]
+select = [
+  "ANN", "B", "C4",
+  "D101", "D102", "D103",  # every public class, method and function has a docstring
+  "E", "F", "FURB", "I", "N", "PERF", "PIE", "PT", "PTH", "RET", "RUF", "SIM", "T20", "UP", "W",
+]
 
 [tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["I001", "RUF022"]
-"tests/*" = ["ANN"]
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
-
-# --- Type checking -----------------------------------------------------------
-
-[tool.ty.environment]
-python-version = "3.11"
+"__init__.py" = ["F403"]  # packages re-export their modules with star imports
+"pytonika/devices/**" = ["F403", "F405"]  # generated device classes import every endpoint class
+"pytonika/endpoints/__init__.py" = ["RUF022"]  # __all__ follows the import order, by module
+"tests/*" = ["D"]
 
 # --- Testing -----------------------------------------------------------------
 
@@ -109,6 +105,7 @@ python-version = "3.11"
 minversion = "9.0"
 testpaths = ["tests"]
 addopts = ["-ra", "--strict-config", "--strict-markers", "--cov"]
+filterwarnings = ["error"]
 xfail_strict = true
 
 [tool.coverage.run]
@@ -119,7 +116,3 @@ branch = true
 show_missing = true
 skip_covered = true
 fail_under = 80
-exclude_also = [
-  "if TYPE_CHECKING:",
-  "raise NotImplementedError",
-]
