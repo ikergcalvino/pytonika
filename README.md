@@ -40,23 +40,31 @@ with RUTX50("https://192.168.1.1") as device:
 
     status = device.firmware.get_firmware_device_status()
     print(status["data"]["version"])
-
-    device.authentication.logout()
 ```
 
-The `with` block closes the connection when it exits; outside it, call `device.close()`.
-The Bearer token returned by `login()` is sent with every request until `logout()`.
+The Bearer token returned by `login()` is sent with every request. When the `with` block exits, Pytonika logs out
+and closes the connection; outside a `with` block, call `device.close()` when you are done.
+
+### Detecting the model
+
+Don't know the model in advance, or managing a mixed fleet? `connect()` asks the device (no credentials needed) and
+returns an instance of the right class:
+
+```python
+import pytonika
+
+with pytonika.connect("https://192.168.1.1") as device:
+    print(device)  # <RUT956 https://192.168.1.1/api>
+```
+
+> [!NOTE]
+> `connect()` raises `ValueError` for a model this version of Pytonika does not support. For such a device, use the
+> generic class of its family (`Router`, `Gateway`, `AccessPoint` or `Switch`), and
+> [request support for it](https://github.com/ikergcalvino/pytonika/issues/new/choose).
 
 > [!TIP]
-> Not sure which model or firmware a device has? The unauthenticated status endpoint tells you, without logging in:
->
-> ```python
-> from pytonika import Router
->
-> with Router("https://192.168.1.1") as router:
->     info = router.unauthorized.get_unauthorized_status()["data"]
->     print(info["device_model"], info["api_version"])  # RUT956 1.16.3
-> ```
+> Type checkers see the result of `connect()` as one of the generic family classes. For autocompletion of
+> model-specific endpoint groups, instantiate the model class directly.
 
 ## Usage
 

@@ -9,7 +9,7 @@ from pytonika.endpoints._endpoint import Endpoint
 from .conftest import BASE_URL
 
 FAMILIES = (Router, Gateway, AccessPoint, Switch)
-DEVICE_CLASSES = [getattr(pytonika, name) for name in pytonika.__all__ if name != "__version__"]
+DEVICE_CLASSES = [getattr(pytonika.devices, name) for name in pytonika.devices.__all__]
 
 
 def endpoint_attributes(device: object) -> set[str]:

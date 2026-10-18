@@ -30,6 +30,11 @@ class APIClient:
         )
 
     @property
+    def authenticated(self) -> bool:
+        """Whether a session token is set, i.e. after ``login()`` and before ``logout()``."""
+        return "Authorization" in self._session.headers
+
+    @property
     def base_url(self) -> str:
         """The API root of the device, e.g. ``https://192.168.1.1/api``."""
         return str(self._session.base_url).rstrip("/")

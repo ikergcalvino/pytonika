@@ -1,5 +1,8 @@
 import ssl
+from contextlib import suppress
 from typing import Self
+
+import httpx
 
 from ..._client import APIClient
 from ...endpoints import *
@@ -66,5 +69,11 @@ class AccessPoint:
         self.close()
 
     def close(self) -> None:
-        """Closes the HTTP connection to the device."""
-        self._client.close()
+        """Logs out if a session is open, then closes the HTTP connection to the device."""
+        try:
+            if self._client.authenticated:
+                # best effort: an unreachable device must not prevent closing the connection
+                with suppress(httpx.HTTPError, ValueError):
+                    self.authentication.logout()
+        finally:
+            self._client.close()
