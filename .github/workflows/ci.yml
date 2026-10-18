@@ -26,7 +26,8 @@ jobs:
           python-version: "3.14"
           cache: pip
           cache-dependency-path: pyproject.toml
-      - run: pip install -e ".[lint]"
+      - run: python -m pip install --upgrade pip
+      - run: pip install --group lint
       - run: ruff check .
       - run: ruff format --check .
 
@@ -40,7 +41,8 @@ jobs:
           python-version: "3.14"
           cache: pip
           cache-dependency-path: pyproject.toml
-      - run: pip install -e ".[type,test]"
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e . --group type --group test
       - run: ty check pytonika tests
 
   test:
@@ -64,7 +66,8 @@ jobs:
           allow-prereleases: true
           cache: pip
           cache-dependency-path: pyproject.toml
-      - run: pip install -e ".[test]"
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e . --group test
       - run: pytest
 
   build-check:
@@ -77,7 +80,8 @@ jobs:
           python-version: "3.14"
           cache: pip
           cache-dependency-path: pyproject.toml
-      - run: pip install -e ".[build]"
+      - run: python -m pip install --upgrade pip
+      - run: pip install --group build
       - run: python -m build
       - run: twine check --strict dist/*
       - uses: actions/upload-artifact@v7

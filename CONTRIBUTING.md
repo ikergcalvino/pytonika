@@ -89,10 +89,14 @@ cd pytonika
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 
-pip install -e ".[dev]"
+python -m pip install --upgrade pip   # dependency groups need pip 25.1 or later
+pip install -e . --group dev
 ```
 
-Pytonika supports Python **3.11** and later.
+Pytonika supports Python **3.11** and later. The development tools are
+[dependency groups](https://packaging.python.org/en/latest/specifications/dependency-groups/)
+in `pyproject.toml` (`lint`, `test`, `type`, `build`, and `dev` with all of them), so they are not published with
+the package.
 
 ## Quality checks
 
